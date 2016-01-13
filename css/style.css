@@ -1,0 +1,195 @@
+body{
+  font-family: Arial;
+}
+
+
+/* ------------------------------ Bandeau -------------------------------- */
+
+#bandeau{
+  background-color: #C00000 ;
+}
+
+#bandeau H1{
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  font-family: Arial;
+}
+
+#bandeau p{
+  font-family: Arial;
+  float: right;
+  font-weight: bold;
+  margin-top: -45px;
+  margin-right: 35px;
+}
+
+#bandeau img{
+  width: 40px;
+  height: 40px;
+  float: left;
+  margin-top: -60px;
+  margin-left: 15px;
+  
+}
+
+
+/* ------------------------------ Tableau récapitulatif ------------------------------ */
+
+#recapitulatif{
+  float: left;
+  margin-left: 23%;
+  margin-top: 5%;
+  border: 1px solid #D8D8D8;
+
+}
+
+#recapitulatif tr td{
+  border: 1px solid #D0D0D0 ;
+  padding: 10px 13px 10px 13px;
+  text-align: center;
+}
+
+.ligne{
+  background-color: #D8D8D8;
+  font-weight: bold;
+}
+
+#colonne{
+  font-weight: bold;
+}
+
+
+/* ---------------------- graphique ----------------------- */
+
+#graphique{
+  float: left;
+  margin-left: -340px;
+  display: inline;
+  margin-top: 33%;
+}
+
+.graph {
+  width: 100px;
+}
+
+.cont{
+  margin-left: 12px;
+}
+
+#color_conge{
+  background-color: rgba(1,66,110,0.5);
+  width: 15px;
+  height: 15px;
+  border-radius: 25px;
+}
+
+#color_rttQ1{
+  background-color: rgba(14,130,188,0.5);
+  width: 15px;
+  height: 15px;
+  border-radius: 25px;
+}
+
+#color_rttQ2{
+  background-color: rgba(52,204,227,0.5);
+  width: 15px;
+  height: 15px;
+  border-radius: 25px;
+}
+
+#color_autres{
+  background-color: rgba(121,158,169,0.54);
+  width: 15px;
+  height: 15px;
+  border-radius: 25px;
+}
+
+/* ----------------------------- numéros des semaines ---------------------------- */
+/* ------------------------ Verifier à partir modal-backdrop ----------------------------- */
+
+.fc-week-number{
+  color: #C00000;
+  font-size: 10px;
+}
+
+
+.fc-week-number span{
+  margin-top: 3px;
+  padding-left: 3px;
+  
+}
+
+.modal-backdrop{
+  height: 0% !important;
+}
+
+
+.control-label{
+  font-size: 17px;
+}
+
+.modal-header{
+  background-color: #f5f5f5;
+}
+
+h3 #myModalLabel1{
+  padding: 8px;
+}
+
+.graph p{
+  font-weight: bold;
+}
+
+.fc-week-number{
+  width: 30px !important;
+}
+
+.controls{
+  margin-top: 12px;
+}
+
+.fc-time{
+   display : none;
+}
+
+.fc-event1 {
+	position: relative; /* for resize handle and other inner positioning */
+	display: block; /* make the <a> tag block */
+	font-size: .85em;
+
+	border-radius: 3px;
+	border: 1px solid #C00000; /* default BORDER color */
+	background-color: rgba(192,0,0,0.2); /* default BACKGROUND color */
+	font-weight: normal; /* undo jqui's ui-widget-header bold */
+	height: 30px;
+	
+}
+
+.control-label1{
+  float:left;
+  width:132px;
+  padding-top:15px;
+  text-align:right;
+  font-family: Arial;
+  font-size: 17px;
+  margin-left: 28px;
+}
+
+#when{
+  padding-top: 10px !important;
+  
+}
+
+select{
+  margin-top: 10px;
+}
+
+#save{
+  float : right;
+  width : 55px;
+  margin-right : 20px;
+  margin-top : 15px;
+}

@@ -1,0 +1,198 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel='stylesheet' href='css/style.css' />
+        <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
+        <link rel='stylesheet' href='css/jquery-ui.css' />
+        <link rel="stylesheet" href="fullcalendar/bootstrap-combined.min.css">
+        
+        <script src='jquery/jquery.min.js'></script>
+        <script src='moment/moment.min.js'></script>
+        <script src='fullcalendar/fullcalendar.js'></script>
+        <script src='fullcalendar/fullcalendar.min.js'></script>
+        <script src="script.js"></script>
+        <script src='fullcalendar/lang/fr.js'></script>
+        <script src='javascript/Chart.js'></script>
+        <script src='javascript/Chart.min.js'></script>
+        <script src='javascript/interact.min.js'></script>
+        <script src='javascript/interact.js'></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="fullcalendar/gcal.js"></script>
+        <script src="javascript/bootstrap.min.js"></script>
+        <script src="javascript/bootstrap.js"></script>
+	 
+    </head>
+    <body>
+        
+        <div id="bandeau">
+    		
+    		<H1> Mes Absences 2015 </H1>
+    		<a href="https://mypm.imfr.cgi.com/portail/#/CDSMainframe">
+    			<img src="img/home.png"></img>
+    		</a>
+    		
+    		<p id="nom_personne"></p>
+    		
+    	</div>
+    	
+    	<div id="save">
+    		<img src="img/save.png"></img>
+    	</div>
+    	
+    	<div class="recap">
+			<table id="recapitulatif">
+				<tr class="ligne">
+					<td><div id="coin"></div> </td>
+					<td></td>
+					<td>A prendre</td>
+					<td>Pris</td>
+					<td>Restants</td>
+				</tr>
+			    <tr>
+					<td><div id="color_conge"></div></td>
+					<td id="colonne"> Congés </td>
+					<td id="conge_aPrendre"></td>
+					<td id="conge_pris"></td>
+					<td id="conge_restant"></td>
+				</tr>
+				<tr>
+				    <td><div id="color_rttQ1"></div></td>
+					<td id="colonne"> RTT Q1 </td>
+					<td id="rttQ1_aPrendre"></td>
+					<td id="rttQ1_pris"></td>
+					<td id="rttQ1_restant"></td>
+				</tr>
+				<tr>
+					<td><div id="color_rttQ2"></div></td>
+					<td id="colonne"> RTT Q2 </td>
+					<td id="rttQ2_aPrendre"></td>
+					<td id="rttQ2_pris"></td>
+					<td id="rttQ2_restant"></td>
+				</tr>
+				<tr>
+					<td><div id="color_autres"></div></td>
+					<td id="colonne"> Autres </td>
+					<td id="autre_aPrendre"></td>
+					<td id="autre_pris"></td>
+					<td id="autre_restant"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td id="colonne"> Total </td>
+					<td id="total_aPrendre"></td>
+					<td id="total_pris"></td>
+					<td id="total_restant"></td>
+				</tr>
+			</table>
+		</div>
+		<div class="container">
+       		<div id="graphique">
+						<div class="cont">
+							<div>
+								<table>
+									<tr>	
+										<td class="graph">     
+											<canvas id="conges" height="75" width="75"></canvas>
+										    <p> Congés</p>
+										    <br>
+										</td>
+										
+										<td class="graph">
+										    <canvas id="rtt_q1" height="75" width="75"></canvas>
+										    <p>RTT Q1</p>
+										   	<br>
+										</td>
+										      
+										<td class="graph">
+										    <canvas id="rtt_q2" height="75" width="75"></canvas>
+										    <p>RTT Q2</p>
+										    <br>
+										</td>
+								    </tr> 
+								</table>
+							</div>
+						</div>
+		</div>
+        <div id='calendar'></div>
+        
+        
+    
+    	<div id="createEventModal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+    		<div class="modal-header">
+        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        		<h3 id="myModalLabel1">Choisissez le type de congé :</h3>
+   			</div>
+    		<div class="modal-body">
+    			<form id="createAppointmentForm" class="form-horizontal">
+        			<div class="control-group">
+            			<div class="controls">
+                			<input type="radio" name="type" value="conge" id="conge" />  Congés <br />
+		   					<input id="rttQ1" type="radio" name="type" value="rttQ1" />  RTT Q1<br />
+		    				<input id="rttQ2" type="radio" name="type" value="rttQ2" />  RTT Q2<br />
+		    				<input id="autre_conge" type="radio" name="type" value="autre" />  Autres congés<br />
+		    				
+                			<input type="hidden" id="apptStartTime"/>
+                			<input type="hidden" id="apptEndTime"/>
+                			<input type="hidden" id="apptAllDay" />
+            			</div>
+        			</div>
+        			<div class="control-group">
+        				<label class="control-label1" for="when">Demi-journée :</label>
+        					<input type="radio" name="demi" value="matin_demi" class="input-control" id="matin"/>  Matin <br />
+                			<input class="input-control" id="apres_midi" type="radio" name="demi" value="apres_demi" />  Après-midi <br />
+                			<input class="input-control" type="radio" id="journee" name="demi" value="journee"/>Journée entière</br>
+                		<label class="control-label1" for="when">Fréquences :</label>
+           					<input type="radio" name="frequence" value="hebdo" class="input-control" id="hebdo"/>  Hebdomadaire <br />
+                			<input class="input-control" id="mensuelle" type="radio" name="frequence" value="mensuelle" />  Mensuel <br />
+                			<input class="input-control" type="radio" id="pas_frequence" name="frequence" value="pas_frequence" checked style='visibility:hidden;display:none'/>
+							
+                			
+            			</br><label class="control-label" for="when">Dates :</label>
+            				<div class="controls controls-row" id="when" style="margin-top:5px;">
+            				</div>
+            			
+        			</div>
+    			</form>
+    		</div>
+    		<div class="modal-footer">
+        		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+       			<button type="submit" class="btn btn-primary" id="submitButton">Save</button>
+    		</div>
+		</div>
+		<div id="fullCalModal" class="modal fade">
+    		<div class="modal-dialog">
+        		<div class="modal-content">
+            		<div class="modal-header">
+                		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
+                		<h4 id="modalTitle" class="modal-title"></h4>
+            		</div>
+            		<div id="modalBody" class="modal-body">
+            			<label>Start date:</label>
+            			<div>
+                    		<input type="text" id="datePicker" >
+            			</div>
+               			<label>end date:</label>
+						<div>
+                    		<input type="text" id="datePickerend" >
+            			</div>
+            			<label> Type de congés : </label>
+            			<div>
+            				<select name="type_conge">
+							  <option value="congé">Congé</option> 
+							  <option value="RttQ1">RTT Q1</option>
+							  <option value="RttQ2">RTT Q2</option>
+							  <option value="Autres">AUtres congés</option>
+							</select>
+            			</div>
+            		</div>
+            		<div class="modal-footer">
+                		<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+               			<button class="btn btn-primary" id="submitButton1">Modifier</button>
+            		</div>
+        		</div>
+    		</div>
+		</div> 
+        
+
+    </body>
+</html>
