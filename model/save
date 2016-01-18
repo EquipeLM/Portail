@@ -1,0 +1,80 @@
+{
+	"modeGestion" : ["Gsm", "Horizon", "Liberté", "Piloté"],
+	"version" : "V1",
+	"listeCodes" : {
+				"cachemire2" : [931],
+				"TMG Viager": [925, 926, 940],
+				"Mixte": [609, 988]
+			}
+
+
+    
+}
+	
+	
+	"actesMetier": {
+        "SOUSCRIPTION":["Souscription",
+                        "Sans effet",
+                        "Redressement de production",
+                        "Renonciation",
+                        "Arbitrage fin de délai d'attente"],
+        "COTISATIONS" :["Versement libre",
+                        "Liquidation versement libre",
+                        "Redressement de cotisation", 
+                        "Liquidation versement régulier", 
+                        "Impayé 1ère prime", 
+                        "Impayé versements ultérieurs",
+                        "Indexation des primes"],
+        "ARBITRAGES"  :["Arbitrage libre",
+                        "Sécurisation des plus-values",
+                        "Arbitrage de la revalorisation annuelle",
+                        "Investissement Progressif",
+                        "Arbitrage Horizon",
+                        "intégration d'une grille GSM + arbitrage du portefeuille"],
+        "SORTIES"     :["Rachat partiel",
+                        "Rachat total",
+                        "Rachat partiel programmé",
+                        "Revenus",
+                        "Décès réel"]
+
+        }
+ 	
+	
+	
+	
+	
+	
+	
+	
+AVENANTS	Avenant  Cotisations régulières
+	Avenant  RPP
+	Avenant  Revenus
+	Avenant Arbitrage de la revalorisation annuelle de PB
+	Avenant Sécurisation des PV
+	Avenant  Invest. Progressif
+	Avenant Changement de grille
+	Avenant Durée Horizon
+	Avenant changement orientation gestion
+	Avenant arrêt mandat 
+FRAIS	Frais sur encours
+	Frais Gestion sous mandat
+	Droits de sortie
+	Frais d'arbitrage
+	Dérogation de frais sur encours
+	Frais de garantie plancher
+	Frais Garantie coup dur
+FISCALITE	Fiscalité rachat
+	Fiscalité décès
+TRAITEMENTS PERIODIQUES	Participation aux bénéfices
+	PB avec campagne commerciale - 1 taux promo
+	Situations Financières (Arrêtés périodiques)
+	IFU
+	BS
+CAMPAGNES COMMERCIALES	Type Abondement
+	Taux promotionnels
+CONSULTATION	Synthèse Contrat (QR M01)
+	Détail Contrat (QR M02)
+	Valeur de rachat et répartition du portefeuille (QR M53)
+	Historique des évènements (QR M03)
+	Détail d'un évènement (QR M04)
+FONCTION COMMUNES	Editique

@@ -1,0 +1,12 @@
+{
+	"modeGestion" : ["Gsm", "Horizon", "Liberté", "Piloté"],
+	"version" : "V1",
+	"listeCodes" : {
+				"cachemire2" : [931],
+				"TMG Viager": [925, 926, 940],
+				"Mixte": [609, 988]
+			}
+
+
+    
+}
