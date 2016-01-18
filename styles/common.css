@@ -1,0 +1,107 @@
+.contentCGI {
+    background-color: #e7e7e7 !important;
+    margin: 0;
+}
+
+.rougeCGI{
+    background-color: #e31937 !important;
+}
+
+.floatLeft{
+    float: left;
+}
+
+.chkbModes{
+    margin-right: 20px;
+    width: 90px;
+}
+
+textarea {
+    height:auto;
+    max-width:920px;
+    color:#999;
+    font-weight:400;
+    font-size:30px;
+    font-family:'Ubuntu', Helvetica, Arial, sans-serif;
+    width:100%;
+    background:#fff;
+    border-radius:3px;
+    line-height:2em;
+    border:none;
+    box-shadow:0px 0px 5px 1px rgba(0,0,0,0.1);
+    padding:30px;
+    -webkit-transition: height 2s ease;
+    -moz-transition: height 2s ease;
+    -ms-transition: height 2s ease;
+    -o-transition: height 2s ease;
+    transition: height 2s ease;
+}
+
+legend{
+    margin-bottom: 7px;
+}
+
+fieldset{
+    margin-top: 15px;
+}
+
+#btnGenerate {
+    background-color: #888888 !important;
+    color: white !important;
+    font-family: "Arial", Arial, Sans-serif !important;
+    text-shadow: 1px 1px 2px #3f0909 !important;
+    font-weight: bold;
+}
+
+.headerCGI {
+	background-color: #e31937 !important;
+	color: white !important;
+	font-family: "Arial", Arial, Sans-serif !important;
+	font-size: 120%;
+	text-shadow: 1px 1px 2px #3F0909 !important;
+    text-align: center;
+	height: 50px !important;
+	font-weight: bold;
+	z-index: 101;
+}
+
+.headerCGI>h2{
+    margin-top: 7px;
+    font-family: "Arial", Arial, Sans-serif !important;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 7px;
+    text-align: center;
+    font-size: 200%;
+    text-shadow: 1px 1px 2px #3F0909;
+    position: absolute;
+}
+
+.homeLink{
+    position: absolute;
+    top: 10px;
+    left: 15px;
+}
+
+.homeLink .fa{
+    color: white;
+    text-shadow: 1px 1px 2px #3F0909;
+}
+
+.fa-check{
+   color: white; 
+}
+
+.footerCGI{
+	/* display: block;
+    position: fixed;
+    bottom: 10px;
+    left: 10px; */
+    background: url('images/logoCGI.png') no-repeat;
+    width: 75px;
+    height: 34px;
+	border-style:none;
+    /* z-index: -1; */
+}
