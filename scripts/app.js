@@ -9,6 +9,10 @@ angular
                 templateUrl: './views/outils/outils.html',
                 controller: 'OutilsCtrl'
             }).
+            when('/viewPdf', {
+                templateUrl: './views/outils/viewPdf.html',
+                controller: 'OutilsCtrl'
+            }).
              otherwise({
                 redirectTo: '/outils'
             });
