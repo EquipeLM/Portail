@@ -1,0 +1,46 @@
+<div class="container">
+
+    <div ng-model="createEventModal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+    		<div class="modal-header">
+        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        		<h3 id="myModalLabel1">Choisissez le type de congé :</h3>
+   			</div>
+    		<div class="modal-body">
+    			<form id="createAppointmentForm" class="form-horizontal">
+        			<div class="control-group">
+            			<div class="controls">
+                			<input ng-model="conge"type="radio" name="type" value="conge" />  Congés <br />
+      		   					<input ng-model="rttQ1" type="radio" name="type" value="rttQ1" />  RTT Q1<br />
+      		    				<input ng-model="rttQ2" type="radio" name="type" value="rttQ2" />  RTT Q2<br />
+      		    				<input ng-model="autre_conge" type="radio" name="type" value="autre" />  Autres congés<br />
+
+                			<input type="hidden" ng-model="apptStartTime"/>
+                			<input type="hidden" ng-model="apptEndTime"/>
+                			<input type="hidden" ng-model="apptAllDay" />
+            			</div>
+        			</div>
+        			<div class="control-group">
+        				<label class="control-label1" for="when">Demi-journée :</label>
+        				    <input ng-model="matin" type="radio" name="demi" value="matin_demi" class="input-control" />  Matin <br />
+                    <input ng-model="apres_midi" class="input-control" type="radio" name="demi" value="apres_demi" />  Après-midi <br />
+                		<input ng-model="journee" class="input-control" type="radio" name="demi" value="journee"/>Journée entière</br>
+                <label class="control-label1" for="when">Fréquences :</label>
+           					<input ng-model="hebdo" type="radio" name="frequence" value="hebdo" class="input-control"/>  Hebdomadaire <br />
+                		<input ng-model="mensuelle" class="input-control" type="radio" name="frequence" value="mensuelle" />  Mensuel <br />
+                		<input ng-model="pas_frequence" class="input-control" type="radio" name="frequence" value="pas_frequence" checked style='visibility:hidden;display:none'/>
+
+
+            			</br><label class="control-label" for="when">Dates :</label>
+            				<div class="controls controls-row" ng-model="when" style="margin-top:5px;">
+            				</div>
+
+        			</div>
+    			</form>
+    		</div>
+    		<div class="modal-footer">
+        		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+       			<button type="submit" class="btn btn-primary" ng-model="submitButton">Save</button>
+    		</div>
+		  </div>
+
+</div>
