@@ -91,7 +91,7 @@ fieldset{
 }
 
 .fa-check{
-   color: white; 
+   color: white;
 }
 
 .footerCGI{
@@ -104,4 +104,70 @@ fieldset{
     height: 34px;
 	border-style:none;
     /* z-index: -1; */
+}
+
+#recapitulatif{
+  float: left;
+  margin-left: 23%;
+  margin-top: 5%;
+  border: 1px solid #D8D8D8;
+
+}
+
+#recapitulatif tr td{
+  border: 1px solid #D0D0D0 ;
+  padding: 10px 13px 10px 13px;
+  text-align: center;
+}
+
+.ligne{
+  background-color: #D8D8D8;
+  font-weight: bold;
+}
+
+#colonne{
+  font-weight: bold;
+}
+
+graphique{
+  float: left;
+  margin-left: -340px;
+  display: inline;
+  margin-top: 28%;
+}
+
+.graph {
+  width: 100px;
+}
+
+.cont{
+  margin-left: 12px;
+}
+
+#color_conge{
+  background-color: rgba(1,66,110,0.5);
+  width: 15px;
+  height: 15px;
+  border-radius: 25px;
+}
+
+#color_rttQ1{
+  background-color: rgba(14,130,188,0.5);
+  width: 15px;
+  height: 15px;
+  border-radius: 25px;
+}
+
+#color_rttQ2{
+  background-color: rgba(52,204,227,0.5);
+  width: 15px;
+  height: 15px;
+  border-radius: 25px;
+}
+
+#color_autres{
+  background-color: rgba(121,158,169,0.54);
+  width: 15px;
+  height: 15px;
+  border-radius: 25px;
 }
