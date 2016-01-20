@@ -1,6 +1,10 @@
-angular
-    .module('portail.controllers', ['ui.calendar', 'ui.bootstrap']);
-    .controller('AbsencesCtrl'['$scope', function($scope, $compile, $timeout, uiCalendarConfig) {
+'use strict';
+
+
+var calendarAbsences = angular.module('portail.controllers', ['ui.calendar', 'ui.bootstrap']);
+
+calendarAbsences.controller('AbsencesCtrl',
+   function($scope, $compile, $timeout, uiCalendarConfig) {
 
 
      $scope.eventSource = {
@@ -47,7 +51,8 @@ angular
                 start=moment(start).format('YYYY-MM-DD');
                 end=moment(end).format('YYYY-MM-DD');
                 var mywhen = start + ' au ' + end;
-                
+              
+
 
              },
         eventClick: $scope.alertOnEventClick,
@@ -115,6 +120,7 @@ angular
     	var color = "rgba(121,158,169,0.54)";
 
     	alert(nb_autre-nb_days+" pas de fréquence");
-    }
+    };
+};
 
-}]);
+});
