@@ -2,7 +2,7 @@
 
 angular.module('portail.controllers', []);
 angular
-    .module('portail', ['ngRoute', 'mobile-angular-ui', 'ui.checkbox', 'portail.controllers'])
+    .module('portail',  ['ngRoute', 'mobile-angular-ui', 'ui.checkbox','ui.calendar', 'ui.bootstrap', 'portail.controllers'])
     .config(function ($routeProvider) {
         $routeProvider.
             when('/outils', {

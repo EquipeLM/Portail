@@ -1,7 +1,7 @@
 'use strict';
 
 
-var calendarAbsences = angular.module('portail.controllers', ['ui.calendar', 'ui.bootstrap']);
+var calendarAbsences = angular.module('portail.controllers');
 
 calendarAbsences.controller('AbsencesCtrl',
    function($scope, $compile, $timeout, uiCalendarConfig) {
@@ -51,7 +51,7 @@ calendarAbsences.controller('AbsencesCtrl',
                 start=moment(start).format('YYYY-MM-DD');
                 end=moment(end).format('YYYY-MM-DD');
                 var mywhen = start + ' au ' + end;
-              
+
 
 
              },
