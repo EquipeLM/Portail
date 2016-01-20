@@ -1,5 +1,5 @@
 angular
-    .module('portail.controllers', ['ui.calendar', 'ui.bootstrap']);
+    .module('portail.controllers');
     .controller('AbsencesCtrl'['$scope', function($scope, $compile, $timeout, uiCalendarConfig) {
 
 
