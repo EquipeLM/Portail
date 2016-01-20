@@ -74,13 +74,20 @@
         </div>
       </div>
 
-      <div class="well">
-          <div class="row-fluid">
-              <div class="span8">
-                  <tabset>
-                        <div class="calendar" ng-model="eventSources" calendar="myCalendar1" ui-calendar="uiConfig.calendar"></div>
-                  </tabset>
-              </div>
-          </div>
-      </div>
+      <div role="main">
+        <div class="container">
+            <section ng-controller="AbsencesCtrl"> 
+
+                <div class="well">
+                    <div class="row-fluid">
+                        <div class="span8">
+                            <tabset>
+                                  <div class="calendar" ng-model="eventSources" calendar="myCalendar1" ui-calendar="uiConfig.calendar"></div>
+                            </tabset>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
 </div>

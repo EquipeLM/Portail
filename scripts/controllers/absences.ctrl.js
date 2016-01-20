@@ -1,6 +1,10 @@
+'use strict';
+
+
 angular
-    .module('portail.controllers');
-    .controller('AbsencesCtrl'['$scope', function($scope, $compile, $timeout, uiCalendarConfig) {
+    .module('portail.controllers')
+    .controller('AbsencesCtrl',
+   function($scope, $compile, $timeout, uiCalendarConfig) {
 
 
      $scope.eventSource = {
@@ -47,7 +51,8 @@ angular
                 start=moment(start).format('YYYY-MM-DD');
                 end=moment(end).format('YYYY-MM-DD');
                 var mywhen = start + ' au ' + end;
-                
+
+
 
              },
         eventClick: $scope.alertOnEventClick,
@@ -65,10 +70,10 @@ angular
     $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
     $scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
 
-    $scope.submitButton.on('click', function(e){
+   /* $scope.submitButton.on('click', function(e){
     	e.preventDefault();
 		  doSubmit();
-    });
+    });*/
 
     function doSubmit(){
 	    function diffdate(d1,d2,u){
@@ -115,6 +120,7 @@ angular
     	var color = "rgba(121,158,169,0.54)";
 
     	alert(nb_autre-nb_days+" pas de fréquence");
-    }
+    };
+};
 
-}]);
+});

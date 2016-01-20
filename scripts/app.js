@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('portail.controllers', []);
+angular.module('portail.controllers', ['ui.calendar', 'ui.bootstrap']);
 angular
-    .module('portail', ['ngRoute', 'mobile-angular-ui', 'ui.checkbox', 'portail.controllers'])
+    .module('portail',  ['ngRoute', 'mobile-angular-ui', 'ui.checkbox', 'ui.calendar', 'ui.bootstrap', 'portail.controllers'])
     .config(function ($routeProvider) {
         $routeProvider.
             when('/genRequete', {
@@ -16,10 +16,6 @@ angular
 			when('/outilsHome', {
                 templateUrl: './views/outils/outilsHome.html',
                 controller: 'OutilsCtrl'
-            }).
-            when('/test', {
-                    templateUrl: './views/testCalendar.html',
-                    controller: 'testCtrl'
             }).
 			when('/mesAbsences', {
                 templateUrl: './views/mesAbsences.html',
