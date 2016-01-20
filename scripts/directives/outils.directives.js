@@ -16,8 +16,8 @@ angular
                     $(element).elevateZoom({
                         cursor: "crosshair",
                         scrollZoom : true,
-                        zoomWindowWidth : 1200,
-                        zoomWindowHeight : 600
+                        zoomWindowWidth : 1300,
+                        zoomWindowHeight : 550
                     });
                 }
                 linkElevateZoom();

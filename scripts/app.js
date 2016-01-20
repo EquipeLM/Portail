@@ -5,15 +5,23 @@ angular
     .module('portail', ['ngRoute', 'mobile-angular-ui', 'ui.checkbox', 'portail.controllers'])
     .config(function ($routeProvider) {
         $routeProvider.
-            when('/outils', {
-                templateUrl: './views/outils/outils.html',
+            when('/genRequete', {
+                templateUrl: './views/outils/genRequete.html',
                 controller: 'OutilsCtrl'
             }).
             when('/viewPdf', {
                 templateUrl: './views/outils/viewPdf.html',
                 controller: 'OutilsCtrl'
             }).
-             otherwise({
-                redirectTo: '/outils'
+            when('/outilsHome', {
+                templateUrl: './views/outils/outilsHome.html',
+                controller: 'OutilsCtrl'
+            }).
+            when('/test', {
+                    templateUrl: './views/testCalendar.html',
+                    controller: 'testCtrl'
+            }).
+            otherwise({
+                redirectTo: '/outilsHome'
             });
     });

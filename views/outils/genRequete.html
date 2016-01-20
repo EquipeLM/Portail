@@ -1,8 +1,8 @@
 <div class="container">
   
     <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
+        <div class="col-s3"></div>
+        <div class="col-s6">
             <fieldset>
                 <legend>1. Choix du produit</legend>
                 <select  ng-model="selected" class="form-control" ng-change="majListe()">
@@ -18,7 +18,7 @@
                 </select>
             </fieldset>
             <fieldset id="modeGestion">
-                <legend>4.Mode de gestion</legend>
+                <legend>3.Mode de gestion</legend>
                     <div class="form-group floatLeft chkbModes" ng-repeat="mode in modesGestion.label">
                         <label>{{mode}} : </label>
                         <checkbox class="rougeCGI" ng-model="modesGestion.value[$index]"></checkbox>
@@ -30,5 +30,5 @@
                 <textarea name="rsltReq" id="rsltReq"></textarea>
             </fieldset>
         </div>
-        <div class="col-md-3"></div>
+        <div class="col-s3"></div>
     </div>
