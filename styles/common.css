@@ -106,12 +106,20 @@ fieldset{
     /* z-index: -1; */
 }
 
+
+.calendrier {
+  width: 60%;
+  float : right;
+  margin-top: 7%;
+}
+
 #recapitulatif{
   float: left;
-  margin-left: 23%;
-  margin-top: 5%;
+  margin-left: 1%;
+  margin-top: 7%;
   border: 1px solid #D8D8D8;
-
+  width: 32%;
+  background-color: white;
 }
 
 #recapitulatif tr td{
@@ -129,16 +137,16 @@ fieldset{
   font-weight: bold;
 }
 
-graphique{
-  float: left;
-  margin-left: -340px;
+#graphique{
+  float : left;
   display: inline;
-  margin-top: 28%;
+  width: 25%;
+  margin-top: 25%;
+  position: absolute;
+  margin-left:-400px
 }
 
-.graph {
-  width: 100px;
-}
+
 
 .cont{
   margin-left: 12px;
