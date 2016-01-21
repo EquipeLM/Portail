@@ -106,18 +106,20 @@ fieldset{
     /* z-index: -1; */
 }
 
-.calendrier {
-  width: 60%;
-  float : right;
-  margin-top: 7%;
+
+.marge{
+  margin-top: 5%;
+}
+.calendar {
+  background-color: white;
+  border : 2px solid #d8d8d8;
 }
 
 #recapitulatif{
   float: left;
-  margin-left: 1%;
-  margin-top: 7%;
+  margin-left: 10%;
   border: 1px solid #D8D8D8;
-  width: 32%;
+  width : 20%;
   background-color: white;
 }
 
@@ -136,19 +138,33 @@ fieldset{
   font-weight: bold;
 }
 
-#graphique{
-  float : left;
+#graphique {
   display: inline;
-  width: 25%;
-  margin-top: 25%;
-  position: absolute;
-  margin-left:-400px
 }
 
+.graphique{
+  margin-left: 8%;
+}
 
+.graph {
+  padding: 30px 20px 10px 5px ;
+}
 
-.cont{
-  margin-left: 12px;
+.graph p{
+  text-align: center;
+  padding-top: 10px;
+}
+
+.fc-week-number {
+  font-size: 10px;
+  margin-left: 5px;
+  color: #C01515;
+}
+
+.fc-week-number span{
+  margin-top: 3px;
+  padding-left: 3px;
+
 }
 
 #color_conge{
