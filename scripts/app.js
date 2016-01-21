@@ -5,6 +5,9 @@ angular
     .module('portail',  ['ngRoute', 'mobile-angular-ui', 'ui.checkbox', 'ui.calendar', 'ui.bootstrap', 'portail.controllers'])
     .config(function ($routeProvider) {
         $routeProvider.
+             when('/home', {
+                templateUrl: './views/home.html',
+            }).
             when('/genRequete', {
                 templateUrl: './views/outils/genRequete.html',
                 controller: 'OutilsCtrl'
