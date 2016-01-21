@@ -75,7 +75,7 @@ angular
 		  doSubmit();
     });*/
 
-    function doSubmit(){
+    /*function doSubmit(){
 	    function diffdate(d1,d2,u){
 			     var div=1
 			        switch(u){
@@ -91,12 +91,12 @@ angular
 
 		       var Diff = d2.getTime() - d1.getTime();
 		       return Math.ceil((Diff/div))
-		}
+		}*/
 
     // -------------------- journée complète : pas de fréquence -----------------------------  //
 
 
-    if(($scope.conge.is(':checked')) && ($scope.journee.is(':checked')) && ($scope.pas_frequence.is(':checked'))){
+    /*if(($scope.conge.is(':checked')) && ($scope.journee.is(':checked')) && ($scope.pas_frequence.is(':checked'))){
         var titre = "Congés";
         var color = "rgba(1,66,110,0.5)";
 
@@ -120,7 +120,7 @@ angular
     	var color = "rgba(121,158,169,0.54)";
 
     	alert(nb_autre-nb_days+" pas de fréquence");
-    };
-};
+    };*/
+
 
 });
