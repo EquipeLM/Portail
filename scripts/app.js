@@ -2,7 +2,7 @@
 
 angular.module('portail.controllers', ['ui.calendar', 'ui.bootstrap']);
 angular
-    .module('portail',  ['ngRoute', 'mobile-angular-ui', 'ui.checkbox', 'ui.calendar', 'ui.bootstrap', 'portail.controllers'])
+    .module('portail',  ['ngRoute', 'mobile-angular-ui', 'ui.checkbox', 'ui.calendar', 'chart.js', 'ui.bootstrap', 'portail.controllers'])
     .config(function ($routeProvider) {
         $routeProvider.
              when('/home', {
