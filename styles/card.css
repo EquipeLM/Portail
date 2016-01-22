@@ -67,37 +67,41 @@
 }
 
 .card-home {
-    height:250px;
+    height:350px;
 }
 
 .card-header {
     height: 49px;
+    overflow: hidden;
 }
 
 .card-body{
-    height: 155px;
+    height: 269px;
     width: 100%;
     padding: 9px;
     text-align: center;
 }
 
 .card-header>.card-button{
-    float: right;
     padding: 4px;
+    position: absolute;
+    top: 3px;
+    right: 4px;
 }
 
 .card-header>.card-button>a, .card-body>i{
     color:  white;
 }
 
-.card-footer {
-    background: rgba(0,0,0,0.65);
-    padding: 6px;
+.card-footer>h2, .card-header>h2 {
+    font-size: 25px;
+    margin-top: 10px;
 }
 .card:hover,
 .card:focus {
-    animation: pulse 0.8s ease infinite;
-	box-shadow: 0 0 65px #CDBE9F inset, 0 0 20px #BEAE8C inset, 0 0 15px #b6a684;
+    /*animation: pulse 0.8s ease infinite;
+	box-shadow: 0 0 65px #CDBE9F inset, 0 0 20px #BEAE8C inset, 0 0 15px #b6a684;*/
+    
 }
 
 .fa-6x {
