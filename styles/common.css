@@ -117,9 +117,8 @@ fieldset{
 
 #recapitulatif{
   float: left;
-  margin-left: 10%;
   border: 1px solid #D8D8D8;
-  width : 20%;
+  width : 100%;
   background-color: white;
 }
 
@@ -193,4 +192,11 @@ fieldset{
   width: 15px;
   height: 15px;
   border-radius: 25px;
+}
+.no-padding{
+    padding: 0;
+}
+
+.tuiles{
+    margin: 40px;
 }

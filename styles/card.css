@@ -3,7 +3,7 @@
     border:1px solid #AAA;
     border-bottom:3px solid #BBB;
     padding:0px;
-    margin:15px;
+    margin:3px;
     overflow:hidden;
     
 }
@@ -13,7 +13,7 @@
   }
 
   50% {
-    transform: scale(1.05);
+    transform: scale(1.01);
   }
 
   100% {
