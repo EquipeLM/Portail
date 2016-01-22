@@ -4,7 +4,7 @@
             <div class="col-sm-4 no-padding">
                 <div class="card card-home card-home-yellow">
                     <div class="card-header card-header-yellow">
-                        <h2>Absences</h2>
+                        <h2>Tâches</h2>
                         <div class="card-button">
                             <a href="#"><i class="fa fa-external-link-square fa-3x"></i></a>
                         </div>
@@ -17,13 +17,16 @@
             <div class="col-sm-4 no-padding">        
                 <div class="card card-home card-home-red">
                     <div class="card-header card-header-red">
-                        <h2>Outils</h2>
+                        <h2>Incidents</h2>
                         <div class="card-button">
                             <a href="#"><i class="fa fa-external-link-square fa-3x"></i></a>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <i class="fa fa-gears fa-6x"></i>
+                    <div class="card-body" ng-controller="OutilsCtrl">
+                        <a href="#"><i class="fa fa-gears fa-3x"></br>test</i></a>
+                        <a href="#"><i class="fa fa-gears fa-3x"></i></i>test2</a>
+                        <a href="#"><i class="fa fa-gears fa-3x"></i>test</i></a>
+                        <a href="#"><i class="fa fa-gears fa-3x"></i>test</i></a>
                     </div>
                     
                 </div>
@@ -31,7 +34,7 @@
             <div class="col-sm-4 no-padding">
                 <div class="card card-home card-home-blue1">
                     <div class="card-header card-header-blue1">
-                        <h2>Incohérences</h2>
+                        <h2>Planning</h2>
                         <div class="card-button">
                             <a href="#"><i class="fa fa-external-link-square fa-3x"></i></a>
                         </div>
@@ -44,8 +47,49 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-8 no-padding">        
+            <div class="col-sm-4 no-padding">        
+                <div class="card card-home card-home-orange">
+                    <div class="card-header card-header-orange">
+                        <h2>Outils</h2>
+                        <div class="card-button">
+                            <a href="#"><i class="fa fa-external-link-square fa-3x"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <i class="fa fa-area-chart fa-6x"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 no-padding">        
+                <div class="card card-home card-home-green">
+                    <div class="card-header card-header-green">
+                        <h2>Test</h2>
+                        <div class="card-button">
+                            <a href="#"><i class="fa fa-external-link-square fa-3x"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <i class="fa fa-area-chart fa-6x"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 no-padding">        
                 <div class="card card-home card-home-blue2">
+                    <div class="card-header card-header-blue2">
+                        <h2>Absences</h2>
+                        <div class="card-button">
+                            <a href="#"><i class="fa fa-external-link-square fa-3x"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <i class="fa fa-area-chart fa-6x"></i>
+                    </div>  
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8 no-padding">        
+                <div class="card card-home card-home-big card-home-blue2">
                     <div class="card-header card-header-blue2">
                         <h2>Statistiques</h2>
                         <div class="card-button">
@@ -59,7 +103,7 @@
                 </div>
             </div>
             <div class="col-sm-4 no-padding">
-                <div class="card card-home card-home-gris-teal">
+                <div class="card card-home card-home-big card-home-gris-teal">
                     <div class="card-header card-header-gris-teal">
                         <h2>Configuration</h2>
                         <div class="card-button">
@@ -73,63 +117,6 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-3 no-padding">        
-                <div class="card card-home card-home-orange">
-                    <div class="card-header card-header-orange">
-                        <h2>Tâches</h2>
-                        <div class="card-button">
-                            <a href="#"><i class="fa fa-external-link-square fa-3x"></i></a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <i class="fa fa-area-chart fa-6x"></i>
-                    </div>
-                   
-                </div>
-            </div>
-            <div class="col-sm-3 no-padding">        
-                <div class="card card-home card-home-green">
-                    <div class="card-header card-header-green">
-                        <h2>Liste des tests</h2>
-                        <div class="card-button">
-                            <a href="#"><i class="fa fa-external-link-square fa-3x"></i></a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <i class="fa fa-area-chart fa-6x"></i>
-                    </div>
-                    
-                </div>
-            </div>
-            <div class="col-sm-3 no-padding">        
-                <div class="card card-home card-home-blue2">
-                    <div class="card-header card-header-blue2">
-                        <h2>Documents</h2>
-                        <div class="card-button">
-                            <a href="#"><i class="fa fa-external-link-square fa-3x"></i></a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <i class="fa fa-area-chart fa-6x"></i>
-                    </div>
-                    
-                </div>
-            </div>
-            <div class="col-sm-3 no-padding">
-                <div class="card card-home card-home-red">
-                    <div class="card-header card-header-red">
-                        <h2>Gant</h2>
-                        <div class="card-button">
-                            <a href="#"><i class="fa fa-external-link-square fa-3x"></i></a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <i class="fa fa-wrench fa-6x"></i>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
+        
     </div>
 </div>

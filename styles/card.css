@@ -70,6 +70,14 @@
     height:350px;
 }
 
+.card-home-big {
+    height:700px;
+}
+.card-home-big>.card-body {
+    height:596px;
+}
+
+
 .card-header {
     height: 49px;
     overflow: hidden;
