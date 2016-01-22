@@ -1,5 +1,4 @@
-<div class="container">
-    <div class="tuiles">
+<div class="tuiles">
         <div class="row">
             <div class="col-sm-4 no-padding">
                 <div class="card card-home card-home-yellow">
@@ -22,11 +21,11 @@
                             <a href="#"><i class="fa fa-external-link-square fa-3x"></i></a>
                         </div>
                     </div>
-                    <div class="card-body" ng-controller="OutilsCtrl">
-                        <a href="#"><i class="fa fa-gears fa-3x"></br>test</i></a>
-                        <a href="#"><i class="fa fa-gears fa-3x"></i></i>test2</a>
-                        <a href="#"><i class="fa fa-gears fa-3x"></i>test</i></a>
-                        <a href="#"><i class="fa fa-gears fa-3x"></i>test</i></a>
+                    <div class="card-body ng-scope" ng-controller="OutilsCtrl">
+                        <a href="#"><i class="fa fa-gears fa-3x"><br>test</i></a>
+                        <a href="#"><i class="fa fa-gears fa-3x"></i>test2</a>
+                        <a href="#"><i class="fa fa-gears fa-3x"></i>test</a>
+                        <a href="#"><i class="fa fa-gears fa-3x"></i>test</a>
                     </div>
                     
                 </div>
@@ -78,11 +77,11 @@
                     <div class="card-header card-header-blue2">
                         <h2>Absences</h2>
                         <div class="card-button">
-                            <a href="#"><i class="fa fa-external-link-square fa-3x"></i></a>
+                             <a href="#"><i class="fa fa-external-link-square fa-3x"></i></a>
                         </div>
                     </div>
                     <div class="card-body">
-                        <i class="fa fa-area-chart fa-6x"></i>
+                        <div  ng-include="card-mesAbsences.html"></div>
                     </div>  
                 </div>
             </div>
@@ -119,4 +118,3 @@
         </div>
         
     </div>
-</div>
