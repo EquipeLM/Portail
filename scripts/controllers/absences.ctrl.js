@@ -70,19 +70,20 @@ angular
     $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
     $scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
 
-    $scope.labelConge = ["Congés Pris", "Congés Restants"];
-    $scope.dataConge = [300, 500, 100];
+    $scope.labelConge = ["Pris", "Restants"];
+    $scope.dataConge = [15, 10];
     $scope.options = {responsive: true, percentageInnerCutout: 70};
 
-    $scope.labelRttQ1 = ["Congés Pris", "Congés Restants"];
-    $scope.dataRttQ1 = [300, 500, 100];
+    $scope.labelRttQ1 = ["Pris", "Restants"];
+    $scope.dataRttQ1 = [8, 7];
     $scope.options = {responsive: true, percentageInnerCutout: 70};
 
-    $scope.labelRttQ2 = ["Congés Pris", "Congés Restants"];
-    $scope.dataRttQ2 = [300, 500, 100];
+    $scope.labelRttQ2 = ["Pris", "Restants"];
+    $scope.dataRttQ2 = [8, 2];
     $scope.options = {responsive: true, percentageInnerCutout: 70};
 
     $scope.colours = ['#e31937','#d8d8d8'];
+
 
    /* $scope.submitButton.on('click', function(e){
     	e.preventDefault();
