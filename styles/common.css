@@ -211,7 +211,6 @@ fieldset{
 
 
 .indicateur{
-
     margin-left: 50px;
     font-size: 21px;
     color: black;
@@ -226,6 +225,23 @@ fieldset{
   font-size : 18px;
   text-align: center;
 }
+
+.fa{
+  color : white;
+}
+
+.icons-outils{
+  margin-top: 4%;
+}
+
+.icons-outils h3 {
+  text-align: center;
+  color: black;
+  font-size: 18px;
+  padding-top: 10px;
+}
+
+
 
 /* css home */
 

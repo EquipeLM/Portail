@@ -25,6 +25,6 @@ angular
                 controller: 'AbsencesCtrl'
             }).
             otherwise({
-                redirectTo: '/outilsHome'
+                redirectTo: '/mesAbsences'
             });
     });
