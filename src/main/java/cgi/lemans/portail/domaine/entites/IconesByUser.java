@@ -5,10 +5,19 @@
  */
 package cgi.lemans.portail.domaine.entites;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author souchul
  */
+
+@Entity
+@Table(name="icones_by_user")
 public class IconesByUser {
     
     private String user;
@@ -20,6 +29,7 @@ public class IconesByUser {
         super();
     }
     
+    @Column(name="user")
     public String getUser() {
         return user;
     }
@@ -28,6 +38,8 @@ public class IconesByUser {
         this.user = user;
     }
     
+    @Id @GeneratedValue
+    @Column(name="id_icone")
     public int getIdIcone() {
         return idIcone;
     }
@@ -36,6 +48,7 @@ public class IconesByUser {
         this.idIcone = idIcone;
     }
     
+    @Column(name="cpt")
     public int getCpt() {
         return cpt;
     }
@@ -44,6 +57,7 @@ public class IconesByUser {
         this.cpt = cpt;
     }
     
+    @Column(name="is_dernier")
     public boolean isIsDernier() {
         return isDernier;
     }

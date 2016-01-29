@@ -11,6 +11,8 @@ import java.util.Date;
  *
  * @author souchul
  */
+
+
 public class Absence {
     
     private int idAbsence;

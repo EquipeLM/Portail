@@ -5,13 +5,23 @@
  */
 package cgi.lemans.portail.domaine.entites;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 
 /**
  *
  * @author souchul
  */
-public class Icones {
+@Entity
+@Table(name="icones")
+public class Icones implements Serializable{
+    
     
     private int idIcone;
     private String texte;
@@ -24,6 +34,9 @@ public class Icones {
         super();
     }
     
+    
+    @Id @GeneratedValue
+    @Column(name="id_icone")
     public int getIdIcone() {
         return idIcone;
     }
@@ -32,6 +45,7 @@ public class Icones {
         this.idIcone = idIcone;
     }
     
+    @Column(name="texte")
     public String getTexte() {
         return texte;
     }
@@ -40,6 +54,7 @@ public class Icones {
         this.texte = texte;
     }
     
+    @Column(name="icone")
     public String getIcone() {
         return icone;
     }
@@ -48,6 +63,7 @@ public class Icones {
         this.icone = icone;
     }
     
+    @Column(name="lien")
     public String getLien() {
         return lien;
     }
