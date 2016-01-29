@@ -6,7 +6,9 @@
 package cgi.lemans.portail.domaine.utils;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 /*
  *
@@ -14,15 +16,16 @@ import org.hibernate.cfg.Configuration;
  */
 public class HibernateUtil {
     
-    private static final SessionFactory sessionFactory = buildSessionFactory();
 
-    private static SessionFactory buildSessionFactory() {
-        try{
-            return new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            System.err.println("Initial SessionFactory creation failed." +ex);
-            throw new ExceptionInInitializerError(ex);
-        }
+    private static ServiceRegistry serviceRegistry;
+    private static SessionFactory sessionFactory = createSessionFactory();
+    
+    public static SessionFactory createSessionFactory() {
+        Configuration configuration = new Configuration();
+        configuration.configure();
+        serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+        return sessionFactory;
     }
     
     public static SessionFactory getSessionFactory() {
