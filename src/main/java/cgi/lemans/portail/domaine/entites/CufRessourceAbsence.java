@@ -30,7 +30,7 @@ public class CufRessourceAbsence {
         super();
     }
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue 
     @Column(name="idRessourceAbsence")
     public int getIdRessourceAbsence() {
         return idRessourceAbsence;

@@ -33,7 +33,7 @@ public class Absence {
         super();
     }
     
-    @Id @GeneratedValue
+    @Id @GeneratedValue 
     @Column(name="ID_ABSENCE")
     public int getIdAbsence() {
         return idAbsence;

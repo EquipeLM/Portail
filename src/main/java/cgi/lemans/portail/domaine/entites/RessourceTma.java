@@ -16,7 +16,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name="ressource_tma")
+@Table(name="ressource_tma") 
 public class RessourceTma {
  
     private String idRessource;

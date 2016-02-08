@@ -28,7 +28,7 @@ public class TypeAbsence {
         super();
     }
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue 
     @Column(name="ID_TYPE_ABSENCE")
     public int getIdTypeAbsence() {
         return idTypeAbsence;
