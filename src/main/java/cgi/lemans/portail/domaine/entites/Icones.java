@@ -23,7 +23,11 @@ import javax.persistence.Table;
 public class Icones implements Serializable{
     
     
-    private int idIcone;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3595768204443605968L;
+	private int idIcone;
     private String texte;
     private String icone;
     private String lien;
