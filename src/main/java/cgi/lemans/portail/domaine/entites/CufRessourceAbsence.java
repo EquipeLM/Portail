@@ -5,10 +5,19 @@
  */
 package cgi.lemans.portail.domaine.entites;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author souchul
  */
+
+@Entity
+@Table(name="cuf_ressource_absence")
 public class CufRessourceAbsence {
  
     private int idRessourceAbsence;
@@ -21,6 +30,8 @@ public class CufRessourceAbsence {
         super();
     }
 
+    @Id @GeneratedValue
+    @Column(name="idRessourceAbsence")
     public int getIdRessourceAbsence() {
         return idRessourceAbsence;
     }
@@ -29,6 +40,7 @@ public class CufRessourceAbsence {
         this.idRessourceAbsence = idRessourceAbsence;
     }
 
+    @Column(name="IdRessource")
     public String getIdRessource() {
         return idRessource;
     }
@@ -37,6 +49,7 @@ public class CufRessourceAbsence {
         this.idRessource = idRessource;
     }
 
+    @Column(name="annee")
     public int getAnnee() {
         return annee;
     }
@@ -45,6 +58,7 @@ public class CufRessourceAbsence {
         this.annee = annee;
     }
 
+    @Column(name="typeAbsence")
     public int getTypeAbsence() {
         return typeAbsence;
     }
@@ -53,6 +67,7 @@ public class CufRessourceAbsence {
         this.typeAbsence = typeAbsence;
     }
 
+    @Column(name="solde")
     public double getSolde() {
         return solde;
     }

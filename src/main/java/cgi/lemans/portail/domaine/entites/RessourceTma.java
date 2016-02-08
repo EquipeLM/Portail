@@ -6,11 +6,17 @@
 package cgi.lemans.portail.domaine.entites;
 
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  *
  * @author souchul
  */
+
+@Entity
+@Table(name="ressource_tma")
 public class RessourceTma {
  
     private String idRessource;
@@ -38,6 +44,8 @@ public class RessourceTma {
         super();
     }
     
+    
+    @Column(name="IdRessource")
     public String getIdRessource() {
         return idRessource;
     }
@@ -46,6 +54,7 @@ public class RessourceTma {
         this.idRessource = idRessource;
     }
 
+    @Column(name="Nom")
     public String getNom() {
         return nom;
     }
@@ -53,7 +62,8 @@ public class RessourceTma {
     public void setNom(String nom) {
         this.nom = nom;
     }
-
+    
+    @Column(name="Prenom")
     public String getPrenom() {
         return prenom;
     }
@@ -62,6 +72,7 @@ public class RessourceTma {
         this.prenom = prenom;
     }
 
+    @Column(name="Fonction")
     public String getFonction() {
         return fonction;
     }
@@ -69,7 +80,8 @@ public class RessourceTma {
     public void setFonction(String fonction) {
         this.fonction = fonction;
     }
-
+    
+    @Column(name="Equipe")
     public String getEquipe() {
         return equipe;
     }
@@ -78,6 +90,7 @@ public class RessourceTma {
         this.equipe = equipe;
     }
 
+    @Column(name="Date_Arrivee")
     public Date getDateArrivee() {
         return DateArrivee;
     }
@@ -86,6 +99,7 @@ public class RessourceTma {
         this.DateArrivee = DateArrivee;
     }
 
+    @Column(name="Date_Depart")
     public Date getDateDepart() {
         return DateDepart;
     }
@@ -94,6 +108,7 @@ public class RessourceTma {
         this.DateDepart = DateDepart;
     }
 
+    @Column(name="Login")
     public String getLogin() {
         return Login;
     }
@@ -102,6 +117,7 @@ public class RessourceTma {
         this.Login = Login;
     }
 
+    @Column(name="IdGroupe")
     public int getIdGroupe() {
         return idGroupe;
     }
@@ -110,6 +126,7 @@ public class RessourceTma {
         this.idGroupe = idGroupe;
     }
 
+    @Column(name="derniereConnexion")
     public Date getDerniereConnexion() {
         return DerniereConnexion;
     }
@@ -118,6 +135,7 @@ public class RessourceTma {
         this.DerniereConnexion = DerniereConnexion;
     }
 
+    @Column(name="eMail")
     public String getEmail() {
         return email;
     }
@@ -126,6 +144,7 @@ public class RessourceTma {
         this.email = email;
     }
 
+    @Column(name="alerteMail")
     public String getAlertMail() {
         return alertMail;
     }
@@ -134,6 +153,7 @@ public class RessourceTma {
         this.alertMail = alertMail;
     }
 
+    @Column(name="alertOT")
     public String getAlertOT() {
         return alertOT;
     }
@@ -142,6 +162,7 @@ public class RessourceTma {
         this.alertOT = alertOT;
     }
 
+    @Column(name="login_Login")
     public String getLoginLogin() {
         return loginLogin;
     }
@@ -150,6 +171,7 @@ public class RessourceTma {
         this.loginLogin = loginLogin;
     }
 
+    @Column(name="groupinfra")
     public String getGroupinfra() {
         return groupinfra;
     }
@@ -158,6 +180,7 @@ public class RessourceTma {
         this.groupinfra = groupinfra;
     }
 
+    @Column(name="matricule")
     public String getMatricule() {
         return matricule;
     }
@@ -166,6 +189,7 @@ public class RessourceTma {
         this.matricule = matricule;
     }
 
+    @Column(name="langue")
     public String getLangue() {
         return langue;
     }
@@ -174,6 +198,7 @@ public class RessourceTma {
         this.langue = langue;
     }
 
+    @Column(name="calendrier")
     public String getCalendrier() {
         return calendrier;
     }
@@ -182,6 +207,7 @@ public class RessourceTma {
         this.calendrier = calendrier;
     }
 
+    @Column(name="tags")
     public String getTags() {
         return tags;
     }

@@ -6,13 +6,19 @@
 package cgi.lemans.portail.domaine.entites;
 
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author souchul
  */
 
-
+@Entity
+@Table(name="absence")
 public class Absence {
     
     private int idAbsence;
@@ -27,6 +33,8 @@ public class Absence {
         super();
     }
     
+    @Id @GeneratedValue
+    @Column(name="ID_ABSENCE")
     public int getIdAbsence() {
         return idAbsence;
     }
@@ -35,6 +43,7 @@ public class Absence {
         this.idAbsence = idAbsence;
     }
     
+    @Column(name="REF_TYPE_ABSENCE")
     public int getRefTypeAbsence() {
         return RefTypeAbsence;
     }
@@ -43,6 +52,7 @@ public class Absence {
         this.RefTypeAbsence = refTypeAbsence;
     }
     
+    @Column(name="REF_RESSOURCE")
     public String getRefRessource() {
         return RefRessource;
     }
@@ -51,6 +61,7 @@ public class Absence {
         this.RefRessource = refRessource;
     }
     
+    @Column(name="PERMIER_JOUR_ABSENCE")
     public Date getPremierJourAbsence() {
         return PremierJourAbsence;
     }
@@ -59,6 +70,7 @@ public class Absence {
         this.PremierJourAbsence = premierJourAbsence;
     }
     
+    @Column(name="DATE_FIN_ABSENCE")
     public Date getDateFinAbsence() {
         return DateFinAbsence;
     }
@@ -67,6 +79,7 @@ public class Absence {
         this.DateFinAbsence = dateFinAbsence;
     }
     
+    @Column(name="NOMBRE_JOUR_ABSENCE")
     public double getNombreJoursAbsence() {
         return NombreJourAbsence;
     }
