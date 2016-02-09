@@ -22,11 +22,11 @@ import javax.persistence.Table;
 public class Absence {
     
     private int idAbsence;
-    private int RefTypeAbsence;
-    private String RefRessource;
-    private Date PremierJourAbsence;
-    private Date DateFinAbsence;
-    private double NombreJourAbsence;
+    private int refTypeAbsence;
+    private String refRessource;
+    private Date premierJourAbsence;
+    private Date dateFinAbsence;
+    private double nombreJourAbsence;
     //private String CommentaireAbsence;
     
     public Absence() {
@@ -45,46 +45,46 @@ public class Absence {
     
     @Column(name="REF_TYPE_ABSENCE")
     public int getRefTypeAbsence() {
-        return RefTypeAbsence;
+        return refTypeAbsence;
     }
     
     public void setRefTypeAbsence(int refTypeAbsence) {
-        this.RefTypeAbsence = refTypeAbsence;
+        this.refTypeAbsence = refTypeAbsence;
     }
     
     @Column(name="REF_RESSOURCE")
     public String getRefRessource() {
-        return RefRessource;
+        return refRessource;
     }
     
     public void setRefRessource(String refRessource) {
-        this.RefRessource = refRessource;
+        this.refRessource = refRessource;
     }
     
     @Column(name="PERMIER_JOUR_ABSENCE")
     public Date getPremierJourAbsence() {
-        return PremierJourAbsence;
+        return premierJourAbsence;
     }
     
     public void setPremierJourAbsence(Date premierJourAbsence) {
-        this.PremierJourAbsence = premierJourAbsence;
+        this.premierJourAbsence = premierJourAbsence;
     }
     
     @Column(name="DATE_FIN_ABSENCE")
     public Date getDateFinAbsence() {
-        return DateFinAbsence;
+        return dateFinAbsence;
     }
     
     public void setDateFinAbsence(Date dateFinAbsence) {
-        this.DateFinAbsence = dateFinAbsence;
+        this.dateFinAbsence = dateFinAbsence;
     }
     
     @Column(name="NOMBRE_JOUR_ABSENCE")
     public double getNombreJoursAbsence() {
-        return NombreJourAbsence;
+        return nombreJourAbsence;
     }
     
     public void setNombreJourAbsence(double nombreJourAbsence) {
-        this.NombreJourAbsence = nombreJourAbsence;
+        this.nombreJourAbsence = nombreJourAbsence;
     }
 }
