@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cgi.lemans.portail.domaine.entites;
+package cgi.lemans.portail.domaine.entites.gamaweb;
 
 import java.io.Serializable;
 import javax.persistence.Column;

@@ -3,11 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cgi.lemans.portail.domaine.entites;
+package cgi.lemans.portail.domaine.entites.gamaweb;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 /**
@@ -38,6 +43,7 @@ public class RessourceTma {
     private String langue;
     private String calendrier;
     private String tags;
+    private List<Absence> absences = new ArrayList<Absence>();
 
     
     public RessourceTma() {
@@ -215,6 +221,17 @@ public class RessourceTma {
     public void setTags(String tags) {
         this.tags = tags;
     }
+
+    @OneToMany(mappedBy="refRessource")
+    @OrderBy("idAbsence")
+	public List<Absence> getAbsences() {
+		return absences;
+	}
+
+
+	public void setAbsences(List<Absence> absences) {
+		this.absences = absences;
+	}
 
     
     

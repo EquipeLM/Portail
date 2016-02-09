@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cgi.lemans.portail.domaine.entites;
+package cgi.lemans.portail.domaine.entites.gamaweb;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +28,8 @@ public class TypeAbsence {
         super();
     }
 
-    @Id @GeneratedValue 
+    @Id 
+    @GeneratedValue 
     @Column(name="ID_TYPE_ABSENCE")
     public int getIdTypeAbsence() {
         return idTypeAbsence;

@@ -3,17 +3,18 @@ package cgi.lemans.portail.domaine.impl;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import cgi.lemans.portail.domaine.IGenericDao;
 
+@Component
 public abstract class AbstractGenericDao<T> implements IGenericDao<Serializable, T>{
     
-	@Autowired
 	private SessionFactory sessionFactory;
-    private final Class<T> persistentClass;
+    protected final Class<T> persistentClass;
      
     @SuppressWarnings("unchecked")
     public AbstractGenericDao(){

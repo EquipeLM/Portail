@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cgi.lemans.portail.domaine.entites;
+package cgi.lemans.portail.domaine.entites.gamaweb;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -20,17 +23,18 @@ import javax.persistence.Table;
 @Table(name="cuf_ressource_absence")
 public class CufRessourceAbsence {
  
-    private int idRessourceAbsence;
-    private String idRessource;
-    private int annee;
-    private int typeAbsence;
-    private double solde;
+    private Integer idRessourceAbsence;
+    private RessourceTma ressourceTma;
+    private Integer annee;
+    private TypeAbsence typeAbsence;
+    private Double solde;
     
     public CufRessourceAbsence() {
         super();
     }
 
-    @Id @GeneratedValue 
+    @Id 
+    @GeneratedValue 
     @Column(name="idRessourceAbsence")
     public int getIdRessourceAbsence() {
         return idRessourceAbsence;
@@ -39,16 +43,7 @@ public class CufRessourceAbsence {
     public void setIdRessourceAbsence(int idRessourceAbsence) {
         this.idRessourceAbsence = idRessourceAbsence;
     }
-
-    @Column(name="IdRessource")
-    public String getIdRessource() {
-        return idRessource;
-    }
-
-    public void setIdRessource(String idRessource) {
-        this.idRessource = idRessource;
-    }
-
+    
     @Column(name="annee")
     public int getAnnee() {
         return annee;
@@ -58,23 +53,32 @@ public class CufRessourceAbsence {
         this.annee = annee;
     }
 
-    @Column(name="typeAbsence")
-    public int getTypeAbsence() {
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="ID_TYPE_ABSENCE")
+    public TypeAbsence getTypeAbsence() {
         return typeAbsence;
     }
 
-    public void setTypeAbsence(int typeAbsence) {
+    public void setTypeAbsence(TypeAbsence typeAbsence) {
         this.typeAbsence = typeAbsence;
     }
 
     @Column(name="solde")
-    public double getSolde() {
+    public Double getSolde() {
         return solde;
     }
 
-    public void setSolde(double solde) {
+    public void setSolde(Double solde) {
         this.solde = solde;
     }
+
+	public RessourceTma getRessourceTma() {
+		return ressourceTma;
+	}
+
+	public void setRessourceTma(RessourceTma ressourceTma) {
+		this.ressourceTma = ressourceTma;
+	}
     
     
     

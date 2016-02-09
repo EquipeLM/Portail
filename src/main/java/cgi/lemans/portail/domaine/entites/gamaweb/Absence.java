@@ -3,13 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cgi.lemans.portail.domaine.entites;
+package cgi.lemans.portail.domaine.entites.gamaweb;
 
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -21,19 +25,20 @@ import javax.persistence.Table;
 @Table(name="absence")
 public class Absence {
     
-    private int idAbsence;
-    private int refTypeAbsence;
-    private String refRessource;
+    private Integer idAbsence;
+    private TypeAbsence refTypeAbsence;
+    private RessourceTma refRessource;
     private Date premierJourAbsence;
     private Date dateFinAbsence;
-    private double nombreJourAbsence;
+    private Double nombreJourAbsence;
     //private String CommentaireAbsence;
     
     public Absence() {
         super();
     }
     
-    @Id @GeneratedValue 
+    @Id 
+    @GeneratedValue 
     @Column(name="ID_ABSENCE")
     public int getIdAbsence() {
         return idAbsence;
@@ -43,21 +48,22 @@ public class Absence {
         this.idAbsence = idAbsence;
     }
     
-    @Column(name="REF_TYPE_ABSENCE")
-    public int getRefTypeAbsence() {
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="ID_TYPE_ABSENCE")
+    public TypeAbsence getRefTypeAbsence() {
         return refTypeAbsence;
     }
     
-    public void setRefTypeAbsence(int refTypeAbsence) {
+    public void setRefTypeAbsence(TypeAbsence refTypeAbsence) {
         this.refTypeAbsence = refTypeAbsence;
     }
     
-    @Column(name="REF_RESSOURCE")
-    public String getRefRessource() {
+    @ManyToOne
+    public RessourceTma getRefRessource() {
         return refRessource;
     }
     
-    public void setRefRessource(String refRessource) {
+    public void setRefRessource(RessourceTma refRessource) {
         this.refRessource = refRessource;
     }
     
