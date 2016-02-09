@@ -9,11 +9,11 @@ package cgi.lemans.portail.domaine.gamaweb;
  *
  * @author souchul
  */
-public interface IAbsenceDao {
+public interface ICufRessourceAbsenceDao {
     
-    
-    
-   
-    
-   
+     /**
+     * @param idRessource
+     * @return
+     */
+    public String findCufRessourceAbsenceByCongeAndRessourceAndSolde(String idRessource);
 }

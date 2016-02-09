@@ -5,15 +5,18 @@
  */
 package cgi.lemans.portail.domaine.gamaweb;
 
+import java.util.List;
+
 /**
  *
  * @author souchul
  */
-public interface IAbsenceDao {
+public interface ICufAbsenceDao {
     
+    /**
+     * @param idRessource
+     * @return
+     */
+    public List findCufAbsenceByCongeAndRessourceAndPris(String idRessource);
     
-    
-   
-    
-   
 }
