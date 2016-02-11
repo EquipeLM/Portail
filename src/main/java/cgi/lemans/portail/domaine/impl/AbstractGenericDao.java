@@ -6,11 +6,9 @@ import java.lang.reflect.Type;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Component;
 
 import cgi.lemans.portail.domaine.IGenericDao;
 
-@Component
 public abstract class AbstractGenericDao<T> implements IGenericDao<Serializable, T>{
     
 	private SessionFactory sessionFactory;
