@@ -19,4 +19,17 @@ public interface ICufAbsenceDao {
      */
     public List findCufAbsenceByCongeAndRessourceAndPris(String idRessource);
     
+    /**
+     * @param idRessource
+     * @return
+     */
+    public List findCufAbsenceByrttq1AndRessourceAndPris(String idRessource);
+    
+    /**
+     * @param idRessource
+     * @return
+     */
+    public List findCufAbsenceByrttq2AndRessourceAndPris(String idRessource);
+    
+    
 }
