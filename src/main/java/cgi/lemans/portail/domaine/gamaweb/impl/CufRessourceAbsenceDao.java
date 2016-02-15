@@ -19,7 +19,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CufRessourceAbsenceDao extends AbstractGenericDaoGamaweb<CufRessourceAbsence> implements ICufRessourceAbsenceDao{
 
-    @Override
+    public static final String CONGES = "1";
+    public static final String RTT_Q1 = "2";
+    public static final String RTT_Q2 = "3";
+    
+    /*@Override
     public List findCufRessourceAbsenceByCongeAndRessourceAndSolde(String idRessource) {
          String hql =  "from cuf_ressource_absence a"
         		+ "where a.annee= :annee "
@@ -49,6 +53,20 @@ public class CufRessourceAbsenceDao extends AbstractGenericDaoGamaweb<CufRessour
         		+ "and a.ressourceTma.idRessource = :idRessource ";
         Query query = getSession().createQuery(hql).setParameter("idRessource", idRessource).setParameter("annee", Calendar.getInstance().get(Calendar.YEAR));
         List results = (List) query.uniqueResult();
+        return results;
+    }*/
+
+    @Override
+    public List<Object[]> findCufRessourceAbsenceByTypeByRessource(String idRessource, String type) {
+        String hql =  "from CufRessourceAbsence a "
+                + "where a.annee= :annee "
+                + "and a.typeAbsence = :type "
+                + "and a.ressourceTma.idRessource = :idRessource ";
+        Query query = getSession().createQuery(hql);
+        query.setParameter("idRessource", idRessource);
+        query.setParameter("annee", Calendar.getInstance().get(Calendar.YEAR));
+        query.setParameter("type", Integer.parseInt(type));
+        List<Object[]> results = query.list();
         return results;
     }
     

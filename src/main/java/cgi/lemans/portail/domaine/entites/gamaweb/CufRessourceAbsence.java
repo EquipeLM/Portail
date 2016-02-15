@@ -24,22 +24,29 @@ import javax.persistence.Table;
 public class CufRessourceAbsence extends EntiteGamaweb{
  
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -8154197893511044838L;
-	@Id 
+     * 
+     */
+    private static final long serialVersionUID = -8154197893511044838L;
+    @Id 
     @GeneratedValue 
     @Column(name="idRessourceAbsence")
-	private Integer idRessourceAbsence;
+    private Integer idRessourceAbsence;
+    
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="IdRessource")
     private RessourceTma ressourceTma;
+    
+    @Column(name="annee")
     private Integer annee;
+    
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="typeAbsence")
     private TypeAbsence typeAbsence;
+    
+    @Column(name="solde")
     private Double solde;
     
-    public CufRessourceAbsence() {
-        super();
-    }
-
+    
     public int getIdRessourceAbsence() {
         return idRessourceAbsence;
     }

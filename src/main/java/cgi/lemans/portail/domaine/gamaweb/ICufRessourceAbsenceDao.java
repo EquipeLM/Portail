@@ -17,17 +17,24 @@ public interface ICufRessourceAbsenceDao {
      * @param idRessource
      * @return
      */
-    public List findCufRessourceAbsenceByCongeAndRessourceAndSolde(String idRessource);
+    //public List findCufRessourceAbsenceByCongeAndRessourceAndSolde(String idRessource);
     
     /**
      * @param idRessource
      * @return
      */
-    public List findCufRessourceAbsenceByRttQ1AndRessourceAndSolde(String idRessource);
+    //public List findCufRessourceAbsenceByRttQ1AndRessourceAndSolde(String idRessource);
     
     /**
      * @param idRessource
      * @return
      */    
-    public List findCufRessourceAbsenceByRttQ2AndRessourceAndSolde(String idRessource);
+    //public List findCufRessourceAbsenceByRttQ2AndRessourceAndSolde(String idRessource);
+    
+    /**
+	 * @param idRessource
+	 * @param type
+	 * @return
+	 */
+	public List<Object[]> findCufRessourceAbsenceByTypeByRessource(String idRessource, String type);
 }

@@ -11,8 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cgi.lemans.portail.config.controller.beans.AbsenceCardBean;
-import cgi.lemans.portail.domaine.entites.gamaweb.CufAbsence;
+import cgi.lemans.portail.controller.beans.AbsenceCardBean;
 import cgi.lemans.portail.domaine.gamaweb.IAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.ICufAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.ICufRessourceAbsenceDao;
@@ -34,7 +33,7 @@ public class AbsenceService implements IAbsenceService {
 	@Autowired
     private ICufAbsenceDao cufAbsenceDao;
 	@Autowired
-    private ICufRessourceAbsenceDao curRessourceAbsenceDao;
+    private ICufRessourceAbsenceDao cufRessourceAbsenceDao;
     
     
     
@@ -48,7 +47,7 @@ public class AbsenceService implements IAbsenceService {
     
     
     public void CufRessourceAbsenceDao(CufRessourceAbsenceDao cufRessourceAbsenceDao) {
-    	this.curRessourceAbsenceDao = cufRessourceAbsenceDao;
+    	this.cufRessourceAbsenceDao = cufRessourceAbsenceDao;
     }
 
     @Override
@@ -57,6 +56,10 @@ public class AbsenceService implements IAbsenceService {
         List<Object[]> listCongesPris = (List<Object[]>)  cufAbsenceDao.findCufAbsenceByTypeByRessource(idRessource, CufAbsenceDao.CONGES);
         List<Object[]> listQ1Pris = (List<Object[]>) cufAbsenceDao.findCufAbsenceByTypeByRessource(idRessource, CufAbsenceDao.RTT_Q1);
         List<Object[]> listQ2Pris = (List<Object[]>) cufAbsenceDao.findCufAbsenceByTypeByRessource(idRessource, CufAbsenceDao.RTT_Q2);
+        
+        List<Object[]> listCongesSolde = (List<Object[]>)  cufRessourceAbsenceDao.findCufRessourceAbsenceByTypeByRessource(idRessource, CufAbsenceDao.CONGES);
+        List<Object[]> listQ1Solde = (List<Object[]>)  cufRessourceAbsenceDao.findCufRessourceAbsenceByTypeByRessource(idRessource, CufAbsenceDao.RTT_Q1);
+        List<Object[]> listQ2Solde = (List<Object[]>)  cufRessourceAbsenceDao.findCufRessourceAbsenceByTypeByRessource(idRessource, CufAbsenceDao.RTT_Q2);
         AbsenceCardBean absRetour = new AbsenceCardBean();
         
         return absRetour;

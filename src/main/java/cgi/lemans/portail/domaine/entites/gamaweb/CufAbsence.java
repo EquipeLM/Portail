@@ -37,7 +37,7 @@ public class CufAbsence extends EntiteGamaweb {
 	private RessourceTma ressource;
 	
 	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-	@JoinColumn(name="ID_ABSENCE")
+	@JoinColumn(name="REF_TYPE_ABSENCE")
 	private TypeAbsence typeAbsence;
 	
 	@Column(name="JOUR")

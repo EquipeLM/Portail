@@ -5,15 +5,11 @@
  */
 package cgi.lemans.portail.domaine.entites.gamaweb;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 /**
@@ -28,31 +24,69 @@ public class RessourceTma extends EntiteGamaweb{
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 6313687676033434806L;
-	@Id
-	private String idRessource;
+    private static final long serialVersionUID = 6313687676033434806L;
+    
+    @Id
+    @Column(name="IdRessource")
+    private String idRessource;
+    
+    @Column(name="Nom")
     private String nom;
-    private String prenom; 
+    
+    @Column(name="Prenom")
+    private String prenom;
+    
+    @Column(name="Fonction")
     private String fonction;
+    
+    @Column(name="Equipe")
     private String equipe;
-    private Date DateArrivee;
-    private Date DateDepart;
-    private String Login;
+    
+    @Column(name="Date_Arrivee")
+    private Date dateArrivee;
+    
+    @Column(name="Date_Depart")
+    private Date dateDepart;
+    
+    @Column(name="Login")
+    private String login;
+    
+    @Column(name="IdGroupe")
     private int idGroupe;
-    private Date DerniereConnexion;
+    
+    @Column(name="derniereConnexion")
+    private Date derniereConnexion;
+    
+    @Column(name="eMail")
     private String email;
+    
+    @Column(name="alertMail")
     private String alertMail;
+    
+    @Column(name="alertOt")
     private String alertOT;
+    
+    @Column(name="loginLogin")
     private String loginLogin;
+    
+    @Column(name="groupinfra")
     private String groupinfra;
+    
+    @Column(name="matricule")
     private String matricule;
+    
+    @Column(name="langue")
     private String langue;
+    
+    @Column(name="calendrier")
     private String calendrier;
+    
+    @Column(name="tags")
     private String tags;
 
-    @OneToMany(mappedBy="refRessource")
+    /*@OneToMany(mappedBy="refRessource")
     @OrderBy("idAbsence")
-    private List<Absence> absences = new ArrayList<Absence>();
+    private List<Absence> absences = new ArrayList<Absence>();*/
 
     
     public RessourceTma() {
@@ -60,7 +94,7 @@ public class RessourceTma extends EntiteGamaweb{
     }
     
     
-    @Column(name="IdRessource")
+    
     public String getIdRessource() {
         return idRessource;
     }
@@ -69,7 +103,7 @@ public class RessourceTma extends EntiteGamaweb{
         this.idRessource = idRessource;
     }
 
-    @Column(name="Nom")
+    
     public String getNom() {
         return nom;
     }
@@ -78,7 +112,7 @@ public class RessourceTma extends EntiteGamaweb{
         this.nom = nom;
     }
     
-    @Column(name="Prenom")
+    
     public String getPrenom() {
         return prenom;
     }
@@ -87,7 +121,7 @@ public class RessourceTma extends EntiteGamaweb{
         this.prenom = prenom;
     }
 
-    @Column(name="Fonction")
+    
     public String getFonction() {
         return fonction;
     }
@@ -96,7 +130,7 @@ public class RessourceTma extends EntiteGamaweb{
         this.fonction = fonction;
     }
     
-    @Column(name="Equipe")
+    
     public String getEquipe() {
         return equipe;
     }
@@ -105,34 +139,33 @@ public class RessourceTma extends EntiteGamaweb{
         this.equipe = equipe;
     }
 
-    @Column(name="Date_Arrivee")
+   
     public Date getDateArrivee() {
-        return DateArrivee;
+        return dateArrivee;
     }
 
-    public void setDateArrivee(Date DateArrivee) {
-        this.DateArrivee = DateArrivee;
+    public void setDateArrivee(Date dateArrivee) {
+        this.dateArrivee = dateArrivee;
     }
 
-    @Column(name="Date_Depart")
+    
     public Date getDateDepart() {
-        return DateDepart;
+        return dateDepart;
     }
 
-    public void setDateDepart(Date DateDepart) {
-        this.DateDepart = DateDepart;
+    public void setDateDepart(Date dateDepart) {
+        this.dateDepart = dateDepart;
     }
 
-    @Column(name="Login")
+    
     public String getLogin() {
-        return Login;
+        return login;
     }
 
-    public void setLogin(String Login) {
-        this.Login = Login;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
-    @Column(name="IdGroupe")
     public int getIdGroupe() {
         return idGroupe;
     }
@@ -141,16 +174,14 @@ public class RessourceTma extends EntiteGamaweb{
         this.idGroupe = idGroupe;
     }
 
-    @Column(name="derniereConnexion")
     public Date getDerniereConnexion() {
-        return DerniereConnexion;
+        return derniereConnexion;
     }
 
-    public void setDerniereConnexion(Date DerniereConnexion) {
-        this.DerniereConnexion = DerniereConnexion;
+    public void setDerniereConnexion(Date derniereConnexion) {
+        this.derniereConnexion = derniereConnexion;
     }
 
-    @Column(name="eMail")
     public String getEmail() {
         return email;
     }
@@ -159,7 +190,6 @@ public class RessourceTma extends EntiteGamaweb{
         this.email = email;
     }
 
-    @Column(name="alerteMail")
     public String getAlertMail() {
         return alertMail;
     }
@@ -168,7 +198,6 @@ public class RessourceTma extends EntiteGamaweb{
         this.alertMail = alertMail;
     }
 
-    @Column(name="alertOT")
     public String getAlertOT() {
         return alertOT;
     }
@@ -177,7 +206,6 @@ public class RessourceTma extends EntiteGamaweb{
         this.alertOT = alertOT;
     }
 
-    @Column(name="login_Login")
     public String getLoginLogin() {
         return loginLogin;
     }
@@ -186,7 +214,6 @@ public class RessourceTma extends EntiteGamaweb{
         this.loginLogin = loginLogin;
     }
 
-    @Column(name="groupinfra")
     public String getGroupinfra() {
         return groupinfra;
     }
@@ -195,7 +222,6 @@ public class RessourceTma extends EntiteGamaweb{
         this.groupinfra = groupinfra;
     }
 
-    @Column(name="matricule")
     public String getMatricule() {
         return matricule;
     }
@@ -204,7 +230,6 @@ public class RessourceTma extends EntiteGamaweb{
         this.matricule = matricule;
     }
 
-    @Column(name="langue")
     public String getLangue() {
         return langue;
     }
@@ -213,7 +238,6 @@ public class RessourceTma extends EntiteGamaweb{
         this.langue = langue;
     }
 
-    @Column(name="calendrier")
     public String getCalendrier() {
         return calendrier;
     }
@@ -222,7 +246,6 @@ public class RessourceTma extends EntiteGamaweb{
         this.calendrier = calendrier;
     }
 
-    @Column(name="tags")
     public String getTags() {
         return tags;
     }
@@ -231,14 +254,14 @@ public class RessourceTma extends EntiteGamaweb{
         this.tags = tags;
     }
 
-	public List<Absence> getAbsences() {
+	/*public List<Absence> getAbsences() {
 		return absences;
 	}
 
 
 	public void setAbsences(List<Absence> absences) {
 		this.absences = absences;
-	}
+	}*/
 
     
     

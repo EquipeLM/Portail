@@ -5,7 +5,7 @@
  */
 package cgi.lemans.portail.service;
 
-import cgi.lemans.portail.config.controller.beans.AbsenceCardBean;
+import cgi.lemans.portail.controller.beans.AbsenceCardBean;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufAbsence;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufRessourceAbsence;
 
