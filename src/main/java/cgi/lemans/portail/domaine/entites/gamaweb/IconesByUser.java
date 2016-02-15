@@ -18,9 +18,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="icones_by_user")
-public class IconesByUser {
+public class IconesByUser extends EntiteGamaweb {
     
-    private String user;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8570179373680422719L;
+	private String user;
     private int idIcone;
     private int cpt;
     private boolean isDernier;

@@ -20,7 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="icones")
-public class Icones implements Serializable{
+public class Icones extends EntiteGamaweb{
     
     
     /**

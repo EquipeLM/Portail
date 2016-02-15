@@ -5,41 +5,37 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.metamodel.source.hbm.HierarchyBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import cgi.lemans.portail.domaine.entites.gamaweb.Absence;
+import cgi.lemans.portail.domaine.entites.gamaweb.CufAbsence;
+import cgi.lemans.portail.domaine.entites.gamaweb.CufRessourceAbsence;
+import cgi.lemans.portail.domaine.entites.gamaweb.RessourceTma;
+import cgi.lemans.portail.domaine.entites.gamaweb.TypeAbsence;
 
 @Configuration
 @ComponentScan("cgi.lemans.portail")
 @EnableTransactionManagement
+@EnableWebMvc
 @PropertySource(value = { "classpath:application.config.properties" })
 public class PortailAppContextConfig {
 
 	@Autowired
     private Environment environment;
 	
-	/**
-	 * Gestion des vues retournées par les controllers spring.</br>
-	 * Attention! Les vues de ce projet sont gérés par Angular</br>
-	 * Il ne devrait pas, sauf cas spécifiques, avoir de retour de vue (juste
-	 * JSON Object as return)
-	 * 
-	 * @return
-	 */
-	@Bean(name = "viewResolver")
-	public InternalResourceViewResolver getViewResolver() {
-		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		viewResolver.setPrefix("/WEB-INF/vues/");
-		viewResolver.setSuffix(".jsp");
-		return viewResolver;
-	}
 	
 	@Autowired
 	@Bean(name = "sessionFactoryNewPortal")
@@ -66,10 +62,15 @@ public class PortailAppContextConfig {
 		properties.put("hibernate.dialect", environment.getRequiredProperty("newportal.hibernate.dialect"));
 		properties.put("hibernate.show_sql", environment.getRequiredProperty("newportal.hibernate.show_sql"));
 		properties.put("hibernate.format_sql", environment.getRequiredProperty("newportal.hibernate.format_sql"));
-		properties.put("hibernate.current_session_context_class", environment.getRequiredProperty("newportal.hibernate.current_session_context_class"));
 		properties.put("hibernate.connection.pool_size", environment.getRequiredProperty("newportal.hibernate.connection.pool_size"));
 		return properties;        
 	}
+	
+	@Autowired
+	@Bean(name="txManagerNewPortal")
+    public HibernateTransactionManager txManagerNewPortal() {
+        return new HibernateTransactionManager(getSessionFactoryNewPortal(getDataSourceNewPortal()));
+    }	
 	
 	/***********************************************************************
 	******************************Datasource GAMAWEB************************
@@ -79,7 +80,11 @@ public class PortailAppContextConfig {
 	@Bean(name = "sessionFactoryGamaweb")
 	public SessionFactory getSessionFactoryGamaweb(DataSource dataSourceGamaweb) {
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSourceGamaweb);
-//	    sessionBuilder.addAnnotatedClasses(User.class);
+		sessionBuilder.addAnnotatedClasses(RessourceTma.class);
+		sessionBuilder.addAnnotatedClasses(Absence.class);
+		sessionBuilder.addAnnotatedClasses(CufAbsence.class);
+		sessionBuilder.addAnnotatedClasses(CufRessourceAbsence.class);
+		sessionBuilder.addAnnotatedClasses(TypeAbsence.class);
 		sessionBuilder.addProperties(getHibernatePropertiesGamaweb());
 		return sessionBuilder.buildSessionFactory();
 	}
@@ -99,8 +104,15 @@ public class PortailAppContextConfig {
         properties.put("hibernate.dialect", environment.getRequiredProperty("gamaweb.hibernate.dialect"));
         properties.put("hibernate.show_sql", environment.getRequiredProperty("gamaweb.hibernate.show_sql"));
         properties.put("hibernate.format_sql", environment.getRequiredProperty("gamaweb.hibernate.format_sql"));
-        properties.put("hibernate.current_session_context_class", environment.getRequiredProperty("gamaweb.hibernate.current_session_context_class"));
         properties.put("hibernate.connection.pool_size", environment.getRequiredProperty("gamaweb.hibernate.connection.pool_size"));
         return properties;        
     }
+	
+	@Autowired
+	@Bean(name="txManagerGamaweb")
+	public HibernateTransactionManager txManagerGamaweb(SessionFactory sessionFactoryGamaweb) {
+		final HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
+		hibernateTransactionManager.setSessionFactory(sessionFactoryGamaweb);
+		return hibernateTransactionManager;
+	}
 }

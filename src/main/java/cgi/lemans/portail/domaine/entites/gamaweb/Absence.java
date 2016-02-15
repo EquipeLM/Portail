@@ -23,9 +23,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="absence")
-public class Absence {
+public class Absence extends EntiteGamaweb{
     
-    private Integer idAbsence;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7675469008489694732L;
+	@Id 
+    @GeneratedValue 
+    @Column(name="ID_ABSENCE")
+	private Integer idAbsence;
     private TypeAbsence refTypeAbsence;
     private RessourceTma refRessource;
     private Date premierJourAbsence;
@@ -37,9 +44,6 @@ public class Absence {
         super();
     }
     
-    @Id 
-    @GeneratedValue 
-    @Column(name="ID_ABSENCE")
     public int getIdAbsence() {
         return idAbsence;
     }
@@ -49,7 +53,6 @@ public class Absence {
     }
     
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    @JoinColumn(name="ID_TYPE_ABSENCE")
     public TypeAbsence getRefTypeAbsence() {
         return refTypeAbsence;
     }

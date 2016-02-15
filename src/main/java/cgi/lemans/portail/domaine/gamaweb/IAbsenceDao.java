@@ -11,9 +11,4 @@ package cgi.lemans.portail.domaine.gamaweb;
  */
 public interface IAbsenceDao {
     
-    
-    
-   
-    
-   
 }

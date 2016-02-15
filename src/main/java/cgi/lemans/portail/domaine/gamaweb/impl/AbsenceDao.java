@@ -3,27 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cgi.lemans.portail.domaine.impl.gamaweb;
+package cgi.lemans.portail.domaine.gamaweb.impl;
 
+
+import org.springframework.stereotype.Repository;
 
 import cgi.lemans.portail.domaine.entites.gamaweb.Absence;
 import cgi.lemans.portail.domaine.gamaweb.IAbsenceDao;
-import cgi.lemans.portail.domaine.impl.newportal.AbstractGenericDaoNewPortal;
+import cgi.lemans.portail.domaine.newportal.impl.AbstractGenericDaoNewPortal;
 
 
 /**
  *
  * @author souchul
  */
-public class AbsenceDao extends AbstractGenericDaoNewPortal<Absence> implements IAbsenceDao{
-    
-   
-    
-   
-
-    
-
-   
-    
-    
+@Repository
+public class AbsenceDao extends AbstractGenericDaoGamaweb<Absence> implements IAbsenceDao{
 }

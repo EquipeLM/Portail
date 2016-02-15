@@ -18,9 +18,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="type_absence")
-public class TypeAbsence {
+public class TypeAbsence extends EntiteGamaweb{
     
-    private int idTypeAbsence;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3697243253215083022L;
+	@Id 
+    @GeneratedValue 
+	private Integer idTypeAbsence;
     private String libelleTypeAbsence;
     
     
@@ -28,16 +34,7 @@ public class TypeAbsence {
         super();
     }
 
-    @Id 
-    @GeneratedValue 
-    @Column(name="ID_TYPE_ABSENCE")
-    public int getIdTypeAbsence() {
-        return idTypeAbsence;
-    }
-
-    public void setIdTypeAbsence(int idTypeAbsence) {
-        this.idTypeAbsence = idTypeAbsence;
-    }
+    
 
     @Column(name="LIBELLE_TYPE_ABSENCE")
     public String getLibelleTypeAbsence() {
@@ -47,6 +44,18 @@ public class TypeAbsence {
     public void setLibelleTypeAbsence(String libelleTypeAbsence) {
         this.libelleTypeAbsence = libelleTypeAbsence;
     }
+
+
+    @Column(name="ID_TYPE_ABSENCE")
+	public Integer getIdTypeAbsence() {
+		return idTypeAbsence;
+	}
+
+
+
+	public void setIdTypeAbsence(Integer idTypeAbsence) {
+		this.idTypeAbsence = idTypeAbsence;
+	}
     
     
 }

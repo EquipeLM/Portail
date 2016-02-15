@@ -1,32 +1,66 @@
 package cgi.lemans.portail.domaine.entites.gamaweb;
 
-import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * @author gautierfa
  *
  */
-@Entity(name = "cuf_absence")
-public class CufAbsence implements Serializable {
+@Entity
+@Table(name = "cuf_absence")
+public class CufAbsence extends EntiteGamaweb {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6414273484714404204L;
 	
+	@Id
+	@GeneratedValue
+	@Column(name="ID_CUF_ABSENCE")
 	private Integer idCufAbsence;
+	
+	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
 	private Absence abscence;
+	
+	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+	@JoinColumn(name="RESSOURCE")
 	private RessourceTma ressource;
+	
+	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+	@JoinColumn(name="ID_ABSENCE")
 	private TypeAbsence typeAbsence;
+	
+	@Column(name="JOUR")
 	private Integer jour;
-	private Integer annee;
+	
+	@Column(name="MOIS")
+	private Integer mois;
+	
+	@Column(name="SEMAINE")
 	private Integer semaine;
+	
+	@Column(name="ANNEE")
+	private Integer annee;
+	
+	@Column(name="DATE_ABSENCE")
 	private Date dateAbsence;
+	
+	@Column(name="NOMBRE_JOUR")
 	private Integer nombreDeJour;
+	
+	@Column(name="COMMENTAIRE")
 	private String commentaire;
+	
 	public Integer getIdCufAbsence() {
 		return idCufAbsence;
 	}
@@ -39,6 +73,7 @@ public class CufAbsence implements Serializable {
 	public void setAbscence(Absence abscence) {
 		this.abscence = abscence;
 	}
+	
 	public RessourceTma getRessource() {
 		return ressource;
 	}
@@ -86,6 +121,12 @@ public class CufAbsence implements Serializable {
 	}
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
+	}
+	public Integer getMois() {
+		return mois;
+	}
+	public void setMois(Integer mois) {
+		this.mois = mois;
 	}
 	
 	
