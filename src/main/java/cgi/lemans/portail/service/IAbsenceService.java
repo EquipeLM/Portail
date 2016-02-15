@@ -5,6 +5,7 @@
  */
 package cgi.lemans.portail.service;
 
+import cgi.lemans.portail.config.controller.beans.AbsenceCardBean;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufAbsence;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufRessourceAbsence;
 
@@ -14,13 +15,10 @@ import cgi.lemans.portail.domaine.entites.gamaweb.CufRessourceAbsence;
  */
 public interface IAbsenceService {
     
-    public CufAbsence affichageCongePris();
-    public CufAbsence affichageRttq1Pris();
-    public CufAbsence affichageRttq2Pris();
-    
-    public CufRessourceAbsence affichageCongeSolde();
-    public CufRessourceAbsence affichageRttq1Solde();
-    public CufRessourceAbsence affichageRttq2Solde();
+    /**
+     * @return
+     */
+    public AbsenceCardBean recupererInfosAbsRessource();
     
     
     

@@ -11,20 +11,17 @@ import cgi.lemans.portail.domaine.IGenericDao;
 
 public abstract class AbstractGenericDao<T> implements IGenericDao<Serializable, T>{
     
-	private SessionFactory sessionFactory;
     protected final Class<T> persistentClass;
      
     @SuppressWarnings("unchecked")
     public AbstractGenericDao(){
     	Type t = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) t;
-        persistentClass = (Class<T>) pt.getActualTypeArguments()[1];
+        persistentClass = (Class<T>) pt.getActualTypeArguments()[0];
     }
      
  
-    protected Session getSession(){
-        return sessionFactory.getCurrentSession();
-    }
+    protected abstract Session getSession();
  
 
 	@Override

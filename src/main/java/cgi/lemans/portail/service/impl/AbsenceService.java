@@ -5,86 +5,60 @@
  */
 package cgi.lemans.portail.service.impl;
 
-import cgi.lemans.portail.domaine.entites.gamaweb.CufAbsence;
-import cgi.lemans.portail.domaine.entites.gamaweb.CufRessourceAbsence;
-import cgi.lemans.portail.domaine.impl.gamaweb.AbsenceDao;
-import cgi.lemans.portail.domaine.impl.gamaweb.CufAbsenceDao;
-import cgi.lemans.portail.domaine.impl.gamaweb.CufRessourceAbsenceDao;
-import cgi.lemans.portail.service.IAbsenceService;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import cgi.lemans.portail.config.controller.beans.AbsenceCardBean;
+import cgi.lemans.portail.domaine.entites.gamaweb.CufAbsence;
+import cgi.lemans.portail.domaine.gamaweb.IAbsenceDao;
+import cgi.lemans.portail.domaine.gamaweb.ICufAbsenceDao;
+import cgi.lemans.portail.domaine.gamaweb.ICufRessourceAbsenceDao;
+import cgi.lemans.portail.domaine.gamaweb.impl.AbsenceDao;
+import cgi.lemans.portail.domaine.gamaweb.impl.CufAbsenceDao;
+import cgi.lemans.portail.domaine.gamaweb.impl.CufRessourceAbsenceDao;
+import cgi.lemans.portail.service.IAbsenceService;
 
 /**
  *
  * @author souchul
  */
-@Transactional
+@Service
+@Transactional(transactionManager = "txManagerGamaweb")
 public class AbsenceService implements IAbsenceService {
     
-    private AbsenceDao absenceDao;
-    private CufAbsenceDao cufAbsenceDao;
-    private CufRessourceAbsenceDao curRessourceAbsenceDao;
+	@Autowired
+    private IAbsenceDao absenceDao;
+	@Autowired
+    private ICufAbsenceDao cufAbsenceDao;
+	@Autowired
+    private ICufRessourceAbsenceDao curRessourceAbsenceDao;
     
     
     
     public void AbsenceDao(AbsenceDao absenceDao) {
-    this.absenceDao = absenceDao;
+    	this.absenceDao = absenceDao;
     }
     
     public void CufAbsenceDao(CufAbsenceDao cufAbsenceDao) {
-    this.cufAbsenceDao = cufAbsenceDao;
+    	this.cufAbsenceDao = cufAbsenceDao;
     }
     
     
     public void CufRessourceAbsenceDao(CufRessourceAbsenceDao cufRessourceAbsenceDao) {
-    this.curRessourceAbsenceDao = cufRessourceAbsenceDao;
+    	this.curRessourceAbsenceDao = cufRessourceAbsenceDao;
     }
 
     @Override
-    public CufAbsence affichageCongePris() {
+    public AbsenceCardBean recupererInfosAbsRessource() {
         String idRessource = "BJA";
-        List listCongesPris = (List) (CufAbsence) cufAbsenceDao.findCufAbsenceByCongeAndRessourceAndPris(idRessource);
-        return (CufAbsence) listCongesPris;
+        List<Object[]> listCongesPris = (List<Object[]>)  cufAbsenceDao.findCufAbsenceByTypeByRessource(idRessource, CufAbsenceDao.CONGES);
+        List<Object[]> listQ1Pris = (List<Object[]>) cufAbsenceDao.findCufAbsenceByTypeByRessource(idRessource, CufAbsenceDao.RTT_Q1);
+        List<Object[]> listQ2Pris = (List<Object[]>) cufAbsenceDao.findCufAbsenceByTypeByRessource(idRessource, CufAbsenceDao.RTT_Q2);
+        AbsenceCardBean absRetour = new AbsenceCardBean();
+        
+        return absRetour;
     }
-
-    @Override
-    public CufAbsence affichageRttq1Pris() {
-        String idRessource = "BJA";
-        List listRttq1Pris = (List) (CufAbsence) cufAbsenceDao.findCufAbsenceByrttq1AndRessourceAndPris(idRessource);
-        return (CufAbsence) listRttq1Pris;
-    }
-
-    @Override
-    public CufAbsence affichageRttq2Pris() {
-        String idRessource = "BJA";
-        List listRttq2Pris = (List) (CufAbsence) cufAbsenceDao.findCufAbsenceByrttq2AndRessourceAndPris(idRessource);
-        return (CufAbsence) listRttq2Pris;
-    }
-
-    @Override
-    public CufRessourceAbsence affichageCongeSolde() {
-        String idRessource = "BJA";
-        List listCongesSolde = curRessourceAbsenceDao.findCufRessourceAbsenceByCongeAndRessourceAndSolde(idRessource);
-        return (CufRessourceAbsence) listCongesSolde;
-    }
-
-    @Override
-    public CufRessourceAbsence affichageRttq1Solde() {
-        String idRessource = "BJA";
-        List listRttq1Solde = curRessourceAbsenceDao.findCufRessourceAbsenceByRttQ1AndRessourceAndSolde(idRessource);
-        return (CufRessourceAbsence) listRttq1Solde;
-    }
-
-    @Override
-    public CufRessourceAbsence affichageRttq2Solde() {
-        String idRessource = "BJA";
-        List listRttq2Solde = curRessourceAbsenceDao.findCufRessourceAbsenceByRttQ2AndRessourceAndSolde(idRessource);
-        return (CufRessourceAbsence) listRttq2Solde;
-    }
-    
-
-    
-    
-    
-
 }

@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
@@ -22,9 +23,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ressource_tma") 
-public class RessourceTma {
+public class RessourceTma extends EntiteGamaweb{
  
-    private String idRessource;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6313687676033434806L;
+	@Id
+	private String idRessource;
     private String nom;
     private String prenom; 
     private String fonction;
@@ -43,6 +49,9 @@ public class RessourceTma {
     private String langue;
     private String calendrier;
     private String tags;
+
+    @OneToMany(mappedBy="refRessource")
+    @OrderBy("idAbsence")
     private List<Absence> absences = new ArrayList<Absence>();
 
     
@@ -222,8 +231,6 @@ public class RessourceTma {
         this.tags = tags;
     }
 
-    @OneToMany(mappedBy="refRessource")
-    @OrderBy("idAbsence")
 	public List<Absence> getAbsences() {
 		return absences;
 	}

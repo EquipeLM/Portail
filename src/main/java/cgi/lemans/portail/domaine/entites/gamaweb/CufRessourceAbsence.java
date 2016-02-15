@@ -21,9 +21,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="cuf_ressource_absence")
-public class CufRessourceAbsence {
+public class CufRessourceAbsence extends EntiteGamaweb{
  
-    private Integer idRessourceAbsence;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8154197893511044838L;
+	@Id 
+    @GeneratedValue 
+    @Column(name="idRessourceAbsence")
+	private Integer idRessourceAbsence;
     private RessourceTma ressourceTma;
     private Integer annee;
     private TypeAbsence typeAbsence;
@@ -33,9 +40,6 @@ public class CufRessourceAbsence {
         super();
     }
 
-    @Id 
-    @GeneratedValue 
-    @Column(name="idRessourceAbsence")
     public int getIdRessourceAbsence() {
         return idRessourceAbsence;
     }
