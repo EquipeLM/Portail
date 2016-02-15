@@ -7,6 +7,8 @@ package cgi.lemans.portail.domaine.gamaweb;
 
 import java.util.List;
 
+import cgi.lemans.portail.domaine.entites.gamaweb.CufRessourceAbsence;
+
 /**
  *
  * @author souchul
@@ -36,5 +38,5 @@ public interface ICufRessourceAbsenceDao {
 	 * @param type
 	 * @return
 	 */
-	public List<Object[]> findCufRessourceAbsenceByTypeByRessource(String idRessource, String type);
+	public List<CufRessourceAbsence> findCufRessourceAbsenceByTypeByRessource(String idRessource, String type);
 }

@@ -60,13 +60,13 @@ public class RessourceTma extends EntiteGamaweb{
     @Column(name="eMail")
     private String email;
     
-    @Column(name="alertMail")
+    @Column(name="alerteMail")
     private String alertMail;
     
     @Column(name="alertOt")
     private String alertOT;
     
-    @Column(name="loginLogin")
+    @Column(name="login_Login")
     private String loginLogin;
     
     @Column(name="groupinfra")

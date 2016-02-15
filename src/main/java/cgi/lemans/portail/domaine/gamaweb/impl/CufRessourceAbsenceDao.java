@@ -57,16 +57,16 @@ public class CufRessourceAbsenceDao extends AbstractGenericDaoGamaweb<CufRessour
     }*/
 
     @Override
-    public List<Object[]> findCufRessourceAbsenceByTypeByRessource(String idRessource, String type) {
+    public List<CufRessourceAbsence> findCufRessourceAbsenceByTypeByRessource(String idRessource, String type) {
         String hql =  "from CufRessourceAbsence a "
                 + "where a.annee= :annee "
-                + "and a.typeAbsence = :type "
+                + "and a.typeAbsence.idTypeAbsence = :type "
                 + "and a.ressourceTma.idRessource = :idRessource ";
         Query query = getSession().createQuery(hql);
         query.setParameter("idRessource", idRessource);
         query.setParameter("annee", Calendar.getInstance().get(Calendar.YEAR));
         query.setParameter("type", Integer.parseInt(type));
-        List<Object[]> results = query.list();
+        List<CufRessourceAbsence> results = query.list();
         return results;
     }
     
