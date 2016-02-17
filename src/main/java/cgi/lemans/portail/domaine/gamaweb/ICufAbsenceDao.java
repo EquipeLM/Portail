@@ -5,15 +5,17 @@
  */
 package cgi.lemans.portail.domaine.gamaweb;
 
+import java.io.Serializable;
 import java.util.List;
 
+import cgi.lemans.portail.domaine.IGenericDao;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufAbsence;
 
 /**
  *
  * @author souchul
  */
-public interface ICufAbsenceDao {
+public interface ICufAbsenceDao extends IGenericDao<Serializable, CufAbsence> {
     
     /**
      * @param idRessource

@@ -5,15 +5,17 @@
  */
 package cgi.lemans.portail.domaine.gamaweb;
 
+import java.io.Serializable;
 import java.util.List;
 
+import cgi.lemans.portail.domaine.IGenericDao;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufRessourceAbsence;
 
 /**
  *
  * @author souchul
  */
-public interface ICufRessourceAbsenceDao {
+public interface ICufRessourceAbsenceDao extends IGenericDao<Serializable, CufRessourceAbsence> {
     
      /**
      * @param idRessource
@@ -40,10 +42,4 @@ public interface ICufRessourceAbsenceDao {
     */
     public List<CufRessourceAbsence> findCufRessourceAbsenceByTypeByRessource(String idRessource, String type);
     
-    /**
-    * @param idRessource
-    * @param type
-    * @return
-    */
-    public List<CufRessourceAbsence> InsertSoldebyType(String idRessource, String type);
 }

@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import cgi.lemans.portail.controller.beans.AbsenceCardBean;
 import cgi.lemans.portail.domaine.entites.gamaweb.Absence;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufRessourceAbsence;
+import cgi.lemans.portail.domaine.entites.gamaweb.RessourceTma;
+import cgi.lemans.portail.domaine.entites.gamaweb.TypeAbsence;
 import cgi.lemans.portail.domaine.gamaweb.IAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.ICufAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.ICufRessourceAbsenceDao;
@@ -55,4 +57,21 @@ public class AbsenceService implements IAbsenceService {
         
         return absRetour;
     }
+
+
+	@Override
+	public void enregistrerInfosParTypes(AbsenceCardBean bean) {
+		CufRessourceAbsence nelleAbsQun = new CufRessourceAbsence();
+		RessourceTma ress = new RessourceTma();
+		TypeAbsence type = new TypeAbsence();
+		type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.RTT_Q1));
+		ress.setIdRessource("BJA");
+//		nelleAbsQun.set....(...);
+//		nelleAbsQun.set...(...);
+//		nelleAbsQun.set...(...);
+//		nelleAbsQun.set...(...);
+		cufRessourceAbsenceDao.create(nelleAbsQun);
+	}
+    
+    
 }

@@ -5,14 +5,17 @@
  */
 package cgi.lemans.portail.domaine.gamaweb;
 
+import cgi.lemans.portail.domaine.IGenericDao;
 import cgi.lemans.portail.domaine.entites.gamaweb.Absence;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author souchul
  */
-public interface IAbsenceDao {
+public interface IAbsenceDao extends IGenericDao<Serializable, Absence>{
     
     public List<Absence> findAbsenceByPremierJourAbsence(String idRessource);
     
