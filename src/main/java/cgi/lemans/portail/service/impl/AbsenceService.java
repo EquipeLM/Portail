@@ -21,6 +21,7 @@ import cgi.lemans.portail.domaine.gamaweb.ICufAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.ICufRessourceAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.impl.CufAbsenceDao;
 import cgi.lemans.portail.service.IAbsenceService;
+import java.util.Calendar;
 
 /**
  *
@@ -61,16 +62,56 @@ public class AbsenceService implements IAbsenceService {
 
 	@Override
 	public void enregistrerInfosParTypes(AbsenceCardBean bean) {
-		CufRessourceAbsence nelleAbsQun = new CufRessourceAbsence();
+		CufRessourceAbsence newSoldeConge = new CufRessourceAbsence();
 		RessourceTma ress = new RessourceTma();
 		TypeAbsence type = new TypeAbsence();
-		type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.RTT_Q1));
+		type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.CONGES));
 		ress.setIdRessource("BJA");
-//		nelleAbsQun.set....(...);
-//		nelleAbsQun.set...(...);
-//		nelleAbsQun.set...(...);
-//		nelleAbsQun.set...(...);
-		cufRessourceAbsenceDao.create(nelleAbsQun);
+		newSoldeConge.setAnnee(Calendar.YEAR);
+                newSoldeConge.setSolde(new Integer(null).doubleValue());
+		cufRessourceAbsenceDao.create(newSoldeConge);
+                
+                CufRessourceAbsence newSoldeQ1 = new CufRessourceAbsence();
+                type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.RTT_Q1));
+		ress.setIdRessource("BJA");
+		newSoldeConge.setAnnee(Calendar.YEAR);
+                newSoldeConge.setSolde(new Integer(null).doubleValue());
+		cufRessourceAbsenceDao.create(newSoldeQ1);
+                
+                CufRessourceAbsence newSoldeQ2 = new CufRessourceAbsence();
+                type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.RTT_Q2));
+		ress.setIdRessource("BJA");
+		newSoldeConge.setAnnee(Calendar.YEAR);
+                newSoldeConge.setSolde(new Integer(null).doubleValue());
+		cufRessourceAbsenceDao.create(newSoldeQ2);
+                
+                
+                Absence nvelleAbsConge = new Absence();
+                type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.CONGES));
+                ress.setIdRessource("BJA");
+                nvelleAbsConge.setPremierJourAbsence(null);
+                nvelleAbsConge.setDateFinAbsence(null);
+                nvelleAbsConge.setNombreJourAbsence(0);
+                absenceDao.create(nvelleAbsConge);
+                
+                Absence nvelleAbsQ1 = new Absence();
+                type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.RTT_Q1));
+                ress.setIdRessource("BJA");
+                nvelleAbsConge.setPremierJourAbsence(null);
+                nvelleAbsConge.setDateFinAbsence(null);
+                nvelleAbsConge.setNombreJourAbsence(0);
+                absenceDao.create(nvelleAbsQ1);
+                
+                Absence nvelleAbsQ2 = new Absence();
+                type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.RTT_Q2));
+                ress.setIdRessource("BJA");
+                nvelleAbsConge.setPremierJourAbsence(null);
+                nvelleAbsConge.setDateFinAbsence(null);
+                nvelleAbsConge.setNombreJourAbsence(0);
+                absenceDao.create(nvelleAbsQ2);
+                
+                //update absence
+                
 	}
     
     
