@@ -69,5 +69,10 @@ public class CufRessourceAbsenceDao extends AbstractGenericDaoGamaweb<CufRessour
         List<CufRessourceAbsence> results = query.list();
         return results;
     }
+
+    @Override
+    public List<CufRessourceAbsence> InsertSoldebyType(String idRessource, String type) {
+        Query query = getSession().createQuery(CufRessourceAbsence);
+    }
     
 }

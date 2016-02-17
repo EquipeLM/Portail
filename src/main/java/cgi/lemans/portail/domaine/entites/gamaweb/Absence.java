@@ -28,15 +28,28 @@ public class Absence extends EntiteGamaweb{
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = -7675469008489694732L;
-	@Id 
+    private static final long serialVersionUID = -7675469008489694732L;
+    
+    @Id 
     @GeneratedValue 
     @Column(name="ID_ABSENCE")
-	private Integer idAbsence;
+    private Integer idAbsence;
+        
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="REF_TYPE_ABSENCE")
     private TypeAbsence refTypeAbsence;
+    
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="REF_RESSOURCE")
     private RessourceTma refRessource;
+    
+    @Column(name="PREMIER_JOUR_ABSENCE")
     private Date premierJourAbsence;
+    
+    @Column(name="DATE_FIN_ABSENCE")
     private Date dateFinAbsence;
+    
+    @Column(name="NOMBRE_JOURS_ABSENCE")
     private Double nombreJourAbsence;
     //private String CommentaireAbsence;
     
@@ -52,7 +65,7 @@ public class Absence extends EntiteGamaweb{
         this.idAbsence = idAbsence;
     }
     
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    
     public TypeAbsence getRefTypeAbsence() {
         return refTypeAbsence;
     }
@@ -70,7 +83,6 @@ public class Absence extends EntiteGamaweb{
         this.refRessource = refRessource;
     }
     
-    @Column(name="PERMIER_JOUR_ABSENCE")
     public Date getPremierJourAbsence() {
         return premierJourAbsence;
     }
@@ -78,8 +90,7 @@ public class Absence extends EntiteGamaweb{
     public void setPremierJourAbsence(Date premierJourAbsence) {
         this.premierJourAbsence = premierJourAbsence;
     }
-    
-    @Column(name="DATE_FIN_ABSENCE")
+
     public Date getDateFinAbsence() {
         return dateFinAbsence;
     }
@@ -88,8 +99,8 @@ public class Absence extends EntiteGamaweb{
         this.dateFinAbsence = dateFinAbsence;
     }
     
-    @Column(name="NOMBRE_JOUR_ABSENCE")
-    public double getNombreJoursAbsence() {
+
+    public double getNombreJourAbsence() {
         return nombreJourAbsence;
     }
     

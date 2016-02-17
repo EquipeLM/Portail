@@ -34,9 +34,16 @@ public interface ICufRessourceAbsenceDao {
     //public List findCufRessourceAbsenceByRttQ2AndRessourceAndSolde(String idRessource);
     
     /**
-	 * @param idRessource
-	 * @param type
-	 * @return
-	 */
-	public List<CufRessourceAbsence> findCufRessourceAbsenceByTypeByRessource(String idRessource, String type);
+    * @param idRessource
+    * @param type
+    * @return
+    */
+    public List<CufRessourceAbsence> findCufRessourceAbsenceByTypeByRessource(String idRessource, String type);
+    
+    /**
+    * @param idRessource
+    * @param type
+    * @return
+    */
+    public List<CufRessourceAbsence> InsertSoldebyType(String idRessource, String type);
 }

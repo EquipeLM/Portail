@@ -5,10 +5,18 @@
  */
 package cgi.lemans.portail.domaine.gamaweb;
 
+import cgi.lemans.portail.domaine.entites.gamaweb.Absence;
+import java.util.List;
+
 /**
  *
  * @author souchul
  */
 public interface IAbsenceDao {
     
+    public List<Absence> findAbsenceByPremierJourAbsence(String idRessource);
+    
+    public List<Absence> findAbsenceByDureeAbsence(String idRessource);
+    
 }
+

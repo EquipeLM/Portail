@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cgi.lemans.portail.controller.beans.AbsenceCardBean;
+import cgi.lemans.portail.domaine.entites.gamaweb.Absence;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufRessourceAbsence;
 import cgi.lemans.portail.domaine.gamaweb.IAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.ICufAbsenceDao;
@@ -31,6 +32,8 @@ public class AbsenceService implements IAbsenceService {
     private ICufAbsenceDao cufAbsenceDao;
 	@Autowired
     private ICufRessourceAbsenceDao cufRessourceAbsenceDao;
+        @Autowired
+    private IAbsenceDao absenceDao;
     
 
     @Override
@@ -43,6 +46,11 @@ public class AbsenceService implements IAbsenceService {
         List<CufRessourceAbsence> listCongesSolde = (List<CufRessourceAbsence>)  cufRessourceAbsenceDao.findCufRessourceAbsenceByTypeByRessource(idRessource, CufAbsenceDao.CONGES);
         List<CufRessourceAbsence> listQ1Solde = (List<CufRessourceAbsence>)  cufRessourceAbsenceDao.findCufRessourceAbsenceByTypeByRessource(idRessource, CufAbsenceDao.RTT_Q1);
         List<CufRessourceAbsence> listQ2Solde = (List<CufRessourceAbsence>)  cufRessourceAbsenceDao.findCufRessourceAbsenceByTypeByRessource(idRessource, CufAbsenceDao.RTT_Q2);
+        
+        List<Absence> dateProchainConge = (List<Absence>)  absenceDao.findAbsenceByPremierJourAbsence(idRessource);
+        
+        List<Absence> dureeProchainConge = (List<Absence>)  absenceDao.findAbsenceByDureeAbsence(idRessource);
+        
         AbsenceCardBean absRetour = new AbsenceCardBean();
         
         return absRetour;
