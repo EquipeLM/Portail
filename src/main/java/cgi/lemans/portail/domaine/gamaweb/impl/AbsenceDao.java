@@ -6,12 +6,13 @@
 package cgi.lemans.portail.domaine.gamaweb.impl;
 
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import cgi.lemans.portail.domaine.entites.gamaweb.Absence;
 import cgi.lemans.portail.domaine.gamaweb.IAbsenceDao;
-import java.util.List;
-import org.hibernate.Query;
 
 
 /**

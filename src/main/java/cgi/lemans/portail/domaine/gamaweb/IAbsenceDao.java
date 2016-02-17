@@ -5,11 +5,11 @@
  */
 package cgi.lemans.portail.domaine.gamaweb;
 
-import cgi.lemans.portail.domaine.IGenericDao;
-import cgi.lemans.portail.domaine.entites.gamaweb.Absence;
-
 import java.io.Serializable;
 import java.util.List;
+
+import cgi.lemans.portail.domaine.IGenericDao;
+import cgi.lemans.portail.domaine.entites.gamaweb.Absence;
 
 /**
  *

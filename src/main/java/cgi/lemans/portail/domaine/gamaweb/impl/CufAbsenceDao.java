@@ -5,12 +5,14 @@
  */
 package cgi.lemans.portail.domaine.gamaweb.impl;
 
-import cgi.lemans.portail.domaine.entites.gamaweb.CufAbsence;
-import cgi.lemans.portail.domaine.gamaweb.ICufAbsenceDao;
 import java.util.Calendar;
 import java.util.List;
+
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
+
+import cgi.lemans.portail.domaine.entites.gamaweb.CufAbsence;
+import cgi.lemans.portail.domaine.gamaweb.ICufAbsenceDao;
 
 /**
  *

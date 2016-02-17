@@ -5,7 +5,6 @@
  */
 package cgi.lemans.portail.domaine.entites.gamaweb;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
