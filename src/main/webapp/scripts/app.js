@@ -1,12 +1,14 @@
 'use strict';
 
+angular.module('portail.services', ['ngResource']);
 angular.module('portail.controllers', ['ui.calendar', 'ui.bootstrap']);
 angular
-    .module('portail',  ['ngRoute', 'mobile-angular-ui', 'ui.checkbox', 'ui.calendar', 'chart.js', 'ui.bootstrap', 'portail.controllers'])
+    .module('portail',  ['ngRoute', 'mobile-angular-ui', 'ui.checkbox', 'ui.calendar', 'chart.js', 'ui.bootstrap', 'portail.controllers', 'portail.services'])
     .config(function ($routeProvider) {
         $routeProvider.
-             when('/home', {
-                templateUrl: './views/home.html',
+            when('/home', {
+            	templateUrl: './views/home.html',
+            	controller: 'HomeCtrl'
             }).
             when('/genRequete', {
                 templateUrl: './views/outils/genRequete.html',
@@ -25,6 +27,6 @@ angular
                 controller: 'AbsencesCtrl'
             }).
             otherwise({
-                redirectTo: '/mesAbsences'
+                redirectTo: '/home'
             });
     });

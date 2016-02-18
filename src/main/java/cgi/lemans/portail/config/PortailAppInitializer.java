@@ -24,7 +24,7 @@ public class PortailAppInitializer implements WebApplicationInitializer {
         ServletRegistration.Dynamic dispatcher = context.addServlet(
                 "SpringDispatcher", new DispatcherServlet(appContext));
         dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/");
+        dispatcher.addMapping("/api/*");
 
 	}
 

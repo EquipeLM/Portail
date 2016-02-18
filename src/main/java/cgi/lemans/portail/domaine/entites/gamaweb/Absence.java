@@ -100,7 +100,7 @@ public class Absence extends EntiteGamaweb{
     }
     
 
-    public double getNombreJourAbsence() {
+    public Double getNombreJourAbsence() {
         return nombreJourAbsence;
     }
     

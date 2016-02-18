@@ -17,9 +17,12 @@ import cgi.lemans.portail.domaine.entites.gamaweb.Absence;
  */
 public interface IAbsenceDao extends IGenericDao<Serializable, Absence>{
     
-    public List<Absence> findAbsenceByPremierJourAbsence(String idRessource);
+    /**
+     * @param idRessource
+     * @return
+     */
+    public Absence findAbsenceByPremierJourAbsence(String idRessource);
     
-    public List<Absence> findAbsenceByDureeAbsence(String idRessource);
     
 }
 

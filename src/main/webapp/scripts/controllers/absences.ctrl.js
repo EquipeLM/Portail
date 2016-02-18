@@ -3,8 +3,7 @@
 
 angular
     .module('portail.controllers')
-    .controller('AbsencesCtrl',
-   function($scope, $compile, $timeout, uiCalendarConfig) {
+    .controller('AbsencesCtrl', function($scope, $compile, $timeout, uiCalendarConfig, Absence) {
 
 
      $scope.eventSource = {
@@ -70,20 +69,32 @@ angular
     $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
     $scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
 
-    $scope.labelConge = ["Pris", "Restants"];
-    $scope.dataConge = [15, 10];
-    $scope.options = {responsive: true, percentageInnerCutout: 70};
 
-    $scope.labelRttQ1 = ["Pris", "Restants"];
-    $scope.dataRttQ1 = [8, 7];
-    $scope.options = {responsive: true, percentageInnerCutout: 70};
-
-    $scope.labelRttQ2 = ["Pris", "Restants"];
-    $scope.dataRttQ2 = [8, 2];
-    $scope.options = {responsive: true, percentageInnerCutout: 70};
-
-    $scope.colours = ['#e31937','#d8d8d8'];
-
+    var conges = Absence.query(function(data) {
+		$scope.conges = data[0].congesConsomme;
+		$scope.rttUn = data[0].rttQunConsomme;
+		$scope.rttDeux = data[0].rttQdeuxConsomme;
+		$scope.dateProchainConges = data[0].dateProchainConges;
+		$scope.dureeProchainConges = data[0].dureeProchainConges;
+		$scope.soldeConges = data[0].soldeConges;
+		$scope.soldesQun = data[0].soldesQun;
+		$scope.soldesQdeux = data[0].soldesQdeux;
+		
+		console.log(data[0]);
+		$scope.labelConge = ["Pris", "Restants"];
+		$scope.dataConge = [$scope.conges, $scope.soldeConges];
+		$scope.options = {responsive: true, percentageInnerCutout: 70};
+		
+		$scope.labelRttQ1 = ["Pris", "Restants"];
+		$scope.dataRttQ1 = [$scope.rttUn, $scope.soldesQun];
+		$scope.options = {responsive: true, percentageInnerCutout: 70};
+		
+		$scope.labelRttQ2 = ["Pris", "Restants"];
+		$scope.dataRttQ2 = [$scope.rttDeux, $scope.soldesQdeux];
+		$scope.options = {responsive: true, percentageInnerCutout: 70};
+		
+		$scope.colours = ['#e31937','#d8d8d8'];
+	});
 
    /* $scope.submitButton.on('click', function(e){
     	e.preventDefault();

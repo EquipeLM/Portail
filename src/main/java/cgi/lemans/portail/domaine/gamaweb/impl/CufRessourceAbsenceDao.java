@@ -25,41 +25,9 @@ public class CufRessourceAbsenceDao extends AbstractGenericDaoGamaweb<CufRessour
     public static final String RTT_Q1 = "2";
     public static final String RTT_Q2 = "3";
     
-    /*@Override
-    public List findCufRessourceAbsenceByCongeAndRessourceAndSolde(String idRessource) {
-         String hql =  "from cuf_ressource_absence a"
-        		+ "where a.annee= :annee "
-        		+ "and a.typeAbsence = 1 "
-        		+ "and a.ressourceTma.idRessource = :idRessource ";
-        Query query = getSession().createQuery(hql).setParameter("idRessource", idRessource).setParameter("annee", Calendar.getInstance().get(Calendar.YEAR));
-        List results = (List) query.uniqueResult();
-        return results;
-    }
 
     @Override
-    public List findCufRessourceAbsenceByRttQ1AndRessourceAndSolde(String idRessource) {
-        String hql =  "from cuf_ressource_absence a"
-        		+ "where a.annee= :annee "
-        		+ "and a.t ypeAbsence = 2 "
-        		+ "and a.ressourceTma.idRessource = :idRessource ";
-        Query query = getSession().createQuery(hql).setParameter("idRessource", idRessource).setParameter("annee", Calendar.getInstance().get(Calendar.YEAR));
-        List results = (List) query.uniqueResult();
-        return results;
-    }
-
-    @Override
-    public List findCufRessourceAbsenceByRttQ2AndRessourceAndSolde(String idRessource) {
-        String hql =  "from cuf_ressource_absence a"
-        		+ "where a.annee= :annee "
-        		+ "and a.typeAbsence = 3 "
-        		+ "and a.ressourceTma.idRessource = :idRessource ";
-        Query query = getSession().createQuery(hql).setParameter("idRessource", idRessource).setParameter("annee", Calendar.getInstance().get(Calendar.YEAR));
-        List results = (List) query.uniqueResult();
-        return results;
-    }*/
-
-    @Override
-    public List<CufRessourceAbsence> findCufRessourceAbsenceByTypeByRessource(String idRessource, String type) {
+    public CufRessourceAbsence findCufRessourceAbsenceByTypeByRessource(String idRessource, String type) {
         String hql =  "from CufRessourceAbsence a "
                 + "where a.annee= :annee "
                 + "and a.typeAbsence.idTypeAbsence = :type "
@@ -68,7 +36,7 @@ public class CufRessourceAbsenceDao extends AbstractGenericDaoGamaweb<CufRessour
         query.setParameter("idRessource", idRessource);
         query.setParameter("annee", Calendar.getInstance().get(Calendar.YEAR));
         query.setParameter("type", Integer.parseInt(type));
-        List<CufRessourceAbsence> results = query.list();
+        CufRessourceAbsence results = (CufRessourceAbsence) query.uniqueResult();
         return results;
     }
     

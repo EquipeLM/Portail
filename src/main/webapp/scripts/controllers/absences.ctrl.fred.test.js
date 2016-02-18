@@ -5,6 +5,7 @@ angular
     .module('portail.controllers')
     .controller('AbsencesCtrl',
    function($scope, $compile, $modal, $timeout, uiCalendarConfig) {
+    	
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();

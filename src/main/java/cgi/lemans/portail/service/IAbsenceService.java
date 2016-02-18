@@ -16,11 +16,12 @@ public interface IAbsenceService {
     /**
      * @return
      */
-    public AbsenceCardBean recupererInfosAbsRessource();
+    public AbsenceCardBean recupererInfosAbsRessource(String idResource);
     
     /**
      * @param bean
      */
     public void enregistrerInfosParTypes(AbsenceCardBean bean);
+
     
 }

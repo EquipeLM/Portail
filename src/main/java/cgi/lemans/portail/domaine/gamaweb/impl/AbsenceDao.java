@@ -23,30 +23,16 @@ import cgi.lemans.portail.domaine.gamaweb.IAbsenceDao;
 public class AbsenceDao extends AbstractGenericDaoGamaweb<Absence> implements IAbsenceDao{
 
     @Override
-    public List<Absence> findAbsenceByPremierJourAbsence(String idRessource) {
-        String hql = "SELECT a.premierJourAbsence " 
-                + "from Absence a "
+    public Absence findAbsenceByPremierJourAbsence(String idRessource) {
+        String hql = "from Absence a "
                 + "where a.premierJourAbsence >= :dateToday "
-                + "and a.refRessource.idRessource = :idRessource ";
+                + "and a.refRessource.idRessource = :idRessource";
         Query query = getSession().createQuery(hql);
         query.setParameter("idRessource", idRessource);
         query.setDate("dateToday", new java.util.Date());
-        List<Absence> results = query.list();
+        query.setMaxResults(1);
+        Absence results = (Absence) query.uniqueResult();
         return results;
     }
 
-    @Override
-    public List<Absence> findAbsenceByDureeAbsence(String idRessource) {
-       String hql = "SELECT a.nombreJourAbsence "
-                + "from Absence a "
-                + "where a.premierJourAbsence = some (SELECT aBis.premierJourAbsence " 
-                + "from Absence aBis "
-                + "where aBis.premierJourAbsence >= :dateToday "
-                + "and aBis.refRessource.idRessource = :idRessource)";
-        Query query = getSession().createQuery(hql);
-        query.setParameter("idRessource", idRessource);
-        query.setDate("dateToday", new java.util.Date());
-        List<Absence> results = query.list();
-        return results; 
-    }
 }

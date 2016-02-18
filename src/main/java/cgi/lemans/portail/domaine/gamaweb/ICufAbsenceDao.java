@@ -40,7 +40,7 @@ public interface ICufAbsenceDao extends IGenericDao<Serializable, CufAbsence> {
 	 * @param type
 	 * @return
 	 */
-	public List<Object[]> findCufAbsenceByTypeByRessource(String idRessource, String type);
+	public Long findCufAbsenceByTypeByRessource(String idRessource, String type);
     
     
 }

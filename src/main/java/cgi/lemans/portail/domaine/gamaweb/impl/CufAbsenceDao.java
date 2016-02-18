@@ -62,7 +62,7 @@ public class CufAbsenceDao extends AbstractGenericDaoGamaweb<CufAbsence> impleme
     }
     
     @Override
-    public List<Object[]> findCufAbsenceByTypeByRessource(String idRessource, String type) {
+    public Long findCufAbsenceByTypeByRessource(String idRessource, String type) {
         String hql = "SELECT sum(a.nombreDeJour) as pris " 
                 + "from CufAbsence a "
                 + "where a.annee= :annee "
@@ -72,7 +72,7 @@ public class CufAbsenceDao extends AbstractGenericDaoGamaweb<CufAbsence> impleme
         query.setParameter("idRessource", idRessource);
         query.setParameter("annee", Calendar.getInstance().get(Calendar.YEAR));
         query.setParameter("type", Integer.parseInt(type));
-        List<Object[]> results = query.list();
+        Long results = (Long) query.uniqueResult();
         return results;
     }
     

@@ -22,6 +22,7 @@ import cgi.lemans.portail.domaine.gamaweb.ICufRessourceAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.impl.CufAbsenceDao;
 import cgi.lemans.portail.service.IAbsenceService;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -30,35 +31,53 @@ import java.util.Calendar;
 @Service
 @Transactional(transactionManager = "txManagerGamaweb")
 public class AbsenceService implements IAbsenceService {
-    
-	@Autowired
-    private ICufAbsenceDao cufAbsenceDao;
-	@Autowired
-    private ICufRessourceAbsenceDao cufRessourceAbsenceDao;
-        @Autowired
-    private IAbsenceDao absenceDao;
-    
 
-    @Override
-    public AbsenceCardBean recupererInfosAbsRessource() {
-        String idRessource = "BJA";
-        List<Object[]> listCongesPris = (List<Object[]>)  cufAbsenceDao.findCufAbsenceByTypeByRessource(idRessource, CufAbsenceDao.CONGES);
-        List<Object[]> listQ1Pris = (List<Object[]>) cufAbsenceDao.findCufAbsenceByTypeByRessource(idRessource, CufAbsenceDao.RTT_Q1);
-        List<Object[]> listQ2Pris = (List<Object[]>) cufAbsenceDao.findCufAbsenceByTypeByRessource(idRessource, CufAbsenceDao.RTT_Q2);
-        
-        List<CufRessourceAbsence> listCongesSolde = (List<CufRessourceAbsence>)  cufRessourceAbsenceDao.findCufRessourceAbsenceByTypeByRessource(idRessource, CufAbsenceDao.CONGES);
-        List<CufRessourceAbsence> listQ1Solde = (List<CufRessourceAbsence>)  cufRessourceAbsenceDao.findCufRessourceAbsenceByTypeByRessource(idRessource, CufAbsenceDao.RTT_Q1);
-        List<CufRessourceAbsence> listQ2Solde = (List<CufRessourceAbsence>)  cufRessourceAbsenceDao.findCufRessourceAbsenceByTypeByRessource(idRessource, CufAbsenceDao.RTT_Q2);
-        
-        List<Absence> dateProchainConge = (List<Absence>)  absenceDao.findAbsenceByPremierJourAbsence(idRessource);
-        
-        List<Absence> dureeProchainConge = (List<Absence>)  absenceDao.findAbsenceByDureeAbsence(idRessource);
-        
-        AbsenceCardBean absRetour = new AbsenceCardBean();
-        
-        return absRetour;
-    }
+	@Autowired
+	private ICufAbsenceDao cufAbsenceDao;
+	@Autowired
+	private ICufRessourceAbsenceDao cufRessourceAbsenceDao;
+	@Autowired
+	private IAbsenceDao absenceDao;
 
+	@Override
+	public AbsenceCardBean recupererInfosAbsRessource(String idRessource) {
+		AbsenceCardBean absRetour = new AbsenceCardBean();
+		Long listCongesPris = (Long) cufAbsenceDao.findCufAbsenceByTypeByRessource(idRessource,
+				CufAbsenceDao.CONGES);
+		absRetour.setCongesConsomme(listCongesPris == null ? "0" : listCongesPris.toString());
+		
+		Long listQ1Pris = (Long) cufAbsenceDao.findCufAbsenceByTypeByRessource(idRessource,
+				CufAbsenceDao.RTT_Q1);
+		absRetour.setRttQunConsomme(listQ1Pris == null ? "0" :  listQ1Pris.toString());
+		
+		Long listQ2Pris = (Long) cufAbsenceDao.findCufAbsenceByTypeByRessource(idRessource,
+				CufAbsenceDao.RTT_Q2);
+		absRetour.setRttQdeuxConsomme(listQ2Pris == null ? "0" : listQ2Pris.toString());
+		
+		CufRessourceAbsence listCongesSolde = (CufRessourceAbsence) cufRessourceAbsenceDao
+				.findCufRessourceAbsenceByTypeByRessource(idRessource, CufAbsenceDao.CONGES);
+		absRetour.setSoldeConges(listCongesSolde == null ? "0" : listCongesSolde.toString());
+		
+		
+		CufRessourceAbsence listQ1Solde = (CufRessourceAbsence) cufRessourceAbsenceDao
+				.findCufRessourceAbsenceByTypeByRessource(idRessource, CufAbsenceDao.RTT_Q1);
+		absRetour.setSoldesQun(listQ1Solde == null ? "0" : listQ1Solde.toString());
+		
+		CufRessourceAbsence listQ2Solde = (CufRessourceAbsence) cufRessourceAbsenceDao
+				.findCufRessourceAbsenceByTypeByRessource(idRessource, CufAbsenceDao.RTT_Q2);
+		absRetour.setSoldesQdeux(listQ2Solde == null ? "0" : listQ2Solde.toString());
+		
+		Absence dateProchainConge = (Absence) absenceDao.findAbsenceByPremierJourAbsence(idRessource);
+		Date premierJourAbsence = dateProchainConge.getPremierJourAbsence();
+		if(premierJourAbsence != null){
+			absRetour.setDateProchainConges(dateProchainConge.toString());
+		}
+		Double nombreJourAbsence = dateProchainConge.getNombreJourAbsence();
+		if(nombreJourAbsence != null){
+			absRetour.setDureeProchainConges(nombreJourAbsence.toString());
+		}
+		return absRetour;
+	}
 
 	@Override
 	public void enregistrerInfosParTypes(AbsenceCardBean bean) {
@@ -68,51 +87,49 @@ public class AbsenceService implements IAbsenceService {
 		type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.CONGES));
 		ress.setIdRessource("BJA");
 		newSoldeConge.setAnnee(Calendar.YEAR);
-                newSoldeConge.setSolde(new Integer(null).doubleValue());
+		newSoldeConge.setSolde(new Integer(null).doubleValue());
 		cufRessourceAbsenceDao.create(newSoldeConge);
-                
-                CufRessourceAbsence newSoldeQ1 = new CufRessourceAbsence();
-                type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.RTT_Q1));
+
+		CufRessourceAbsence newSoldeQ1 = new CufRessourceAbsence();
+		type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.RTT_Q1));
 		ress.setIdRessource("BJA");
-		newSoldeConge.setAnnee(Calendar.YEAR);
-                newSoldeConge.setSolde(new Integer(null).doubleValue());
+		newSoldeQ1.setAnnee(Calendar.YEAR);
+		newSoldeQ1.setSolde(new Integer(null).doubleValue());
 		cufRessourceAbsenceDao.create(newSoldeQ1);
-                
-                CufRessourceAbsence newSoldeQ2 = new CufRessourceAbsence();
-                type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.RTT_Q2));
+
+		CufRessourceAbsence newSoldeQ2 = new CufRessourceAbsence();
+		type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.RTT_Q2));
 		ress.setIdRessource("BJA");
-		newSoldeConge.setAnnee(Calendar.YEAR);
-                newSoldeConge.setSolde(new Integer(null).doubleValue());
+		newSoldeQ2.setAnnee(Calendar.YEAR);
+		newSoldeQ2.setSolde(new Integer(null).doubleValue());
 		cufRessourceAbsenceDao.create(newSoldeQ2);
-                
-                
-                Absence nvelleAbsConge = new Absence();
-                type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.CONGES));
-                ress.setIdRessource("BJA");
-                nvelleAbsConge.setPremierJourAbsence(null);
-                nvelleAbsConge.setDateFinAbsence(null);
-                nvelleAbsConge.setNombreJourAbsence(0);
-                absenceDao.create(nvelleAbsConge);
-                
-                Absence nvelleAbsQ1 = new Absence();
-                type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.RTT_Q1));
-                ress.setIdRessource("BJA");
-                nvelleAbsConge.setPremierJourAbsence(null);
-                nvelleAbsConge.setDateFinAbsence(null);
-                nvelleAbsConge.setNombreJourAbsence(0);
-                absenceDao.create(nvelleAbsQ1);
-                
-                Absence nvelleAbsQ2 = new Absence();
-                type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.RTT_Q2));
-                ress.setIdRessource("BJA");
-                nvelleAbsConge.setPremierJourAbsence(null);
-                nvelleAbsConge.setDateFinAbsence(null);
-                nvelleAbsConge.setNombreJourAbsence(0);
-                absenceDao.create(nvelleAbsQ2);
-                
-                //update absence
-                
+
+		Absence nvelleAbsConge = new Absence();
+		type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.CONGES));
+		ress.setIdRessource("BJA");
+		nvelleAbsConge.setPremierJourAbsence(null);
+		nvelleAbsConge.setDateFinAbsence(null);
+		nvelleAbsConge.setNombreJourAbsence(0);
+		absenceDao.create(nvelleAbsConge);
+
+		Absence nvelleAbsQ1 = new Absence();
+		type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.RTT_Q1));
+		ress.setIdRessource("BJA");
+		nvelleAbsQ1.setPremierJourAbsence(null);
+		nvelleAbsQ1.setDateFinAbsence(null);
+		nvelleAbsQ1.setNombreJourAbsence(0);
+		absenceDao.create(nvelleAbsQ1);
+
+		Absence nvelleAbsQ2 = new Absence();
+		type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.RTT_Q2));
+		ress.setIdRessource("BJA");
+		nvelleAbsQ2.setPremierJourAbsence(null);
+		nvelleAbsQ2.setDateFinAbsence(null);
+		nvelleAbsQ2.setNombreJourAbsence(0);
+		absenceDao.create(nvelleAbsQ2);
+
+		// update absence
+
 	}
-    
-    
+
 }
