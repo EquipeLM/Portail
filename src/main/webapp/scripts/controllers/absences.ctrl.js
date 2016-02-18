@@ -89,9 +89,13 @@ angular
 		$scope.dataRttQ1 = [$scope.rttUn, $scope.soldesQun];
 		$scope.options = {responsive: true, percentageInnerCutout: 70};
 		
-		$scope.labelRttQ2 = ["Pris", "Restants"];
-		$scope.dataRttQ2 = [$scope.rttDeux, $scope.soldesQdeux];
-		$scope.options = {responsive: true, percentageInnerCutout: 70};
+		if($scope.rttDeux == "0.0" && $scope.soldesQdeux == "0.0"){
+			$scope.isCachee = "cachee";
+		}else {
+			$scope.labelRttQ2 = ["Pris", "Restants"];
+			$scope.dataRttQ2 = [$scope.rttDeux, $scope.soldesQdeux];
+			$scope.options = {responsive: true, percentageInnerCutout: 70};
+		}
 		
 		$scope.colours = ['#e31937','#d8d8d8'];
 	});

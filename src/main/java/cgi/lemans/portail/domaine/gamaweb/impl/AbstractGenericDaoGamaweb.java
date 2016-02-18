@@ -1,14 +1,11 @@
 package cgi.lemans.portail.domaine.gamaweb.impl;
 
-import java.io.Serializable;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import cgi.lemans.portail.domaine.IGenericDao;
 import cgi.lemans.portail.domaine.impl.AbstractGenericDao;
 
 /**
@@ -17,7 +14,7 @@ import cgi.lemans.portail.domaine.impl.AbstractGenericDao;
  * @param <T>
  */
 @Component
-public abstract class AbstractGenericDaoGamaweb<T> extends AbstractGenericDao<T> implements IGenericDao<Serializable, T>{
+public abstract class AbstractGenericDaoGamaweb<T> extends AbstractGenericDao<T> {
     
 	@Autowired
 	@Qualifier("sessionFactoryGamaweb")

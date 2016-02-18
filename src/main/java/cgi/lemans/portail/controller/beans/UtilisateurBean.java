@@ -6,12 +6,12 @@ package cgi.lemans.portail.controller.beans;
  */
 public class UtilisateurBean {
 
-	
+	public static String USER_TRI = "BJA";
 	private String trigramme;
 	private String password;
 	
 	public String getTrigramme() {
-		return "BJA";
+		return USER_TRI;
 	}
 //	public String getTrigramme() {
 //		return trigramme;

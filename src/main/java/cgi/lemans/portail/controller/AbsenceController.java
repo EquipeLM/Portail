@@ -45,7 +45,7 @@ public class AbsenceController {
 	public ResponseEntity<List<AbsenceCardBean>> getInfosAbsencesCard(HttpServletRequest request){
 		UtilisateurBean user = addUtilisateurSession(request.getSession());
 		List<AbsenceCardBean> listRetour = new ArrayList<AbsenceCardBean>();
-		if(user != null && "BJA".equals(user.getTrigramme())){
+		if(user != null && UtilisateurBean.USER_TRI.equals(user.getTrigramme())){
 			AbsenceCardBean infosSend = absenceService.recupererInfosAbsRessource(user.getTrigramme());
 			listRetour.add(infosSend);
 		}else {

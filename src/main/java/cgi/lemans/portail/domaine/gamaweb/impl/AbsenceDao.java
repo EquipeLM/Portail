@@ -26,7 +26,8 @@ public class AbsenceDao extends AbstractGenericDaoGamaweb<Absence> implements IA
     public Absence findAbsenceByPremierJourAbsence(String idRessource) {
         String hql = "from Absence a "
                 + "where a.premierJourAbsence >= :dateToday "
-                + "and a.refRessource.idRessource = :idRessource";
+                + "and a.refRessource.idRessource = :idRessource "
+                + "order by a.premierJourAbsence";
         Query query = getSession().createQuery(hql);
         query.setParameter("idRessource", idRessource);
         query.setDate("dateToday", new java.util.Date());

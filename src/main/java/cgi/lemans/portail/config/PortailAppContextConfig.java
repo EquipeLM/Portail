@@ -22,6 +22,8 @@ import cgi.lemans.portail.domaine.entites.gamaweb.CufAbsence;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufRessourceAbsence;
 import cgi.lemans.portail.domaine.entites.gamaweb.RessourceTma;
 import cgi.lemans.portail.domaine.entites.gamaweb.TypeAbsence;
+import cgi.lemans.portail.domaine.entites.newportal.Icones;
+import cgi.lemans.portail.domaine.entites.newportal.IconesByUser;
 
 @Configuration
 @ComponentScan("cgi.lemans.portail")
@@ -38,7 +40,8 @@ public class PortailAppContextConfig {
 	@Bean(name = "sessionFactoryNewPortal")
 	public SessionFactory getSessionFactoryNewPortal(DataSource dataSourceNewPortal) {
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSourceNewPortal);
-//	    sessionBuilder.addAnnotatedClasses(User.class);
+		sessionBuilder.addAnnotatedClasses(Icones.class);
+	    sessionBuilder.addAnnotatedClasses(IconesByUser.class);
 		sessionBuilder.addProperties(getHibernatePropertiesNewPortal());
 		return sessionBuilder.buildSessionFactory();
 	}

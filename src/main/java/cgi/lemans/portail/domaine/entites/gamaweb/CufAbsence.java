@@ -56,7 +56,7 @@ public class CufAbsence extends EntiteGamaweb {
 	private Date dateAbsence;
 	
 	@Column(name="NOMBRE_JOUR")
-	private Integer nombreDeJour;
+	private Double nombreDeJour;
 	
 	@Column(name="COMMENTAIRE")
 	private String commentaire;
@@ -110,10 +110,10 @@ public class CufAbsence extends EntiteGamaweb {
 	public void setDateAbsence(Date dateAbsence) {
 		this.dateAbsence = dateAbsence;
 	}
-	public Integer getNombreDeJour() {
+	public Double getNombreDeJour() {
 		return nombreDeJour;
 	}
-	public void setNombreDeJour(Integer nombreDeJour) {
+	public void setNombreDeJour(Double nombreDeJour) {
 		this.nombreDeJour = nombreDeJour;
 	}
 	public String getCommentaire() {
