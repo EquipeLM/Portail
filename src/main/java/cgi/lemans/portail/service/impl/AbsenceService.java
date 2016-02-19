@@ -25,6 +25,7 @@ import cgi.lemans.portail.domaine.gamaweb.ICufRessourceAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.impl.CufAbsenceDao;
 import cgi.lemans.portail.service.IAbsenceService;
 
+
 /**
  *
  * @author souchul
