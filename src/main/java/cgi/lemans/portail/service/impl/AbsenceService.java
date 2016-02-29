@@ -5,7 +5,6 @@
  */
 package cgi.lemans.portail.service.impl;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -88,7 +87,7 @@ public class AbsenceService implements IAbsenceService {
 		CufRessourceAbsence newSoldeConge = new CufRessourceAbsence();
 		RessourceTma ress = new RessourceTma();
 		TypeAbsence type = new TypeAbsence();
-		type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.CONGES));
+		type.setIdTypeAbsence(Integer.parseInt(bean.getIdTypeAbsence()));
 		ress.setIdRessource(UtilisateurBean.USER_TRI);
 		newSoldeConge.setAnnee(Calendar.YEAR);
 		newSoldeConge.setSolde(Double.parseDouble(bean.getSoldeConges()));

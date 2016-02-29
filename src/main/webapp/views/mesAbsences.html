@@ -7,44 +7,32 @@
                     <tr class="ligne">
                       <td><div id="coin"></div> </td>
                       <td></td>
-                      <td>A prendre</td>
                       <td>Pris</td>
                       <td>Restants</td>
                     </tr>
                       <tr>
                       <td><div id="color_conge"></div></td>
                       <td id="colonne"> Congés </td>
-                      <td id="conge_aPrendre"></td>
-                      <td id="conge_pris"></td>
-                      <td id="conge_restant"></td>
+                      <td id="conge_pris">{{conges}}</td>
+                      <td id="conge_restant">{{restantConges}}</td>
                     </tr>
                     <tr>
                         <td><div id="color_rttQ1"></div></td>
                       <td id="colonne"> RTT Q1 </td>
-                      <td id="rttQ1_aPrendre"></td>
-                      <td id="rttQ1_pris"></td>
-                      <td id="rttQ1_restant"></td>
+                      <td id="rttQ1_pris">{{rttUn}}</td>
+                      <td id="rttQ1_restant">{{restantQun}}</td>
                     </tr>
                     <tr>
                       <td><div id="color_rttQ2"></div></td>
                       <td id="colonne"> RTT Q2 </td>
-                      <td id="rttQ2_aPrendre"></td>
-                      <td id="rttQ2_pris"></td>
-                      <td id="rttQ2_restant"></td>
-                    </tr>
-                    <tr>
-                      <td><div id="color_autres"></div></td>
-                      <td id="colonne"> Autres </td>
-                      <td id="autre_aPrendre"></td>
-                      <td id="autre_pris"></td>
-                      <td id="autre_restant"></td>
-                    </tr>
+                      <td id="rttQ2_pris">{{rttDeux}}</td>
+                      <td id="rttQ2_restant">{{restantQdeux}}</td>
+                    </tr>  
                     <tr>
                       <td></td>
                       <td id="colonne"> Total </td>
-                      <td id="total_aPrendre"></td>
-                      <td id="total_pris"></td>
-                      <td id="total_restant"></td>
+                      <td id="total_pris">{{totalPris}}</td>
+                      <td id="total_restant">{{totalRestant}}</td>
                     </tr>
                 </table>
             </div>
@@ -54,19 +42,19 @@
               <div class="cont">
                 <table class="graphique">
                     <tr>
-                      <td class="graph">
+                      <td class="graph {{isCentre}}">
                         <canvas id="conges" class="chart chart-doughnut"chart-data="dataConge" chart-labels="labelConge" chart-colours="colours" width="100" height="130" chart-options="options"></canvas>
                           <p> Congés</p>
                           <br>
                       </td>
 
-                      <td class="graph">
+                      <td class="graph {{isCentre}}">
                           <canvas id="rtt_q1" class="chart chart-doughnut"chart-data="dataRttQ1" chart-labels="labelRttQ1" chart-colours="colours" width="100" height="130" chart-options="options"></canvas>
                           <p>RTT Q1</p>
                           <br>
                       </td>
 
-                      <td class="graph">
+                      <td class="graph {{isCachee}}">
                           <canvas id="rtt_q2" class="chart chart-doughnut"chart-data="dataRttQ2" chart-labels="labelRttQ2" chart-colours="colours" width="100" height="130" chart-options="options"></canvas>
                           <p>RTT Q2</p>
                           <br>

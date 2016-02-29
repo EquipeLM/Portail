@@ -116,6 +116,12 @@ fieldset{
   border : 2px solid #d8d8d8;
 }
 
+.modal-content {
+    width : 30%;
+    margin-left: 35%;
+    margin-top: 10%;
+}
+    
 #recapitulatif{
   float: left;
   border: 1px solid #D8D8D8;
@@ -198,7 +204,7 @@ fieldset{
 /* css card Absences */
 
 .graph-card {
-  padding: 30px 55px 0px 5px ;
+  padding: 30px 35px 0px 5px ;
 }
 
 #titre p{
@@ -241,6 +247,10 @@ fieldset{
   padding-top: 10px;
 }
 
+.cont{
+    padding-left: 12%;
+}
+
 
 
 /* css home */
@@ -255,4 +265,8 @@ fieldset{
 
 .cachee {
 	display: none;
+}
+
+.centre {
+    padding-left: 12%;
 }

@@ -14,6 +14,10 @@ public class AbsenceCardBean{
 	private String congesConsomme;
 	private String rttQunConsomme;
 	private String rttQdeuxConsomme;
+        private String idTypeAbsence;
+
+    
+        
 	
 	public String getDateProchainConges() {
 		return dateProchainConges;
@@ -63,7 +67,12 @@ public class AbsenceCardBean{
 	public void setRttQdeuxConsomme(String rttQdeuxConsomme) {
 		this.rttQdeuxConsomme = rttQdeuxConsomme;
 	}
-	
+	public String getIdTypeAbsence() {
+            return idTypeAbsence;
+        }
+        public void setIdTypeAbsence(String idTypeAbsence) {
+            this.idTypeAbsence = idTypeAbsence;
+        }
 	
 
 }

@@ -1,6 +1,22 @@
 <div class="modal-header"><h2>Confirmation</h2></div>
-<div class="modal-body">Voulez-vous supprimer cette élement ? </div>
+<div class="modal-body">
+    <form role="form">
+      <div class="form-group">
+        <label for="email">Choisissez le type de congé :</label>
+        <input type="radio" name="type" value="conge" id="conge" />  Congés <br />
+        <input id="rttQ1" type="radio" name="type" value="rttQ1" />  RTT Q1<br />
+        <input id="rttQ2" type="radio" name="type" value="rttQ2" />  RTT Q2<br />
+      </div>
+      <div class="form-group">
+        <label for="password">>Demi-journée :</label>
+        <input type="radio" name="demi" value="matin_demi" id="matin"/>  Matin <br />
+        <input id="apres_midi" type="radio" name="demi" value="apres_demi" />  Après-midi <br />
+        <input type="radio" id="journee" name="demi" value="journee"/>Journée entière</br>
+      </div>
+    </form>
+</div>
 <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="delete()">Confirmer</button>
+    <button class="btn btn-primary" ng-click="doSubmit()">Confirmer</button>
     <button class="btn" ng-click="cancel()">Annuler</button>
 </div>
+

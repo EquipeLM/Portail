@@ -4,26 +4,26 @@
       <table class="table-responsive">
           <tr>
 
-            <td class="graph-card">
+            <td class="graph-card {{isCentre}}">
               <canvas id="conges" class="chart chart-doughnut"chart-data="dataConge" chart-labels="labelConge" chart-colours="coloursCard" width="120" height="120" chart-options="options"></canvas>
-              <div id="indicateur"><p class="indicateur" id="conge_restant">{{soldeConges}}</p></div>
+              <div id="indicateur"><p class="indicateur" id="conge_restant">{{restantConges}}</p></div>
               <div id="titre"><p> Congés</p></div>
               <br>
             </td>
-
-            <td class="graph-card">
+            
+            <td class="graph-card {{isCentre}}">
                 <canvas id="rtt_q1" class="chart chart-doughnut"chart-data="dataRttQ1" chart-labels="labelRttQ1" chart-colours="coloursCard" width="120" height="120" chart-options="options"></canvas>
-                <div id="indicateur"><p class="indicateur" id="rttQ1_restant">{{soldesQun}}</p></div>
+                <div id="indicateur"><p class="indicateur" id="rttQ1_restant">{{restantQun}}</p></div>
                 <div id="titre"><p>RTT Q1</p></div>
                 <br>
             </td>
-
+            
             <td class="graph-card {{isCachee}}">
                 <canvas id="rtt_q2" class="chart chart-doughnut"chart-data="dataRttQ2" chart-labels="labelRttQ2" chart-colours="coloursCard" width="120" height="120" chart-options="options"></canvas>
-                <div id="indicateur"><p class="indicateur" id="rttQ2_restant">{{soldesQdeux}}</p></div>
+                <div id="indicateur"><p class="indicateur" id="rttQ2_restant">{{restantQdeux}}</p></div>
                 <div id="titre"><p>RTT Q2</p></div>
                 <br>
-            </td>
+            </td> 
 
             </tr>
         </table>

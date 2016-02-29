@@ -35,7 +35,7 @@ angular
           center: '',
           right: 'today prev,next'
         },
-       /* select: function(start, end, event) {
+        select: function(start, end, event) {
                 console.log(event);
                 if(start == end){
                   $scope.alertOnEventClick;  
@@ -69,7 +69,7 @@ angular
                     }
                 };
                 $modal.open(dialogOpts);
-        },*/
+        },
         events: [
             {
                 title: 'All Day Event',
