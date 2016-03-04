@@ -6,7 +6,6 @@
 package cgi.lemans.portail.domaine.gamaweb.impl;
 
 import java.util.Calendar;
-import java.util.List;
 
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;

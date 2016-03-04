@@ -46,10 +46,10 @@ angular
                     templateUrl: './views/modaleTpl.html', // Url du template HTML
                     controller: ['$scope', '$modalInstance','scopeParent', 'id',
                         function($scope, $modalInstance,scopeParent,id) { //Controller de la fenêtre. Il doit prend en paramètre tous les élèments du "resolve".
-                            $scope.valider = function() {
+                            $scope.delete = function() {
                                 //On fait appel à la fonction du scope parent qui permet de supprimer l'élément.
                                 //On peut également faire appel à un service de notre application.
-                                scopeParent.valider(id);
+                                scopeParent.delete(id);
                                 //validation de la fenêtre modale
                                 $modalInstance.doSubmit();
                             };
@@ -99,40 +99,46 @@ angular
 
 
     var conges = Absence.query(function(data) {
+        
 		$scope.conges = data[0].congesConsomme;
 		$scope.rttUn = data[0].rttQunConsomme;
 		$scope.rttDeux = data[0].rttQdeuxConsomme;
+                
 		$scope.dateProchainConges = data[0].dateProchainConges;
 		$scope.dureeProchainConges = data[0].dureeProchainConges;
+                
 		$scope.soldeConges = data[0].soldeConges;
 		$scope.soldesQun = data[0].soldesQun;
 		$scope.soldesQdeux = data[0].soldesQdeux;
-                $scope.restantConges = $scope.soldeConges-$scope.conges;
-                $scope.restantQun = $scope.soldesQun-$scope.rttUn;
-                $scope.restantQdeux = $scope.soldesQdeux-$scope.rttDeux;
+                
+                $scope.restantConges = parseFloat($scope.soldeConges)-parseFloat($scope.conges);
+                $scope.restantQun = parseFloat($scope.soldesQun)-parseFloat($scope.rttUn);
+                $scope.restantQdeux = parseFloat($scope.soldesQdeux)-parseFloat($scope.rttDeux);
+                
+                $scope.totalPris = parseFloat($scope.conges)+parseFloat($scope.rttUn)+parseFloat($scope.rttDeux);
+                $scope.totalRestant = parseFloat($scope.restantConges)+parseFloat($scope.restantQun)+parseFloat($scope.restantQdeux);
 		
 		console.log(data[0]);
 		$scope.labelConge = ["Pris", "Restants"];
-		$scope.dataConge = [$scope.conges, $scope.soldeConges];
+		$scope.dataConge = [$scope.conges, $scope.restantConges];
 		$scope.options = {responsive: true, percentageInnerCutout: 70};
 		
 		$scope.labelRttQ1 = ["Pris", "Restants"];
-		$scope.dataRttQ1 = [$scope.rttUn, $scope.soldesQun];
+		$scope.dataRttQ1 = [$scope.rttUn, $scope.restantQun];
 		$scope.options = {responsive: true, percentageInnerCutout: 70};
 		
-		if($scope.rttDeux == "0.0" && $scope.soldesQdeux == "0.0"){
+		if($scope.rttDeux == "0.0" && $scope.restantQdeux == "0.0"){
 			$scope.isCachee = "cachee";
                         $scope.isCentre = "centre";
 		}else {
 			$scope.labelRttQ2 = ["Pris", "Restants"];
-			$scope.dataRttQ2 = [$scope.rttDeux, $scope.soldesQdeux];
+			$scope.dataRttQ2 = [$scope.rttDeux, $scope.restantQdeux];
 			$scope.options = {responsive: true, percentageInnerCutout: 70};
 		}
 		
 		$scope.colours = ['#e31937','#d8d8d8'];
                 
-                $scope.totalPris = Double.parseDouble($scope.conges)+Double.parseDouble($scope.rttUn)+Double.parseDouble($scope.rttDeux);
-                $scope.totalRestant = $scope.soldeConges+$scope.soldesQun+$scope.soldesQdeux;
+                
 	});
 
 

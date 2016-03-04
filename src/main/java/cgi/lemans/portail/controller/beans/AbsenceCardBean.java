@@ -1,5 +1,7 @@
 package cgi.lemans.portail.controller.beans;
 
+import java.util.Date;
+
 /**
  * @author gautierfa
  *
@@ -15,6 +17,9 @@ public class AbsenceCardBean{
 	private String rttQunConsomme;
 	private String rttQdeuxConsomme;
         private String idTypeAbsence;
+        private Date datePremierJour;
+        private Date dateFin;
+        private String nombreJours;
 
     
         
@@ -73,6 +78,32 @@ public class AbsenceCardBean{
         public void setIdTypeAbsence(String idTypeAbsence) {
             this.idTypeAbsence = idTypeAbsence;
         }
-	
+
+        public Date getDatePremierJour() {
+            return datePremierJour;
+        }
+
+        public void setDatePremierJour(Date datePremierJour) {
+            this.datePremierJour = datePremierJour;
+        }
+
+        public Date getDateFin() {
+            return dateFin;
+        }
+
+        public void setDateFin(Date dateFin) {
+            this.dateFin = dateFin;
+        }
+
+        public String getNombreJours() {
+            return nombreJours;
+        }
+
+        public void setNombreJours(String nombreJours) {
+            this.nombreJours = nombreJours;
+        }
+        
+        
+        
 
 }

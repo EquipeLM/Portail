@@ -51,7 +51,7 @@
                     <div class="card-header card-header-orange">
                         <h2>Outils</h2>
                         <div class="card-button">
-                            <a href="#"><i class="fa fa-external-link-square fa-3x"></i></a>
+                            <a href="/portail/#/outilsHome"><i class="fa fa-external-link-square fa-3x"></i></a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -92,10 +92,11 @@
                     <div class="card-header card-header-blue2">
                         <h2>Absences</h2>
                         <div class="card-button">
-                            <a href="" ng-click="open()"><i class="fa fa-plus fa-3x"></i></a>
+                            <a href="" ng-click="showAdvanced($event)"><i class="fa fa-plus fa-3x"></i></a>
                             <a href="/portail/#/mesAbsences"><i class="fa fa-external-link-square fa-3x"></i></a>
                                                        
                         </div>
+                        
                     </div>
                     <div class="card-body">
                         <div ng-include="'./views/card-mesAbsences.html'"></div>
@@ -103,6 +104,7 @@
                 </div>
             </div>
         </div>
+       
         <div class="row">
             <div class="col-sm-8 no-padding">
                 <div class="card card-home card-home-big card-home-blue2">
@@ -135,3 +137,4 @@
         </div>
 
     </div>
+        

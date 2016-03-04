@@ -5,6 +5,9 @@
  */
 package cgi.lemans.portail.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,9 +25,6 @@ import cgi.lemans.portail.domaine.gamaweb.ICufRessourceAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.impl.CufAbsenceDao;
 import cgi.lemans.portail.service.IAbsenceService;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  *
@@ -79,6 +79,8 @@ public class AbsenceService implements IAbsenceService {
 		if(nombreJourAbsence != null){
 			absRetour.setDureeProchainConges(nombreJourAbsence.toString());
 		}
+                
+               
 		return absRetour;
 	}
 
@@ -97,9 +99,9 @@ public class AbsenceService implements IAbsenceService {
 		Absence nvelleAbsConge = new Absence();
 		type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.CONGES));
 		ress.setIdRessource("BJA");
-		nvelleAbsConge.setPremierJourAbsence(null);
-		nvelleAbsConge.setDateFinAbsence(null);
-		nvelleAbsConge.setNombreJourAbsence(0);
+		nvelleAbsConge.setPremierJourAbsence(bean.getDatePremierJour()); 
+		nvelleAbsConge.setDateFinAbsence(bean.getDateFin()); 
+		nvelleAbsConge.setNombreJourAbsence(Double.parseDouble(bean.getNombreJours()));
 		absenceDao.create(nvelleAbsConge);
 
 		// update absence

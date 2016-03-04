@@ -1,22 +1,65 @@
-<div class="modal-header"><h2>Confirmation</h2></div>
+<div class="modal-header">
+    <h4 class="modal-title">Ajouter une absence</h4>
+</div>
 <div class="modal-body">
-    <form role="form">
-      <div class="form-group">
-        <label for="email">Choisissez le type de congé :</label>
-        <input type="radio" name="type" value="conge" id="conge" />  Congés <br />
-        <input id="rttQ1" type="radio" name="type" value="rttQ1" />  RTT Q1<br />
-        <input id="rttQ2" type="radio" name="type" value="rttQ2" />  RTT Q2<br />
-      </div>
-      <div class="form-group">
-        <label for="password">>Demi-journée :</label>
-        <input type="radio" name="demi" value="matin_demi" id="matin"/>  Matin <br />
-        <input id="apres_midi" type="radio" name="demi" value="apres_demi" />  Après-midi <br />
-        <input type="radio" id="journee" name="demi" value="journee"/>Journée entière</br>
-      </div>
+    <form>
+        <div class="form-group row">
+            <label class="col-sm-5">Choisissez le type de congé :</label>
+            <div class="col-sm-7">
+              <div class="radio">
+                <label>
+                  <input type="radio" name="gridRadios" id="conge" value="option1" checked>
+                  Congé
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="gridRadios" id="rttQ1" value="option2">
+                  RTT Q1
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="gridRadios" id="rttQ2" value="option3">
+                  RTT Q2
+                </label>
+              </div>
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <label class="col-sm-5">Demi-journée :</label>
+            <div class="col-sm-7">
+              <div class="radio">
+                <label>
+                  <input type="radio" name="gridRadios" id="gridRadios4" value="option4" checked>
+                  Journée entière
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="gridRadios" id="gridRadios6" value="option5">
+                  Matin
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="gridRadios" id="gridRadios7" value="option6">
+                  Après-midi
+                </label>
+              </div>
+            </div>
+        </div>
+        <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 form-control-label">Solde</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputEmail3" placeholder="Solde">
+        </div>
+         
     </form>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="doSubmit()">Confirmer</button>
+    <button class="btn btn-primary" ng-click="delete()">Confirmer</button>
     <button class="btn" ng-click="cancel()">Annuler</button>
 </div>
 

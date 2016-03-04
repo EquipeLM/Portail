@@ -106,6 +106,36 @@ fieldset{
     /* z-index: -1; */
 }
 
+.settings{
+    float: right;
+    margin-right: 1%;
+    margin-top: 10px;
+}
+
+.tri{
+    float: right;
+    margin-right: 3%;
+    margin-top: 15px;
+    }
+    
+
+    
+    
+.outilsIcones{
+    width : 90%;
+    margin-left: 8%;
+    margin-top : 5%;
+    }
+
+.outilsIcones h4{
+    margin-top: 5%;
+    color : #e12d0e;
+    text-align: left;
+}
+    
+.outilsIcones .fa{
+    color : #616161 ;
+    }
 /* css fullscreen mes Absences */
 
 .marge{
@@ -113,13 +143,14 @@ fieldset{
 }
 .calendar {
   background-color: white;
-  border : 2px solid #d8d8d8;
+  border : 2px solid #C7C7C7;
 }
 
 .modal-content {
     width : 30%;
     margin-left: 35%;
     margin-top: 10%;
+    border-radius: 15px;
 }
     
 #recapitulatif{
@@ -136,7 +167,7 @@ fieldset{
 }
 
 .ligne{
-  background-color: #D8D8D8;
+  background-color: #C7C7C7;
   font-weight: bold;
 }
 
@@ -157,6 +188,16 @@ fieldset{
 }
 
 .graph p{
+  text-align: center;
+  padding-top: 10px;
+}
+
+.graphScreen {
+  padding: 40px 50px 0px 0px ;
+    
+}
+
+.graphScreen p{
   text-align: center;
   padding-top: 10px;
 }
@@ -202,6 +243,51 @@ fieldset{
 }
 
 /* css card Absences */
+
+
+md-dialog {
+    width : 32%
+}
+
+.inputNombre{
+    margin-left: 1%;
+}
+
+.md-datepicker-input-container {
+    width : 65%
+}
+
+md-input-container .md-placeholder, md-input-container label:not(.md-no-float):not(.md-container-ignore) {
+    padding-left: 15px;
+}
+
+.md-datepicker-input {
+    width : 100%;
+}
+
+md-input-container{
+    margin : 7px 0;
+    width : 55%;
+}
+
+md-input-container .md-errors-spacer {
+    min-width: 0px;
+}
+
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+    background-color: #e12d0e;
+}
+
+md-radio-button {
+    margin-left: 55%;
+    margin-top: -25px;
+}
+
+md-radio-button.md-default-theme .md-on, md-radio-button .md-on {
+    background-color: #e12d0e;
+}
+
+
 
 .graph-card {
   padding: 30px 35px 0px 5px ;
@@ -251,6 +337,17 @@ fieldset{
     padding-left: 12%;
 }
 
+.modal-title {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+.modal-header{
+    background-color: #e31937;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
 
 
 /* css home */

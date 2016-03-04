@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<md-dialog ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Ajouter une absence</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="./styles/images/cancel.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <form role="form">
+            <div class="form-group row">
+                <div class="col-sm-1"></div>
+                <md-datepicker class="col-sm-5" ng-model="DateDebut" md-placeholder="Début de congé"></md-datepicker>
+                <md-datepicker class="col-sm-5" ng-model="DateFin" md-placeholder="Fin de congé"></md-datepicker>
+                <div class="col-sm-1"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-3"></div>
+                <p> Type de l'absence : </p>
+                <md-radio-group ng-model="data.group1">
+                    <md-radio-button value="{{choixConge}}"> Congé </md-radio-button>
+                    <md-radio-button value="{{choixRtt1}}"> RTT Q1 </md-radio-button>
+                    <md-radio-button value="{{choixRtt2}}"> RTT Q2 </md-radio-button>
+                </md-radio-group>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-3"></div>
+                <p> Type de journée : </p>
+                <md-radio-group ng-model="data.group2">
+                    <md-radio-button value="{{journeeEntiere}}"> Journée entière </md-radio-button>
+                    <md-radio-button value="{{matin}}"> Matin </md-radio-button>
+                    <md-radio-button value="{{ApresMidi}}"> Après-midi </md-radio-button>
+                </md-radio-group>
+            </div>
+            <div class="form-group row inputNombre">
+                <div class="col-sm-2"></div>
+                <md-input-container class="md-block col-sm-8" flex-gt-sm>
+                    <input name="nombreJours" ng-model="nbJours" placeholder="Nombre de jours" required ng-pattern="/^[0-9]{5}$/">
+                </md-input-container>   
+            </div>
+            <div class="form-group row inputNombre">
+                <div class="col-sm-2"></div>
+                <md-input-container class="md-block col-sm-8" flex-gt-sm>
+                    <input name="solde" ng-model="solde" placeholder="Votre solde actuel" required ng-pattern="/^[0-9]{5}$/">
+                </md-input-container>   
+            </div>
+        </form>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      
+      <span flex></span>
+      <md-button ng-click="answer('not useful')">
+       Annuler
+      </md-button>
+      <md-button ng-click="answer('useful')" style="margin-right:20px;">
+       Valider
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
