@@ -20,11 +20,11 @@ angular
 	$scope.formData.soldeConges = null;
 	$scope.formData.soldesQun = null;
 	$scope.formData.soldesQdeux = null;
-    $scope.formData.restantConges = null;
-    $scope.formData.restantQun = null;
-    $scope.formData.restantQdeux = null;
-    $scope.formData.totalPris = null;
-    $scope.formData.totalRestant = null;
+        $scope.formData.restantConges = null;
+        $scope.formData.restantQun = null;
+        $scope.formData.restantQdeux = null;
+        $scope.formData.totalPris = null;
+        $scope.formData.totalRestant = null;
 	$scope.formData.labelConge = null;
 	$scope.formData.dataConge = null;
 	$scope.formData.options = null;
@@ -73,10 +73,10 @@ angular
         $mdDialog.cancel();
       };
       $scope.valider = function() {
-		var response = $http.post('/submit', $scope.formData);
+		var response = $http.post('/absence', $scope.formData);
 		response.success(function(data, status, headers, config) {  });
 		response.error(function(data, status, headers, config) {
-		    alert( "Exception details: " + JSON.stringify({data: data}));
+		    console.log( "Exception details: " + JSON.stringify({data: data}));
 		});
       }
       

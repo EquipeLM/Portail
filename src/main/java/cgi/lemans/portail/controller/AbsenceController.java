@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cgi.lemans.portail.controller.beans.AbsenceCardBean;
 import cgi.lemans.portail.controller.beans.UtilisateurBean;
 import cgi.lemans.portail.service.IAbsenceService;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author gautierfa
@@ -56,8 +54,17 @@ public class AbsenceController {
 		return new ResponseEntity<List<AbsenceCardBean>>(listRetour, HttpStatus.OK);
 	}
         
-        @RequestMapping(value = "/submit", method = RequestMethod.POST)
-        public @ResponseBody AbsenceCardBean getAbsenceCardBean(@RequestBody AbsenceCardBean absenceCardBean){      
-        return absenceCardBean;
+        @RequestMapping(value = "/absence", method = RequestMethod.POST)
+        public ResponseEntity<AbsenceCardBean> ajouterAbsence(HttpServletRequest request){
+            AbsenceCardBean bean = new AbsenceCardBean();
+            UtilisateurBean user = addUtilisateurSession(request.getSession());
+            if(user != null && UtilisateurBean.USER_TRI.equals(user.getTrigramme())){
+			AbsenceCardBean infosAbsences = absenceService.enregistrerInfosParTypes(user.getTrigramme(), bean);
+		
+		}else {
+			//TODO: Equipe implémentation des erreurs
+		}
+            
+         return new ResponseEntity<AbsenceCardBean>(bean, HttpStatus.OK);
         }
 }

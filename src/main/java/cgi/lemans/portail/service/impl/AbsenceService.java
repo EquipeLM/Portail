@@ -85,7 +85,7 @@ public class AbsenceService implements IAbsenceService {
 	}
 
 	@Override
-	public void enregistrerInfosParTypes(AbsenceCardBean bean) {
+	public AbsenceCardBean enregistrerInfosParTypes(String idRessource, AbsenceCardBean bean) {
 		CufRessourceAbsence newSoldeConge = new CufRessourceAbsence();
 		RessourceTma ress = new RessourceTma();
 		TypeAbsence type = new TypeAbsence();
@@ -100,11 +100,13 @@ public class AbsenceService implements IAbsenceService {
 		type.setIdTypeAbsence(Integer.parseInt(CufAbsenceDao.CONGES));
 		ress.setIdRessource("BJA");
 		nvelleAbsConge.setPremierJourAbsence(bean.getDatePremierJour()); 
-		nvelleAbsConge.setDateFinAbsence(bean.getDateFin()); 
-		nvelleAbsConge.setNombreJourAbsence(Double.parseDouble(bean.getNombreJours()));
+		nvelleAbsConge.setDateFinAbsence(bean.getDateFin());
+                nvelleAbsConge.setNombreJourAbsence(Double.parseDouble(bean.getNombreJours()));
+                nvelleAbsConge.setCommentaireAbsence(bean.getTypeJournee());
 		absenceDao.create(nvelleAbsConge);
 
-		// update absence
+                return null; // modifier
+// update absence
 
 	}
 

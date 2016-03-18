@@ -21,7 +21,7 @@ public interface IAbsenceService {
     /**
      * @param bean
      */
-    public void enregistrerInfosParTypes(AbsenceCardBean bean);
+    public AbsenceCardBean enregistrerInfosParTypes(String idResource, AbsenceCardBean bean);
 
     
 }
