@@ -10,8 +10,28 @@ angular
     $scope.status = '  ';
     $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
     
-    
-    
+    //il faut initialiser le scope pour pouvoir faire le binding avec le modele
+ 
+    $scope.formData = {};
+	$scope.formData.dateProchainConges = null;
+	$scope.formData.dateFinProchainConges = null;
+	$scope.formData.dureeProchainConges = null;
+	$scope.formData.idTypeAbsence = null;
+	$scope.formData.soldeConges = null;
+	$scope.formData.soldesQun = null;
+	$scope.formData.soldesQdeux = null;
+    $scope.formData.restantConges = null;
+    $scope.formData.restantQun = null;
+    $scope.formData.restantQdeux = null;
+    $scope.formData.totalPris = null;
+    $scope.formData.totalRestant = null;
+	$scope.formData.labelConge = null;
+	$scope.formData.dataConge = null;
+	$scope.formData.options = null;
+	$scope.formData.labelRttQ1 = null;
+	$scope.formData.dataRttQ1 = null;
+	$scope.formData.options = null;
+   
     
     
     $scope.showAdvanced = function(ev) {
@@ -53,28 +73,12 @@ angular
         $mdDialog.cancel();
       };
       $scope.valider = function() {
-        $mdDialog.valider();
-        
-        $scope.formData = {
-         
-          "dateFin" : $scope.DateFin,
-          "datePremierJour" : $scope.DateDebut,
-          "idTypeAbsence" : $scope.typeAbs,
-          "typeJournee" : $scope.typeJournee,
-          "nombreJours" : $scope.nbJours,
-          //solde = $scope.solde
-          
-        } 
-            var response = $http.post('submit', formData);
-                response.success(function(data, status, headers, config) {
-                    //donnees
-                });
-            response.error(function(data, status, headers, config) {
-                    alert( "Exception details: " + JSON.stringify({data: data}));
-                });
-
-                
-        }
+		var response = $http.post('/submit', $scope.formData);
+		response.success(function(data, status, headers, config) {  });
+		response.error(function(data, status, headers, config) {
+		    alert( "Exception details: " + JSON.stringify({data: data}));
+		});
+      }
       
       
       
