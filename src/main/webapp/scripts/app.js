@@ -26,6 +26,10 @@ angular
                 templateUrl: './views/mesAbsences.html',
                 controller: 'AbsencesCtrl'
             }).
+                        when('/planning', {
+                templateUrl: './views/planning.html',
+                controller: 'PlanningCtrl'
+            }).
             otherwise({
                 redirectTo: '/home'
             });

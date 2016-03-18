@@ -27,8 +27,8 @@
     padding:10px;
     padding-bottom:0px;
 }
-.card p {
-    margin:0px;
+#titre p {
+    margin-top:50px;
     padding:10px;
 }
 .card-image {
@@ -71,10 +71,10 @@
 }
 
 .card-home-big {
-    height:700px;
+    height:530px;
 }
 .card-home-big>.card-body {
-    height:596px;
+    height:350px;
 }
 
 

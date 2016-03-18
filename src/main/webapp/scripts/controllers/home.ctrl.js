@@ -9,22 +9,9 @@ angular
         
     $scope.status = '  ';
     $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
-    $scope.cancel = function() {
-        $mdDialog.cancel();
-    };
     
-    $scope.showAlert = function(ev) {
-        $mdDialog.show(
-          $mdDialog.alert()
-            .parent(angular.element(document.querySelector('#popupContainer')))
-            .clickOutsideToClose(true)
-            .title('This is an alert title')
-            .textContent('You can specify some description text in here.')
-            .ariaLabel('Alert Dialog Demo')
-            .ok('Got it!')
-            .targetEvent(ev)
-        );
-      };
+    
+    
     
     
     $scope.showAdvanced = function(ev) {
@@ -38,11 +25,7 @@ angular
             fullscreen: useFullScreen
         })
     
-        .then(function(answer) {
-            $scope.status = 'You said the information was "' + answer + '".';
-        }, function() {
-            $scope.status = 'You cancelled the dialog.';
-        });
+        
     
         $scope.$watch(function() {
             return $mdMedia('xs') || $mdMedia('sm');
@@ -62,9 +45,49 @@ angular
     $scope.myDate.getMonth() + 2,
     $scope.myDate.getDate());
     
-    
+   
+      $scope.hide = function() {
+        $mdDialog.hide();
+      };
+      $scope.cancel = function() {
+        $mdDialog.cancel();
+      };
+      $scope.valider = function() {
+        $mdDialog.valider();
+        
+        $scope.formData = {
+         
+          "dateFin" : $scope.DateFin,
+          "datePremierJour" : $scope.DateDebut,
+          "idTypeAbsence" : $scope.typeAbs,
+          "typeJournee" : $scope.typeJournee,
+          "nombreJours" : $scope.nbJours,
+          //solde = $scope.solde
+          
+        } 
+            var response = $http.post('submit', formData);
+                response.success(function(data, status, headers, config) {
+                    //donnees
+                });
+            response.error(function(data, status, headers, config) {
+                    alert( "Exception details: " + JSON.stringify({data: data}));
+                });
+
+                
+        }
+      
+      
+      
+      
+      
+     
+
+               
+
  
     }])
+
+    
 
 .config(function($mdDateLocaleProvider) {
   $mdDateLocaleProvider.formatDate = function(date) {
@@ -74,5 +97,7 @@ angular
   // Can change week display to start on Monday.
   $mdDateLocaleProvider.firstDayOfWeek = 1;
 });
+
+
     
    

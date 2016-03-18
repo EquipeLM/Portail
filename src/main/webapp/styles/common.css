@@ -303,7 +303,7 @@ md-radio-button.md-default-theme .md-on, md-radio-button .md-on {
 
 
 .indicateur{
-    margin-left: 50px;
+    margin-top: 10px;
     font-size: 21px;
     color: black;
 }
@@ -367,3 +367,45 @@ md-radio-button.md-default-theme .md-on, md-radio-button .md-on {
 .centre {
     padding-left: 12%;
 }
+
+
+
+/* css tuile planning */
+
+
+.list{
+    float : left;
+    margin-top: 4%;
+}
+
+.listOT{
+    text-align: left;
+    padding-top: 30px;
+    padding-left: 30px;
+    margin-right: 30px;
+     
+}
+
+.planningTable{
+    margin-top: 20px;
+}
+
+
+.planningTable  td, th{
+    padding: 15px 27px 10px 27px;
+}
+
+.planningTable th{
+    font-size: 17px;
+}
+
+  
+
+
+.planningTable td{
+    height: 60px;
+    
+}
+
+
+

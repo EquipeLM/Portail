@@ -20,6 +20,8 @@ public class AbsenceCardBean{
         private Date datePremierJour;
         private Date dateFin;
         private String nombreJours;
+        private String typeAbsence;
+        private String typeJournee;
 
     
         
@@ -102,6 +104,23 @@ public class AbsenceCardBean{
         public void setNombreJours(String nombreJours) {
             this.nombreJours = nombreJours;
         }
+
+        public String getTypeAbsence() {
+            return typeAbsence;
+        }
+
+        public void setTypeAbsence(String typeAbsence) {
+            this.typeAbsence = typeAbsence;
+        }
+
+        public String getTypeJournee() {
+            return typeJournee;
+        }
+
+        public void setTypeJournee(String typeJournee) {
+            this.typeJournee = typeJournee;
+        }
+        
         
         
         
