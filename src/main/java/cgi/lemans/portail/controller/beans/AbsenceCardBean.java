@@ -22,6 +22,15 @@ public class AbsenceCardBean{
         private String nombreJours;
         private String typeAbsence;
         private String typeJournee;
+        private String tags;
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
 
     
         

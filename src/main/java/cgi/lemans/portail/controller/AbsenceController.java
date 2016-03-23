@@ -47,12 +47,17 @@ public class AbsenceController {
 		List<AbsenceCardBean> listRetour = new ArrayList<AbsenceCardBean>();
 		if(user != null && UtilisateurBean.USER_TRI.equals(user.getTrigramme())){
 			AbsenceCardBean infosSend = absenceService.recupererInfosAbsRessource(user.getTrigramme());
+                        // AbsenceCardBean infosSendEquipe = absenceService.recupererInfosEquipe();
+                        // listRetour.add(infosSendEquipe);
 			listRetour.add(infosSend);
+                        
 		}else {
 			//TODO: Equipe implémentation des erreurs
 		}
 		return new ResponseEntity<List<AbsenceCardBean>>(listRetour, HttpStatus.OK);
 	}
+        
+        
         
         @RequestMapping(value = "/absence", method = RequestMethod.POST)
         public ResponseEntity<AbsenceCardBean> ajouterAbsence(HttpServletRequest request){

@@ -4,7 +4,7 @@
 
 angular
     .module('portail.controllers')
-    .controller('HomeCtrl', ['$scope', '$http', 'Absence', '$mdDialog', '$mdMedia', function ($scope, $http, Absence, $mdDialog, $mdMedia) {
+    .controller('HomeCtrl', ['$scope', '$http', 'Absence', '$mdDialog', '$mdMedia', '$resource', function ($scope, $http, Absence, $mdDialog, $mdMedia, $resource) {
     
         
     $scope.status = '  ';
@@ -73,12 +73,17 @@ angular
         $mdDialog.cancel();
       };
       $scope.valider = function() {
-		var response = $http.post('/absence', $scope.formData);
-		response.success(function(data, status, headers, config) {  });
+		var response = $http.post('api/absences/absence', $scope.formData);
+                Absence.save($scope.formData, function() {
+                       //va appeler ta fonction ajouterAbsence avec les valeurs bindées dans formData
+                });
+		response.success(function(data, status, headers, config) {                     
+                });
 		response.error(function(data, status, headers, config) {
 		    console.log( "Exception details: " + JSON.stringify({data: data}));
 		});
-      }
+                
+      };
       
       
       
