@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cgi.lemans.portail.controller.beans.AbsenceCardBean;
+import cgi.lemans.portail.controller.beans.AbsenceEquipeBean;
 import cgi.lemans.portail.controller.beans.UtilisateurBean;
 import cgi.lemans.portail.service.IAbsenceService;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,13 +57,16 @@ public class AbsenceController {
 		return new ResponseEntity<List<AbsenceCardBean>>(listRetour, HttpStatus.OK);
 	}
         
-        /*@RequestMapping(value = "/equipe/{nomEquipe}", method = RequestMethod.GET)
-        public ResponseEntity<List<AbsenceCardBean>> infosEquipeAbsence(HttpServletRequest request){
-            AbsenceCardBean infosSend = absenceService.);
+        
+        @RequestMapping(value = "/equipe/{nomEquipe}", method = RequestMethod.GET)
+        public ResponseEntity<List<AbsenceEquipeBean>> infosEquipeAbsence(HttpServletRequest request){
+                        
+                        List<AbsenceEquipeBean> listRetour = new ArrayList<AbsenceEquipeBean>();
+                        AbsenceEquipeBean infosSend = absenceService.afficherInfosEquipe(equipeChoisie);
                        
 			listRetour.add(infosSend);
-                        return new ResponseEntity<List<AbsenceCardBean>>(listRetour, HttpStatus.OK;
-        };*/
+                        return new ResponseEntity<List<AbsenceEquipeBean>>(listRetour, HttpStatus.OK);
+        };
         
         
         

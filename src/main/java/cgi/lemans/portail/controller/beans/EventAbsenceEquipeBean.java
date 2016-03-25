@@ -15,8 +15,7 @@ public class EventAbsenceEquipeBean {
     private String text;
     private String dateDebut;
     private String dateFin;
-    //private AbsenceEquipeBean trigramme;
-
+   
     public int getId() {
         return id;
     }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cgi.lemans.portail.controller.beans.AbsenceCardBean;
+import cgi.lemans.portail.controller.beans.AbsenceEquipeBean;
 import cgi.lemans.portail.domaine.entites.gamaweb.Absence;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufRessourceAbsence;
 import cgi.lemans.portail.domaine.entites.gamaweb.RessourceTma;
@@ -22,6 +23,7 @@ import cgi.lemans.portail.domaine.gamaweb.ICufAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.ICufRessourceAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.impl.CufAbsenceDao;
 import cgi.lemans.portail.service.IAbsenceService;
+import java.util.List;
 
 
 /**
@@ -108,12 +110,24 @@ public class AbsenceService implements IAbsenceService {
 
 	}
         
-        /*public AbsenceCardBean afficherInfosEquipe(String equipeChoisie, AbsenceCardBean bean) {
+        @Override
+        public AbsenceEquipeBean afficherInfosEquipe(String equipeChoisie) {
         
-            AbsenceCardBean absRetour = new AbsenceCardBean();
-		List<Absence> listEquipe = absenceDao.findAbsenceByEquipe(equipeChoisie);
-		absRetour.set;
-        }*/
+                AbsenceEquipeBean absRetour = new AbsenceEquipeBean();
+		List<Absence> listNomEquipe = absenceDao.findAbsenceByEquipe(equipeChoisie);
+		absRetour.setNom(listNomEquipe.toString());
+                
+                List<Absence> listPrenomEquipe = absenceDao.findAbsenceByEquipe(equipeChoisie);
+		absRetour.setPrenom(listPrenomEquipe.toString());
+                
+                List<Absence> listTriEquipe = absenceDao.findAbsenceByEquipe(equipeChoisie);
+		absRetour.setTrigramme(listNomEquipe.toString());
+                
+                /*List<Absence> listEventEquipe = absenceDao.findAbsenceByEquipe(equipeChoisie);
+		absRetour.setListEvent(...);*/
+                
+                return absRetour;
+        }
 
         
 }

@@ -5,6 +5,8 @@
  */
 package cgi.lemans.portail.controller.beans;
 
+import java.util.List;
+
 /**
  *
  * @author souchul
@@ -14,6 +16,7 @@ public class AbsenceEquipeBean {
     private String trigramme;
     private String nom;
     private String prenom;
+    private List<EventAbsenceEquipeBean> listEvent;
 
     public String getTrigramme() {
         return trigramme;
@@ -38,6 +41,16 @@ public class AbsenceEquipeBean {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
+
+    public List<EventAbsenceEquipeBean> getListEvent() {
+        return listEvent;
+    }
+
+    public void setListEvent(List<EventAbsenceEquipeBean> listEvent) {
+        this.listEvent = listEvent;
+    }
+    
+    
     
     
 	
