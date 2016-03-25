@@ -47,8 +47,7 @@ public class AbsenceController {
 		List<AbsenceCardBean> listRetour = new ArrayList<AbsenceCardBean>();
 		if(user != null && UtilisateurBean.USER_TRI.equals(user.getTrigramme())){
 			AbsenceCardBean infosSend = absenceService.recupererInfosAbsRessource(user.getTrigramme());
-                        // AbsenceCardBean infosSendEquipe = absenceService.recupererInfosEquipe();
-                        // listRetour.add(infosSendEquipe);
+                       
 			listRetour.add(infosSend);
                         
 		}else {
@@ -56,6 +55,14 @@ public class AbsenceController {
 		}
 		return new ResponseEntity<List<AbsenceCardBean>>(listRetour, HttpStatus.OK);
 	}
+        
+        /*@RequestMapping(value = "/equipe/{nomEquipe}", method = RequestMethod.GET)
+        public ResponseEntity<List<AbsenceCardBean>> infosEquipeAbsence(HttpServletRequest request){
+            AbsenceCardBean infosSend = absenceService.);
+                       
+			listRetour.add(infosSend);
+                        return new ResponseEntity<List<AbsenceCardBean>>(listRetour, HttpStatus.OK;
+        };*/
         
         
         

@@ -1,7 +1,7 @@
 
 angular
         .module('portail.controllers')
-        .controller('TeamCtrl', ['$scope', '$http', '$timeout', function($scope, $http, $timeout, Absence) {
+        .controller('TeamCtrl', ['$scope', '$http', '$timeout', function($scope, $http, $timeout, EquipeAbsence) {
     
             $scope.schedulerConfig = {
                 scale: "Day",
@@ -55,8 +55,5 @@ angular
                 ];
                 
             };
-            var conges = Absence.query(function(data) {
-        
-		$scope.team = data[0].tags;
-            });
+            
   }]);

@@ -76,4 +76,5 @@ public class CufAbsenceDao extends AbstractGenericDaoGamaweb<CufAbsence> impleme
         return results;
     }
     
+    
 }

@@ -23,7 +23,7 @@ public interface IAbsenceService {
      */
     public AbsenceCardBean enregistrerInfosParTypes(String idResource, AbsenceCardBean bean);
     
-    public AbsenceCardBean recupererEquipeCNP();
+    
 
     
 }

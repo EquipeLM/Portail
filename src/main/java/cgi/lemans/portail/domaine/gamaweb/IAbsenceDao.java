@@ -24,5 +24,11 @@ public interface IAbsenceDao extends IGenericDao<Serializable, Absence>{
     public Absence findAbsenceByPremierJourAbsence(String idRessource);
     
     
+     /**
+     * @param EquipeLibelle
+     * @return
+     */
+    public List<Absence> findAbsenceByEquipe (String EquipeLibelle);
+    
 }
 

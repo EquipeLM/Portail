@@ -6,16 +6,13 @@
 package cgi.lemans.portail.service.impl;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cgi.lemans.portail.controller.beans.AbsenceCardBean;
-import cgi.lemans.portail.controller.beans.UtilisateurBean;
 import cgi.lemans.portail.domaine.entites.gamaweb.Absence;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufRessourceAbsence;
 import cgi.lemans.portail.domaine.entites.gamaweb.RessourceTma;
@@ -23,10 +20,8 @@ import cgi.lemans.portail.domaine.entites.gamaweb.TypeAbsence;
 import cgi.lemans.portail.domaine.gamaweb.IAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.ICufAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.ICufRessourceAbsenceDao;
-import cgi.lemans.portail.domaine.gamaweb.IRessourceTmaDao;
 import cgi.lemans.portail.domaine.gamaweb.impl.CufAbsenceDao;
 import cgi.lemans.portail.service.IAbsenceService;
-import cgi.lemans.portail.utils.ConvertUtils;
 
 
 /**
@@ -43,9 +38,7 @@ public class AbsenceService implements IAbsenceService {
 	private ICufRessourceAbsenceDao cufRessourceAbsenceDao;
 	@Autowired
 	private IAbsenceDao absenceDao;
-        @Autowired
-	private IRessourceTmaDao ressourceTmaDao;
-
+        
 	@Override
 	public AbsenceCardBean recupererInfosAbsRessource(String idRessource) {
 		AbsenceCardBean absRetour = new AbsenceCardBean();
@@ -94,11 +87,11 @@ public class AbsenceService implements IAbsenceService {
 		CufRessourceAbsence newSoldeConge = new CufRessourceAbsence();
 		RessourceTma ress = new RessourceTma();
 		TypeAbsence type = new TypeAbsence();
-		type.setIdTypeAbsence(ConvertUtils.parseInteger(bean.getIdTypeAbsence()));
+		/*type.setIdTypeAbsence(Integer.parseInt(bean.getIdTypeAbsence()));
 		ress.setIdRessource(UtilisateurBean.USER_TRI);
 		newSoldeConge.setAnnee(Calendar.YEAR);
-		newSoldeConge.setSolde(ConvertUtils.parseDouble(bean.getSoldeConges()));
-		cufRessourceAbsenceDao.create(newSoldeConge);
+		newSoldeConge.setSolde(Double.parseDouble(bean.getSoldeConges()));
+		cufRessourceAbsenceDao.create(newSoldeConge);*/
 
 
 		Absence nvelleAbsConge = new Absence();
@@ -106,21 +99,21 @@ public class AbsenceService implements IAbsenceService {
 		ress.setIdRessource("BJA");
 		nvelleAbsConge.setPremierJourAbsence(bean.getDatePremierJour()); 
 		nvelleAbsConge.setDateFinAbsence(bean.getDateFin());
-        nvelleAbsConge.setNombreJourAbsence(ConvertUtils.parseDouble(bean.getNombreJours()));
-        nvelleAbsConge.setCommentaireAbsence(bean.getTypeJournee());
+                nvelleAbsConge.setNombreJourAbsence(Double.parseDouble(bean.getNombreJours()));
+                nvelleAbsConge.setCommentaireAbsence(bean.getTypeJournee());
 		absenceDao.create(nvelleAbsConge);
 
                 return bean; // modifier
 // update absence
 
 	}
+        
+        /*public AbsenceCardBean afficherInfosEquipe(String equipeChoisie, AbsenceCardBean bean) {
+        
+            AbsenceCardBean absRetour = new AbsenceCardBean();
+		List<Absence> listEquipe = absenceDao.findAbsenceByEquipe(equipeChoisie);
+		absRetour.set;
+        }*/
 
-        @Override
-        public AbsenceCardBean recupererEquipeCNP() {
-            AbsenceCardBean absRetourEquipe = new AbsenceCardBean();
-                    List<RessourceTma> listEquipe = ressourceTmaDao.findEquipeByCNP();
-                    absRetourEquipe.setTags(listEquipe.toString());
-                    return absRetourEquipe;
-        }
-
+        
 }

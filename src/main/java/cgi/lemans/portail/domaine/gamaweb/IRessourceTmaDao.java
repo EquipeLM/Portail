@@ -8,7 +8,6 @@ package cgi.lemans.portail.domaine.gamaweb;
 import cgi.lemans.portail.domaine.IGenericDao;
 import cgi.lemans.portail.domaine.entites.gamaweb.RessourceTma;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  *
@@ -16,7 +15,6 @@ import java.util.List;
  */
 public interface IRessourceTmaDao extends IGenericDao<Serializable, RessourceTma>{
     
-    public List<RessourceTma> findEquipeByCNP();
-    
+  
     
 }
