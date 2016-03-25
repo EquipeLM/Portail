@@ -38,15 +38,14 @@ public class AbsenceDao extends AbstractGenericDaoGamaweb<Absence> implements IA
     
     @Override
     public List<Absence> findAbsenceByEquipe (String equipeLibelle){
-        String hql = "from Absence a "
-                   + "left join a.refResource ref "
+        String hql = "select a from Absence a "
+                   + "left join a.refRessource ref "
                    + "where ref.tags " 
                    + "like :equipeChoisie";
         Query query = getSession().createQuery(hql);
         query.setParameter("equipeChoisie", '%'+ equipeLibelle + '%');
-        List<Absence> results = query.list();
+        List<Absence> results = (List<Absence>)query.list();
     	return results;
-
     }
 
 }

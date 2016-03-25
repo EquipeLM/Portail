@@ -1,9 +1,14 @@
 angular
 	.module('portail.services')
 	.factory('Absence', function($resource) {
-		return $resource('api/absences/:id'); 
-	})
-        
-        .factory('EquipeAbsence', function($resource) {
-		return $resource('api/equipeAbsences/:id'); 
+		return $resource('api/absences/:id', 
+				{id: '@id'},
+				{
+					getByEquipe : {
+						method: 'GET',
+						url:'api/absences/equipe/:id',
+						isArray: true
+					}
+				}
+		); 
 	});

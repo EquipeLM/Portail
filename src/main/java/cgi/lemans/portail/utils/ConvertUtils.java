@@ -1,5 +1,9 @@
 package cgi.lemans.portail.utils;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -7,6 +11,37 @@ import org.apache.commons.lang3.StringUtils;
  *
  */
 public class ConvertUtils {
+	
+	
+	/**
+	 * Formattage date en string
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static String formatterDateUS(Date date){
+		String retour = null;
+		if(date != null){
+			DateFormat df = new SimpleDateFormat("yyyy-dd-MM");
+			retour = df.format(date);
+		}
+		return retour;
+	}
+	/**
+	 * Formattage date en string
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static String formatterDate(Date date){
+		String retour = null;
+		if(date != null){
+			DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+			retour = df.format(date);
+		}
+		return retour;
+	}
+	
 	/**
 	 * Convertir un String en Double avec gestion de l'exception.
 	 * 

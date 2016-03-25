@@ -5,6 +5,8 @@
  */
 package cgi.lemans.portail.service;
 
+import java.util.List;
+
 import cgi.lemans.portail.controller.beans.AbsenceCardBean;
 import cgi.lemans.portail.controller.beans.AbsenceEquipeBean;
 
@@ -24,7 +26,11 @@ public interface IAbsenceService {
      */
     public AbsenceCardBean enregistrerInfosParTypes(String idResource, AbsenceCardBean bean);
     
-    public AbsenceEquipeBean afficherInfosEquipe(String equipeChoisie);
+    /**
+     * @param equipeChoisie
+     * @return
+     */
+    public List<AbsenceEquipeBean> afficherInfosEquipe(String equipeChoisie);
 
     
 }
