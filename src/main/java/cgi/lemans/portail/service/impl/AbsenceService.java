@@ -123,12 +123,12 @@ public class AbsenceService implements IAbsenceService {
 			if(absence.getPremierJourAbsence() != null){
 				cal.setTime(absence.getPremierJourAbsence());
 				event.setNumMoisDebut(ConvertUtils.toString(cal.get(Calendar.MONTH)));
-                                event.setAnnee(ConvertUtils.toString(cal.get(Calendar.YEAR)));
+                event.setAnnee(ConvertUtils.toString(cal.get(Calendar.YEAR)));
 			}
 			if(absence.getDateFinAbsence() != null){
 				cal.setTime(absence.getDateFinAbsence());
 				event.setNumMoisFin(ConvertUtils.toString(cal.get(Calendar.MONTH)));
-                                event.setAnnee(ConvertUtils.toString(cal.get(Calendar.YEAR)));
+                event.setAnnee(ConvertUtils.toString(cal.get(Calendar.YEAR)));
 			}
 			event.setDateDebut(ConvertUtils.formatterDateUS(absence.getPremierJourAbsence()));
 			event.setDateFin(ConvertUtils.formatterDateUS(absence.getDateFinAbsence()));

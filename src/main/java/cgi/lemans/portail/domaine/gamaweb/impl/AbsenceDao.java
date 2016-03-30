@@ -6,6 +6,7 @@
 package cgi.lemans.portail.domaine.gamaweb.impl;
 
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Repository;
 
 import cgi.lemans.portail.domaine.entites.gamaweb.Absence;
 import cgi.lemans.portail.domaine.gamaweb.IAbsenceDao;
-import java.util.Calendar;
 
 
 /**
@@ -42,13 +42,13 @@ public class AbsenceDao extends AbstractGenericDaoGamaweb<Absence> implements IA
         String hql = "select a from Absence a "
                    + "left join a.refRessource ref "
                    + "where ref.tags " 
-                   + "like :equipeChoisie"
-                   + "and (month(a.premierJourAbsence) = :moisAafficher"
-                   + "and (year(a.premierJourAbsence) = :AnneeAafficher";
+                   + "like :equipeChoisie "
+//                   + "and (month(a.premierJourAbsence) = :moisAafficher or month(a.dateFinAbsence) = :moisAafficher) "
+                   + "and (year(a.premierJourAbsence) = :anneeEnCours or year(a.dateFinAbsence) = :anneeEnCours)";
         Query query = getSession().createQuery(hql);
         query.setParameter("equipeChoisie", '%'+ equipeLibelle + '%');
         query.setParameter("anneeEnCours", Calendar.getInstance().get(Calendar.YEAR));
-        query.setParameter("moisAafficher", moisAafficher);
+//        query.setParameter("moisAafficher", ConvertUtils.parseInteger(moisAafficher) + 1 );
         List<Absence> results = (List<Absence>)query.list();
     	return results;
     }

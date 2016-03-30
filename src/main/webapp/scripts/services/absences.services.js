@@ -6,7 +6,11 @@ angular
 				{
 					getByEquipe : {
 						method: 'GET',
-						url:'api/absences/equipe/:id',
+						param : {
+							id: '@id',
+							month: '@month'
+						},
+						url:'api/absences/equipe/:id/mois/:month',
 						isArray: true
 					}
 				}

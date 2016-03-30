@@ -22,7 +22,7 @@ public class ConvertUtils {
 	public static String formatterDateUS(Date date){
 		String retour = null;
 		if(date != null){
-			DateFormat df = new SimpleDateFormat("yyyy-dd-MM");
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 			retour = df.format(date);
 		}
 		return retour;

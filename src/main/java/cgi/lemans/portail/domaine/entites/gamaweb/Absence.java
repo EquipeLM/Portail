@@ -53,7 +53,7 @@ public class Absence extends EntiteGamaweb{
     private Double nombreJourAbsence;
     
     @Column (name="COMMENTAIRE_ABSENCE")
-    private String CommentaireAbsence;
+    private String commentaireAbsence;
     
     public Absence() {
         super();
@@ -111,11 +111,11 @@ public class Absence extends EntiteGamaweb{
     }
 
     public String getCommentaireAbsence() {
-        return CommentaireAbsence;
+        return commentaireAbsence;
     }
 
-    public void setCommentaireAbsence(String CommentaireAbsence) {
-        this.CommentaireAbsence = CommentaireAbsence;
+    public void setCommentaireAbsence(String commentaireAbsence) {
+        this.commentaireAbsence = commentaireAbsence;
     }
     
     
