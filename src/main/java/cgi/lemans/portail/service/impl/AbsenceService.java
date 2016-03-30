@@ -113,9 +113,9 @@ public class AbsenceService implements IAbsenceService {
 	}
 
 	@Override
-	public List<AbsenceEquipeBean> afficherInfosEquipe(String equipeChoisie) {
+	public List<AbsenceEquipeBean> afficherInfosEquipe(String equipeChoisie, String moisAafficher) {
 		Map<String, AbsenceEquipeBean> absBytrigramme = new HashMap<String, AbsenceEquipeBean>();
-		List<Absence> listNomEquipe = absenceDao.findAbsenceByEquipe(equipeChoisie);
+		List<Absence> listNomEquipe = absenceDao.findAbsenceByEquipe(equipeChoisie, moisAafficher);
 		
 		for (Absence absence : listNomEquipe) {
 			EventAbsenceEquipeBean event = new EventAbsenceEquipeBean();
@@ -123,10 +123,12 @@ public class AbsenceService implements IAbsenceService {
 			if(absence.getPremierJourAbsence() != null){
 				cal.setTime(absence.getPremierJourAbsence());
 				event.setNumMoisDebut(ConvertUtils.toString(cal.get(Calendar.MONTH)));
+                                event.setAnnee(ConvertUtils.toString(cal.get(Calendar.YEAR)));
 			}
 			if(absence.getDateFinAbsence() != null){
 				cal.setTime(absence.getDateFinAbsence());
 				event.setNumMoisFin(ConvertUtils.toString(cal.get(Calendar.MONTH)));
+                                event.setAnnee(ConvertUtils.toString(cal.get(Calendar.YEAR)));
 			}
 			event.setDateDebut(ConvertUtils.formatterDateUS(absence.getPremierJourAbsence()));
 			event.setDateFin(ConvertUtils.formatterDateUS(absence.getDateFinAbsence()));

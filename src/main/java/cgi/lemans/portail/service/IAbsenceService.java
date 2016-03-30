@@ -30,7 +30,7 @@ public interface IAbsenceService {
      * @param equipeChoisie
      * @return
      */
-    public List<AbsenceEquipeBean> afficherInfosEquipe(String equipeChoisie);
+    public List<AbsenceEquipeBean> afficherInfosEquipe(String equipeChoisie, String moisAafficher);
 
     
 }
