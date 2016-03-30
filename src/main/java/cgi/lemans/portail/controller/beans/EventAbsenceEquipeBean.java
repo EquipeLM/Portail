@@ -17,6 +17,7 @@ public class EventAbsenceEquipeBean {
     private String dateFin;
     private String numMoisDebut;
     private String numMoisFin;
+    private String annee;
    
     public int getId() {
         return id;
@@ -65,7 +66,16 @@ public class EventAbsenceEquipeBean {
 	public void setNumMoisFin(String numMoisFin) {
 		this.numMoisFin = numMoisFin;
 	}
+
+    public String getAnnee() {
+        return annee;
+    }
+
+    public void setAnnee(String annee) {
+        this.annee = annee;
+    }
     
+        
     
             
 }

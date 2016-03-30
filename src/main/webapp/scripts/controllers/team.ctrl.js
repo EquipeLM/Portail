@@ -19,7 +19,8 @@ angular
             $scope.navigatorConfig = {
                 selectMode: "month",
                 showMonths: 3,
-                skipMonths: 3
+                skipMonths: 3,
+                showYear : true
 //                onTimeRangeSelected: function(args) {                        
 //                    loadEvents(args.start.firstDayOfMonth(), args.start.addMonths(1).firstDayOfMonth());
 //                }

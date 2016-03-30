@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import cgi.lemans.portail.domaine.entites.gamaweb.Absence;
 import cgi.lemans.portail.domaine.gamaweb.IAbsenceDao;
+import java.util.Calendar;
 
 
 /**
@@ -37,13 +38,17 @@ public class AbsenceDao extends AbstractGenericDaoGamaweb<Absence> implements IA
     }
     
     @Override
-    public List<Absence> findAbsenceByEquipe (String equipeLibelle){
+    public List<Absence> findAbsenceByEquipe (String equipeLibelle, String moisAafficher){
         String hql = "select a from Absence a "
                    + "left join a.refRessource ref "
                    + "where ref.tags " 
-                   + "like :equipeChoisie";
+                   + "like :equipeChoisie"
+                   + "and (month(a.premierJourAbsence) = :moisAafficher"
+                   + "and (year(a.premierJourAbsence) = :AnneeAafficher";
         Query query = getSession().createQuery(hql);
         query.setParameter("equipeChoisie", '%'+ equipeLibelle + '%');
+        query.setParameter("anneeEnCours", Calendar.getInstance().get(Calendar.YEAR));
+        query.setParameter("moisAafficher", moisAafficher);
         List<Absence> results = (List<Absence>)query.list();
     	return results;
     }
