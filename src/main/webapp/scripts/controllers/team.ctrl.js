@@ -9,20 +9,15 @@ angular
                 startDate: new DayPilot.Date().firstDayOfMonth(),
                 timeHeaders: [
                     { groupBy: "Month" },
-                    { groupBy: "Cell", format: "d" }
+                    { groupBy: "Cell", format: "dd/MM" }
                 ],
-            };
-//            
-            $scope.navigatorConfig = {
-                selectMode: "day",
-                showMonths: 3,
-                skipMonths: 3,
-                onTimeRangeSelected: function(args) {
-                	$scope.schedulerConfig.startDate = args.day;
-
-                },
-                showYear : true
-            };
+                eventResizeHandling : "Disabled",
+                eventMoveHandling : "Disabled",
+                locale : "fr-fr",
+                cellBackColorNonBusiness : "#000000",
+                eventEndSpec : "Date",
+            };            
+           
             
             $scope.schedulerConfig.resources = [];
             $scope.events = [];

@@ -34,6 +34,10 @@ angular
                 templateUrl: './views/team-mesAbsences.html',
                 controller: 'TeamCtrl'
             }).
+                        when('/config', {
+                templateUrl: './views/config.html',
+                controller: 'HomeCtrl'
+            }).
             otherwise({
                 redirectTo: '/home'
             });

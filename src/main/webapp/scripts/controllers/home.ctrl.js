@@ -10,6 +10,10 @@ angular
     $scope.status = '  ';
     $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
     
+    if ($scope.planning) {
+                    alert("CheckBox is checked.");
+                }              
+    
     //il faut initialiser le scope pour pouvoir faire le binding avec le modele
  
     $scope.formData = {};
