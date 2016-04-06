@@ -1,7 +1,7 @@
 
 angular
         .module('portail.controllers')
-        .controller('TeamCtrl', function($scope, $http, $timeout, Absence) {
+        .controller('TeamCtrl', function($scope, $http, $timeout,$filter , Absence) {
     
             $scope.schedulerConfig = {
                 scale: "Day",
@@ -21,6 +21,7 @@ angular
             
             $scope.schedulerConfig.resources = [];
             $scope.events = [];
+            var orderBy = $filter('orderBy');
             Absence.getByEquipe({id:'CNP', month:new DayPilot.Date().getMonth()},function(data){
             	data.forEach(function(elt){
             		$scope.schedulerConfig.resources.push({ id : elt.trigramme, name : elt.nom + " " + elt.prenom});
@@ -32,7 +33,14 @@ angular
             		    end: evt.dateFin,
             		    resource: elt.trigramme});
             		});
+            		
             	})
+            	$scope.order = function(predicate) {
+            		$scope.predicate = predicate;
+            		$scope.reverse = false;
+            		$scope.schedulerConfig.resources = orderBy($scope.schedulerConfig.resources, predicate, $scope.reverse);
+            	};
+            	$scope.order('name');
 
             });
   });
