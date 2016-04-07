@@ -4,7 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<md-dialog ng-cloak ng-controller="HomeCtrl">
+<md-dialog ng-cloak ng-controller="HomeCtrl" data-ng-init="affichePeriodeFin('false')">
   <form>
     <md-toolbar>
       <div class="md-toolbar-tools">
@@ -18,30 +18,51 @@ and open the template in the editor.
     <md-dialog-content>
       <div class="md-dialog-content">
         <form role="form">
-            <div class="form-group row">
+        	<div class="form-group row">
+                <div class="col-sm-1"></div>
+				<md-radio-group layout="row" ng-model="formData.isPoseSurPeriode" ng-change="affichePeriodeFin(formData.isPoseSurPeriode)">
+					<md-radio-button value="false"> Sur une journée </md-radio-button>
+					<md-radio-button value="true"> Sur une période </md-radio-button>
+				</md-radio-group>
+                <div class="col-sm-1"></div>
+            </div>
+            <div class=" form-group row">
                 <div class="col-sm-1"></div>
                 <md-datepicker class="col-sm-5" ng-model="formData.dateProchainConges" md-placeholder="Début de congé"></md-datepicker>
-                <md-datepicker class="col-sm-5" ng-model="formData.dateFinProchainConges" md-placeholder="Fin de congé"></md-datepicker>
+				<md-radio-group ng-model="formData.typeJourneeDebut">
+					<md-radio-button value="am"> Matin </md-radio-button>
+					<md-radio-button value="pm"> Après-midi </md-radio-button>
+					<md-radio-button ng-class="isJourneeCachee" value="amPm"> Journée complète </md-radio-button>
+				</md-radio-group>
+                <div class="col-sm-1"></div>
+            </div>
+            <div class="{{isCachee}} form-group row">
+                <div class="col-sm-1"></div>
+                	<md-datepicker class="col-sm-5" ng-model="formData.dateFinProchainConges" md-placeholder="Fin de congé"></md-datepicker>
+                	<md-radio-group ng-model="formData.typeJourneeFin">
+	                    <md-radio-button value="am"> Matin </md-radio-button>
+	                    <md-radio-button value="pm"> Après-midi </md-radio-button>
+                	</md-radio-group>
                 <div class="col-sm-1"></div>
             </div>
             <div class="form-group row">
                 <div class="col-sm-3"></div>
                 <p> Type de l'absence : </p>
-                <md-radio-group ng-model="data.group1">
-                    <md-radio-button ng-model="formData.idTypeAbsence" value="choixConge"> Congé </md-radio-button>
-                    <md-radio-button ng-model="formData.idTypeAbsence" value="choixRtt1"> RTT Q1 </md-radio-button>
-                    <md-radio-button ng-model="formData.idTypeAbsence" value="choixRtt2"> RTT Q2 </md-radio-button>
+                <md-radio-group ng-model="formData.idTypeAbsence">
+                    <md-radio-button value="choixConge"> Congé </md-radio-button>
+                    <md-radio-button value="choixRtt1"> RTT Q1 </md-radio-button>
+                    <md-radio-button value="choixRtt2"> RTT Q2 </md-radio-button>
                 </md-radio-group>
             </div>
-            <div class="form-group row">
-                <div class="col-sm-3"></div>
-                <p> Type de journée : </p>
-                <md-radio-group ng-model="data.group2">
-                    <md-radio-button ng-model="formData.typeJournee" value="journeeEntiere"> Journée entière </md-radio-button>
-                    <md-radio-button ng-model="formData.typeJournee" value="matin"> Matin </md-radio-button>
-                    <md-radio-button ng-model="formData.typeJournee" value="apresMidi"> Après-midi </md-radio-button>
-                </md-radio-group>
-            </div>
+<!--             <div class="form-group row"> -->
+<!--                 <div class="col-sm-3"></div> -->
+<!--                 <p> Type de journée : </p> -->
+<!--                 <md-radio-group ng-model="data.group2"> -->
+<!--                     <md-radio-button ng-model="formData.typeJournee" value="journeeEntiere"> Journée entière </md-radio-button> -->
+<!--                     <md-radio-button ng-model="formData.typeJournee" value="matin"> Matin </md-radio-button> -->
+<!--                     <md-radio-button ng-model="formData.typeJournee" value="apresMidi"> Après-midi </md-radio-button> -->
+<!--                 </md-radio-group> -->
+<!--             </div> -->
             <div class="form-group row inputNombre">
                 <div class="col-sm-2"></div>
                 <md-input-container class="md-block col-sm-8" flex-gt-sm>

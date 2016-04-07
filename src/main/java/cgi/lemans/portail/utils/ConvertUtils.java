@@ -1,6 +1,7 @@
 package cgi.lemans.portail.utils;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,6 +13,29 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class ConvertUtils {
 	
+	static DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	static DateFormat dfr = new SimpleDateFormat("dd/MM/yyyy");
+	
+	
+	/**
+	 * Parse string en date.
+	 * 
+	 * @param dateAParser
+	 * @param type US ou FR
+	 * @return une date
+	 */
+	public static Date parseToDate(String dateAParser, String type){
+		DateFormat dfTmp = "US".equals(type) ? df : dfr;
+		Date retour = null;
+		try {
+			if(dateAParser != null){
+				retour = df.parse(dateAParser);
+			}
+		} catch (ParseException e) {
+			//TODO : add log
+		}
+		return retour;
+	}
 	
 	/**
 	 * Formattage date en string
@@ -22,11 +46,11 @@ public class ConvertUtils {
 	public static String formatterDateUS(Date date){
 		String retour = null;
 		if(date != null){
-			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 			retour = df.format(date);
 		}
 		return retour;
 	}
+	
 	/**
 	 * Formattage date en string
 	 * 
@@ -36,8 +60,7 @@ public class ConvertUtils {
 	public static String formatterDate(Date date){
 		String retour = null;
 		if(date != null){
-			DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-			retour = df.format(date);
+			retour = dfr.format(date);
 		}
 		return retour;
 	}

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -66,16 +67,14 @@ public class AbsenceController {
 	};
 
 	@RequestMapping(value = "/absence", method = RequestMethod.POST)
-	public ResponseEntity<AbsenceCardBean> ajouterAbsence(HttpServletRequest request) {
-		AbsenceCardBean bean = new AbsenceCardBean();
+	public ResponseEntity<AbsenceCardBean> ajouterAbsence(@RequestBody AbsenceCardBean bean, HttpServletRequest request) {
 		UtilisateurBean user = addUtilisateurSession(request.getSession());
 		if (user != null && UtilisateurBean.USER_TRI.equals(user.getTrigramme())) {
-			AbsenceCardBean infosAbsences = absenceService.enregistrerInfosParTypes(user.getTrigramme(), bean);
-
+			absenceService.enregistrerInfosParTypes(user.getTrigramme(), bean);
 		} else {
 			// TODO: Equipe implémentation des erreurs
 		}
-
+		//FIXME: Le code retourné est toujours OK mais ça ne veut pas dire que c'est vrai tq les exceptions ne sont pas gérées.
 		return new ResponseEntity<AbsenceCardBean>(bean, HttpStatus.OK);
 	}
 }

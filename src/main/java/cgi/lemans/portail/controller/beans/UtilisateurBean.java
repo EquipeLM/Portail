@@ -6,7 +6,7 @@ package cgi.lemans.portail.controller.beans;
  */
 public class UtilisateurBean {
 
-	public static String USER_TRI = "BJA";
+	public static String USER_TRI = "LSO";
 	private String trigramme;
 	private String password;
 	

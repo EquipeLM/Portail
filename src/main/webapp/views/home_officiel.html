@@ -1,0 +1,126 @@
+<div class="tuiles">
+        <div class="row">
+            <div class="col-sm-4 no-padding {{isCache}}">
+                <div class="card card-home card-home-big card-home-blue1">
+                    <div class="card-header card-header-blue1">
+                        <h2>Tâches</h2>
+                        <div class="card-button">
+                            <a href="#"><i class="fa fa-external-link-square fa-3x"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <i class="fa fa-calendar fa-6x"></i>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="col-sm-8 no-padding {{isCache}}">
+                <div class="card card-home card-home-big card-home-yellow">
+                    <div class="card-header card-header-yellow">
+                        <h2>Planning</h2>
+                        <div class="card-button">
+                            <a href="#"><i class="fa fa-external-link-square fa-3x"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                       <div ng-include="'./views/card-planning.html'"></div> 
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 no-padding">
+                <div class="card card-home card-home-orange">
+                    <div class="card-header card-header-orange">
+                        <h2>Outils</h2>
+                        <div class="card-button">
+                            <a href="/portail/#/outilsHome"><i class="fa fa-external-link-square fa-3x"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="icons-outils row">
+                        <div class="col-sm-1"></div>
+                        <a href="/portail/#/genRequete"><i class="fa fa-database fa-5x col-sm-3"><h3>Requête SQL</h3></i></a>
+                        <a href="/portail/#/viewPdf"><i class="fa fa-gears fa-5x col-sm-4"><h3>Modèle de données</h3></i></a>
+                        <a href="https://timeandexpenses.global.logica.com/jetspeed/j_security_check"><i class="fa fa-clock-o fa-5x col-sm-3"><h3>Timesheet</h3></i></a>
+                        <div class="col-sm-1"></div>
+                      </div>
+                      <div class="icons-outils row">
+                        <div class="col-sm-2"></div>
+                        <a href="https://ebs-sso.global.logica.com/sso/pages/login.jsp"><i class="fa fa-calendar fa-5x col-sm-4"><h3>My Logica People</h3></i></a>
+                        <a href="http://mysite.ent.cgi.com/news.aspx"><i class="fa fa-user fa-5x col-sm-4"><h3>My Site</h3></i></a>
+                        <div class="col-sm-1"></div>
+                      </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 no-padding">
+                <div class="card card-home card-home-green">
+                    <div class="card-header card-header-green">
+                        <h2>Test</h2>
+                        <div class="card-button">
+                            <a href="#"><i class="fa fa-external-link-square fa-3x"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <i class="fa fa-area-chart fa-6x"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 no-padding">
+                <div class="card card-home card-home-blue2">
+                    <div class="card-header card-header-blue2">
+                        <h2>Absences</h2>
+                        <div class="card-button">
+                            <a href="/portail/#/teamAbsences"><i class="fa fa-users fa-3x"></i></a>
+                            <a href="" ng-click="showAdvanced($event)"><i class="fa fa-plus fa-3x"></i></a>
+                            <a href="/portail/#/mesAbsences"><i class="fa fa-external-link-square fa-3x"></i></a>
+                                                       
+                        </div>
+                        
+                    </div>
+                    <div class="card-body">
+                        <div ng-include="'./views/card-mesAbsences.html'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="row">
+            <div class="col-sm-8 no-padding">
+                <div class="card card-home card-home-big card-home-blue2">
+                    <div class="card-header card-header-blue2">
+                        <h2>Statistiques</h2>
+                        <div class="card-button">
+                            <a href="#"><i class="fa fa-external-link-square fa-3x"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <i class="fa fa-area-chart fa-6x"></i>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-4 no-padding">
+                <div class="card card-home card-home-big card-home-gris-teal">
+                    <div class="card-header card-header-gris-teal">
+                        <h2>Documents</h2>
+                        <div class="card-button">
+                            <a href="#"><i class="fa fa-external-link-square fa-3x"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <i class="fa fa-wrench fa-6x"></i>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+        

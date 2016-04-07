@@ -11,32 +11,42 @@ angular
     $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
     
     if ($scope.planning) {
-                    alert("CheckBox is checked.");
-                }              
+        alert("CheckBox is checked.");
+    }              
     
     //il faut initialiser le scope pour pouvoir faire le binding avec le modele
  
     $scope.formData = {};
-	$scope.formData.dateProchainConges = null;
-	$scope.formData.dateFinProchainConges = null;
+	$scope.formData.dateProchainConges = new Date();
+	$scope.formData.dateFinProchainConges = new Date();
+	$scope.formData.typeJourneeDebut = "amPm";
+	$scope.formData.typeJourneeFin = null;
+	$scope.formData.isPoseSurPeriode = "false";
 	$scope.formData.dureeProchainConges = null;
-	$scope.formData.idTypeAbsence = null;
+	$scope.formData.idTypeAbsence = "choixConge";
 	$scope.formData.soldeConges = null;
 	$scope.formData.soldesQun = null;
 	$scope.formData.soldesQdeux = null;
-        $scope.formData.restantConges = null;
-        $scope.formData.restantQun = null;
-        $scope.formData.restantQdeux = null;
-        $scope.formData.totalPris = null;
-        $scope.formData.totalRestant = null;
+    $scope.formData.restantConges = null;
+    $scope.formData.restantQun = null;
+    $scope.formData.restantQdeux = null;
+    $scope.formData.totalPris = null;
+    $scope.formData.totalRestant = null;
 	$scope.formData.labelConge = null;
 	$scope.formData.dataConge = null;
 	$scope.formData.options = null;
 	$scope.formData.labelRttQ1 = null;
 	$scope.formData.dataRttQ1 = null;
 	$scope.formData.options = null;
-   
-    
+	
+    $scope.affichePeriodeFin = function(value){
+    	$scope.isCachee = "cachee";
+    	$scope.isJourneeCachee = "";
+    	if("true" == value){
+    		 $scope.isCachee = "";
+    		 $scope.isJourneeCachee = "cachee";
+    	}
+    }
     
     $scope.showAdvanced = function(ev) {
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
@@ -88,16 +98,7 @@ angular
 		});
                 
       };
-      
-      
-      
-      
-      
-     
-
-               
-
- 
+   
     }])
 
     
