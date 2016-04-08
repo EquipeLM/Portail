@@ -30,6 +30,10 @@ import cgi.lemans.portail.domaine.gamaweb.ICufRessourceAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.impl.CufAbsenceDao;
 import cgi.lemans.portail.service.IAbsenceService;
 import cgi.lemans.portail.utils.ConvertUtils;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -89,7 +93,7 @@ public class AbsenceService implements IAbsenceService {
 	public AbsenceCardBean enregistrerInfosParTypes(String idRessource, AbsenceCardBean bean) {
 		
 		
-		CufRessourceAbsence newSoldeConge = new CufRessourceAbsence();
+		Absence nvelleAbsConge = new Absence();
 		RessourceTma ress = new RessourceTma();
 		TypeAbsence type = new TypeAbsence();
 	
@@ -99,60 +103,83 @@ public class AbsenceService implements IAbsenceService {
 //		newSoldeConge.setSolde(Double.parseDouble(bean.getSoldeConges()));
 //		cufRessourceAbsenceDao.create(newSoldeConge);
 		
+
+                if ( Boolean.parseBoolean(bean.getIsPoseSurPeriode()) == false){
+                    if(bean.getTypeJourneeDebut() ==  "amPm"){
+                       
+                        nvelleAbsConge.setNombreJourAbsence(0.5);
+                        nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
+                        nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
+                        nvelleAbsConge.setNombreJourAbsence(0.5);
+                        
+                        if(bean.getIdTypeAbsence() == "choixConge") {
+                            nvelleAbsConge.setRefTypeAbsence(1); // problème 1 corespond à congé dans la table
+                        } else if (bean.getIdTypeAbsence() == "choixRtt1") {
+                            nvelleAbsConge.setRefTypeAbsence(2); // problème 2 correspond à rtt1 dans la table
+                        } else {
+                            nvelleAbsConge.setRefTypeAbsence(3); // problème 2 correspond à rtt2 dans la table
+                        }
+                        
+
+                        if(bean.getTypeJourneeDebut() ==  "am"){
+                            nvelleAbsConge.setCommentaireAbsence("AM");
+                        } else {
+                            nvelleAbsConge.setCommentaireAbsence("PM");
+                        } 
+                         
+                        absenceDao.create(nvelleAbsConge);
+                        
+                    } else {
+                        nvelleAbsConge.setNombreJourAbsence(1);
+                        nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
+                        nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
+                        nvelleAbsConge.setCommentaireAbsence("");
+                        absenceDao.create(nvelleAbsConge);
+                        
+                    }
+                } else {
+                   if((bean.getTypeJourneeDebut() ==  "am") && (bean.getTypeJourneeFin() ==  "pm")){
+                        //calculer nbJours et créer absence
+                        String debut = bean.getDateProchainConges();
+                        String fin = bean.getDateFinProchainConges();
+                        
+                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                        try {
+                            Date d1 = df.parse(bean.getDateProchainConges());
+                            Date d2 = df.parse(bean.getDateFinProchainConges());
+                            double diff = d2.getTime() - d1.getTime();
+                            nvelleAbsConge.setNombreJourAbsence(diff);
+                            nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
+                            nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
+                            nvelleAbsConge.setCommentaireAbsence("");
+                            absenceDao.create(nvelleAbsConge);
+                            
+                        } catch (ParseException ex) {
+                            Logger.getLogger(AbsenceService.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        
+                        
+                       
+                   } else if ((bean.getTypeJourneeDebut() ==  "am") && (bean.getTypeJourneeFin() ==  "am")){
+                       //creer absence de dateDebut à dateFin - 1jr (nbJours complets)
+		       //creer absence sur dateFin (0.5jr avec commenaire à AM)
+                   } else if ((bean.getTypeJourneeDebut() ==  "pm") && (bean.getTypeJourneeFin() ==  "am")){
+                        //creer absence dateDebut (0.5J)
+                        //creer absence de dateDebut +1jr à dateDeFin - 1jr (nbJours = 1 2 3)
+                        //creer absence sur dateFin (0.5jr avec commenaire à AM)
+                   } else if ((bean.getTypeJourneeDebut() ==  "pm") && (bean.getTypeJourneeFin() ==  "pm")){
+                        //creer absence dateDebut (0.5J)
+                        //creer absence de dateDebut à dateFin (nbJours = 1 2 3)
+                   }
+                } 
+                
 		
-		/*Algo pour enregistrer des absences
-		 * 
-		 * si isPosePeriode == false (absence sur journée ou demie-jnée) alors 
-		 * -----si typeJourneeDeut != amPm créer absence avec 0.5j et ajouter AM ou PM dans le commentaire selon le typeJnée
-		 * -----sinon créer absence avec nbJours à 1
-		 *      
-		 *      ex: 01/09/2016 avec 'matin' de choché => Absence de 0.5jours ayant pour commentaire AM
-		 *     
-		 *     
-		 * sinon (on est sur une période)
-		 * -----si typeJneeDebut == AM & typeJneeFin = PM (cas d'une période avec journées complète) calculer nbJours et créer absence
-		 * 			ex: 01/07/2016 matin à 09/07/2016 à après midi => Absence de 9 jours
-		 * 
-		 * -----sinon si typeJneeDebut == AM & typeJneeFin = AM 
-		 * 			creer absence de dateDebut à dateFin - 1jr (nbJours complets)
-		 *          creer absence sur dateFin (0.5jr avec commenaire à AM)
-		 *          
-		 *          ex: 01/07/2016 matin à 09/07/2016 à matin
-		 *              1 Absence de 8 jours (du 01/07 au 08/07)
-		 *              1 Absence de 0.5jrs pour le 09/07 avec AM en commentaire
-		 *              
-		 * -----sinon si typejourneeDebut = PM & typeJneeFin = AM
-		 * 			creer absence dateDebut (0.5J)
-		 * 			creer absence de dateDebut +1jr à dateDeFin - 1jr (nbJours = 1 2 3)
-		 *          creer absence sur dateFin (0.5jr avec commenaire à AM)
-		 *          
-		 *          ex: 01/07/2016 après-midi au 09/07/2016  matin
-		 *              1 Absence de 0.5jrs pour le 01/07 avec PM en commentaire
-		 *              1 Absence de 7jrs (du 02/07 au 08/07)
-		 *              1 Absence de 0.5jrs pour le 09/07 avec AM en commentaire 
-		 *              
-		 * -----sinon si typejourneeDebut = PM & typeJneeFin = PM
-		 *          creer absence dateDebut (0.5J)
-		 * 			creer absence de dateDebut à dateFin (nbJours = 1 2 3)
-		 * 			
-		 * 			ex: 01/07/2016 après-midi à 09/07/2016 après-midi
-		 *              1 Absence de 8 jours (du 02/07 au 09/07)
-		 *              1 Absence de 0.5jrs pour le 01/07 avec PM en commentaire
-		 * 
-		 * 
-		 * */
-		 
+		
 
-		Absence nvelleAbsConge = new Absence();
-		nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
-		nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
-		nvelleAbsConge.setNombreJourAbsence(Double.parseDouble(bean.getNombreJours()));
-		nvelleAbsConge.setCommentaireAbsence(bean.getTypeJournee());
-		absenceDao.create(nvelleAbsConge);
-
-		return bean; // modifier
-		// update absence
-
+		
+		
+		
+                return bean;
 	}
 
 	@Override
