@@ -35,7 +35,7 @@ public class Absence extends EntiteGamaweb{
     @Column(name="ID_ABSENCE")
     private Integer idAbsence;
         
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne( cascade = {CascadeType.MERGE} )
     @JoinColumn(name="REF_TYPE_ABSENCE")
     private TypeAbsence refTypeAbsence;
     

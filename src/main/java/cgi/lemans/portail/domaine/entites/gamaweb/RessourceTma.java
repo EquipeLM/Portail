@@ -239,7 +239,7 @@ public class RessourceTma extends EntiteGamaweb{
     }
 
     public String getCalendrier() {
-        return calendrier;
+        return "français";
     }
 
     public void setCalendrier(String calendrier) {

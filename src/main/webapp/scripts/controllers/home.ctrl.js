@@ -88,6 +88,7 @@ angular
       };
       $scope.valider = function() {
 		var response = $http.post('api/absences/absence', $scope.formData);
+                
                 Absence.save($scope.formData, function() {
                        //va appeler ta fonction ajouterAbsence avec les valeurs bindées dans formData
                 });
