@@ -5,13 +5,18 @@
  */
 package cgi.lemans.portail.service.impl;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,11 +35,6 @@ import cgi.lemans.portail.domaine.gamaweb.ICufRessourceAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.impl.CufAbsenceDao;
 import cgi.lemans.portail.service.IAbsenceService;
 import cgi.lemans.portail.utils.ConvertUtils;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.util.GregorianCalendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -97,322 +97,280 @@ public class AbsenceService implements IAbsenceService {
 		Absence nvelleAbsConge = new Absence();
 		RessourceTma ress = new RessourceTma();
 		TypeAbsence type = new TypeAbsence();
-	
-                  
-//		type.setIdTypeAbsence(Integer.parseInt(bean.getIdTypeAbsence()));
-//		ress.setIdRessource(UtilisateurBean.USER_TRI);
-//		newSoldeConge.setAnnee(Calendar.YEAR);
-//		newSoldeConge.setSolde(Double.parseDouble(bean.getSoldeConges()));
-//		cufRessourceAbsenceDao.create(newSoldeConge);
+
+		nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
+		nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
+		ress.setIdRessource(idRessource);
+		Double nbJours = 0.0;
 		
-
-                if ( Boolean.parseBoolean(bean.getIsPoseSurPeriode()) == false){
-                    if(!("amPm").equals(bean.getTypeJourneeDebut())){
-                       
-                        
-                        nvelleAbsConge.setNombreJourAbsence(0.5);
-                        nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
-                        nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
-                        ress.setIdRessource(idRessource);
-                        nvelleAbsConge.setRefRessource(ress);
-                        
-                        if(("choixConge").equals(bean.getIdTypeAbsence())) {
-                            type.setIdTypeAbsence(1);
-                            nvelleAbsConge.setRefTypeAbsence(type); 
-                        } else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
-                            type.setIdTypeAbsence(2);
-                            nvelleAbsConge.setRefTypeAbsence(type);
-                        } else {
-                            type.setIdTypeAbsence(3);
-                            nvelleAbsConge.setRefTypeAbsence(type);
-                        }
-                        
-                        if(bean.getTypeJourneeDebut().equals("am")){
-                            nvelleAbsConge.setCommentaireAbsence("AM");
-                        } else {
-                            nvelleAbsConge.setCommentaireAbsence("PM");
-                        } 
-                         
-                        absenceDao.create(nvelleAbsConge);
-                        
-                    } else {
-                        nvelleAbsConge.setNombreJourAbsence(1);
-                        nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
-                        nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
-                        nvelleAbsConge.setCommentaireAbsence("");
-                        
-                        if(("choixConge").equals(bean.getIdTypeAbsence())) {
-                            type.setIdTypeAbsence(1);
-                            nvelleAbsConge.setRefTypeAbsence(type); 
-                        } else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
-                            type.setIdTypeAbsence(2);
-                            nvelleAbsConge.setRefTypeAbsence(type);
-                        } else {
-                            type.setIdTypeAbsence(3);
-                            nvelleAbsConge.setRefTypeAbsence(type);
-                        }
-                        ress.setIdRessource(idRessource);
-                        nvelleAbsConge.setRefRessource(ress);
-                        absenceDao.create(nvelleAbsConge);
-                        
-                    }
-                } else {
-                   if(("am").equals(bean.getTypeJourneeDebut()) && (("pm").equals(bean.getTypeJourneeFin()))){
-                        //calculer nbJours et créer absence
-                        String debut = bean.getDateProchainConges();
-                        String fin = bean.getDateFinProchainConges();
-                        
-                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                        try {
-                            Date d1 = df.parse(bean.getDateProchainConges());
-                            Date d2 = df.parse(bean.getDateFinProchainConges());
-                            double diff = d2.getTime() - d1.getTime();
-                            
-                            nvelleAbsConge.setNombreJourAbsence(diff);
-                            nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
-                            nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
-                            nvelleAbsConge.setCommentaireAbsence("");
-                            if(("choixConge").equals(bean.getIdTypeAbsence())) {
-                                type.setIdTypeAbsence(1);
-                                nvelleAbsConge.setRefTypeAbsence(type); 
-                            } else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
-                                type.setIdTypeAbsence(2);
-                                nvelleAbsConge.setRefTypeAbsence(type);
-                            } else {
-                                type.setIdTypeAbsence(3);
-                                nvelleAbsConge.setRefTypeAbsence(type);
-                            }
-                            ress.setIdRessource(idRessource);
-                            nvelleAbsConge.setRefRessource(ress);
-                            
-                            absenceDao.create(nvelleAbsConge);
-                            
-                        } catch (ParseException ex) {
-                            Logger.getLogger(AbsenceService.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        
-                        
-                       
-                   } else if (("am").equals(bean.getTypeJourneeDebut()) && (("am").equals(bean.getTypeJourneeFin()))){
-                        
-                        String debut = bean.getDateProchainConges();
-                        String fin = bean.getDateFinProchainConges();
-                        
-                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                        try {
-                            Date d1 = df.parse(bean.getDateProchainConges());
-                            Date d2 = df.parse(bean.getDateFinProchainConges());
-                            double diff = d2.getTime() - d1.getTime();
-                            
-                            nvelleAbsConge.setNombreJourAbsence(diff);
-                            nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
-                            nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
-                            nvelleAbsConge.setCommentaireAbsence("");
-                            if(("choixConge").equals(bean.getIdTypeAbsence())) {
-                                type.setIdTypeAbsence(1);
-                                nvelleAbsConge.setRefTypeAbsence(type); 
-                            } else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
-                                type.setIdTypeAbsence(2);
-                                nvelleAbsConge.setRefTypeAbsence(type);
-                            } else {
-                                type.setIdTypeAbsence(3);
-                                nvelleAbsConge.setRefTypeAbsence(type);
-                            }
-                            ress.setIdRessource(idRessource);
-                            nvelleAbsConge.setRefRessource(ress);
-                            
-                            absenceDao.create(nvelleAbsConge);
-                        } catch (ParseException ex) {
-                            Logger.getLogger(AbsenceService.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        
-                        
-                        nvelleAbsConge.setNombreJourAbsence(0.5);
-                        nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
-                        nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
-                        nvelleAbsConge.setCommentaireAbsence("AM");
-                        
-                        if(("choixConge").equals(bean.getIdTypeAbsence())) {
-                            type.setIdTypeAbsence(1);
-                            nvelleAbsConge.setRefTypeAbsence(type); 
-                        } else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
-                            type.setIdTypeAbsence(2);
-                            nvelleAbsConge.setRefTypeAbsence(type);
-                        } else {
-                            type.setIdTypeAbsence(3);
-                            nvelleAbsConge.setRefTypeAbsence(type);
-                        }
-                        ress.setIdRessource(idRessource);
-                        nvelleAbsConge.setRefRessource(ress);
-                         
-                        absenceDao.create(nvelleAbsConge);
-                        
-                 
-                   } else if (("pm").equals(bean.getTypeJourneeDebut()) && (("am").equals(bean.getTypeJourneeFin()))){
-                        
-                        nvelleAbsConge.setNombreJourAbsence(0.5);
-                        nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
-                        nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
-                        nvelleAbsConge.setCommentaireAbsence("PM");
-                        
-                        if(("choixConge").equals(bean.getIdTypeAbsence())) {
-                            type.setIdTypeAbsence(1);
-                            nvelleAbsConge.setRefTypeAbsence(type); 
-                        } else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
-                            type.setIdTypeAbsence(2);
-                            nvelleAbsConge.setRefTypeAbsence(type);
-                        } else {
-                            type.setIdTypeAbsence(3);
-                            nvelleAbsConge.setRefTypeAbsence(type);
-                        }
-                         
-                        ress.setIdRessource(idRessource);
-                        nvelleAbsConge.setRefRessource(ress);
-                        
-                        absenceDao.create(nvelleAbsConge);
-                        
-                        //creer absence de dateDebut +1jr à dateDeFin - 1jr (nbJours = 1 2 3)
-                        
-                        
-                        String debut = bean.getDateProchainConges();
-                        String fin = bean.getDateFinProchainConges();
-                        
-                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                        try {
-                            Date d1 = df.parse(bean.getDateProchainConges()); 
-                            Date d2 = df.parse(bean.getDateFinProchainConges());
-                            
-                            GregorianCalendar gc = new GregorianCalendar();
-                            GregorianCalendar gregorianCalendar = new GregorianCalendar(); 
-                            gregorianCalendar.setGregorianChange(d1); 
-                            gregorianCalendar.add(gc.DAY_OF_YEAR,1); 
-                            d1 = gregorianCalendar.getGregorianChange();
-                            
-                            gregorianCalendar.setGregorianChange(d2); 
-                            gregorianCalendar.add(gc.DAY_OF_YEAR,-1); 
-                            d2 = gregorianCalendar.getGregorianChange();
-                            
-                            double diff = d2.getTime() - d1.getTime();
-                            
-                            nvelleAbsConge.setNombreJourAbsence(diff);
-                            nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
-                            nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
-                            nvelleAbsConge.setCommentaireAbsence("");
-                            if(("choixConge").equals(bean.getIdTypeAbsence())) {
-                                type.setIdTypeAbsence(1);
-                                nvelleAbsConge.setRefTypeAbsence(type); 
-                            } else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
-                                type.setIdTypeAbsence(2);
-                                nvelleAbsConge.setRefTypeAbsence(type);
-                            } else {
-                                type.setIdTypeAbsence(3);
-                                nvelleAbsConge.setRefTypeAbsence(type);
-                            }
-                            
-                            ress.setIdRessource(idRessource);
-                            nvelleAbsConge.setRefRessource(ress);
-                            
-                            absenceDao.create(nvelleAbsConge);
-                        } catch (ParseException ex) {
-                            Logger.getLogger(AbsenceService.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        
-                        //creer absence sur dateFin (0.5jr avec commenaire à AM)
-                        
-                        nvelleAbsConge.setNombreJourAbsence(0.5);
-                        nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
-                        nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
-                        nvelleAbsConge.setCommentaireAbsence("AM");
-                        
-                        if(("choixConge").equals(bean.getIdTypeAbsence())) {
-                            type.setIdTypeAbsence(1);
-                            nvelleAbsConge.setRefTypeAbsence(type); 
-                        } else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
-                            type.setIdTypeAbsence(2);
-                            nvelleAbsConge.setRefTypeAbsence(type);
-                        } else {
-                            type.setIdTypeAbsence(3);
-                            nvelleAbsConge.setRefTypeAbsence(type);
-                        }
-                         
-                        ress.setIdRessource(idRessource);
-                        nvelleAbsConge.setRefRessource(ress);
-                        
-                        absenceDao.create(nvelleAbsConge);
-                        
-                   } else if (("pm").equals(bean.getTypeJourneeDebut()) && (("pm").equals(bean.getTypeJourneeFin()))){
-                        //creer absence dateDebut (0.5J)
-                        nvelleAbsConge.setNombreJourAbsence(0.5);
-                        nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
-                        nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
-                        nvelleAbsConge.setCommentaireAbsence("PM");
-                        
-                        if(("choixConge").equals(bean.getIdTypeAbsence())) {
-                            type.setIdTypeAbsence(1);
-                            nvelleAbsConge.setRefTypeAbsence(type); 
-                        } else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
-                            type.setIdTypeAbsence(2);
-                            nvelleAbsConge.setRefTypeAbsence(type);
-                        } else {
-                            type.setIdTypeAbsence(3);
-                            nvelleAbsConge.setRefTypeAbsence(type);
-                        }
-                         
-                        ress.setIdRessource(idRessource);
-                        nvelleAbsConge.setRefRessource(ress);
-                        
-                        absenceDao.create(nvelleAbsConge);
-                        //creer absence de dateDebut+1 (non?) à dateFin (nbJours = 1 2 3)
-                        
-                        String debut = bean.getDateProchainConges();
-                        String fin = bean.getDateFinProchainConges();
-                        
-                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                        try {
-                            Date d1 = df.parse(bean.getDateProchainConges());
-                            Date d2 = df.parse(bean.getDateFinProchainConges());
-                            
-                            GregorianCalendar gc = new GregorianCalendar();
-                            GregorianCalendar gregorianCalendar = new GregorianCalendar(); 
-                            gregorianCalendar.setGregorianChange(d1); 
-                            gregorianCalendar.add(gc.DAY_OF_YEAR,1); 
-                            d1 = gregorianCalendar.getGregorianChange();
-                            
-                            double diff = d2.getTime() - d1.getTime();
-                            
-                            nvelleAbsConge.setNombreJourAbsence(diff);
-                            nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
-                            nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
-                            nvelleAbsConge.setCommentaireAbsence("");
-                            if(("choixConge").equals(bean.getIdTypeAbsence())) {
-                                type.setIdTypeAbsence(1);
-                                nvelleAbsConge.setRefTypeAbsence(type); 
-                            } else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
-                                type.setIdTypeAbsence(2);
-                                nvelleAbsConge.setRefTypeAbsence(type);
-                            } else {
-                                type.setIdTypeAbsence(3);
-                                nvelleAbsConge.setRefTypeAbsence(type);
-                            }
-                            
-                            ress.setIdRessource(idRessource);
-                            nvelleAbsConge.setRefRessource(ress);
-
-                            absenceDao.create(nvelleAbsConge);
-                        } catch (ParseException ex) {
-                            Logger.getLogger(AbsenceService.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        
-                    }
-                } 
+        if ( Boolean.parseBoolean(bean.getIsPoseSurPeriode()) == false){
+    		nvelleAbsConge.setRefRessource(ress);
+			if(("choixConge").equals(bean.getIdTypeAbsence())) {
+				type.setIdTypeAbsence(1);
+			} else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
+				type.setIdTypeAbsence(2);
+			} else {
+				type.setIdTypeAbsence(3);
+			}
+			nvelleAbsConge.setRefTypeAbsence(type);
+			nvelleAbsConge.setCommentaireAbsence("");
+			if("am".equals(bean.getTypeJourneeDebut())){
+				nvelleAbsConge.setCommentaireAbsence("AM");
+				nbJours = 0.5;
+			} else if(!"am".equals(bean.getTypeJourneeDebut())){
+				nbJours = 0.5;
+				nvelleAbsConge.setCommentaireAbsence("PM");
+			}
+			nvelleAbsConge.setNombreJourAbsence(nbJours);
+            absenceDao.create(nvelleAbsConge);
+        } else if(("am").equals(bean.getTypeJourneeDebut()) && (("pm").equals(bean.getTypeJourneeFin()))){
+                //calculer nbJours et créer absence
+                String debut = bean.getDateProchainConges();
+                String fin = bean.getDateFinProchainConges();
                 
-		
-		
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    Date d1 = df.parse(bean.getDateProchainConges());
+                    Date d2 = df.parse(bean.getDateFinProchainConges());
+                    double diff = d2.getTime() - d1.getTime();
+                    
+                    nvelleAbsConge.setNombreJourAbsence(diff);
+                    nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
+                    nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
+                    nvelleAbsConge.setCommentaireAbsence("");
+                    if(("choixConge").equals(bean.getIdTypeAbsence())) {
+                        type.setIdTypeAbsence(1);
+                        nvelleAbsConge.setRefTypeAbsence(type); 
+                    } else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
+                        type.setIdTypeAbsence(2);
+                        nvelleAbsConge.setRefTypeAbsence(type);
+                    } else {
+                        type.setIdTypeAbsence(3);
+                        nvelleAbsConge.setRefTypeAbsence(type);
+                    }
+                    ress.setIdRessource(idRessource);
+                    nvelleAbsConge.setRefRessource(ress);
+                    
+                    absenceDao.create(nvelleAbsConge);
+                    
+                } catch (ParseException ex) {
+                    Logger.getLogger(AbsenceService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+               
+           } else if (("am").equals(bean.getTypeJourneeDebut()) && (("am").equals(bean.getTypeJourneeFin()))){
+                
+                String debut = bean.getDateProchainConges();
+                String fin = bean.getDateFinProchainConges();
+                
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    Date d1 = df.parse(bean.getDateProchainConges());
+                    Date d2 = df.parse(bean.getDateFinProchainConges());
+                    double diff = d2.getTime() - d1.getTime();
+                    
+                    nvelleAbsConge.setNombreJourAbsence(diff);
+                    nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
+                    nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
+                    nvelleAbsConge.setCommentaireAbsence("");
+                    if(("choixConge").equals(bean.getIdTypeAbsence())) {
+                        type.setIdTypeAbsence(1);
+                        nvelleAbsConge.setRefTypeAbsence(type); 
+                    } else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
+                        type.setIdTypeAbsence(2);
+                        nvelleAbsConge.setRefTypeAbsence(type);
+                    } else {
+                        type.setIdTypeAbsence(3);
+                        nvelleAbsConge.setRefTypeAbsence(type);
+                    }
+                    ress.setIdRessource(idRessource);
+                    nvelleAbsConge.setRefRessource(ress);
+                    
+                    absenceDao.create(nvelleAbsConge);
+                } catch (ParseException ex) {
+                    Logger.getLogger(AbsenceService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+                nvelleAbsConge.setNombreJourAbsence(0.5);
+                nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
+                nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
+                nvelleAbsConge.setCommentaireAbsence("AM");
+                
+                if(("choixConge").equals(bean.getIdTypeAbsence())) {
+                    type.setIdTypeAbsence(1);
+                    nvelleAbsConge.setRefTypeAbsence(type); 
+                } else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
+                    type.setIdTypeAbsence(2);
+                    nvelleAbsConge.setRefTypeAbsence(type);
+                } else {
+                    type.setIdTypeAbsence(3);
+                    nvelleAbsConge.setRefTypeAbsence(type);
+                }
+                ress.setIdRessource(idRessource);
+                nvelleAbsConge.setRefRessource(ress);
+                 
+                absenceDao.create(nvelleAbsConge);
+                
+         
+           } else if (("pm").equals(bean.getTypeJourneeDebut()) && (("am").equals(bean.getTypeJourneeFin()))){
+                
+                nvelleAbsConge.setNombreJourAbsence(0.5);
+                nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
+                nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
+                nvelleAbsConge.setCommentaireAbsence("PM");
+                
+                if(("choixConge").equals(bean.getIdTypeAbsence())) {
+                    type.setIdTypeAbsence(1);
+                    nvelleAbsConge.setRefTypeAbsence(type); 
+                } else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
+                    type.setIdTypeAbsence(2);
+                    nvelleAbsConge.setRefTypeAbsence(type);
+                } else {
+                    type.setIdTypeAbsence(3);
+                    nvelleAbsConge.setRefTypeAbsence(type);
+                }
+                 
+                ress.setIdRessource(idRessource);
+                nvelleAbsConge.setRefRessource(ress);
+                
+                absenceDao.create(nvelleAbsConge);
+                
+                //creer absence de dateDebut +1jr à dateDeFin - 1jr (nbJours = 1 2 3)
+                
+                
+                String debut = bean.getDateProchainConges();
+                String fin = bean.getDateFinProchainConges();
+                
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    Date d1 = df.parse(bean.getDateProchainConges()); 
+                    Date d2 = df.parse(bean.getDateFinProchainConges());
+                    
+                    GregorianCalendar gc = new GregorianCalendar();
+                    GregorianCalendar gregorianCalendar = new GregorianCalendar(); 
+                    gregorianCalendar.setGregorianChange(d1); 
+                    gregorianCalendar.add(gc.DAY_OF_YEAR,1); 
+                    d1 = gregorianCalendar.getGregorianChange();
+                    
+                    gregorianCalendar.setGregorianChange(d2); 
+                    gregorianCalendar.add(gc.DAY_OF_YEAR,-1); 
+                    d2 = gregorianCalendar.getGregorianChange();
+                    
+                    double diff = d2.getTime() - d1.getTime();
+                    
+                    nvelleAbsConge.setNombreJourAbsence(diff);
+                    nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
+                    nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
+                    nvelleAbsConge.setCommentaireAbsence("");
+                    if(("choixConge").equals(bean.getIdTypeAbsence())) {
+                        type.setIdTypeAbsence(1);
+                        nvelleAbsConge.setRefTypeAbsence(type); 
+                    } else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
+                        type.setIdTypeAbsence(2);
+                        nvelleAbsConge.setRefTypeAbsence(type);
+                    } else {
+                        type.setIdTypeAbsence(3);
+                        nvelleAbsConge.setRefTypeAbsence(type);
+                    }
+                    
+                    ress.setIdRessource(idRessource);
+                    nvelleAbsConge.setRefRessource(ress);
+                    
+                    absenceDao.create(nvelleAbsConge);
+                } catch (ParseException ex) {
+                    Logger.getLogger(AbsenceService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                //creer absence sur dateFin (0.5jr avec commenaire à AM)
+                
+                nvelleAbsConge.setNombreJourAbsence(0.5);
+                nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
+                nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
+                nvelleAbsConge.setCommentaireAbsence("AM");
+                
+                if(("choixConge").equals(bean.getIdTypeAbsence())) {
+                    type.setIdTypeAbsence(1);
+                    nvelleAbsConge.setRefTypeAbsence(type); 
+                } else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
+                    type.setIdTypeAbsence(2);
+                    nvelleAbsConge.setRefTypeAbsence(type);
+                } else {
+                    type.setIdTypeAbsence(3);
+                    nvelleAbsConge.setRefTypeAbsence(type);
+                }
+                 
+                ress.setIdRessource(idRessource);
+                nvelleAbsConge.setRefRessource(ress);
+                
+                absenceDao.create(nvelleAbsConge);
+                
+           } else if (("pm").equals(bean.getTypeJourneeDebut()) && (("pm").equals(bean.getTypeJourneeFin()))){
+                //creer absence dateDebut (0.5J)
+                nvelleAbsConge.setNombreJourAbsence(0.5);
+                nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
+                nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
+                nvelleAbsConge.setCommentaireAbsence("PM");
+                
+                if(("choixConge").equals(bean.getIdTypeAbsence())) {
+                    type.setIdTypeAbsence(1);
+                    nvelleAbsConge.setRefTypeAbsence(type); 
+                } else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
+                    type.setIdTypeAbsence(2);
+                    nvelleAbsConge.setRefTypeAbsence(type);
+                } else {
+                    type.setIdTypeAbsence(3);
+                    nvelleAbsConge.setRefTypeAbsence(type);
+                }
+                 
+                ress.setIdRessource(idRessource);
+                nvelleAbsConge.setRefRessource(ress);
+                
+                absenceDao.create(nvelleAbsConge);
+                //creer absence de dateDebut+1 (non?) à dateFin (nbJours = 1 2 3)
+                
+                String debut = bean.getDateProchainConges();
+                String fin = bean.getDateFinProchainConges();
+                
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    Date d1 = df.parse(bean.getDateProchainConges());
+                    Date d2 = df.parse(bean.getDateFinProchainConges());
+                    
+                    GregorianCalendar gc = new GregorianCalendar();
+                    GregorianCalendar gregorianCalendar = new GregorianCalendar(); 
+                    gregorianCalendar.setGregorianChange(d1); 
+                    gregorianCalendar.add(gc.DAY_OF_YEAR,1); 
+                    d1 = gregorianCalendar.getGregorianChange();
+                    
+                    double diff = d2.getTime() - d1.getTime();
+                    
+                    nvelleAbsConge.setNombreJourAbsence(diff);
+                    nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
+                    nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
+                    nvelleAbsConge.setCommentaireAbsence("");
+                    if(("choixConge").equals(bean.getIdTypeAbsence())) {
+                        type.setIdTypeAbsence(1);
+                        nvelleAbsConge.setRefTypeAbsence(type); 
+                    } else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
+                        type.setIdTypeAbsence(2);
+                        nvelleAbsConge.setRefTypeAbsence(type);
+                    } else {
+                        type.setIdTypeAbsence(3);
+                        nvelleAbsConge.setRefTypeAbsence(type);
+                    }
+                    
+                    ress.setIdRessource(idRessource);
+                    nvelleAbsConge.setRefRessource(ress);
 
-		
-		
-		
-                return bean;
+                    absenceDao.create(nvelleAbsConge);
+                } catch (ParseException ex) {
+                    Logger.getLogger(AbsenceService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+            return bean;
 	}
 
 	@Override
