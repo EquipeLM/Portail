@@ -93,8 +93,6 @@ public class RessourceTma extends EntiteGamaweb{
         super();
     }
     
-    
-    
     public String getIdRessource() {
         return idRessource;
     }

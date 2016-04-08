@@ -5,7 +5,6 @@
  */
 package cgi.lemans.portail.domaine.entites.gamaweb;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,14 +31,14 @@ public class CufRessourceAbsence extends EntiteGamaweb{
     @Column(name="idRessourceAbsence")
     private Integer idRessourceAbsence;
     
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne
     @JoinColumn(name="IdRessource")
     private RessourceTma ressourceTma;
     
     @Column(name="annee")
     private Integer annee;
     
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne
     @JoinColumn(name="typeAbsence")
     private TypeAbsence typeAbsence;
     
@@ -64,7 +63,7 @@ public class CufRessourceAbsence extends EntiteGamaweb{
         this.annee = annee;
     }
 
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne
     @JoinColumn(name="ID_TYPE_ABSENCE")
     public TypeAbsence getTypeAbsence() {
         return typeAbsence;
