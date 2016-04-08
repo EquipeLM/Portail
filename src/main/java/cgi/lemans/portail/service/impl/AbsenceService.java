@@ -98,8 +98,7 @@ public class AbsenceService implements IAbsenceService {
 		RessourceTma ress = new RessourceTma();
 		TypeAbsence type = new TypeAbsence();
 
-		nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
-		nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
+		
 		ress.setIdRessource(idRessource);
 		Double nbJours = 0.0;
 		
@@ -117,11 +116,17 @@ public class AbsenceService implements IAbsenceService {
 			if("am".equals(bean.getTypeJourneeDebut())){
 				nvelleAbsConge.setCommentaireAbsence("AM");
 				nbJours = 0.5;
-			} else if(!"am".equals(bean.getTypeJourneeDebut())){
+			} else if("pm".equals(bean.getTypeJourneeDebut())){
 				nbJours = 0.5;
 				nvelleAbsConge.setCommentaireAbsence("PM");
-			}
-			nvelleAbsConge.setNombreJourAbsence(nbJours);
+			} else {
+                            nbJours = 1.0;
+                        }
+                nvelleAbsConge.setNombreJourAbsence(nbJours);
+                
+                nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
+		nvelleAbsConge.setDateFinAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
+                
             absenceDao.create(nvelleAbsConge);
         } else if(("am").equals(bean.getTypeJourneeDebut()) && (("pm").equals(bean.getTypeJourneeFin()))){
                 //calculer nbJours et créer absence
