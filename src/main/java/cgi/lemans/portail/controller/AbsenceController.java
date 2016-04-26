@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cgi.lemans.portail.controller.beans.AbsenceBean;
 import cgi.lemans.portail.controller.beans.AbsenceCardBean;
-import cgi.lemans.portail.controller.beans.AbsenceEquipeBean;
 import cgi.lemans.portail.controller.beans.UtilisateurBean;
 import cgi.lemans.portail.service.IAbsenceService;
 
@@ -60,28 +60,29 @@ public class AbsenceController {
 	}
 
 	@RequestMapping(value = "/equipe/{nomEquipe}/mois/{mois}", method = RequestMethod.GET)
-	public ResponseEntity<List<AbsenceEquipeBean>> infosEquipeAbsence(@PathVariable String nomEquipe,
+	public ResponseEntity<List<AbsenceBean>> infosEquipeAbsence(@PathVariable String nomEquipe,
 			@PathVariable String mois, HttpServletRequest request) {
-		List<AbsenceEquipeBean> infosSend = absenceService.afficherInfosEquipe(nomEquipe, mois);
-		return new ResponseEntity<List<AbsenceEquipeBean>>(infosSend, HttpStatus.OK);
+		List<AbsenceBean> infosSend = absenceService.afficherInfosEquipe(nomEquipe, mois);
+		return new ResponseEntity<List<AbsenceBean>>(infosSend, HttpStatus.OK);
 	};
-        
-        @RequestMapping(value = "/allAbsence/", method = RequestMethod.GET)
-	public ResponseEntity<List<AbsenceEquipeBean>> infosUserAbsence(@PathVariable String idRessource,
-			 HttpServletRequest request) {
-		List<AbsenceEquipeBean> infosSend = absenceService.recupererAllAbsRessource(idRessource);
-		return new ResponseEntity<List<AbsenceEquipeBean>>(infosSend, HttpStatus.OK);
+
+	@RequestMapping(value = "/{idRessource}", method = RequestMethod.GET)
+	public ResponseEntity<AbsenceBean> infosUserAbsence(@PathVariable String idRessource, HttpServletRequest request) {
+		AbsenceBean infosSend = absenceService.recupererAllAbsRessource(idRessource);
+		return new ResponseEntity<AbsenceBean>(infosSend, HttpStatus.OK);
 	};
 
 	@RequestMapping(value = "/absence", method = RequestMethod.POST)
-	public ResponseEntity<AbsenceCardBean> ajouterAbsence(@RequestBody AbsenceCardBean bean, HttpServletRequest request) {
+	public ResponseEntity<AbsenceCardBean> ajouterAbsence(@RequestBody AbsenceCardBean bean,
+			HttpServletRequest request) {
 		UtilisateurBean user = addUtilisateurSession(request.getSession());
 		if (user != null && UtilisateurBean.USER_TRI.equals(user.getTrigramme())) {
 			absenceService.enregistrerInfosParTypes(user.getTrigramme(), bean);
 		} else {
 			// TODO: Equipe implémentation des erreurs
 		}
-		//FIXME: Le code retourné est toujours OK mais ça ne veut pas dire que c'est vrai tq les exceptions ne sont pas gérées.
+		// FIXME: Le code retourné est toujours OK mais ça ne veut pas dire que
+		// c'est vrai tq les exceptions ne sont pas gérées.
 		return new ResponseEntity<AbsenceCardBean>(bean, HttpStatus.OK);
 	}
 }

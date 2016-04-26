@@ -9,7 +9,7 @@ package cgi.lemans.portail.controller.beans;
  *
  * @author souchul
  */
-public class EventAbsenceEquipeBean {
+public class EventAbsenceBean {
     
     private int id;
     private String text;

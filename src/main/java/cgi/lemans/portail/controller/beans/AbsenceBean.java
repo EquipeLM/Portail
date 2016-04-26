@@ -11,12 +11,12 @@ import java.util.List;
  *
  * @author souchul
  */
-public class AbsenceEquipeBean {
+public class AbsenceBean {
     
     private String trigramme;
     private String nom;
     private String prenom;
-    private List<EventAbsenceEquipeBean> listEvent;
+    private List<EventAbsenceBean> listEvent;
 
     public String getTrigramme() {
         return trigramme;
@@ -42,11 +42,11 @@ public class AbsenceEquipeBean {
         this.prenom = prenom;
     }
 
-    public List<EventAbsenceEquipeBean> getListEvent() {
+    public List<EventAbsenceBean> getListEvent() {
         return listEvent;
     }
 
-    public void setListEvent(List<EventAbsenceEquipeBean> listEvent) {
+    public void setListEvent(List<EventAbsenceBean> listEvent) {
         this.listEvent = listEvent;
     }
     

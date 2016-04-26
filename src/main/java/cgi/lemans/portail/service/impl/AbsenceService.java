@@ -19,9 +19,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cgi.lemans.portail.controller.beans.AbsenceCardBean;
-import cgi.lemans.portail.controller.beans.AbsenceEquipeBean;
-import cgi.lemans.portail.controller.beans.EventAbsenceEquipeBean;
-import cgi.lemans.portail.controller.beans.EventAbsenceUserBean;
+import cgi.lemans.portail.controller.beans.AbsenceBean;
+import cgi.lemans.portail.controller.beans.EventAbsenceBean;
 import cgi.lemans.portail.domaine.entites.gamaweb.Absence;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufRessourceAbsence;
 import cgi.lemans.portail.domaine.entites.gamaweb.RessourceTma;
@@ -89,33 +88,32 @@ public class AbsenceService implements IAbsenceService {
 
 	@Override
 	public AbsenceCardBean enregistrerInfosParTypes(String idRessource, AbsenceCardBean bean) {
-		
-		
+
 		Absence nvelleAbsConge = new Absence();
-                //CufRessourceAbsence nvSolde = new CufRessourceAbsence();
+		// CufRessourceAbsence nvSolde = new CufRessourceAbsence();
 		RessourceTma ress = new RessourceTma();
 		TypeAbsence type = new TypeAbsence();
-                
-                //nvSolde.setSolde(Double.parseDouble(bean.getSoldeConges()));
-                //cufRessourceAbsenceDao.create(nvSolde);
-		
+
+		// nvSolde.setSolde(Double.parseDouble(bean.getSoldeConges()));
+		// cufRessourceAbsenceDao.create(nvSolde);
+
 		ress.setIdRessource(idRessource);
 		Double nbJours = 0.0;
-                
-                Calendar cal = new GregorianCalendar();
-                cal.setTime(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US")); 
-                cal.add(Calendar.DAY_OF_YEAR, 1); 
-                Date dateDebut = cal.getTime();
-                
-                cal.setTime(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US")); 
-                cal.add(Calendar.DAY_OF_YEAR, 1); 
-                Date dateFin = cal.getTime();
-                
-                nvelleAbsConge.setRefRessource(ress);
-		
-        if ( Boolean.parseBoolean(bean.getIsPoseSurPeriode()) == false){
-    		nvelleAbsConge.setRefRessource(ress);
-			if(("choixConge").equals(bean.getIdTypeAbsence())) {
+
+		Calendar cal = new GregorianCalendar();
+		cal.setTime(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
+		cal.add(Calendar.DAY_OF_YEAR, 1);
+		Date dateDebut = cal.getTime();
+
+		cal.setTime(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
+		cal.add(Calendar.DAY_OF_YEAR, 1);
+		Date dateFin = cal.getTime();
+
+		nvelleAbsConge.setRefRessource(ress);
+
+		if (Boolean.parseBoolean(bean.getIsPoseSurPeriode()) == false) {
+			nvelleAbsConge.setRefRessource(ress);
+			if (("choixConge").equals(bean.getIdTypeAbsence())) {
 				type.setIdTypeAbsence(1);
 			} else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
 				type.setIdTypeAbsence(2);
@@ -124,121 +122,106 @@ public class AbsenceService implements IAbsenceService {
 			}
 			nvelleAbsConge.setRefTypeAbsence(type);
 			nvelleAbsConge.setCommentaireAbsence("");
-			if("am".equals(bean.getTypeJourneeDebut())){
+			if ("am".equals(bean.getTypeJourneeDebut())) {
 				nvelleAbsConge.setCommentaireAbsence("AM");
 				nbJours = 0.5;
-			} else if("pm".equals(bean.getTypeJourneeDebut())){
+			} else if ("pm".equals(bean.getTypeJourneeDebut())) {
 				nbJours = 0.5;
 				nvelleAbsConge.setCommentaireAbsence("PM");
 			} else {
-                            nbJours = 1.0;
-                        }
-                nvelleAbsConge.setNombreJourAbsence(nbJours);
-                              
-                nvelleAbsConge.setPremierJourAbsence(dateDebut);
-		nvelleAbsConge.setDateFinAbsence(dateDebut);
-                
-            absenceDao.create(nvelleAbsConge);
-        } else {
-                
-                                
-                    Date d1 = ConvertUtils.parseToDate(bean.getDateProchainConges(), "US");
-                    Date d2 = ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US");
-                    long diff= ((d2.getTime()- d1.getTime())/86400000)+1 ;
-                   
-                    
-                    nvelleAbsConge.setNombreJourAbsence(diff);
-                    nvelleAbsConge.setPremierJourAbsence(dateDebut);
-                    nvelleAbsConge.setDateFinAbsence(dateFin);
-                    nvelleAbsConge.setCommentaireAbsence("");
-                    if(("choixConge").equals(bean.getIdTypeAbsence())) {
-                        type.setIdTypeAbsence(1);
-                        nvelleAbsConge.setRefTypeAbsence(type); 
-                    } else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
-                        type.setIdTypeAbsence(2);
-                        nvelleAbsConge.setRefTypeAbsence(type);
-                    } else {
-                        type.setIdTypeAbsence(3);
-                        nvelleAbsConge.setRefTypeAbsence(type);
-                    }
-                    
-                    
-                    absenceDao.create(nvelleAbsConge);
-                        
-           } 
-            return bean;
+				nbJours = 1.0;
+			}
+			nvelleAbsConge.setNombreJourAbsence(nbJours);
+
+			nvelleAbsConge.setPremierJourAbsence(dateDebut);
+			nvelleAbsConge.setDateFinAbsence(dateDebut);
+
+			absenceDao.create(nvelleAbsConge);
+		} else {
+
+			Date d1 = ConvertUtils.parseToDate(bean.getDateProchainConges(), "US");
+			Date d2 = ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US");
+			long diff = ((d2.getTime() - d1.getTime()) / 86400000) + 1;
+
+			nvelleAbsConge.setNombreJourAbsence(diff);
+			nvelleAbsConge.setPremierJourAbsence(dateDebut);
+			nvelleAbsConge.setDateFinAbsence(dateFin);
+			nvelleAbsConge.setCommentaireAbsence("");
+			if (("choixConge").equals(bean.getIdTypeAbsence())) {
+				type.setIdTypeAbsence(1);
+				nvelleAbsConge.setRefTypeAbsence(type);
+			} else if (("choixRtt1").equals(bean.getIdTypeAbsence())) {
+				type.setIdTypeAbsence(2);
+				nvelleAbsConge.setRefTypeAbsence(type);
+			} else {
+				type.setIdTypeAbsence(3);
+				nvelleAbsConge.setRefTypeAbsence(type);
+			}
+
+			absenceDao.create(nvelleAbsConge);
+
+		}
+		return bean;
 	}
 
 	@Override
-	public List<AbsenceEquipeBean> afficherInfosEquipe(String equipeChoisie, String moisAafficher) {
-		Map<String, AbsenceEquipeBean> absBytrigramme = new HashMap<String, AbsenceEquipeBean>();
+	public List<AbsenceBean> afficherInfosEquipe(String equipeChoisie, String moisAafficher) {
+		Map<String, AbsenceBean> absBytrigramme = new HashMap<String, AbsenceBean>();
 		List<Absence> listNomEquipe = absenceDao.findAbsenceByEquipe(equipeChoisie, moisAafficher);
-		
+
 		for (Absence absence : listNomEquipe) {
-			EventAbsenceEquipeBean event = new EventAbsenceEquipeBean();
-			Calendar cal = Calendar.getInstance();
-			if(absence.getPremierJourAbsence() != null){
-				cal.setTime(absence.getPremierJourAbsence());
-				event.setNumMoisDebut(ConvertUtils.toString(cal.get(Calendar.MONTH)));
-                event.setAnnee(ConvertUtils.toString(cal.get(Calendar.YEAR)));
-			}
-			if(absence.getDateFinAbsence() != null){
-				cal.setTime(absence.getDateFinAbsence());
-				event.setNumMoisFin(ConvertUtils.toString(cal.get(Calendar.MONTH)));
-                event.setAnnee(ConvertUtils.toString(cal.get(Calendar.YEAR)));
-			}
-			event.setDateDebut(ConvertUtils.formatterDateUS(absence.getPremierJourAbsence()));
-			event.setDateFin(ConvertUtils.formatterDateUS(absence.getDateFinAbsence()));
-			event.setId(absence.getIdAbsence());
-			event.setText(absence.getCommentaireAbsence());
+			EventAbsenceBean event = creerEventAbsence(absence);
 			final RessourceTma refRessource = absence.getRefRessource();
 			final String idRessource = refRessource.getIdRessource();
-			
-			if(!absBytrigramme.keySet().contains(idRessource)){
-				AbsenceEquipeBean absRetour = new AbsenceEquipeBean();
+
+			if (!absBytrigramme.keySet().contains(idRessource)) {
+				AbsenceBean absRetour = new AbsenceBean();
 				absRetour.setNom(refRessource.getNom());
 				absRetour.setPrenom(refRessource.getPrenom());
 				absRetour.setTrigramme(idRessource);
-				absRetour.setListEvent(new ArrayList<EventAbsenceEquipeBean>());
+				absRetour.setListEvent(new ArrayList<EventAbsenceBean>());
 				absBytrigramme.put(idRessource, absRetour);
-				
+
 			}
 			absBytrigramme.get(idRessource).getListEvent().add(event);
 		}
 		return new ArrayList<>(absBytrigramme.values());
 	}
 
-    @Override
-    public List<AbsenceEquipeBean> recupererAllAbsRessource(String idRessource) {
-        List<Absence> listAbsence = absenceDao.findAbsenceByUser(idRessource);
-		
-        for (Absence absence : listAbsence) {
-			EventAbsenceUserBean event  = new EventAbsenceUserBean();                                         
-			Calendar cal = Calendar.getInstance();
-			if(absence.getPremierJourAbsence() != null){
-				cal.setTime(absence.getPremierJourAbsence());
-				event.setAnnee(ConvertUtils.toString(cal.get(Calendar.YEAR)));
-			}
-			if(absence.getDateFinAbsence() != null){
-				cal.setTime(absence.getDateFinAbsence());
-				event.setAnnee(ConvertUtils.toString(cal.get(Calendar.YEAR)));
-			}
-			event.setDateDebut(ConvertUtils.formatterDateUS(absence.getPremierJourAbsence()));
-			event.setDateFin(ConvertUtils.formatterDateUS(absence.getDateFinAbsence()));
-			event.setType(absence.getRefTypeAbsence().toString());
-			final RessourceTma refRessource = absence.getRefRessource();
-			
-			
-			
-			AbsenceEquipeBean absRetour = new AbsenceEquipeBean();
-                        absRetour.setListEvent(new ArrayList<EventAbsenceEquipeBean>());
-			
-				
-			
+	/**
+	 * @param absence
+	 * @return
+	 */
+	private EventAbsenceBean creerEventAbsence(Absence absence) {
+		EventAbsenceBean event = new EventAbsenceBean();
+		Calendar cal = Calendar.getInstance();
+		if (absence.getPremierJourAbsence() != null) {
+			cal.setTime(absence.getPremierJourAbsence());
+			event.setNumMoisDebut(ConvertUtils.toString(cal.get(Calendar.MONTH)));
+			event.setAnnee(ConvertUtils.toString(cal.get(Calendar.YEAR)));
+		}
+		if (absence.getDateFinAbsence() != null) {
+			cal.setTime(absence.getDateFinAbsence());
+			event.setNumMoisFin(ConvertUtils.toString(cal.get(Calendar.MONTH)));
+			event.setAnnee(ConvertUtils.toString(cal.get(Calendar.YEAR)));
+		}
+		event.setDateDebut(ConvertUtils.formatterDateUS(absence.getPremierJourAbsence()));
+		event.setDateFin(ConvertUtils.formatterDateUS(absence.getDateFinAbsence()));
+		event.setId(absence.getIdAbsence());
+		event.setText(absence.getCommentaireAbsence());
+		return event;
+	}
+
+	@Override
+	public AbsenceBean recupererAllAbsRessource(String idRessource) {
+		List<Absence> listAbsence = absenceDao.findAbsenceByUser(idRessource);
+		AbsenceBean absRetour = new AbsenceBean();
+		List<EventAbsenceBean> absResources = new ArrayList<EventAbsenceBean>();
+		for (Absence absence : listAbsence) {
+			absResources.add(creerEventAbsence(absence));
 		}
 		return null;
-		
-        
-    }
+
+	}
 
 }
