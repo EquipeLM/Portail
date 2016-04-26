@@ -30,6 +30,7 @@ public class ConvertUtils {
 		try {
 			if(dateAParser != null){
 				retour = df.parse(dateAParser);
+                                
 			}
 		} catch (ParseException e) {
 			//TODO : add log

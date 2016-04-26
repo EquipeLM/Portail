@@ -54,5 +54,14 @@ public class AbsenceDao extends AbstractGenericDaoGamaweb<Absence> implements IA
         List<Absence> results = (List<Absence>)query.list();
     	return results;
     }
+    
+    public List<Absence> findAbsenceByUser (String idRessource){
+        String hql = "from Absence a "
+                    + "where a.refRessource.idRessource = :idRessource ";
+        Query query = getSession().createQuery(hql);
+        query.setParameter("idRessource", idRessource);
+        List<Absence> results = (List<Absence>)query.list();
+    	return results;
+    }
 
 }

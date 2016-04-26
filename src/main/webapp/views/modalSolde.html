@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<md-dialog ng-cloak ng-controller="AbsencesCtrl" >
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>MAJ Manuelle des soldes</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="./styles/images/cancel.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <form role="form">
+            
+            <div class="form-group row inputSolde">
+                <div class="col-sm-2"></div>
+                <md-input-container class="md-block col-sm-8" flex-gt-sm>
+                    <input name="soldeConge" ng-model="formData.soldeConges" placeholder="Solde des congés" required ng-pattern="/^[0-9]{5}$/">
+                </md-input-container>   
+            </div>
+            <div class="form-group row inputSolde">
+                <div class="col-sm-2"></div>
+                <md-input-container class="md-block col-sm-8" flex-gt-sm>
+                    <input name="soldeQ1" ng-model="formData.soldesQun" placeholder="Solde des RTT Q1" required ng-pattern="/^[0-9]{5}$/">
+                </md-input-container>   
+            </div>
+            <div class="form-group row inputSolde">
+                <div class="col-sm-2"></div>
+                <md-input-container class="md-block col-sm-8" flex-gt-sm>
+                    <input name="soldeQ2" ng-model="formData.soldesQdeux" placeholder="Solde des RTT Q2" required ng-pattern="/^[0-9]{5}$/">
+                </md-input-container>   
+            </div>
+            
+
+        </form>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row"> 
+      
+      <span flex></span>
+      <md-button ng-click="hide()">
+       Annuler
+      </md-button>
+      <md-button ng-click="valider()" style="margin-right:20px;">
+       Valider
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

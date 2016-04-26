@@ -141,6 +141,10 @@ fieldset{
 .marge{
   margin-top: 5%;
 }
+
+.marge1{
+    margin-top: 0%;
+}
 .calendar {
   background-color: white;
   border : 2px solid #C7C7C7;
@@ -193,13 +197,13 @@ fieldset{
 }
 
 .graphScreen {
-  padding: 40px 50px 0px 0px ;
+  padding: 20px 50px 0px 0px ;
     
 }
 
 .graphScreen p{
   text-align: center;
-  padding-top: 10px;
+  padding-top: 50px;
 }
 
 .fc-week-number {
@@ -275,7 +279,7 @@ md-input-container .md-errors-spacer {
 }
 
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
-    background-color: #e12d0e;
+    background-color: #e31937;
 }
 
 md-radio-button {
@@ -290,11 +294,12 @@ md-radio-button.md-default-theme .md-on, md-radio-button .md-on {
 
 
 .graph-card {
-  padding: 30px 35px 0px 5px ;
+  padding: 18px 35px 0px 5px ;
 }
 
 #titre p{
   margin-top: 30%;
+  text-align: center;
 }
 
 #indicateur{
@@ -334,7 +339,7 @@ md-radio-button.md-default-theme .md-on, md-radio-button .md-on {
 }
 
 .cont{
-    padding-left: 12%;
+    padding-left: 13%;
 }
 
 .modal-title {
@@ -563,30 +568,201 @@ input:checked + .switch:active::before {
   box-shadow: 0 2px 8px rgba(0,0,0,0.28), 0 0 0 20px rgba(0,150,136,0.2);
 }
 
-.taches_cache{
-    dusplay : none;
+.layout-row {
+    padding-bottom: 25px;
 }
 
-.planning_cache{
-    dusplay : none;
+.centree{
+    margin-left: 20%;
+    padding-bottom: 10px;
 }
 
-.outils_cache{
-    dusplay : none;
+#indicateurAbsences{
+    margin-top: -130px;
 }
 
-.test_cache{
-    dusplay : none;
+#indicateurAbsences p{
+    font-size: 18px;
 }
 
-.absences_cache{
-    dusplay : none;
+
+.buttonAjouter img{
+    width: 13%;
+    padding-bottom: 20px;
+    margin-left: 25%;
 }
 
-.stats_cache{
-    dusplay : none;
+.buttonAjouter p{
+    margin-top: -60px;
+    margin-left: 41%;
+    padding-bottom: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    color : black;
 }
 
-.doc_cache{
-    dusplay : none;
+.cont2 {
+    margin-left: -30px;
 }
+
+.ajuste{
+    margin-left: 12%;
+}
+
+md-input-container .md-input {
+    width : 50%;
+    
+}
+md-input-container{
+    margin-left: 31%;
+}
+
+#titre_blanc p{
+    margin-top: 48%;
+    color : white;
+    text-align: center;
+}
+
+#indicateur_taches p{
+    text-align : center;
+    margin-top: -72px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}
+
+.tableau{
+    background-color: #e7e7e7;
+    width: 90%;
+    margin-left: 5%;
+    border: 3px solid #fff;
+    
+}
+
+.enRetard{
+    background-color: #dd5e60;
+    padding: 3px;
+    
+    border-bottom: 2px solid #fff;
+   
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.enAvance{
+    background-color: #72d3a9;
+    padding: 3px;
+    font-weight: bold;
+    font-size: 13px;
+    border-bottom: 2px solid #fff;
+    border-top: 2px solid #fff;
+}
+
+.enDelais{
+    background-color: #929292;
+    padding: 3px;
+    font-weight: bold;
+    font-size: 13px;
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+}
+
+.colorfa{
+    color : black;
+    border : 2px solid #d8d8d8;
+    background-color: white;
+    padding: 3px;
+}
+
+.dm{
+  width : 34%;  
+}
+
+.ot{
+  width : 30%;  
+}
+
+typ{
+   width : 9%;
+   text-align: center;
+}
+
+.dateOt{
+  width : 10%;  
+  text-align: center;
+}
+
+.chargeOt{
+    width : 9%;
+    text-align: center;
+}
+
+.iconOt{
+    width : 3%;
+}
+
+.infos_tache{
+    margin: 8px;
+}
+
+.icon-screen{
+    width : 2%;
+}
+
+.enRetardScreen{
+    background-color: #dd5e60;
+    padding: 9px;
+    font-weight: bold;
+    font-size: 18px;
+    border: 3px solid white;
+}
+
+.enDelaisScreen{
+    background-color: #929292;
+    padding: 9px;
+    font-weight: bold;
+    font-size: 18px;
+    border: 3px solid white;
+}
+
+.enAvanceScreen{
+    background-color: #72d3a9;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    border: 3px solid white;
+}
+
+.retard{
+    
+    border-left: 3px solid white;
+    border-right: 3px solid white;
+     background-color: #eeeeee; 
+}
+
+.delais{
+    border-left: 3px solid white;
+    border-right: 3px solid white;
+     background-color: #eeeeee; 
+}
+
+.avance{
+    border-bottom : 3px solid white;
+    border-left: 3px solid white;
+    border-right: 3px solid white;
+    background-color: #eeeeee; 
+}
+
+.indicateur-screen{
+    margin-left: 10%;
+}
+
+#indicateur_screen{
+    text-align: center;
+    margin-top: -95px;
+}
+
+.graph-tache {
+  padding: 30px 115px 0px 5px ;
+}
+

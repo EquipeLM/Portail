@@ -24,7 +24,7 @@ angular
             var orderBy = $filter('orderBy');
             Absence.getByEquipe({id:'CNP', month:new DayPilot.Date().getMonth()},function(data){
             	data.forEach(function(elt){
-            		$scope.schedulerConfig.resources.push({ id : elt.trigramme, name : elt.nom + " " + elt.prenom});
+            		$scope.schedulerConfig.resources.push({ id : elt.trigramme, name : elt.prenom + " " + elt.nom, name2 : elt.nom});
             		elt.listEvent.forEach(function(evt){
             			$scope.events.push(
             			{id: evt.id,
@@ -40,7 +40,7 @@ angular
             		$scope.reverse = false;
             		$scope.schedulerConfig.resources = orderBy($scope.schedulerConfig.resources, predicate, $scope.reverse);
             	};
-            	$scope.order('name');
+            	$scope.order('name2');
 
             });
   });

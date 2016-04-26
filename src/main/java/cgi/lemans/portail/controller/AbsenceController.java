@@ -65,6 +65,13 @@ public class AbsenceController {
 		List<AbsenceEquipeBean> infosSend = absenceService.afficherInfosEquipe(nomEquipe, mois);
 		return new ResponseEntity<List<AbsenceEquipeBean>>(infosSend, HttpStatus.OK);
 	};
+        
+        @RequestMapping(value = "/allAbsence/", method = RequestMethod.GET)
+	public ResponseEntity<List<AbsenceEquipeBean>> infosUserAbsence(@PathVariable String idRessource,
+			 HttpServletRequest request) {
+		List<AbsenceEquipeBean> infosSend = absenceService.recupererAllAbsRessource(idRessource);
+		return new ResponseEntity<List<AbsenceEquipeBean>>(infosSend, HttpStatus.OK);
+	};
 
 	@RequestMapping(value = "/absence", method = RequestMethod.POST)
 	public ResponseEntity<AbsenceCardBean> ajouterAbsence(@RequestBody AbsenceCardBean bean, HttpServletRequest request) {

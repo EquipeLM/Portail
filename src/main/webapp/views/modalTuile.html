@@ -28,21 +28,18 @@ and open the template in the editor.
             </div>
             <div class=" form-group row">
                 <div class="col-sm-1"></div>
-                <md-datepicker class="col-sm-5" ng-model="formData.dateProchainConges" md-placeholder="Début de congé"></md-datepicker>
+                <md-datepicker class="col-sm-5 {{centre}}" ng-model="formData.dateProchainConges" md-placeholder="Début de congé"></md-datepicker>
 				<md-radio-group ng-model="formData.typeJourneeDebut">
-					<md-radio-button value="am"> Matin </md-radio-button>
-					<md-radio-button value="pm"> Après-midi </md-radio-button>
-					<md-radio-button ng-class="isJourneeCachee" value="amPm"> Journée complète </md-radio-button>
+					<md-radio-button ng-class="isJourneeCachee" value="am"> Matin </md-radio-button>
+					<md-radio-button ng-class="isJourneeCachee" value="pm"> Après-midi </md-radio-button>
+					<md-radio-button ng-class="isJourneeCachee"value="amPm"> Journée complète </md-radio-button>
 				</md-radio-group>
                 <div class="col-sm-1"></div>
             </div>
             <div class="{{isCachee}} form-group row">
                 <div class="col-sm-1"></div>
-                	<md-datepicker class="col-sm-5" ng-model="formData.dateFinProchainConges" md-placeholder="Fin de congé"></md-datepicker>
-                	<md-radio-group ng-model="formData.typeJourneeFin">
-	                    <md-radio-button value="am"> Matin </md-radio-button>
-	                    <md-radio-button value="pm"> Après-midi </md-radio-button>
-                	</md-radio-group>
+                	<md-datepicker class="col-sm-5 {{centre}}" ng-model="formData.dateFinProchainConges" md-placeholder="Fin de congé"></md-datepicker>
+                	
                 <div class="col-sm-1"></div>
             </div>
             <div class="form-group row">
@@ -54,27 +51,7 @@ and open the template in the editor.
                     <md-radio-button value="choixRtt2"> RTT Q2 </md-radio-button>
                 </md-radio-group>
             </div>
-<!--             <div class="form-group row"> -->
-<!--                 <div class="col-sm-3"></div> -->
-<!--                 <p> Type de journée : </p> -->
-<!--                 <md-radio-group ng-model="data.group2"> -->
-<!--                     <md-radio-button ng-model="formData.typeJournee" value="journeeEntiere"> Journée entière </md-radio-button> -->
-<!--                     <md-radio-button ng-model="formData.typeJournee" value="matin"> Matin </md-radio-button> -->
-<!--                     <md-radio-button ng-model="formData.typeJournee" value="apresMidi"> Après-midi </md-radio-button> -->
-<!--                 </md-radio-group> -->
-<!--             </div> -->
-            <div class="form-group row inputNombre">
-                <div class="col-sm-2"></div>
-                <md-input-container class="md-block col-sm-8" flex-gt-sm>
-                    <input name="nombreJours" ng-model="formData.nbJours" placeholder="Nombre de jours" required ng-pattern="/^[0-9]{5}$/">
-                </md-input-container>   
-            </div>
-            <!--<div class="form-group row inputNombre">
-                <div class="col-sm-2"></div>
-                <md-input-container class="md-block col-sm-8" flex-gt-sm>
-                    <input name="solde" ng-model="formData.solde" placeholder="Votre solde actuel" required ng-pattern="/^[0-9]{5}$/">
-                </md-input-container>   
-            </div>-->
+
         </form>
       </div>
     </md-dialog-content>

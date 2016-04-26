@@ -3,100 +3,35 @@
 
 angular
     .module('portail.controllers')
-    .controller('AbsencesCtrl', function($scope, $compile, $timeout, uiCalendarConfig, Absence, $modal) {
+    .controller('AbsencesCtrl',['$scope', '$http', 'Absence', '$mdDialog', '$mdMedia', '$resource', function ($scope, $http, Absence, $mdDialog, $mdMedia, $resource) {
 
 
-    var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
 
-    /* event source that contains custom events on the scope */
-    $scope.events = [];
-    $scope.eventSources = [];
-    /* event source that calls a function on every view switch */
-    $scope.eventsF = function (start, end, timezone, callback) {
-      var s = new Date(start).getTime() / 1000;
-      var e = new Date(end).getTime() / 1000;
-      var m = new Date(start).getMonth();
-      var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
-      callback(events);
-    };
-    
-    /* config object */
-    $scope.uiConfig = {
+$scope.uiConfig = {
         calendar:{
         height: 550,
         editable: true,
-        selectable: true,
+        
         weekends: true,
         header:{
           left: 'prev',
           center: 'title',
           right: 'next'
         },
-        select: function(start, end, event) {
-                console.log(event);
-                if(start == end){
-                  $scope.alertOnEventClick;  
-                }
-                var dialogOpts = {
-                    backdrop: true,
-                    keyboard: true,
-                    templateUrl: './views/modaleTpl.html', // Url du template HTML
-                    controller: ['$scope', '$modalInstance','scopeParent', 'id',
-                        function($scope, $modalInstance,scopeParent,id) { //Controller de la fenêtre. Il doit prend en paramètre tous les élèments du "resolve".
-                            $scope.delete = function() {
-                                //On fait appel à la fonction du scope parent qui permet de supprimer l'élément.
-                                //On peut également faire appel à un service de notre application.
-                                scopeParent.delete(id);
-                                //validation de la fenêtre modale
-                                $modalInstance.doSubmit();
-                            };
-                            $scope.cancel = function() {
-                                // Appel à la fonction d'annulation.
-                                $modalInstance.close();
-                            };
-                        }
-                    ],
-                    resolve: {
-                        scopeParent: function() {
-                            return $scope; //On passe à la fenêtre modal une référence vers le scope parent.
-                        },
-                        id: function(){
-                            return $scope.id; // On passe en paramètre l'id de l'élément à supprimer.
-                        }
-                    }
-                };
-                $modal.open(dialogOpts);
-        },
-        events: [
-            {
-                title: 'All Day Event',
-                start: '2016-01-01'
-            },
-            {
-                title: 'Long Event',
-                start: '2016-01-07',
-                end: '2016-01-10'
-        }],
-        eventClick: function(){alert("tete")},
-        eventDrop: $scope.alertOnDrop,
-        eventResize: $scope.alertOnResize,
-        eventRender: $scope.eventRender,
-        dayClick: function(){alert("tete")},
+        
+        
       }
     };
-    /* event sources array*/
-    $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
-    $scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
-
-    $scope.uiConfig.calendar.dayNames = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
-    $scope.uiConfig.calendar.dayNamesShort = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
-
-
-  
-
+    
+            
+   /* forEach(function(evt){
+        $scope.events.push({title: evt.comentaire,
+                            start: evt.dateDebut,
+                            end : evt.dateFin,
+        });
+    });*/
+                    
+   
 
     var conges = Absence.query(function(data) {
         
@@ -130,17 +65,160 @@ angular
 		if($scope.rttDeux == "0.0" && $scope.restantQdeux == "0.0"){
 			$scope.isCachee = "cachee";
                         $scope.isCentre = "centre";
+                        $scope.isAjuste = "ajuste";
 		}else {
 			$scope.labelRttQ2 = ["Pris", "Restants"];
-			$scope.dataRttQ2 = [$scope.rttDeux, $scope.restantQdeux];
+			$scope.dataRttQ2 = ["0", $scope.restantQdeux];
 			$scope.options = {responsive: true, percentageInnerCutout: 70};
 		}
+                
+                if($scope.rttDeux < "0.0"){
+                    $scope.dataRttQ2 = ["0", $scope.restantQdeux];
+                }
 		
-		$scope.colours = ['#e31937','#d8d8d8'];
+		$scope.colours = ['#80a1b7','#d8d8d8'];
+                $scope.colours1 = ['#87c1de','#d8d8d8'];
+                $scope.colours2 = ['#9ae6f1','#d8d8d8'];
+                
+                
                 
                 
 	});
+        
+    $scope.status = '  ';
+    $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
+    
+    if ($scope.planning) {
+        alert("CheckBox is checked.");
+    }              
+    
+    //il faut initialiser le scope pour pouvoir faire le binding avec le modele
+ 
+    $scope.formData = {};
+	$scope.formData.dateProchainConges = new Date();
+        
+        //$scope.formData.dateProchainConges.setHours(5);
+        //$scope.formData.dateFinProchainConges = $scope.formData.dateProchainConges;
+	$scope.formData.dateFinProchainConges = new Date();
+	$scope.formData.typeJourneeDebut = "amPm";
+	$scope.formData.typeJourneeFin = null;
+	$scope.formData.isPoseSurPeriode = "false";
+	$scope.formData.dureeProchainConges = null;
+	$scope.formData.idTypeAbsence = "choixConge";
+	$scope.formData.soldeConges = null;
+	$scope.formData.soldesQun = null;
+	$scope.formData.soldesQdeux = null;
+        $scope.formData.restantConges = null;
+        $scope.formData.restantQun = null;
+        $scope.formData.restantQdeux = null;
+        $scope.formData.totalPris = null;
+        $scope.formData.totalRestant = null;
+	$scope.formData.labelConge = null;
+	$scope.formData.dataConge = null;
+	$scope.formData.options = null;
+	$scope.formData.labelRttQ1 = null;
+	$scope.formData.dataRttQ1 = null;
+	$scope.formData.options = null;
+        
+        
+	
+    $scope.affichePeriodeFin = function(value){
+    	$scope.isCachee = "cachee";
+    	$scope.isJourneeCachee = "";
+        
+    	if("true" == value){
+    		 
+            $scope.isCachee = "";
+    		 $scope.isJourneeCachee = "cachee";
+                 $scope.centre = "centree";
+                     
+    	}
+    }
+    
+    $scope.showAdvanced = function(ev) {
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+        $mdDialog.show({
+      
+            templateUrl: './views/modalTuile.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: useFullScreen
+        })
+        
+        };
+        $scope.showAdvanced2 = function(ev) {
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+        $mdDialog.show({
+      
+            templateUrl: './views/modalSolde.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: useFullScreen
+        })
+    
+      };  
+    
+        $scope.$watch(function() {
+            return $mdMedia('xs') || $mdMedia('sm');
+        }, function(wantsFullScreen) {
+            $scope.customFullscreen = (wantsFullScreen === true);
+        });
+    
+    
+  
+    $scope.myDate = new Date();
+    $scope.minDate = new Date(
+    $scope.myDate.getFullYear(),
+    $scope.myDate.getMonth() - 2,
+    $scope.myDate.getDate());
+    $scope.maxDate = new Date(
+    $scope.myDate.getFullYear(),
+    $scope.myDate.getMonth() + 2,
+    $scope.myDate.getDate());
+    
+   
+      $scope.hide = function() {
+        
+      };
+      $scope.cancel = function() {
+        $mdDialog.cancel();
+      };
+      $scope.valider = function() {
+                
+                
+		var response = $http.post('api/absences/absence', $scope.formData);
+                
+                Absence.save($scope.formData, function() {
+                       //va appeler ta fonction ajouterAbsence avec les valeurs bindées dans formData
+                       
+                });
+		response.success(function(data, status, headers, config) {
+                    
+                });
+		response.error(function(data, status, headers, config) {
+		    console.log( "Exception details: " + JSON.stringify({data: data}));
+		});
+         console.log($scope.formData); 
+        
+         
+      };
+   
+    }])
 
+    
 
-
+.config(function($mdDateLocaleProvider) {
+  $mdDateLocaleProvider.formatDate = function(date) {
+    return moment(date).format('DD/MM/YYYY');
+  };
+  $mdDateLocaleProvider.shortDays = ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'];
+  // Can change week display to start on Monday.
+  $mdDateLocaleProvider.firstDayOfWeek = 1;
 });
+
+
+
+
+

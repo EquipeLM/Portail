@@ -1,0 +1,93 @@
+<div class="container">
+    <div class="row marge1">
+        <div class="col-sm-4"></div>
+    <table class="table-responsive indicateur-screen">
+          <tr>
+
+            <td class="graph-tache">
+              <canvas id="conges" class="chart chart-doughnut" chart-data="dataRetard" chart-labels="labelRetard" chart-colours="coloursRetard" width="130" height="130" chart-options="options"></canvas>
+              <div id="indicateur_screen"><p class="indicateur" id="supPrevu"> 3</p></div>
+              <div id="titre"><p> En retard </p></div>
+              <br>
+            </td>
+            
+            <td class="graph-tache">
+                <canvas id="rtt_q1" class="chart chart-doughnut"chart-data="dataDelais" chart-labels="labelDelais" chart-colours="coloursDelais" width="130" height="130" chart-options="options"></canvas>
+                <div id="indicateur_screen"><p class="indicateur" id="egalPrevu"> 5</p></div>
+                <div id="titre"><p>Dans les délais</p></div>
+                <br>
+            </td>
+            
+            <td class="graph-tache">
+                <canvas id="rtt_q2" class="chart chart-doughnut"chart-data="dataAvance" chart-labels="labelAvance" chart-colours="coloursAvance" width="130" height="130" chart-options="options"></canvas>
+                <div id="indicateur_screen"><p class="indicateur" id="infPrevu"> 2</p></div>
+                <div id="titre"><p>En avance</p></div>
+                <br>
+            </td> 
+
+            </tr>
+        </table>
+    </div>
+    <div class="row marge1">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <table class="table retard">
+                <h5 class="enRetardScreen"> En retard : </h5>
+                <tr ng-repeat="tacheRetard in tacheRetards">
+                    <td>{{tacheRetard.dm}}
+                    </td>
+                    <td>{{tacheRetard.ot}}
+                    </td>
+                    <td>{{tacheRetard.type}}
+                    </td>
+                    <td>{{tacheRetard.date}}
+                    </td>
+                    <td>{{tacheRetard.charge}}
+                    </td>
+                    <td class="icon-screen"><a href="" ng-click="showAdvancedEnd($event)"><i class="fa fa-flag-checkered fa-2x colorfa" aria-hidden="true"></i></a>
+                    </td>
+                    <td class="icon-screen"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa fa-2x" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            </table>
+            <table class="table delais">
+                <h5 class="enDelaisScreen"> Dans les délais : </h5>
+                <tr ng-repeat="tache in taches">
+                    <td>{{tache.dm}}
+                    </td>
+                    <td>{{tache.ot}}
+                    </td>
+                    <td>{{tache.type}}
+                    </td>
+                    <td>{{tache.date}}
+                    </td>
+                    <td>{{tache.charge}}
+                    </td>
+                    <td class="icon-screen"><a href="" ng-click="showAdvancedEnd($event)"><i class="fa fa-flag-checkered fa-2x colorfa" aria-hidden="true"></i></a>
+                    </td>
+                    <td class="icon-screen"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa fa-2x" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            </table>
+            <table class="table avance">
+                <h5 class="enAvanceScreen"> En avance : </h5>
+                <tr ng-repeat="tacheAvance in tacheAvances">
+                    <td>{{tacheAvance.dm}}
+                    </td>
+                    <td>{{tacheAvance.ot}}
+                    </td>
+                    <td>{{tacheAvance.type}}
+                    </td>
+                    <td>{{tacheAvance.date}}
+                    </td>
+                    <td>{{tacheAvance.charge}}
+                    </td>
+                    <td class="icon-screen"><a href="" ng-click="showAdvancedEnd($event)"><i class="fa fa-flag-checkered fa-2x colorfa" aria-hidden="true"></i></a>
+                    </td>
+                    <td class="icon-screen"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa fa-2x" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

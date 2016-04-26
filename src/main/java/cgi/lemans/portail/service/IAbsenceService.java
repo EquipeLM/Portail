@@ -33,4 +33,9 @@ public interface IAbsenceService {
     public List<AbsenceEquipeBean> afficherInfosEquipe(String equipeChoisie, String moisAafficher);
 
     
+    /**
+     * @return
+     */
+    public List<AbsenceEquipeBean> recupererAllAbsRessource(String idRessource);
+    
 }

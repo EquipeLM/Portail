@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<md-dialog ng-cloak ng-controller="HomeCtrl">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Ajouter une absence</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="./styles/images/cancel.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <form role="form">
+        	<div class="form-group row">
+                <div class="col-sm-1"></div>
+                      <div layout="column" layout-align="center center" style="height: 100px;">
+                        <md-select placeholder="Demande : " ng-model="demande" md-on-open="loadDemandes()" style="min-width: 200px;">
+                          <md-option ng-value="demande" ng-repeat="demande in demandes">{{demande.name}}</md-option>
+                        </md-select>
+                      </div>	
+                <div class="col-sm-1"></div>
+            </div>
+        </form>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row"> 
+      
+      <span flex></span>
+      <md-button ng-click="hide()">
+       Annuler
+      </md-button>
+      <md-button ng-click="valider()" style="margin-right:20px;">
+       Valider
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
