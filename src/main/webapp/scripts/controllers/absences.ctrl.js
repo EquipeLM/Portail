@@ -21,15 +21,28 @@ $scope.uiConfig = {
         
         
       }
-    };
+    }
     
+   
+   $scope.events = [];
             
-   /* forEach(function(evt){
-        $scope.events.push({title: evt.comentaire,
-                            start: evt.dateDebut,
-                            end : evt.dateFin,
-        });
-    });*/
+            Absence.get({id: "LSO"},function(data){
+            	
+                console.log("ok");  
+               data.listEvent.forEach(function(evt){
+                       console.log("passe");
+                       $scope.events.push(
+                       {id: evt.id,
+                       text: evt.text,
+                       start: evt.dateDebut,
+                       end: evt.dateFin,
+                       color: '#f2f2f2'
+                       });
+                   });
+                console.log("ok2");     
+            		
+            	
+            });
                     
    
 

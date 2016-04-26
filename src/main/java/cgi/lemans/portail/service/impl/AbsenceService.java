@@ -219,8 +219,11 @@ public class AbsenceService implements IAbsenceService {
 		List<EventAbsenceBean> absResources = new ArrayList<EventAbsenceBean>();
 		for (Absence absence : listAbsence) {
 			absResources.add(creerEventAbsence(absence));
+                        
+                        
 		}
-		return null;
+                absRetour.setListEvent(absResources);
+		return absRetour;
 
 	}
 

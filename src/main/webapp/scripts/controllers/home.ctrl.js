@@ -32,6 +32,20 @@ angular
       ];
     }, 650);
     };
+    
+    $scope.loadTypes = function() {
+    // Use timeout to simulate a 650ms request.
+    $scope.types = [];
+    return $timeout(function() {
+      $scope.types = [
+        { id: 1, name: 'Developpement / test' },
+        { id: 2, name: 'MCO : données' },
+        { id: 3, name: 'MCO : traitement' },
+        { id: 4, name: 'PRJ : homologation' },
+        { id: 5, name: 'PRJ: recette' },
+      ];
+    }, 650);
+    };
                     
                     
     $scope.status = '  ';
