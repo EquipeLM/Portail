@@ -19,9 +19,20 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import cgi.lemans.portail.domaine.entites.gamaweb.Absence;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufAbsence;
+import cgi.lemans.portail.domaine.entites.gamaweb.CufCommentaire;
+import cgi.lemans.portail.domaine.entites.gamaweb.CufEstTraitePendant;
+import cgi.lemans.portail.domaine.entites.gamaweb.CufPlanning;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufRessourceAbsence;
+import cgi.lemans.portail.domaine.entites.gamaweb.DemandeEtat;
+import cgi.lemans.portail.domaine.entites.gamaweb.DemandeOuProjet;
+import cgi.lemans.portail.domaine.entites.gamaweb.ForfaitBudget;
+import cgi.lemans.portail.domaine.entites.gamaweb.HistoryUpdate;
+import cgi.lemans.portail.domaine.entites.gamaweb.JalonDemande;
+import cgi.lemans.portail.domaine.entites.gamaweb.JourFerieMobile;
+import cgi.lemans.portail.domaine.entites.gamaweb.OrdreDeTravail;
 import cgi.lemans.portail.domaine.entites.gamaweb.RessourceTma;
 import cgi.lemans.portail.domaine.entites.gamaweb.TypeAbsence;
+import cgi.lemans.portail.domaine.entites.gamaweb.TypeActivite;
 import cgi.lemans.portail.domaine.entites.newportal.Icones;
 import cgi.lemans.portail.domaine.entites.newportal.IconesByUser;
 
@@ -85,6 +96,18 @@ public class PortailAppContextConfig {
 		sessionBuilder.addAnnotatedClasses(CufAbsence.class);
 		sessionBuilder.addAnnotatedClasses(CufRessourceAbsence.class);
 		sessionBuilder.addAnnotatedClasses(TypeAbsence.class);
+                sessionBuilder.addAnnotatedClasses(CufCommentaire.class);
+                sessionBuilder.addAnnotatedClasses(CufEstTraitePendant.class);
+		sessionBuilder.addAnnotatedClasses(CufPlanning.class);
+                sessionBuilder.addAnnotatedClasses(DemandeEtat.class);
+                sessionBuilder.addAnnotatedClasses(DemandeOuProjet.class);
+		sessionBuilder.addAnnotatedClasses(ForfaitBudget.class);
+                sessionBuilder.addAnnotatedClasses(HistoryUpdate.class);
+                sessionBuilder.addAnnotatedClasses(JalonDemande.class);
+		sessionBuilder.addAnnotatedClasses(JourFerieMobile.class);
+                sessionBuilder.addAnnotatedClasses(OrdreDeTravail.class);
+                sessionBuilder.addAnnotatedClasses(TypeActivite.class);
+                
 		sessionBuilder.addProperties(getHibernatePropertiesGamaweb());
 		return sessionBuilder.buildSessionFactory();
 	}

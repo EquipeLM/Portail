@@ -54,7 +54,7 @@ public class CufRessourceAbsence extends EntiteGamaweb{
         this.idRessourceAbsence = idRessourceAbsence;
     }
     
-    @Column(name="annee")
+    
     public int getAnnee() {
         return annee;
     }
@@ -73,7 +73,7 @@ public class CufRessourceAbsence extends EntiteGamaweb{
         this.typeAbsence = typeAbsence;
     }
 
-    @Column(name="solde")
+    
     public Double getSolde() {
         return solde;
     }

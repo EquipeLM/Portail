@@ -4,7 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<md-dialog ng-cloak ng-controller="HomeCtrl">
+<md-dialog ng-cloak ng-controller="TachesCtrl">
   <form>
     <md-toolbar>
       <div class="md-toolbar-tools">
@@ -22,7 +22,7 @@ and open the template in the editor.
                 <div class="col-sm-1"></div>
                       <div layout="column" layout-align="center center" >
                         <md-select placeholder="Demande : " ng-model="demande" md-on-open="loadDemandes()" style="min-width: 300px; max-width:300px;">
-                          <md-option ng-value="demande" ng-repeat="demande in demandes">{{demande.name}}</md-option>
+                          <md-option ng-value="demande" ng-repeat="demande in demandes | orderBy:'name'">{{demande.name}}</md-option>
                         </md-select>
                       </div>	
                 <div class="col-sm-1"></div>

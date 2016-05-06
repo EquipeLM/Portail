@@ -3,7 +3,7 @@
 
 angular
     .module('portail.controllers')
-    .controller('TachesCtrl',['$scope', '$http','$mdDialog', '$mdMedia', '$resource', function ($scope, $http, $mdDialog, $mdMedia, $resource) {
+    .controller('TachesCtrl',['$scope', '$http','$mdDialog', '$mdMedia', '$resource', "Tache", '$timeout', function ($scope, $http, $mdDialog, $mdMedia, $resource, Tache, $timeout) {
             
         $scope.labelRetard = ["retard", "Autres"];
 	$scope.dataRetard = ["3", "7"];
@@ -19,6 +19,15 @@ angular
 	$scope.dataAvance = ["2", "8"];
 	$scope.options = {responsive: true, percentageInnerCutout: 70};
         $scope.coloursAvance = ['#72d3a9','#d8d8d8'];
+        
+        $scope.sortType     = 'name'; // set the default sort type
+        $scope.sortReverse  = false;  // set the default sort order
+        $scope.searchTache   = '';     // set the default search/filter term
+
+        // create the list of sushi rolls 
+        $scope.sortType     = 'tacheRetard.dm'; // set the default sort type
+        $scope.sortReverse  = false;  // set the default sort order
+        $scope.searchTache   = '';     // set the default search/filter term
             
         
         $scope.showAdvancedEnd = function(ev) {
@@ -45,6 +54,18 @@ angular
             })  
         };
         
+        $scope.showAdvancedComs = function(ev) {
+            var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+            $mdDialog.show({
+      
+                templateUrl: './views/modalCommentaireTaches.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true,
+                fullscreen: useFullScreen
+            })  
+        };
+        
         
         
         $scope.hide = function() {
@@ -56,6 +77,9 @@ angular
         $scope.valider = function() {
                 
         };  
+        
+        
+         
         
         $scope.taches = [
                     {'dm':'Analyse CQTM - 04/2016',
@@ -197,5 +221,62 @@ angular
 
              
          ]
+         
+         $scope.showAdvancedAddTache = function(ev) {
+            var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+            $mdDialog.show({
+      
+                templateUrl: './views/modalAjoutTacheScreen.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true,
+                fullscreen: useFullScreen
+            })  
+        };
+     
+         $scope.loadDemandes = function() {
+        // Use timeout to simulate a 650ms request.
+        $scope.demandes = [];
+         
+                var test = Tache.get({id: "CNP"}, function(data) {
+                    data.listTache.forEach(function(evt){
+                        $scope.demandes.push(
+                            {id: evt.id, name: evt.libelle}
+                        )
+                    }); 
+                });
+        
+        
+         };
+         
+            
+                
+        $scope.loadTypes = function() {
+        // Use timeout to simulate a 650ms request.
+        $scope.types = [];
+       
+          var test = Tache.get(function(data) {
+                    data.listTache.forEach(function(evt){
+                        $scope.types.push(
+                            {id: evt.id, name: evt.libelle}
+                        )
+                    }); 
+                });
+        
+        };
+
+        $scope.loadUsers = function() {
+        // Use timeout to simulate a 650ms request.
+        $scope.users = [];
+        return $timeout(function() {
+          $scope.users = [
+            { id: 1, name: 'Prenom Nom' },
+            { id: 2, name: 'Prenom Nom' },
+            { id: 3, name: 'Prenom Nom' },
+            { id: 4, name: 'Prenom Nom' },
+            { id: 5, name: 'Prenom Nom' },
+          ];
+        }, 650);
+        };
     
 }]);

@@ -22,21 +22,23 @@ and open the template in the editor.
             <div class="form-group row inputSolde">
                 <div class="col-sm-2"></div>
                 <md-input-container class="md-block col-sm-8" flex-gt-sm>
-                    <input name="soldeConge" ng-model="formData.soldeConges" placeholder="Solde des congés" required ng-pattern="/^[0-9]{5}$/">
+                    <input name="soldeConges" ng-model="formSolde.soldeConges" placeholder="Solde des congés">
                 </md-input-container>   
             </div>
             <div class="form-group row inputSolde">
                 <div class="col-sm-2"></div>
                 <md-input-container class="md-block col-sm-8" flex-gt-sm>
-                    <input name="soldeQ1" ng-model="formData.soldesQun" placeholder="Solde des RTT Q1" required ng-pattern="/^[0-9]{5}$/">
+                    <input name="soldesQun" ng-model="formSolde.soldesQun" placeholder="Solde des RTT Q1">
                 </md-input-container>   
             </div>
             <div class="form-group row inputSolde">
                 <div class="col-sm-2"></div>
                 <md-input-container class="md-block col-sm-8" flex-gt-sm>
-                    <input name="soldeQ2" ng-model="formData.soldesQdeux" placeholder="Solde des RTT Q2" required ng-pattern="/^[0-9]{5}$/">
+                    <input name="soldesQdeux" ng-model="formSolde.soldesQdeux" placeholder="Solde des RTT Q2">
                 </md-input-container>   
             </div>
+            
+            
             
 
         </form>
@@ -48,7 +50,7 @@ and open the template in the editor.
       <md-button ng-click="hide()">
        Annuler
       </md-button>
-      <md-button ng-click="valider()" style="margin-right:20px;">
+      <md-button ng-click="validerSolde()" style="margin-right:20px;">
        Valider
       </md-button>
     </md-dialog-actions>

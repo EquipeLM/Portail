@@ -18,33 +18,57 @@ $scope.uiConfig = {
           center: 'title',
           right: 'next'
         },
-        
-        
+        refetchEvents : true,
+        weekNumbers: true,
+        eventClick: $scope.showAdvanced
       }
     }
     
-   
-   $scope.events = [];
-            
-            Absence.get({id: "LSO"},function(data){
-            	
-                console.log("ok");  
-               data.listEvent.forEach(function(evt){
-                       console.log("passe");
-                       $scope.events.push(
-                       {id: evt.id,
-                       text: evt.text,
-                       start: evt.dateDebut,
-                       end: evt.dateFin,
-                       color: '#f2f2f2'
-                       });
-                   });
-                console.log("ok2");     
-            		
-            	
-            });
-                    
-   
+    
+    
+    
+        $scope.events = [];
+      
+        
+           Absence.get({id: "LSO"},function(data){
+                    $scope.events.splice(0, $scope.events.length); 
+              data.listEvent.forEach(function(evt){
+                      
+                      $scope.events.push(
+                      {id: evt.id,
+                      title: evt.text,
+                      start: new Date(evt.dateDebut),
+                      end: new Date(evt.dateFin),
+                      color: evt.couleur,
+                      stick : true,
+                      });
+                  });
+                       
+           });
+           
+           $scope.eventsF = [];
+      
+        
+           Absence.get(function(data){
+                    $scope.eventsF.splice(0, $scope.eventsF.length); 
+              data.listEvent.forEach(function(evt){
+                      
+                      $scope.eventsF.push(
+                      {id: evt.id,
+                      title: evt.text,
+                      start: new Date(evt.dateDebut),
+                      end: new Date(evt.dateFin),
+                      color: evt.couleur,
+                      stick : true,
+                      });
+                  });
+                       
+           }); //pb d'affichage des jours fériés
+           
+                   
+    $scope.eventSources = [$scope.events, $scope.eventsF];
+    
+    
 
     var conges = Absence.query(function(data) {
         
@@ -118,9 +142,7 @@ $scope.uiConfig = {
 	$scope.formData.isPoseSurPeriode = "false";
 	$scope.formData.dureeProchainConges = null;
 	$scope.formData.idTypeAbsence = "choixConge";
-	$scope.formData.soldeConges = null;
-	$scope.formData.soldesQun = null;
-	$scope.formData.soldesQdeux = null;
+        
         $scope.formData.restantConges = null;
         $scope.formData.restantQun = null;
         $scope.formData.restantQdeux = null;
@@ -133,7 +155,11 @@ $scope.uiConfig = {
 	$scope.formData.dataRttQ1 = null;
 	$scope.formData.options = null;
         
-        
+       
+       $scope.formSolde = {};
+        $scope.formSolde.soldeConges = null;
+	$scope.formSolde.soldesQun = null;
+	$scope.formSolde.soldesQdeux =  null;
 	
     $scope.affichePeriodeFin = function(value){
     	$scope.isCachee = "cachee";
@@ -156,7 +182,8 @@ $scope.uiConfig = {
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose:true,
-            fullscreen: useFullScreen
+            fullscreen: useFullScreen,
+           
         })
         
         };
@@ -193,7 +220,7 @@ $scope.uiConfig = {
     
    
       $scope.hide = function() {
-        
+        $mdDialog.hide();
       };
       $scope.cancel = function() {
         $mdDialog.cancel();
@@ -214,6 +241,30 @@ $scope.uiConfig = {
 		    console.log( "Exception details: " + JSON.stringify({data: data}));
 		});
          console.log($scope.formData); 
+                
+          
+        
+         
+      };
+      
+      $scope.validerSolde = function() {
+                
+                
+		var response = $http.post('api/absences/absence/solde', $scope.formSolde);
+                
+                Absence.save($scope.formSolde, function() {
+                       //va appeler ta fonction ajouterAbsence avec les valeurs bindées dans formData
+                       
+                });
+		response.success(function(data, status, headers, config) {
+                    
+                });
+		response.error(function(data, status, headers, config) {
+		    console.log( "Exception details: " + JSON.stringify({data: data}));
+		});
+         console.log($scope.formSolde); 
+                
+          
         
          
       };

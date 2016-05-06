@@ -23,11 +23,13 @@ import cgi.lemans.portail.controller.beans.AbsenceBean;
 import cgi.lemans.portail.controller.beans.EventAbsenceBean;
 import cgi.lemans.portail.domaine.entites.gamaweb.Absence;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufRessourceAbsence;
+import cgi.lemans.portail.domaine.entites.gamaweb.JourFerieMobile;
 import cgi.lemans.portail.domaine.entites.gamaweb.RessourceTma;
 import cgi.lemans.portail.domaine.entites.gamaweb.TypeAbsence;
 import cgi.lemans.portail.domaine.gamaweb.IAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.ICufAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.ICufRessourceAbsenceDao;
+import cgi.lemans.portail.domaine.gamaweb.IJourFerieMobileDao;
 import cgi.lemans.portail.domaine.gamaweb.impl.CufAbsenceDao;
 import cgi.lemans.portail.service.IAbsenceService;
 import cgi.lemans.portail.utils.ConvertUtils;
@@ -46,6 +48,8 @@ public class AbsenceService implements IAbsenceService {
 	private ICufRessourceAbsenceDao cufRessourceAbsenceDao;
 	@Autowired
 	private IAbsenceDao absenceDao;
+        @Autowired
+	private IJourFerieMobileDao jourFerieMobileDao;
 
 	@Override
 	public AbsenceCardBean recupererInfosAbsRessource(String idRessource) {
@@ -209,22 +213,96 @@ public class AbsenceService implements IAbsenceService {
 		event.setDateFin(ConvertUtils.formatterDateUS(absence.getDateFinAbsence()));
 		event.setId(absence.getIdAbsence());
 		event.setText(absence.getCommentaireAbsence());
+                
+                if(new Integer(1).equals(absence.getRefTypeAbsence().getIdTypeAbsence())){
+                    event.setCouleur("rgba(127, 161, 183, 0.5)");
+                } else if (new Integer(2).equals(absence.getRefTypeAbsence().getIdTypeAbsence())){
+                    event.setCouleur("rgba(135, 193, 221, 0.5)");
+                } else {
+                    event.setCouleur("rgba(154, 230, 241, 0.5)");
+                }
+                
 		return event;
 	}
 
 	@Override
 	public AbsenceBean recupererAllAbsRessource(String idRessource) {
 		List<Absence> listAbsence = absenceDao.findAbsenceByUser(idRessource);
+                
 		AbsenceBean absRetour = new AbsenceBean();
 		List<EventAbsenceBean> absResources = new ArrayList<EventAbsenceBean>();
 		for (Absence absence : listAbsence) {
-			absResources.add(creerEventAbsence(absence));
+			absResources.add(creerEventAbsence(absence));      
                         
-                        
-		}
+                }
                 absRetour.setListEvent(absResources);
+                
+                
+                
+                
 		return absRetour;
 
 	}
+        
+    
+
+    @Override
+    public AbsenceCardBean enregistrerSoldeParTypes(String idRessource, AbsenceCardBean bean) {
+        
+                /*AbsenceCardBean absRetour = new AbsenceCardBean();
+		CufRessourceAbsence idAbsenceSupp = (CufRessourceAbsence) cufRessourceAbsenceDao.findCufRessourceAbsenceByTypeByRessource(idRessource, CufRessourceAbsenceDao.CONGES);
+		absRetour.setIdRessourceAbsence(idAbsenceSupp);*/
+
+        
+        CufRessourceAbsence newSolde = new CufRessourceAbsence();
+		// CufRessourceAbsence nvSolde = new CufRessourceAbsence();
+		RessourceTma ress = new RessourceTma();
+		TypeAbsence type = new TypeAbsence();
+                Calendar cal = Calendar.getInstance();
+                ress.setIdRessource(idRessource);
+
+                
+                newSolde.setSolde(ConvertUtils.parseDouble(bean.getSoldeConges()));
+                type.setIdTypeAbsence(1);
+                newSolde.setTypeAbsence(type);
+                newSolde.setAnnee(2016);
+                newSolde.setRessourceTma(ress); 
+                
+                cufRessourceAbsenceDao.create(newSolde);
+                
+                
+                
+                
+                return bean;
+    }
+    
+    private EventAbsenceBean creerEventAbsenceJourFerie(JourFerieMobile jourFerieMobile) {
+		EventAbsenceBean event = new EventAbsenceBean();
+		Calendar cal = Calendar.getInstance();
+		
+		event.setDateDebut(ConvertUtils.formatterDateUS(jourFerieMobile.getDateJourFerieMobile()));
+		event.setDateFin(ConvertUtils.formatterDateUS(jourFerieMobile.getDateJourFerieMobile()));
+		event.setId(jourFerieMobile.getIdJourFerieMobile());
+		event.setText(jourFerieMobile.getLibelleJourFerieMobile());
+                event.setCouleur("rgba(131, 131, 131, 0.5)");
+                
+                
+		return event;
+	}
+
+    @Override
+    public AbsenceBean recupererJourFerie() {
+        List<JourFerieMobile> listJourFerie = jourFerieMobileDao.findJourFerie();
+                
+		AbsenceBean absRetour = new AbsenceBean();
+		List<EventAbsenceBean> absResources = new ArrayList<EventAbsenceBean>();
+		for (JourFerieMobile jourFerieMobile : listJourFerie) {
+			absResources.add(creerEventAbsenceJourFerie(jourFerieMobile));      
+                        
+                }
+                absRetour.setListEvent(absResources);
+              
+		return absRetour;
+    }
 
 }

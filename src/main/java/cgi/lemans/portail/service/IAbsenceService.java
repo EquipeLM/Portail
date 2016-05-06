@@ -32,9 +32,15 @@ public interface IAbsenceService {
 	 */
 	public List<AbsenceBean> afficherInfosEquipe(String equipeChoisie, String moisAafficher);
 
-	/**
-	 * @return
+	public AbsenceBean recupererAllAbsRessource(String idRessource) ;
+        
+        public AbsenceBean recupererJourFerie() ;
+        
+        
+	
+        /**
+	 * @param bean
 	 */
-	public AbsenceBean recupererAllAbsRessource(String idRessource);
+	public AbsenceCardBean enregistrerSoldeParTypes(String idRessource, AbsenceCardBean bean);
 
 }

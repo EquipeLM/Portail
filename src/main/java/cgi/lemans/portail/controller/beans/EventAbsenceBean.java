@@ -18,6 +18,7 @@ public class EventAbsenceBean {
     private String numMoisDebut;
     private String numMoisFin;
     private String annee;
+    private String couleur;
    
     public int getId() {
         return id;
@@ -74,6 +75,16 @@ public class EventAbsenceBean {
     public void setAnnee(String annee) {
         this.annee = annee;
     }
+
+    public String getCouleur() {
+        return couleur;
+    }
+
+    public void setCouleur(String couleur) {
+        this.couleur = couleur;
+    }
+    
+    
     
         
     

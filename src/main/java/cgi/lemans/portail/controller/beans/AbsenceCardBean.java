@@ -25,6 +25,7 @@ public class AbsenceCardBean{
         private String typeJourneeFin;
         private String isPoseSurPeriode;
         private String tags;
+        private String idRessourceAbsence;
 
     public String getTags() {
         return tags;
@@ -160,4 +161,14 @@ public class AbsenceCardBean{
 	public void setIsPoseSurPeriode(String isPoseSurPeriode) {
 		this.isPoseSurPeriode = isPoseSurPeriode;
 	}
+
+    public String getIdRessourceAbsence() {
+        return idRessourceAbsence;
+    }
+
+    public void setIdRessourceAbsence(String idRessourceAbsence) {
+        this.idRessourceAbsence = idRessourceAbsence;
+    }
+        
+        
  }

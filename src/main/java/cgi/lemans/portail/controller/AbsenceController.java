@@ -71,6 +71,12 @@ public class AbsenceController {
 		AbsenceBean infosSend = absenceService.recupererAllAbsRessource(idRessource);
 		return new ResponseEntity<AbsenceBean>(infosSend, HttpStatus.OK);
 	};
+        
+        @RequestMapping(value = "/JourFerie", method = RequestMethod.GET)
+	public ResponseEntity<AbsenceBean> infosUseAbsenceJourFerie(HttpServletRequest request) {
+		AbsenceBean infosSend = absenceService.recupererJourFerie();
+		return new ResponseEntity<AbsenceBean>(infosSend, HttpStatus.OK);
+	};
 
 	@RequestMapping(value = "/absence", method = RequestMethod.POST)
 	public ResponseEntity<AbsenceCardBean> ajouterAbsence(@RequestBody AbsenceCardBean bean,
@@ -78,6 +84,21 @@ public class AbsenceController {
 		UtilisateurBean user = addUtilisateurSession(request.getSession());
 		if (user != null && UtilisateurBean.USER_TRI.equals(user.getTrigramme())) {
 			absenceService.enregistrerInfosParTypes(user.getTrigramme(), bean);
+		} else {
+			// TODO: Equipe implémentation des erreurs
+		}
+		// FIXME: Le code retourné est toujours OK mais ça ne veut pas dire que
+		// c'est vrai tq les exceptions ne sont pas gérées.
+		return new ResponseEntity<AbsenceCardBean>(bean, HttpStatus.OK);
+	}
+        
+        @RequestMapping(value = "/absence/solde", method = RequestMethod.POST)
+	public ResponseEntity<AbsenceCardBean> ajouterSolde(@RequestBody AbsenceCardBean bean,
+			HttpServletRequest request) {
+		UtilisateurBean user = addUtilisateurSession(request.getSession());
+		if (user != null && UtilisateurBean.USER_TRI.equals(user.getTrigramme())) {
+                        
+			//absenceService.enregistrerSoldeParTypes(user.getTrigramme(), bean);
 		} else {
 			// TODO: Equipe implémentation des erreurs
 		}
