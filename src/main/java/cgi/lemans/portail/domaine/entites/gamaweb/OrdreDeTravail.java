@@ -32,9 +32,8 @@ public class OrdreDeTravail extends EntiteGamaweb{
     @JoinColumn(name="IdDemande")
     private DemandeOuProjet idDemande;
     
-    @ManyToOne
-    @JoinColumn(name="TypeActivite")
-    private TypeActivite typeActivite;
+    @Column(name="TypeActivite")
+    private String typeActivite;
     
     @Column(name="Ressource")
     private String ressource;
@@ -96,11 +95,11 @@ public class OrdreDeTravail extends EntiteGamaweb{
         this.idDemande = idDemande;
     }
 
-    public TypeActivite getTypeActivite() {
+    public String getTypeActivite() {
         return typeActivite;
     }
 
-    public void setTypeActivite(TypeActivite typeActivite) {
+    public void setTypeActivite(String typeActivite) {
         this.typeActivite = typeActivite;
     }
 

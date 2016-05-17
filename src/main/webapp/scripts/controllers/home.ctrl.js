@@ -4,6 +4,7 @@
 
 angular
     .module('portail.controllers')
+    
     .controller('HomeCtrl', ['$scope', '$http', 'Tache', 'Absence', '$mdDialog', '$mdMedia', '$resource', '$timeout', function ($scope, $http, Tache, Absence, $mdDialog, $mdMedia, $resource, $timeout) {
     
         

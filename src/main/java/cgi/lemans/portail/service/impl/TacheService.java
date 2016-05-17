@@ -41,7 +41,7 @@ public class TacheService implements ITacheService {
 	@Autowired
 	private ITypeActiviteDao typeActiviteDao;
 
-	private ListTacheBean TacheDm(DemandeOuProjet demandeOuProjet) {
+	private ListTacheBean tacheDm(DemandeOuProjet demandeOuProjet) {
 		ListTacheBean task = new ListTacheBean();
 
 		task.setId(ConvertUtils.parseInteger(demandeOuProjet.getIdDemande()));
@@ -50,7 +50,7 @@ public class TacheService implements ITacheService {
 		return task;
 	}
 
-	private ListTacheBean TacheOT(TypeActivite typeActivite) {
+	private ListTacheBean tacheOT(TypeActivite typeActivite) {
 		ListTacheBean task = new ListTacheBean();
 
 		task.setLibelleTypeOT(typeActivite.getLibelle());
@@ -58,14 +58,13 @@ public class TacheService implements ITacheService {
 		return task;
 	}
 
-	private ListTacheBean AllTaches(OrdreDeTravail ordreDeTravail) {
+	private ListTacheBean allTaches(OrdreDeTravail ordreDeTravail) {
 		ListTacheBean task = new ListTacheBean();
-		DemandeOuProjet dm = new DemandeOuProjet();
-		TypeActivite type = new TypeActivite();
+	
 
 		task.setLibelleOT(ordreDeTravail.getLibelOT());
-		task.setLibelleTypeOT(type.getLibelle());
-		task.setLibelleDm(dm.getLibelle());
+		task.setLibelleTypeOT(ordreDeTravail.getTypeActivite());
+		task.setLibelleDm(ordreDeTravail.getIdDemande().getLibelle());
 		task.setDate(ConvertUtils.formatterDate(ordreDeTravail.getDateFinPrevue()));
 		task.setChargePrevue(ordreDeTravail.getChargePrevue().toString());
 
@@ -78,7 +77,7 @@ public class TacheService implements ITacheService {
 		TacheBean taskRetour = new TacheBean();
 		List<ListTacheBean> absResources = new ArrayList<ListTacheBean>();
 		for (DemandeOuProjet demandeOuProjet : listdm) {
-			absResources.add(TacheDm(demandeOuProjet));
+			absResources.add(tacheDm(demandeOuProjet));
 
 		}
 		taskRetour.setListTache(absResources);
@@ -92,7 +91,7 @@ public class TacheService implements ITacheService {
 		TacheBean taskRetour = new TacheBean();
 		List<ListTacheBean> absResources = new ArrayList<ListTacheBean>();
 		for (TypeActivite typeActivite : listot) {
-			absResources.add(TacheOT(typeActivite));
+			absResources.add(tacheOT(typeActivite));
 
 		}
 		taskRetour.setListTache(absResources);
@@ -102,15 +101,11 @@ public class TacheService implements ITacheService {
 
 	@Override
 	public TacheBean recupererListDemande(String idRessource) {
-		List<Object[][]> allOT = ordreDeTravailDao.findAllDemande(idRessource);
+		List<OrdreDeTravail> allOt = ordreDeTravailDao.findAllDemande(idRessource);
 		TacheBean taskRetour = new TacheBean();
 		List<ListTacheBean> absResources = new ArrayList<ListTacheBean>();
-		for (Object[] result : allOT) {
-			Integer rsltDuCase = (Integer) result[0];
-			OrdreDeTravail ot = (OrdreDeTravail) result[1];
-			DemandeOuProjet dem = (DemandeOuProjet) result[2];
-
-			// absResources.add(AllTaches(ordreDeTravail));
+		for (OrdreDeTravail ordreDeTravail : allOt) {
+			absResources.add(allTaches(ordreDeTravail));
 
 		}
 		taskRetour.setListTache(absResources);

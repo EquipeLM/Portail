@@ -17,6 +17,6 @@ import cgi.lemans.portail.domaine.entites.gamaweb.OrdreDeTravail;
  */
 public interface IOrdreDeTravailDao extends IGenericDao<Serializable, OrdreDeTravail> {
 
-	public List<Object[][]> findAllDemande(String idRessource);
+	public List<OrdreDeTravail> findAllDemande(String idRessource);
 
 }

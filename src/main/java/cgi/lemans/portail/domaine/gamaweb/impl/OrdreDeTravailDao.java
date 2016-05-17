@@ -21,16 +21,17 @@ import cgi.lemans.portail.domaine.gamaweb.IOrdreDeTravailDao;
 public class OrdreDeTravailDao extends AbstractGenericDaoGamaweb<OrdreDeTravail> implements IOrdreDeTravailDao {
 
 	@Override
-	public List<Object[][]> findAllDemande(String idRessource) {
-		String hql = "select case " + "when a.chargeRestante + a.chargeConcommeeTotale>a.chargePrevue then 1 "
-				+ "when a.chargeRestante + a.chargeConcommeeTotale<a.chargePrevue then 3 " + "else 2 "
-				+ "end as code_type_delai, dem, a " + "from OrdreDeTravail a " + "left join a.idDemande dem "
-				+ "where a.typeActivite <> 'HTM' " + "and a.chargeRestante <> 0 " + "and a.ressource = :idRessource  ";
+	public List<OrdreDeTravail> findAllDemande(String idRessource) {
+		String hql = "from OrdreDeTravail a "
+                            + "left join a.idDemande dem "
+                            + "where a.typeActivite!='HTM' "
+                            + "and a.chargeRestante!=0 "
+                            + "and a.ressource = :idRessource" ;
 		Query query = getSession().createQuery(hql);
 		query.setParameter("idRessource", idRessource);
 		System.out.println(query.getQueryString());
 
-		List<Object[][]> results = query.list();
+		List<OrdreDeTravail> results = query.list();
 		return results;
 
 	}
