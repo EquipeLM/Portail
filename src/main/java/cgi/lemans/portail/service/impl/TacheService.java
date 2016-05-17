@@ -13,6 +13,7 @@ import cgi.lemans.portail.domaine.entites.gamaweb.OrdreDeTravail;
 import cgi.lemans.portail.domaine.entites.gamaweb.TypeActivite;
 import cgi.lemans.portail.domaine.gamaweb.IDemandeOuProjetDao;
 import cgi.lemans.portail.domaine.gamaweb.IOrdreDeTravailDao;
+import cgi.lemans.portail.domaine.gamaweb.ITypeActiviteDao;
 import cgi.lemans.portail.service.ITacheService;
 import cgi.lemans.portail.utils.ConvertUtils;
 import java.util.ArrayList;
@@ -36,6 +37,12 @@ public class TacheService implements ITacheService{
     @Autowired
     private IOrdreDeTravailDao ordreDeTravailDao;
     
+    @Autowired
+    private ITypeActiviteDao typeActiviteDao;
+    
+    
+    
+    
     private ListTacheBean TacheDm(DemandeOuProjet demandeOuProjet) {
 		ListTacheBean task = new ListTacheBean();
 		
@@ -45,11 +52,10 @@ public class TacheService implements ITacheService{
                 
 		return task;
 	}
-    private ListTacheBean TacheOT(OrdreDeTravail ordreDeTravail) {
+    private ListTacheBean TacheOT(TypeActivite typeActivite) {
 		ListTacheBean task = new ListTacheBean();
 		
-		task.setId(ordreDeTravail.getIdOt());
-		task.setLibelle(ordreDeTravail.getLibelOT());
+		task.setLibelle(typeActivite.getLibelle());
                 
                 
 		return task;
@@ -64,20 +70,20 @@ public class TacheService implements ITacheService{
 		for (DemandeOuProjet demandeOuProjet : listdm) {
 			absResources.add(TacheDm(demandeOuProjet));      
                         
-                }
-                taskRetour.setListTache(absResources);
+        }
+        taskRetour.setListTache(absResources);
               
 		return taskRetour;
     }
 
         
     @Override
-    public TacheBean recupererInfosOrdreTravailModal(String tag) {
-        List<OrdreDeTravail> listot = ordreDeTravailDao.findInfosOrdreTravailModal(tag);
+    public TacheBean recupererInfosTypeOTModal() {
+        List<TypeActivite> listot = typeActiviteDao.findTypeOTModal();
 		TacheBean taskRetour = new TacheBean();
 		List<ListTacheBean> absResources = new ArrayList<ListTacheBean>();
-		for (OrdreDeTravail ordreDeTravail : listot) {
-			absResources.add(TacheOT(ordreDeTravail));      
+		for (TypeActivite typeActivite : listot) {
+			absResources.add(TacheOT(typeActivite));      
                         
                 }
                 taskRetour.setListTache(absResources);
