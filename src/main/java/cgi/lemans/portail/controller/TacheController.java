@@ -64,24 +64,12 @@ public class TacheController {
 	}
         
         @RequestMapping(value = "", method = RequestMethod.GET)
-	public ResponseEntity<TacheBean> getInfosTacheAjoutOT(HttpServletRequest request) {
-		TacheBean infosSend = tacheService.recupererInfosOrdreTravailModal("CNP");
+	public ResponseEntity<TacheBean> getInfosTacheAjoutTypeOT(HttpServletRequest request) {
+		TacheBean infosSend = tacheService.recupererInfosTypeOTModal();
 		return new ResponseEntity<TacheBean>(infosSend, HttpStatus.OK);
 	}
         
-       
-        
-         /*@RequestMapping(value = "/ajout")
-	public ResponseEntity<List<TacheCardBean>> getInfosTacheAjoutOrdre(HttpServletRequest request) {
-		
-		List<TacheCardBean> listRetour = new ArrayList<TacheCardBean>();
-		TacheCardBean infosSend = (TacheCardBean) tacheService.recupererInfosOrdreTravailModal("CNP");
 
-		listRetour.add(infosSend);
-
-		
-		return new ResponseEntity<List<TacheCardBean>>(listRetour, HttpStatus.OK);
-	}*/
 
     
 }

@@ -18,19 +18,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class OrdreDeTravailDao extends AbstractGenericDaoGamaweb<OrdreDeTravail> implements IOrdreDeTravailDao{
 
-    @Override
-    public List<OrdreDeTravail> findInfosOrdreTravailModal(String tag) {
-        String hql = "from OrdreDeTravail a "
-                   + "left join a.ressource ref "
-                   + "where ref.tags "
-                   + "like :equipeChoisie "
-                   ;
-        Query query = getSession().createQuery(hql);
-        query.setParameter("equipeChoisie", '%'+ tag + '%');
-        List<OrdreDeTravail> results = (List<OrdreDeTravail>)query.list();
-    	return results;
-    }
-    
+        
     
     @Override
     public List<OrdreDeTravail> findAllDemande(String tag) {

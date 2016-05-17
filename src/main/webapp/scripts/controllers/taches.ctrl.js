@@ -23,8 +23,7 @@ angular
         $scope.sortType     = 'name'; // set the default sort type
         $scope.sortReverse  = false;  // set the default sort order
         $scope.searchTache   = '';     // set the default search/filter term
-
-        // create the list of sushi rolls 
+  
         $scope.sortType     = 'tacheRetard.dm'; // set the default sort type
         $scope.sortReverse  = false;  // set the default sort order
         $scope.searchTache   = '';     // set the default search/filter term
@@ -234,7 +233,7 @@ angular
             })  
         };
      
-         $scope.loadDemandes = function() {
+        $scope.loadDemandes = function() {
         // Use timeout to simulate a 650ms request.
         $scope.demandes = [];
          
@@ -258,7 +257,7 @@ angular
           var test = Tache.get(function(data) {
                     data.listTache.forEach(function(evt){
                         $scope.types.push(
-                            {id: evt.id, name: evt.libelle}
+                            {name: evt.libelle}
                         )
                     }); 
                 });
