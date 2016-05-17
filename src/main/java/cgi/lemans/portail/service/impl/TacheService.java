@@ -105,8 +105,8 @@ public class TacheService implements ITacheService{
     }
 
     @Override
-    public TacheBean recupererListDemande(String tag) {
-        List<OrdreDeTravail> allOT = ordreDeTravailDao.findAllDemande(tag);
+    public TacheBean recupererListDemande(String idRessource) {
+        List<OrdreDeTravail> allOT = ordreDeTravailDao.findAllDemande(idRessource);
 		TacheBean taskRetour = new TacheBean();
 		List<ListTacheBean> absResources = new ArrayList<ListTacheBean>();
 		for (OrdreDeTravail ordreDeTravail : allOT) {

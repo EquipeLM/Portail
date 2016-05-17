@@ -240,7 +240,7 @@ angular
                 var test = Tache.get({id: "CNP"}, function(data) {
                     data.listTache.forEach(function(evt){
                         $scope.demandes.push(
-                            {id: evt.id, name: evt.libelle}
+                            {id: evt.id, name: evt.libelleDm}
                         )
                     }); 
                 });
@@ -257,7 +257,7 @@ angular
           var test = Tache.get(function(data) {
                     data.listTache.forEach(function(evt){
                         $scope.types.push(
-                            {name: evt.libelle}
+                            {name: evt.libelleTypeOT}
                         )
                     }); 
                 });

@@ -36,9 +36,8 @@ public class OrdreDeTravail extends EntiteGamaweb{
     @JoinColumn(name="TypeActivite")
     private TypeActivite typeActivite;
     
-    @ManyToOne
-    @JoinColumn(name="Ressource")
-    private RessourceTma ressource;
+    @Column(name="Ressource")
+    private String ressource;
     
     @Column(name="Date_debut")
     private Date dateDebut;
@@ -105,11 +104,11 @@ public class OrdreDeTravail extends EntiteGamaweb{
         this.typeActivite = typeActivite;
     }
 
-    public RessourceTma getRessource() {
+    public String getRessource() {
         return ressource;
     }
 
-    public void setRessource(RessourceTma ressource) {
+    public void setRessource(String ressource) {
         this.ressource = ressource;
     }
 

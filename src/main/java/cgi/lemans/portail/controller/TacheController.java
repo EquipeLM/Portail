@@ -44,9 +44,12 @@ public class TacheController {
 	}
         
         @RequestMapping(value = "/tache", method = RequestMethod.GET)
-	public ResponseEntity<TacheBean> getInfosAllDemande(HttpServletRequest request) {		
-		TacheBean infosSend = tacheService.recupererListDemande("CNP");
-                System.err.println(infosSend);
+	public ResponseEntity<TacheBean> getInfosAllDemande(HttpServletRequest request) {
+            UtilisateurBean user = addUtilisateurSession(request.getSession());
+           
+		TacheBean infosSend = tacheService.recupererListDemande(user.getTrigramme());
+           
+               
 		return new ResponseEntity<TacheBean>(infosSend, HttpStatus.OK);
 	}
         

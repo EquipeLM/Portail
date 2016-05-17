@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface IOrdreDeTravailDao extends IGenericDao<Serializable, OrdreDeTravail>{
     
-    public List<OrdreDeTravail> findAllDemande(String tag);
+    public List<OrdreDeTravail> findAllDemande(String idRessource);
     
         
  
