@@ -36,8 +36,5 @@ public class DemandeOuProjetDao extends AbstractGenericDaoGamaweb<DemandeOuProje
     
     }
     
-    
-    /*select * from demande_ou_projet a
-left join ressource_tma b on a.ref_ressource = b.idressource
-where b.tags like '%CNP%' and Dernier_etat!='TER' and charge_restante_totale!=0 and type_demande not in ('PRV')*/
+
 }

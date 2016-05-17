@@ -16,7 +16,7 @@ public interface ITacheService {
     
     public TacheBean recupererDemandeModal(String tag);
     
-    public TacheBean recupererInfosOrdreTravailModal (String tag);
+    public TacheBean recupererInfosTypeOTModal();
     
     public TacheCardBean recupererListDemande(String tag);
     

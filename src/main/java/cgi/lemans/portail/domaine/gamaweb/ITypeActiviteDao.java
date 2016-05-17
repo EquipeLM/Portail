@@ -6,7 +6,7 @@
 package cgi.lemans.portail.domaine.gamaweb;
 
 import cgi.lemans.portail.domaine.IGenericDao;
-import cgi.lemans.portail.domaine.entites.gamaweb.OrdreDeTravail;
+import cgi.lemans.portail.domaine.entites.gamaweb.TypeActivite;
 import java.io.Serializable;
 import java.util.List;
 
@@ -14,11 +14,7 @@ import java.util.List;
  *
  * @author souchul
  */
-public interface IOrdreDeTravailDao extends IGenericDao<Serializable, OrdreDeTravail>{
+public interface ITypeActiviteDao extends IGenericDao<Serializable, TypeActivite>{
     
-    public List<OrdreDeTravail> findAllDemande(String tag);
-    
-        
- 
-    
+    public List<TypeActivite> findTypeOTModal ();
 }

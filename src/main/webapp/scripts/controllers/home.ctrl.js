@@ -4,7 +4,7 @@
 
 angular
     .module('portail.controllers')
-    .controller('HomeCtrl', ['$scope', '$http', 'Absence', '$mdDialog', '$mdMedia', '$resource', '$timeout', function ($scope, $http, Absence, $mdDialog, $mdMedia, $resource, $timeout) {
+    .controller('HomeCtrl', ['$scope', '$http', 'Tache', 'Absence', '$mdDialog', '$mdMedia', '$resource', '$timeout', function ($scope, $http, Tache, Absence, $mdDialog, $mdMedia, $resource, $timeout) {
     
         
      $scope.showAdvancedAddTache = function(ev) {
@@ -20,46 +20,53 @@ angular
         };
      
     $scope.loadDemandes = function() {
-    // Use timeout to simulate a 650ms request.
-    $scope.demandes = [];
-    return $timeout(function() {
-      $scope.demandes = [
-        { id: 1, name: 'Analyse CQTM - 04/2016' },
-        { id: 2, name: 'C2V2 Eurocroissance : Sprint 11bis - Environnement 2 - Demande de Batch 3 | Nouveau Run | Quotidiens :3 | Mensuels :1' },
-        { id: 3, name: 'Campagne Commerciale - Intégration EuroCroissance' },
-        { id: 4, name: 'Editique VL  exclusion de la date comme critère de recherche' },
-        { id: 5, name: 'Activation des avenants VR en PROD' },
-      ];
-    }, 650);
-    };
+        // Use timeout to simulate a 650ms request.
+        $scope.demandes = [];
+         
+                var test = Tache.get({id: "CNP"}, function(data) {
+                    data.listTache.forEach(function(evt){
+                        $scope.demandes.push(
+                            {id: evt.id, name: evt.libelle}
+                        )
+                    }); 
+                });
+        
+        
+         };
     
     $scope.loadTypes = function() {
-    // Use timeout to simulate a 650ms request.
-    $scope.types = [];
-    return $timeout(function() {
-      $scope.types = [
-        { id: 1, name: 'Developpement / test' },
-        { id: 2, name: 'MCO : données' },
-        { id: 3, name: 'MCO : traitement' },
-        { id: 4, name: 'PRJ : homologation' },
-        { id: 5, name: 'PRJ: recette' },
-      ];
-    }, 650);
-    };
+        // Use timeout to simulate a 650ms request.
+        $scope.types = [];
+       
+          var test = Tache.get(function(data) {
+                    data.listTache.forEach(function(evt){
+                        $scope.types.push(
+                            {name: evt.libelle}
+                        )
+                    }); 
+                });
+         console.log(test);
+        
+        };
+        
+    
+    
+     $scope.formDataTache = {};
+	//$scope.formDataTache.designation = 
     
     $scope.loadUsers = function() {
-    // Use timeout to simulate a 650ms request.
     $scope.users = [];
-    return $timeout(function() {
-      $scope.users = [
-        { id: 1, name: 'Prenom Nom' },
-        { id: 2, name: 'Prenom Nom' },
-        { id: 3, name: 'Prenom Nom' },
-        { id: 4, name: 'Prenom Nom' },
-        { id: 5, name: 'Prenom Nom' },
-      ];
-    }, 650);
-    };
+         
+                var test = Absence.getByEquipe({id: "CNP", month:new DayPilot.Date().getMonth()}, function(data) {
+                    data.listEvent.forEach(function(evt){
+                        $scope.users.push(
+                            {name : evt.nom}
+                        )
+                    }); 
+                });
+        
+        
+         };
                     
                     
     $scope.status = '  ';
