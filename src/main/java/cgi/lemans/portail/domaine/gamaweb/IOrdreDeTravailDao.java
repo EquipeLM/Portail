@@ -5,20 +5,18 @@
  */
 package cgi.lemans.portail.domaine.gamaweb;
 
-import cgi.lemans.portail.domaine.IGenericDao;
-import cgi.lemans.portail.domaine.entites.gamaweb.OrdreDeTravail;
 import java.io.Serializable;
 import java.util.List;
+
+import cgi.lemans.portail.domaine.IGenericDao;
+import cgi.lemans.portail.domaine.entites.gamaweb.OrdreDeTravail;
 
 /**
  *
  * @author souchul
  */
-public interface IOrdreDeTravailDao extends IGenericDao<Serializable, OrdreDeTravail>{
-    
-    public List<OrdreDeTravail> findAllDemande(String idRessource);
-    
-        
- 
-    
+public interface IOrdreDeTravailDao extends IGenericDao<Serializable, OrdreDeTravail> {
+
+	public List<Object[][]> findAllDemande(String idRessource);
+
 }
