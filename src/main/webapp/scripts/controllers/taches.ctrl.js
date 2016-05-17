@@ -277,5 +277,7 @@ angular
           ];
         }, 650);
         };
+        
+         $scope.quantity = 2;
     
 }]);

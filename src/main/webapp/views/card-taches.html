@@ -34,72 +34,56 @@
     <div class="tableau">
         <h5 class="enRetard"> Hors délais : </h5>
         <table class="infos_tache">
-            <tr>
-                <td class="dm">Suivi production - 04-2016</td>
-                <td class="ot">Wapiti 766740</td>
-                <td class="typ">DEV</td>
-                <td class="dateOt">01/01/2016</td>
-                <td class="chargeOt">0.5</td>
-                <td class="iconOt"><a href="" ng-click="showAdvancedComs($event)"><i class="fa fa-comments-o fa-1x colorfa" aria-hidden="true"></i></a></td>
-                <td class="iconOt"><a href="" ng-click="showAdvancedEnd($event)"><i class="fa fa-flag-checkered fa-1x colorfa" aria-hidden="true"></i></a></td>
-                <td class="iconOt"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa" aria-hidden="true"></i></a></td>
+            <tr ng-repeat="tacheRetard in tacheRetards | limitTo:quantity">
+                <td>{{ tacheRetard.dm }}</td>
+                <td>{{ tacheRetard.ot }}</td>
+                <td style="text-align: center">{{ tacheRetard.type }}</td>
+                <td style="text-align: center">{{ tacheRetard.date }}</td>
+                <td style="text-align: center">{{ tacheRetard.charge }}</td>
+                <td class="icon-screen"><a href="" ng-click="showAdvancedEnd($event)"><i class="fa fa-flag-checkered fa colorfa" aria-hidden="true"></i></a>
+                </td>
+                <td class="icon-screen"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa fa" aria-hidden="true"></i></a>
+                </td>
+                <td class="icon-screen"><a href="" ng-click="showAdvancedComs($event)"><i class="fa fa-comments-o colorfa fa" aria-hidden="true"></i></a>
+                </td>
             </tr>
-            <tr>
-                <td class="dm">Suivi production - 04-2016</td>
-                <td class="ot">Wapiti 766740</td>
-                <td class="typ">DEV</td>
-                <td class="dateOt">01/01/2016</td>
-                <td class="chargeOt">103.5</td>
-                <td class="iconOt"><a href="" ng-click="showAdvancedComs($event)"><i class="fa fa-comments-o fa-1x colorfa" aria-hidden="true"></i></a></td>
-                <td class="iconOt"><a href="" ng-click="showAdvancedEnd($event)"><i class="fa fa-flag-checkered fa-1x colorfa" aria-hidden="true"></i></a></td>
-                <td class="iconOt"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa" aria-hidden="true"></i></a></td>
-            </tr>
+          
         </table>
         <h5 class="enDelais"> Dans les délais : </h5>
         <table class="infos_tache">
-            <tr>
-                <td class="dm">Suivi production - 04-2016</td>
-                <td class="ot">Wapiti 766740</td>
-                <td class="typ">DEV</td>
-                <td class="dateOt">01/01/2016</td>
-                <td class="chargeOt">0.5</td>
-                <td class="iconOt"><a href="" ng-click="showAdvancedComs($event)"><i class="fa fa-comments-o fa-1x colorfa" aria-hidden="true"></i></a></td>
-                <td class="iconOt"><a href="" ng-click="showAdvancedEnd($event)"><i class="fa fa-flag-checkered fa-1x colorfa" aria-hidden="true"></i></a></td>
-                <td class="iconOt"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa" aria-hidden="true"></i></a></td>
-            </tr>
-            <tr>
-                <td class="dm">Suivi production - 04-2016</td>
-                <td class="ot">Wapiti 766740</td>
-                <td class="typ">DEV</td>
-                <td class="dateOt">01/01/2016</td>
-                <td class="chargeOt">0.5</td>
-                <td class="iconOt"><a href="" ng-click="showAdvancedComs($event)"><i class="fa fa-comments-o fa-1x colorfa" aria-hidden="true"></i></a></td>
-                <td class="iconOt"><a href="" ng-click="showAdvancedEnd($event)"><i class="fa fa-flag-checkered fa-1x colorfa" aria-hidden="true"></i></a></td>
-                <td class="iconOt"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa" aria-hidden="true"></i></a></td>
-            </tr>
+            <tr ng-repeat="tache in taches |  limitTo:quantity">
+                <td>{{ tache.dm }}</td>
+                <td>{{ tache.ot }}</td>
+                <td style="text-align: center">{{ tache.type }}</td>
+                <td style="text-align: center">{{ tache.date }}</td>
+                <td style="text-align: center">{{ tache.charge }}</td>
+                <td class="icon-screen"><a href="" ng-click="showAdvancedEnd($event)"><i class="fa fa-flag-checkered fa colorfa" aria-hidden="true"></i></a>
+                </td>
+                <td class="icon-screen"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa fa" aria-hidden="true"></i></a>
+                </td>
+                <td class="icon-screen"><a href="" ng-click="showAdvancedComs($event)"><i class="fa fa-comments-o colorfa fa" aria-hidden="true"></i></a>
+            </td>
+            
+          </tr>
+            
         </table>
         <h5 class="enAvance"> En Avance : </h5>
         <table class="infos_tache">
-            <tr>
-                <td class="dm">Suivi production - 04-2016</td>
-                <td class="ot">Wapiti 766740</td>
-                <td class="typ">DEV</td>
-                <td class="dateOt">01/01/2016</td>
-                <td class="chargeOt">0.5</td>
-                <td class="iconOt"><a href="" ng-click="showAdvancedComs($event)"><i class="fa fa-comments-o fa-1x colorfa" aria-hidden="true"></i></a></td>
-                <td class="iconOt"><a href="" ng-click="showAdvancedEnd($event)"><i class="fa fa-flag-checkered fa-1x colorfa" aria-hidden="true"></i></a></td>
-                <td class="iconOt"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa" aria-hidden="true"></i></a></td>
-            </tr>
-            <tr>
-                <td class="dm">Suivi production - 04-2016</td>
-                <td class="ot">Wapiti 766740</td>
-                <td class="typ">DEV</td>
-                <td class="dateOt">01/01/2016</td>
-                <td class="chargeOt">0.5</td>
-                <td class="iconOt"><a href="" ng-click="showAdvancedComs($event)"><i class="fa fa-comments-o fa-1x colorfa" aria-hidden="true"></i></a></td>
-                <td class="iconOt"><a href="" ng-click="showAdvancedEnd($event)"><i class="fa fa-flag-checkered fa-1x colorfa" aria-hidden="true"></i></a></td>
-                <td class="iconOt"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa" aria-hidden="true"></i></a></td>
-            </tr>
+           <tr ng-repeat="tacheAvance in tacheAvances | limitTo:quantity">
+                <td>{{ tacheAvance.dm }}</td>
+                <td>{{ tacheAvance.ot }}</td>
+                <td style="text-align: center">{{ tacheAvance.type }}</td>
+                <td style="text-align: center">{{ tacheAvance.date }}</td>
+                <td style="text-align: center">{{ tacheAvance.charge }}</td>
+                <td class="icon-screen"><a href="" ng-click="showAdvancedEnd($event)"><i class="fa fa-flag-checkered  colorfa" aria-hidden="true"></i></a>
+                </td>
+                <td class="icon-screen"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa " aria-hidden="true"></i></a>
+                </td>
+                <td class="icon-screen"><a href="" ng-click="showAdvancedComs($event)"><i class="fa fa-comments-o colorfa " aria-hidden="true"></i></a>
+                </td>
+            
+          </tr>
+            
         </table>
     </div>
   

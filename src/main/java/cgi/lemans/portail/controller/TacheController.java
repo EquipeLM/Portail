@@ -6,11 +6,8 @@
 package cgi.lemans.portail.controller;
 
 import cgi.lemans.portail.controller.beans.TacheBean;
-import cgi.lemans.portail.controller.beans.TacheCardBean;
 import cgi.lemans.portail.controller.beans.UtilisateurBean;
 import cgi.lemans.portail.service.ITacheService;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,15 +43,11 @@ public class TacheController {
 		return user;
 	}
         
-        @RequestMapping(value = "/tache")
-	public ResponseEntity<List<TacheCardBean>> getInfosAllDemande(HttpServletRequest request) {
-		UtilisateurBean user = addUtilisateurSession(request.getSession());
-		List<TacheCardBean> listRetour = new ArrayList<TacheCardBean>();
-		
-		TacheCardBean infosSend = (TacheCardBean) tacheService.recupererListDemande("CNP");
-                listRetour.add(infosSend);
-
-		return new ResponseEntity<List<TacheCardBean>>(listRetour, HttpStatus.OK);
+        @RequestMapping(value = "/tache", method = RequestMethod.GET)
+	public ResponseEntity<TacheBean> getInfosAllDemande(HttpServletRequest request) {		
+		TacheBean infosSend = tacheService.recupererListDemande("CNP");
+                System.err.println(infosSend);
+		return new ResponseEntity<TacheBean>(infosSend, HttpStatus.OK);
 	}
         
         @RequestMapping(value = "/{tag}", method = RequestMethod.GET)

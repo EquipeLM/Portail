@@ -6,7 +6,6 @@
 package cgi.lemans.portail.service;
 
 import cgi.lemans.portail.controller.beans.TacheBean;
-import cgi.lemans.portail.controller.beans.TacheCardBean;
 
 /**
  *
@@ -18,6 +17,6 @@ public interface ITacheService {
     
     public TacheBean recupererInfosTypeOTModal();
     
-    public TacheCardBean recupererListDemande(String tag);
+    public TacheBean recupererListDemande(String tag);
     
 }

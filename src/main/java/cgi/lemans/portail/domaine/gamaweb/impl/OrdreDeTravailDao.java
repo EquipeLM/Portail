@@ -22,19 +22,23 @@ public class OrdreDeTravailDao extends AbstractGenericDaoGamaweb<OrdreDeTravail>
     
     @Override
     public List<OrdreDeTravail> findAllDemande(String tag) {
-         String hql = 
-                    "from OrdreDeTravail a "
-                    + "left join a.Ressource ref "
-                   + "where a.typeActivite!='HTM' "
-                   + "and a.chargeRestante!=0 "
-                   + "and ref.tags " 
-                   + "like :equipeChoisie "
-                   ;
+         String hql =  "select case " 
+                 + "when a.chargeRestante + a.chargeConcommeeTotale>a.chargePrevue then 1 " 
+                 + "when a.chargeRestante + a.chargeConcommeeTotale<a.chargePrevue then 3 " 
+                 + "else 2 " 
+                 + "end as code_type_delai " 
+                 + "from OrdreDeTravail a "
+                 + "left join a.idDemande dem " 
+                 + "left join a.ressource ref " 
+                 + "where a.typeActivite != 'HTM' " 
+                 + "and a.chargeRestante != 0 " 
+                 + "and ref.tags " 
+                 + "like :equipeChoisie ";
         Query query = getSession().createQuery(hql);
         query.setParameter("equipeChoisie", '%'+ tag + '%');
         System.out.println(query.getQueryString());
         
-        List<OrdreDeTravail> results = (List<OrdreDeTravail>)query.list();
+        List<OrdreDeTravail> results = query.list();
     	return results;        
     
     }

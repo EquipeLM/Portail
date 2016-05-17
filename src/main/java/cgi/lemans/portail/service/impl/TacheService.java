@@ -7,7 +7,6 @@ package cgi.lemans.portail.service.impl;
 
 import cgi.lemans.portail.controller.beans.ListTacheBean;
 import cgi.lemans.portail.controller.beans.TacheBean;
-import cgi.lemans.portail.controller.beans.TacheCardBean;
 import cgi.lemans.portail.domaine.entites.gamaweb.DemandeOuProjet;
 import cgi.lemans.portail.domaine.entites.gamaweb.OrdreDeTravail;
 import cgi.lemans.portail.domaine.entites.gamaweb.TypeActivite;
@@ -47,7 +46,7 @@ public class TacheService implements ITacheService{
 		ListTacheBean task = new ListTacheBean();
 		
 		task.setId(ConvertUtils.parseInteger(demandeOuProjet.getIdDemande()));
-		task.setLibelle(demandeOuProjet.getLibelle());
+		task.setLibelleDm(demandeOuProjet.getLibelle());
                 
                 
 		return task;
@@ -55,11 +54,25 @@ public class TacheService implements ITacheService{
     private ListTacheBean TacheOT(TypeActivite typeActivite) {
 		ListTacheBean task = new ListTacheBean();
 		
-		task.setLibelle(typeActivite.getLibelle());
+		task.setLibelleTypeOT(typeActivite.getLibelle());
                 
                 
 		return task;
 	}
+    
+    private ListTacheBean AllTaches (OrdreDeTravail ordreDeTravail) {
+        ListTacheBean task = new ListTacheBean();
+        DemandeOuProjet dm = new DemandeOuProjet();
+        TypeActivite type = new TypeActivite();
+        
+        task.setLibelleOT(ordreDeTravail.getLibelOT());
+        task.setLibelleTypeOT(type.getLibelle());
+        task.setLibelleDm(dm.getLibelle());
+        task.setDate(ConvertUtils.formatterDate(ordreDeTravail.getDateFinPrevue()));
+        task.setChargePrevue(ordreDeTravail.getChargePrevue().toString());
+        
+        return task;
+    }
     
     
     @Override
@@ -92,28 +105,17 @@ public class TacheService implements ITacheService{
     }
 
     @Override
-    public TacheCardBean recupererListDemande(String tag) {
-        List<OrdreDeTravail> listDemande = ordreDeTravailDao.findAllDemande("CNP");
-        DemandeOuProjet dm = new DemandeOuProjet();
-        TypeActivite type = new TypeActivite();
-               //dm.setLibelle(); recupérer par l'id
-		TacheCardBean tacheRetour = new TacheCardBean();
-		
-		for (OrdreDeTravail ordreDeTravail : listDemande) {
-			
-                        tacheRetour.setOt(ordreDeTravail.getLibelOT());
-                        tacheRetour.setDate(ConvertUtils.formatterDate(ordreDeTravail.getDateFinPrevue()));
-                        tacheRetour.setDemande(dm.getLibelle()); 
-                        //tacheRetour.setCharge(ordreDeTravail.getChargePrevue().toString());
-                        tacheRetour.setType(type.getLibelle());
-                        ;
+    public TacheBean recupererListDemande(String tag) {
+        List<OrdreDeTravail> allOT = ordreDeTravailDao.findAllDemande(tag);
+		TacheBean taskRetour = new TacheBean();
+		List<ListTacheBean> absResources = new ArrayList<ListTacheBean>();
+		for (OrdreDeTravail ordreDeTravail : allOT) {
+			absResources.add(AllTaches(ordreDeTravail));      
                         
                 }
-                return tacheRetour;
-                
+                taskRetour.setListTache(absResources);
+              
+		return taskRetour;         
     }
-
-    
-    
-    
+  
 }
