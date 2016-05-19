@@ -23,10 +23,10 @@ public class OrdreDeTravailDao extends AbstractGenericDaoGamaweb<OrdreDeTravail>
 	@Override
 	public List<OrdreDeTravail> findAllDemande(String idRessource) {
 		String hql = "from OrdreDeTravail a "
-                            + "left join a.idDemande dem "
+                            
                             + "where a.typeActivite!='HTM' "
-                            + "and a.chargeRestante!=0 "
-                            + "and a.ressource = :idRessource" ;
+                            
+                            + "and a.ressource.idRessource = :idRessource" ;
 		Query query = getSession().createQuery(hql);
 		query.setParameter("idRessource", idRessource);
 		System.out.println(query.getQueryString());
@@ -35,5 +35,21 @@ public class OrdreDeTravailDao extends AbstractGenericDaoGamaweb<OrdreDeTravail>
 		return results;
 
 	}
+      
+
+    @Override
+    public List<OrdreDeTravail> findAllDemandeEquipe(String tag) {
+                String hql = "from OrdreDeTravail a "   
+                            //+ "left join a.ressource ref " 
+                            + "where a.ressource.tags " 
+                            + "like :equipeChoisie "
+                            + "and a.typeActivite != 'HTM'"
+                           ;
+		Query query = getSession().createQuery(hql);
+		query.setParameter("equipeChoisie", '%'+ tag + '%');
+		
+		List<OrdreDeTravail> results = query.list();
+		return results; 
+    }
 
 }

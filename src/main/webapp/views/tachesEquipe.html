@@ -47,7 +47,7 @@
         </form>
          <div class="icons-taches">
             <a href="https://mypm.imfr.cgi.com/portail/#/CDSMainframe/outils/imputations" target="_blank"><i class="fa fa-clock-o fa-4x search-black"></i></a>
-            <a href="/portail/#/tachesEquipe"><i class="fa fa-users fa-4x search-black"></i></a>
+            <a href="/portail/#/taches"><i class="fa fa-user fa-4x search-black"></i></a>
             <a href="" ng-click="showAdvancedAddTache($event)"><i class="fa fa-plus fa-4x search-black"></i></a>
          </div>
      </div>
@@ -68,6 +68,9 @@
                 <a href="" ng-click="showRetards = ! showRetards">Type</a> 
             </th>
             <th>
+                <a href="" ng-click="showRetards = ! showRetards">Tri</a> 
+            </th>
+            <th>
                 <a href="" ng-click="showRetards = ! showRetards">Date</a> 
             </th>
             <th>
@@ -76,7 +79,7 @@
             <th>
                 <a href="" ng-click="showRetards = ! showRetards">Restant</a> 
             </th>
-            <th colspan="3" >
+            <th>
                 <a href="" ng-click="showRetards = ! showRetards">Actions</a>
             </th>
             
@@ -88,13 +91,11 @@
             <td ng-app="">{{ tacheRetard.dm }}</td>
             <td>{{ tacheRetard.ot }}</td>
             <td style="text-align: center">{{ tacheRetard.type }}</td>
+            <td style="text-align: center">{{ tacheRetard.ressource }}</td>
             <td style="text-align: center">{{ tacheRetard.date }}</td>
             <td style="text-align: center">{{ tacheRetard.charge }}</td>
             <td style="text-align: center">{{ tacheRetard.restant }}</td>
-            <td class="icon-screen"><a href="" ng-click="showAdvancedEndBis($event)"><i class="fa fa-flag-checkered fa-2x colorfa" aria-hidden="true"></i></a>
-            </td>
-            <td class="icon-screen"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa fa-2x" aria-hidden="true"></i></a>
-            </td>
+            
             <td class="icon-screen"><a href="" ng-click="showAdvancedComs($event)"><i class="fa fa-comments-o colorfa fa-2x" aria-hidden="true"></i></a>
             </td>
             
@@ -117,6 +118,9 @@
                 <a href="" ng-click="showDetails = ! showDetails">Type</a> 
             </th>
             <th>
+                <a href="" ng-click="showRetards = ! showRetards">Tri</a> 
+            </th>
+            <th>
                 <a href="" ng-click="showDetails = ! showDetails">Date</a> 
             </th>
             <th>
@@ -125,7 +129,7 @@
             <th>
                 <a href="" ng-click="showDetails = ! showDetails">Restant</a> 
             </th>
-            <th colspan="3" >
+            <th>
                 <a href="" ng-click="showDetails = ! showDetails">Actions</a>
             </th>
             
@@ -137,13 +141,11 @@
             <td>{{ tache.dm }}</td>
             <td>{{ tache.ot }}</td>
             <td style="text-align: center">{{ tache.type }}</td>
+            <td style="text-align: center">{{ tache.ressource }}</td>
             <td style="text-align: center">{{ tache.date }}</td>
             <td style="text-align: center">{{ tache.charge }}</td>
             <td style="text-align: center">{{ tache.restant }}</td>
-            <td class="icon-screen"><a href="" ng-click="showAdvancedEndBis($event)"><i class="fa fa-flag-checkered fa-2x colorfa" aria-hidden="true"></i></a>
-            </td>
-            <td class="icon-screen"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa fa-2x" aria-hidden="true"></i></a>
-            </td>
+            
             <td class="icon-screen"><a href="" ng-click="showAdvancedComs($event)"><i class="fa fa-comments-o colorfa fa-2x" aria-hidden="true"></i></a>
             </td>
             
@@ -165,6 +167,9 @@
                 <a href="" ng-click="showAvance = ! showAvance">Type</a> 
             </th>
             <th>
+                <a href="" ng-click="showRetards = ! showRetards">Tri</a> 
+            </th>
+            <th>
                 <a href="" ng-click="showAvance = ! showAvance">Date</a> 
             </th>
             <th>
@@ -173,7 +178,7 @@
             <th>
                 <a href="" ng-click="showAvance = ! showAvance">Restant</a> 
             </th>
-            <th colspan="3" >
+            <th>
                 <a href="" ng-click="showAvance = ! showAvance">Actions</a>
             </th>
             
@@ -185,13 +190,11 @@
             <td>{{ tacheAvance.dm }}</td>
             <td>{{ tacheAvance.ot }}</td>
             <td style="text-align: center">{{ tacheAvance.type }}</td>
+            <td style="text-align: center">{{ tache.ressource }}</td>
             <td style="text-align: center">{{ tacheAvance.date }}</td>
             <td style="text-align: center">{{ tacheAvance.charge }}</td>
             <td style="text-align: center">{{ tacheAvance.restant }}</td>
-            <td class="icon-screen"><a href="" ng-click="showAdvancedEndBis($event)"><i class="fa fa-flag-checkered fa-2x colorfa" aria-hidden="true"></i></a>
-            </td>
-            <td class="icon-screen"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa fa-2x" aria-hidden="true"></i></a>
-            </td>
+           
             <td class="icon-screen"><a href="" ng-click="showAdvancedComs($event)"><i class="fa fa-comments-o colorfa fa-2x" aria-hidden="true"></i></a>
             </td>
             
@@ -213,6 +216,9 @@
             <th>
                 <a href="" ng-click="showtermine = ! showtermine">Type</a> 
             </th>
+            <th>
+                <a href="" ng-click="showtermine = ! showtermine">Tri</a> 
+            </th>
 
             <th>
                 <a href="" ng-click="showtermine = ! showtermine">Actions</a>
@@ -226,6 +232,7 @@
             <td>{{ tacheTermine.dm }}</td>
             <td>{{ tacheTermine.ot }}</td>
             <td style="text-align: center">{{ tacheTermine.type }}</td>
+            <td style="text-align: center">{{ tacheTermine.ressource }}</td>
             <td class="icon-screen"><a href="" ng-click="showAdvancedComs($event)"><i class="fa fa-comments-o colorfa fa-2x" aria-hidden="true"></i></a>
             </td>
             

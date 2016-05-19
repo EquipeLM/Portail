@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 /**
  *
@@ -28,15 +30,20 @@ public class OrdreDeTravail extends EntiteGamaweb{
     @Column(name="IdOT")
     private Integer idOt;
     
+    @NotFound(action=NotFoundAction.IGNORE)
     @ManyToOne
     @JoinColumn(name="IdDemande")
     private DemandeOuProjet idDemande;
     
+    
     @Column(name="TypeActivite")
     private String typeActivite;
     
-    @Column(name="Ressource")
-    private String ressource;
+    
+    @NotFound(action=NotFoundAction.IGNORE)
+    @ManyToOne
+    @JoinColumn(name="Ressource")
+    private RessourceTma ressource;
     
     @Column(name="Date_debut")
     private Date dateDebut;
@@ -51,7 +58,7 @@ public class OrdreDeTravail extends EntiteGamaweb{
     private Double chargePrevue;
     
     @Column(name="charge_consommee_totale")
-    private Double chargeConcommeeTotale;
+    private Double chargeConsommeeTotale;
     
     @Column(name="charge_restante")
     private Double chargeRestante;
@@ -103,11 +110,11 @@ public class OrdreDeTravail extends EntiteGamaweb{
         this.typeActivite = typeActivite;
     }
 
-    public String getRessource() {
+    public RessourceTma getRessource() {
         return ressource;
     }
 
-    public void setRessource(String ressource) {
+    public void setRessource(RessourceTma ressource) {
         this.ressource = ressource;
     }
 
@@ -143,12 +150,12 @@ public class OrdreDeTravail extends EntiteGamaweb{
         this.chargePrevue = chargePrevue;
     }
 
-    public Double getChargeConcommeeTotale() {
-        return chargeConcommeeTotale;
+    public Double getChargeConsommeeTotale() {
+        return chargeConsommeeTotale;
     }
 
-    public void setChargeConcommeeTotale(Double chargeConcommeeTotale) {
-        this.chargeConcommeeTotale = chargeConcommeeTotale;
+    public void setChargeConsommeeTotale(Double chargeConsommeeTotale) {
+        this.chargeConsommeeTotale = chargeConsommeeTotale;
     }
 
     public Double getChargeRestante() {

@@ -13,6 +13,20 @@ angular
 						url:'api/absences/equipe/:id/mois/:month',
 						isArray: true
 					},
+                                        getJourFerie : {
+						method: 'GET',
+                                                param : {},
+						
+						url:'api/absences/absence/jourFerie',
+						isArray: false
+					},
+                                        updateSolde : {
+						method: 'POST',
+                                                param : {},
+						
+						url:'api/absences/absence/Updatesolde',
+						isArray: false
+					}
                                         
 				}
 		); 

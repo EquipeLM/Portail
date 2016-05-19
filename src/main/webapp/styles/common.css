@@ -625,7 +625,7 @@ md-input-container{
 
 #indicateur_taches p{
     text-align : center;
-    margin-top: -72px;
+    margin-top: -78px;
     font-size: 14px;
     font-weight: bold;
     color: white;
@@ -754,7 +754,7 @@ typ{
 }
 
 .indicateur-screen{
-    margin-left: 10%;
+    margin-left: 20%;
 }
 
 #indicateur_screen{
@@ -763,7 +763,7 @@ typ{
 }
 
 .graph-tache {
-  padding: 30px 115px 0px 5px ;
+  padding: 50px 135px 0px 5px ;
 }
 
 md-select.md-default-theme .md-select-value.md-select-placeholder, md-select .md-select-value.md-select-placeholder{
@@ -849,3 +849,13 @@ color-black{
 .icons-taches a {
     margin-left: 5%;
 }
+
+.cont1{
+    padding-left: 9%;
+    padding-top: 5%;
+}
+
+.cont1 td{
+    padding-left: 15%;
+}
+

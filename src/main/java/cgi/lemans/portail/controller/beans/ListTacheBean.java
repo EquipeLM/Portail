@@ -14,9 +14,20 @@ public class ListTacheBean {
     private int id;
     private String libelleTypeOT;
     private String libelleDm;
+    private String libelleDmRetard;
+    private String libelleDmDelais;
+    private String libelleDmAvance;
+    private String libelleDmTermine;
     private String libelleOT;
     private String Date;
     private String chargePrevue;
+    private String chargeRestante;
+    private Double chargeConso;
+    private int compteurRetard;
+    private int compteurDelais;
+    private int compteurAvance;
+    private String trigramme;
+
 
     public int getId() {
         return id;
@@ -34,6 +45,40 @@ public class ListTacheBean {
         this.libelleTypeOT = libelleTypeOT;
     }
 
+    public String getLibelleDmRetard() {
+        return libelleDmRetard;
+    }
+
+    public void setLibelleDmRetard(String libelleDmRetard) {
+        this.libelleDmRetard = libelleDmRetard;
+    }
+
+    public String getLibelleDmDelais() {
+        return libelleDmDelais;
+    }
+
+    public void setLibelleDmDelais(String libelleDmDelais) {
+        this.libelleDmDelais = libelleDmDelais;
+    }
+
+    public String getLibelleDmAvance() {
+        return libelleDmAvance;
+    }
+
+    public void setLibelleDmAvance(String libelleDmAvance) {
+        this.libelleDmAvance = libelleDmAvance;
+    }
+
+    public String getLibelleDmTermine() {
+        return libelleDmTermine;
+    }
+
+    public void setLibelleDmTermine(String libelleDmTermine) {
+        this.libelleDmTermine = libelleDmTermine;
+    }
+    
+    
+
     public String getLibelleDm() {
         return libelleDm;
     }
@@ -41,6 +86,8 @@ public class ListTacheBean {
     public void setLibelleDm(String libelleDm) {
         this.libelleDm = libelleDm;
     }
+    
+        
 
     public String getLibelleOT() {
         return libelleOT;
@@ -65,6 +112,56 @@ public class ListTacheBean {
     public void setChargePrevue(String chargePrevue) {
         this.chargePrevue = chargePrevue;
     }
+
+    public String getChargeRestante() {
+        return chargeRestante;
+    }
+
+    public void setChargeRestante(String chargeRestante) {
+        this.chargeRestante = chargeRestante;
+    }
+
+    public Double getChargeConso() {
+        return chargeConso;
+    }
+
+    public void setChargeConso(Double chargeConso) {
+        this.chargeConso = chargeConso;
+    }
+
+    public int getCompteurRetard() {
+        return compteurRetard;
+    }
+
+    public void setCompteurRetard(int compteurRetard) {
+        this.compteurRetard = compteurRetard;
+    }
+
+    public int getCompteurDelais() {
+        return compteurDelais;
+    }
+
+    public void setCompteurDelais(int compteurDelais) {
+        this.compteurDelais = compteurDelais;
+    }
+
+    public int getCompteurAvance() {
+        return compteurAvance;
+    }
+
+    public void setCompteurAvance(int compteurAvance) {
+        this.compteurAvance = compteurAvance;
+    }
+
+    public String getTrigramme() {
+        return trigramme;
+    }
+
+    public void setTrigramme(String trigramme) {
+        this.trigramme = trigramme;
+    }
+    
+    
 
     
     

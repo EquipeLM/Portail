@@ -5,20 +5,7 @@ angular
     .module('portail.controllers')
     .controller('TachesCtrl',['$scope', '$http','$mdDialog', '$mdMedia', '$resource', "Tache", '$timeout', function ($scope, $http, $mdDialog, $mdMedia, $resource, Tache, $timeout) {
             
-        $scope.labelRetard = ["retard", "Autres"];
-	$scope.dataRetard = ["3", "7"];
-	$scope.options = {responsive: true, percentageInnerCutout: 70};
-        $scope.coloursRetard = ['#dd5e60','#d8d8d8'];
-            
-        $scope.labelDelais = ["delais", "Autres"];
-	$scope.dataDelais = ["5", "5"];
-	$scope.options = {responsive: true, percentageInnerCutout: 70};
-        $scope.coloursDelais = ['#929292','#d8d8d8'];
-            
-        $scope.labelAvance = ["avance", "Autres"];
-	$scope.dataAvance = ["2", "8"];
-	$scope.options = {responsive: true, percentageInnerCutout: 70};
-        $scope.coloursAvance = ['#72d3a9','#d8d8d8'];
+        
         
         $scope.sortType     = 'name'; // set the default sort type
         $scope.sortReverse  = false;  // set the default sort order
@@ -29,7 +16,7 @@ angular
         $scope.searchTache   = '';     // set the default search/filter term
             
         
-        $scope.showAdvancedEnd = function(ev) {
+        $scope.showAdvancedEndBis = function(ev) {
             var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
             $mdDialog.show({
       
@@ -79,147 +66,98 @@ angular
         
         
          
-        
-        $scope.taches = [
-                    {'dm':'Analyse CQTM - 04/2016',
-                        'ot':'CQTM 105541',
-                        'type':'RE7',
-                        'date':'0/1/1900',
-                        'charge':0.2},
-                    {'dm':'Analyse CQTM - 04/2016',
-                        'ot':'CQTM 105579',
-                        'type':'RE7',
-                        'date':'0/1/1900',
-                        'charge':1.3},
-                    {'dm':'Analyse CQTM - 04/2016',
-                        'ot':'CQTM 105731',
-                        'type':'RE7',
-                        'date':'0/1/1900',
-                        'charge':0.4},
-                    {'dm':'Analyse CQTM - 04/2016',
-                        'ot':'CQTM 105640',
-                        'type':'RE7',
-                        'date':'0/1/1900',
-                        'charge':0.4},
-                    {'dm':'Analyse CQTM - 04/2016',
-                        'ot':'CQTM 105641',
-                        'type':'RE7',
-                        'date':'0/1/1900',
-                        'charge':0.4},
-                    {'dm':'Analyse CQTM - 04/2016',
-                        'ot':'CQTM 105597',
-                        'type':'RE7',
-                        'date':'0/1/1900',
-                        'charge':0.4},
-                    {'dm':'Analyse CQTM - 04/2016',
-                        'ot':'CQTM 105457',
-                        'type':'RE7',
-                        'date':'0/1/1900',
-                        'charge':0.3},
-                    {'dm':'C2V2 Eurocroissance : Sprint 10 Partages - Environnement 1 - Demande de Batch 2 | Quotidiens :3 | Mensuels :1',
-                        'ot':'C2V2 Eurocroissance  Sprint 10 Partages - Environnement 1 - Demande de Batch 2 - Traitement du Batch Recette',
-                        'type':'RE7',
-                        'date':'0/1/1900',
-                        'charge':0.2},
-                    {'dm':'C2V2 Eurocroissance : Sprint 11bis - Environnement 2 - Demande de Batch 3 | Nouveau Run | Quotidiens :3 | Mensuels :1',
-                        'ot':'C2V2 Eurocroissance  Sprint 11bis - Environnement 2 - Demande de Batch 3 - Traitement du Batch Recette',
-                        'type':'RE7',
-                        'date':'0/1/1900',
-                        'charge':0.3},
-                    {'dm':'Campagne Commerciale - Intégration EuroCroissance',
-                        'ot':'Campagne Commerciale - Intégration EuroCroissance - Etude Impact / SFG',
-                        'type':'SFG',
-                        'date':'0/1/1900',
-                        'charge':0.3},
-                    {'dm':'Editique VL  exclusion de la date comme critère de recherche',
-                        'ot':'Editique VL  exclusion de la date comme critère de recherche - Recette',
-                        'type':'RE7',
-                        'date':'0/1/1900',
-                        'charge':0.3}, 
-
-        ];
-        
-        $scope.tacheRetards = [
-                    {   'dm':'Activation des avenants VR en PROD',
-                        'ot':'Ouverture des avenants VR en PROD',
-                        'type':'INT',
-                        'date':'0/1/1900',
-                        'charge': 0.1},
-                    {'dm':'Analyse CQTM - 04/2016',
-                        'ot':'CQTM 105492',
-                        'type':'RE7',
-                        'date':'0/1/1900',
-                        'charge':0.1},
-                    {'dm':'C2V2 Eurocroissance : Sprint 10bis - Environnement 2 - Demande de Batch 1 | Nouveau Run | Quotidiens :2 | Mensuels :1',
-                        'ot':'C2V2 Eurocroissance  Sprint 10bis - Environnement 2 - Demande de Batch 1 - Traitement du Batch Recette',
-                        'type':'RE7',
-                        'date':'0/1/1900',
-                        'charge': 0.1},
-                    {'dm':'C2V2 Eurocroissance : Sprint 11bis - Environnement 2 - Demande de Batch 2 | Nouveau Run | Contrats :115 | Quotidiens :2 | Mensuels :1',
-                        'ot':'C2V2 Eurocroissance  Sprint 11bis - Environnement 2 - Demande de Batch 2 - Traitement du Batch Recette',
-                        'type':'RE7',
-                        'date':'0/1/1900',
-                        'charge':0.9},
-                    {'dm':'Eurocroissance Lot 3 - Modification du plan de VR',
-                        'ot':'EuroCroissance Lot 3 - Analyse',
-                        'type':'SFD',
-                        'date':'0/1/1900',
-                        'charge':0.8},
-                    {'dm':'Eurocroissance Lot 3 - Modification du plan de VR',
-                        'ot':'Pré-analyse modification de plan de VR',
-                        'type':'SFD',
-                        'date':'0/1/1900',
-                        'charge':1},
-                    {'dm':'EuroCroissance lot 3 éditique RSP',
-                        'ot':'SUPPORT 2016/03/10 RSP sans opération Cécile GUILLOIT',
-                        'type':'RE7',
-                        'date':'0/1/1900',
-                        'charge':0.1},
-                    {'dm':'EuroCroissance lot 3 éditique RSP',
-                        'ot':'CQTM 105641',
-                        'type':'RE7',
-                        'date':'0/1/1900',
-                        'charge':0.1},
-                    {'dm':'EuroCroissance lot 3 éditique RSP',
-                        'ot':'CQTM 105563',
-                        'type':'RE7',
-                        'date':'0/1/1900',
-                        'charge':0.3},
-                    {'dm':'EuroCroissance lot 3 éditique RSP - complément',
-                        'ot':'SUPPORT 20160315 - Pré-Prod RSP - C.Guilloit',
-                        'type':'RE7',
-                        'date':'0/1/1900',
-                        'charge':0.1},
-                    {'dm':'Interaction P3- P4 - Arbitrage 30 jours',
-                        'ot':'Interaction P3- P4 - Arbitrage 30 jours - SFD',
-                        'type':'SFD',
-                        'date':'0/1/1900',
-                        'charge':2.3},
-                    {'dm':'Interactions P3 P4 arbitrage 30j',
-                        'ot':'Interactions P3 P4 arbitrage 30j - Analyse',
-                        'type':'SFD',
-                        'date':'0/1/1900',
-                        'charge':0.1},
-                    {'dm':'Interactions P3 P4 arbitrage 30j',
-                        'ot':'Pilotes arbitrage 30j',
-                        'type':'DEV',
-                        'date':'0/1/1900',
-                        'charge':0.1},
-                    {'dm':'Transfert GMO Eurocroissance évolution courrier'
-                        ,'ot':'Transfert GMO Eurocroissance évolution courrier - Tests Hom',
-                        'type':'HOM',
-                        'date':'0/1/1900',
-                        'charge':0.1},
-
-	                
-                    ];
+        var comptDelais = 0;
+        var comptAvance = 0;
+        var comptRetard = 0;
+        var comptTermine = 0;
+        $scope.taches = [];
+        $scope.tacheRetards = [];
+        $scope.tacheAvances = [];
+        $scope.tacheTermines = [];
+         
+                var test = Tache.get(function(data) {
+                    data.listTache.forEach(function(evt){
+                        if(evt.libelleDmDelais !== null){
+                            comptDelais++;
+                        $scope.taches.push(
+                            {id: evt.id, 
+                             dm: evt.libelleDmDelais,
+                             ot: evt.libelleOT,
+                             type: evt.libelleTypeOT,
+                             date : evt.date,
+                             charge: evt.chargePrevue,
+                             restant : evt.chargeRestante}
+                        );
+                        }else if(evt.libelleDmRetard !== null){
+                            comptRetard++;
+                        $scope.tacheRetards.push(
+                            {id: evt.id, 
+                             dm: evt.libelleDmRetard,
+                             ot: evt.libelleOT,
+                             type: evt.libelleTypeOT,
+                             date : evt.date,
+                             charge: evt.chargePrevue,
+                             restant : evt.chargeRestante}
+                        )
+                        }
+                        else if(evt.libelleDmAvance !== null){
+                            comptAvance++;
+                        $scope.tacheAvances.push(
+                            {id: evt.id, 
+                             dm: evt.libelleDmAvance,
+                             ot: evt.libelleOT,
+                             type: evt.libelleTypeOT,
+                             date : evt.date,
+                             charge: evt.chargePrevue,
+                             restant : evt.chargeRestante}
+                        )
+                        }
+                        
+                        else if(evt.libelleDmTermine !== null){
+                            comptTermine++;
+                        $scope.tacheTermines.push(
+                            {id: evt.id, 
+                             dm: evt.libelleDmTermine,
+                             ot: evt.libelleOT,
+                             type: evt.libelleTypeOT,
+                             date : evt.date,
+                             charge: evt.chargePrevue}
+                        )
+                        }
+                        
+                    });
                     
-         $scope.tacheAvances = [
-                    {'dm':'Analyse CQTM - 04/2016','ot':'CQTM 105470','type':'RE7','date':'0/1/1900','charge':0.1},
-                    {'dm':'Suivi Production - 04/2016','ot':'Wapiti 804730','type':'EVO','date':'0/1/1900','charge':0.5},
+                   var totalDelais =  comptAvance + comptRetard;
+                   var totalRetard =  comptAvance + comptDelais;
+                   var totalAvance =  comptDelais + comptRetard;
+                   
+                   $scope.delais = comptDelais;
+                   $scope.retard = comptRetard;
+                   $scope.avance = comptAvance;
+                   $scope.termine = comptTermine;
+                   
+                   $scope.labelDelais = ["Delais", "Autres"];
+                   $scope.dataDelais = [comptDelais, totalDelais];
+                   $scope.options = {responsive: true, percentageInnerCutout: 70};
+                   $scope.coloursDelais = ['#929292','#d8d8d8'];
+                
+                   $scope.labelRetard = ["Retard", "Autres"];
+                   $scope.dataRetard = [comptRetard, totalRetard];
+                   $scope.options = {responsive: true, percentageInnerCutout: 70};
+                   $scope.coloursRetard = ['#dd5e60','#d8d8d8'];
 
-             
-         ]
+                   $scope.labelAvance = ["Avance", "Autres"];
+                   $scope.dataAvance = [comptAvance, totalAvance];
+                   $scope.options = {responsive: true, percentageInnerCutout: 70};
+                   $scope.coloursAvance = ['#72d3a9','#d8d8d8']; 
+                   
+                   $scope.labelTermine = ["Termine", ""];
+                   $scope.dataTermine = [comptTermine, "0"];
+                   $scope.options = {responsive: true, percentageInnerCutout: 70};
+                   $scope.coloursTermine = ['#d8d8d8','#d8d8d8']; 
+                
+                });
+            
          
          $scope.showAdvancedAddTache = function(ev) {
             var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
@@ -237,27 +175,26 @@ angular
         // Use timeout to simulate a 650ms request.
         $scope.demandes = [];
          
-                var test = Tache.get({id: "CNP"}, function(data) {
+                var test = Tache.getDemandeLibelle({tag: "CNP"}, function(data) {
                     data.listTache.forEach(function(evt){
                         $scope.demandes.push(
-                            {id: evt.id, name: evt.libelle}
+                            {id: evt.id, name: evt.libelleDm}
                         )
                     }); 
                 });
-        
         
          };
          
             
                 
         $scope.loadTypes = function() {
-        // Use timeout to simulate a 650ms request.
+     
         $scope.types = [];
        
-          var test = Tache.get(function(data) {
+          var test = Tache.getTypeActiviteLibelle(function(data) {
                     data.listTache.forEach(function(evt){
                         $scope.types.push(
-                            {name: evt.libelle}
+                            {name: evt.libelleTypeOT}
                         )
                     }); 
                 });
@@ -279,5 +216,40 @@ angular
         };
         
          $scope.quantity = 2;
+         
+        $scope.formTacheConsoEnd = { 
+            "codeEnd": ""
+        };
+       // $scope.formTacheConsoEnd.consoEnd ;
+         
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+        
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+        
+        $scope.valider = function() {
+                
+                
+		//var response = $http.post('api/taches/conso', $scope.formTacheConsoEnd);
+                
+                Tache.addConsoEnd($scope.formTacheConsoEnd, function() {});
+		/*response.success(function(data, status, headers, config) {
+                    
+                });
+		response.error(function(data, status, headers, config) {
+		    console.log( "Exception details: " + JSON.stringify({data: data}));
+		});*/
+                
+         console.log($scope.formTacheConsoEnd); 
+                
+          
+        
+         
+      };
+         
+         
     
 }]);

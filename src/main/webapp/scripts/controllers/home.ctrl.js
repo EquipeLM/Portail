@@ -24,10 +24,10 @@ angular
         // Use timeout to simulate a 650ms request.
         $scope.demandes = [];
          
-                var test = Tache.get({id: "CNP"}, function(data) {
+                var test = Tache.getDemandeLibelle({tag: "CNP"}, function(data) {
                     data.listTache.forEach(function(evt){
                         $scope.demandes.push(
-                            {id: evt.id, name: evt.libelle}
+                            {id: evt.id, name: evt.libelleDm}
                         )
                     }); 
                 });
@@ -39,14 +39,14 @@ angular
         // Use timeout to simulate a 650ms request.
         $scope.types = [];
        
-          var test = Tache.get(function(data) {
+          var test = Tache.getTypeActiviteLibelle(function(data) {
                     data.listTache.forEach(function(evt){
                         $scope.types.push(
-                            {name: evt.libelle}
+                            {name: evt.libelleTypeOT}
                         )
                     }); 
                 });
-         console.log(test);
+        
         
         };
         

@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cgi.lemans.portail.controller.beans.ListTacheBean;
 import cgi.lemans.portail.controller.beans.TacheBean;
+import cgi.lemans.portail.controller.beans.TacheCardBean;
 import cgi.lemans.portail.domaine.entites.gamaweb.DemandeOuProjet;
 import cgi.lemans.portail.domaine.entites.gamaweb.OrdreDeTravail;
 import cgi.lemans.portail.domaine.entites.gamaweb.TypeActivite;
@@ -22,6 +23,7 @@ import cgi.lemans.portail.domaine.gamaweb.IOrdreDeTravailDao;
 import cgi.lemans.portail.domaine.gamaweb.ITypeActiviteDao;
 import cgi.lemans.portail.service.ITacheService;
 import cgi.lemans.portail.utils.ConvertUtils;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -60,15 +62,102 @@ public class TacheService implements ITacheService {
 
 	private ListTacheBean allTaches(OrdreDeTravail ordreDeTravail) {
 		ListTacheBean task = new ListTacheBean();
-	
+                
+                
+                double calcul =  ordreDeTravail.getChargeRestante() + ordreDeTravail.getChargeConsommeeTotale();
+                
+                
+                DecimalFormat df = new DecimalFormat("########.00"); 
+                String str = df.format(calcul); 
+                calcul = Double.parseDouble(str.replace(',', '.'));
 
-		task.setLibelleOT(ordreDeTravail.getLibelOT());
-		task.setLibelleTypeOT(ordreDeTravail.getTypeActivite());
-		task.setLibelleDm(ordreDeTravail.getIdDemande().getLibelle());
-		task.setDate(ConvertUtils.formatterDate(ordreDeTravail.getDateFinPrevue()));
-		task.setChargePrevue(ordreDeTravail.getChargePrevue().toString());
+                /*BigDecimal bd = new BigDecimal(calcul);
+                bd= bd.setScale(3,BigDecimal.ROUND_DOWN);
+                calcul = bd.doubleValue();*/
+                
+                task.setLibelleOT(ordreDeTravail.getLibelOT());
+                   task.setLibelleTypeOT(ordreDeTravail.getTypeActivite());
+                   task.setDate(ConvertUtils.formatterDate(ordreDeTravail.getDateFinPrevue()));
+		   task.setChargePrevue(ordreDeTravail.getChargePrevue().toString());
+                   task.setChargeRestante(ordreDeTravail.getChargeRestante().toString());
+                   task.setId(ordreDeTravail.getIdOt());
+                   task.setChargeConso(calcul);
+                   
+               if (ordreDeTravail.getChargeRestante() == 0.0){
+                    task.setLibelleDmTermine(ordreDeTravail.getIdDemande().getLibelle());
+                    
+                    
+               }else if(calcul == ordreDeTravail.getChargePrevue() && ordreDeTravail.getChargeRestante() != 0.0){
+                    task.setLibelleDmDelais(ordreDeTravail.getIdDemande().getLibelle());
+                    
+	
+               } else if (calcul > ordreDeTravail.getChargePrevue() && ordreDeTravail.getChargeRestante() != 0.0){
+                   task.setLibelleDmRetard(ordreDeTravail.getIdDemande().getLibelle());
+                   
+                   
+                } else if (calcul < ordreDeTravail.getChargePrevue() && ordreDeTravail.getChargeRestante() != 0.0){
+                   task.setLibelleDmAvance(ordreDeTravail.getIdDemande().getLibelle());
+                   
+                }
+                    
+                
 
 		return task;
+                
+	}
+	
+	private ListTacheBean allTachesEquipe(OrdreDeTravail ordreDeTravail) {
+		ListTacheBean task = new ListTacheBean();
+                
+                
+                double calcul =  ordreDeTravail.getChargeRestante() + ordreDeTravail.getChargeConsommeeTotale();
+                
+                
+                DecimalFormat df = new DecimalFormat("########.00"); 
+                String str = df.format(calcul); 
+                calcul = Double.parseDouble(str.replace(',', '.'));
+
+                /*BigDecimal bd = new BigDecimal(calcul);
+                bd= bd.setScale(3,BigDecimal.ROUND_DOWN);
+                calcul = bd.doubleValue();*/
+                
+                    task.setLibelleOT(ordreDeTravail.getLibelOT());
+                   task.setLibelleTypeOT(ordreDeTravail.getTypeActivite());
+                   task.setDate(ConvertUtils.formatterDate(ordreDeTravail.getDateFinPrevue()));
+		   task.setChargePrevue(ordreDeTravail.getChargePrevue().toString());
+                   task.setChargeRestante(ordreDeTravail.getChargeRestante().toString());
+                   task.setId(ordreDeTravail.getIdOt());
+                   task.setChargeConso(calcul);
+                   task.setTrigramme(ordreDeTravail.getRessource().getIdRessource());
+                   
+               
+                if(ordreDeTravail.getIdDemande() != null){   
+                   
+                    if (ordreDeTravail.getChargeRestante() == 0.0){
+                        task.setLibelleDmTermine(ordreDeTravail.getIdDemande().getLibelle());
+
+
+                   }else if(calcul == ordreDeTravail.getChargePrevue() && ordreDeTravail.getChargeRestante() != 0.0){
+
+                        task.setLibelleDmDelais(ordreDeTravail.getIdDemande().getLibelle());
+                       
+
+
+                   } else if (calcul > ordreDeTravail.getChargePrevue() && ordreDeTravail.getChargeRestante() != 0.0){
+                       task.setLibelleDmRetard(ordreDeTravail.getIdDemande().getLibelle());
+
+
+                    } else if (calcul < ordreDeTravail.getChargePrevue() && ordreDeTravail.getChargeRestante() != 0.0){
+                       task.setLibelleDmAvance(ordreDeTravail.getIdDemande().getLibelle());
+
+                    }
+                 
+                    
+                }
+
+		return task;
+                
+                
 	}
 
 	@Override
@@ -112,5 +201,27 @@ public class TacheService implements ITacheService {
 
 		return taskRetour;
 	}
+        
+        @Override
+	public TacheBean afficherTacheEquipe(String tag) {
+		List<OrdreDeTravail> allOtEquipe = ordreDeTravailDao.findAllDemandeEquipe(tag);
+		TacheBean taskRetour = new TacheBean();
+		List<ListTacheBean> absResources = new ArrayList<ListTacheBean>();
+		for (OrdreDeTravail ordreDeTravail : allOtEquipe) {
+			absResources.add(allTachesEquipe(ordreDeTravail));
+
+		}
+		taskRetour.setListTache(absResources);
+
+		return taskRetour;
+	}
+
+    @Override
+    public TacheCardBean enregistrerConsoEnd(String idRessource, TacheCardBean bean) {
+        OrdreDeTravail consoEndTache = new OrdreDeTravail();
+        consoEndTache.setChargeConsommeeTotale(Double.parseDouble(bean.getChargeConsomme()));
+        ordreDeTravailDao.create(consoEndTache);
+        return bean;
+    }
 
 }

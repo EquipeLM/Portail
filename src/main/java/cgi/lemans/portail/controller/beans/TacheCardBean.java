@@ -22,6 +22,7 @@ public class TacheCardBean {
     private String chargeConsomme;
     private String RessourceNom;
     private String RessourcePrenom;
+    
 
     public String getDemandeRetard() {
         return demandeRetard;

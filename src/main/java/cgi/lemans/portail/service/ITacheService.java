@@ -5,7 +5,9 @@
  */
 package cgi.lemans.portail.service;
 
+
 import cgi.lemans.portail.controller.beans.TacheBean;
+import cgi.lemans.portail.controller.beans.TacheCardBean;
 
 /**
  *
@@ -18,5 +20,9 @@ public interface ITacheService {
     public TacheBean recupererInfosTypeOTModal();
     
     public TacheBean recupererListDemande(String tag);
+    
+    public TacheBean afficherTacheEquipe(String equipeChoisie);
+    
+    public TacheCardBean enregistrerConsoEnd(String idRessource, TacheCardBean bean);
     
 }

@@ -6,6 +6,7 @@
 package cgi.lemans.portail.controller;
 
 import cgi.lemans.portail.controller.beans.TacheBean;
+import cgi.lemans.portail.controller.beans.TacheCardBean;
 import cgi.lemans.portail.controller.beans.UtilisateurBean;
 import cgi.lemans.portail.service.ITacheService;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,7 +45,7 @@ public class TacheController {
 		return user;
 	}
         
-        @RequestMapping(value = "/tache", method = RequestMethod.GET)
+        @RequestMapping(value = "", method = RequestMethod.GET)
 	public ResponseEntity<TacheBean> getInfosAllDemande(HttpServletRequest request) {
             UtilisateurBean user = addUtilisateurSession(request.getSession());
            
@@ -53,16 +55,39 @@ public class TacheController {
 		return new ResponseEntity<TacheBean>(infosSend, HttpStatus.OK);
 	}
         
-        @RequestMapping(value = "/{tag}", method = RequestMethod.GET)
+        @RequestMapping(value = "/tache/equipe/{tag}", method = RequestMethod.GET)
+	public ResponseEntity<TacheBean> infosEquipeTache(@PathVariable String tag,
+			 HttpServletRequest request) {
+		TacheBean infosSend = (TacheBean) tacheService.afficherTacheEquipe(tag);
+		return new ResponseEntity<TacheBean>(infosSend, HttpStatus.OK);
+	};
+        
+        
+        // permet d'afficher demande dans modal
+        @RequestMapping(value = "/tache/demande/libelle/{tag}", method = RequestMethod.GET)
 	public ResponseEntity<TacheBean> getInfosTacheAjoutDM(@PathVariable String tag, HttpServletRequest request) {
 		TacheBean infosSend = tacheService.recupererDemandeModal(tag);
 		return new ResponseEntity<TacheBean>(infosSend, HttpStatus.OK);
 	}
         
-        @RequestMapping(value = "", method = RequestMethod.GET)
+        @RequestMapping(value = "/tache/typeActivite/libelle", method = RequestMethod.GET)
 	public ResponseEntity<TacheBean> getInfosTacheAjoutTypeOT(HttpServletRequest request) {
 		TacheBean infosSend = tacheService.recupererInfosTypeOTModal();
 		return new ResponseEntity<TacheBean>(infosSend, HttpStatus.OK);
+	}
+        
+        @RequestMapping(value = "/tache/ajout/consoEnd", method = RequestMethod.POST)
+	public ResponseEntity<TacheCardBean> ajouterConsoEnd(@RequestBody TacheCardBean bean,
+			HttpServletRequest request) {
+		UtilisateurBean user = addUtilisateurSession(request.getSession());
+		if (user != null && UtilisateurBean.USER_TRI.equals(user.getTrigramme())) {
+			tacheService.enregistrerConsoEnd(user.getTrigramme(), bean);
+		} else {
+			// TODO: Equipe implémentation des erreurs
+		}
+		// FIXME: Le code retourné est toujours OK mais ça ne veut pas dire que
+		// c'est vrai tq les exceptions ne sont pas gérées.
+		return new ResponseEntity<TacheCardBean>(bean, HttpStatus.OK);
 	}
         
 

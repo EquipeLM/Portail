@@ -1,27 +1,35 @@
 <div ng-controller="TachesCtrl">
   <div id="graphique">
-    <div class="cont">
+    <div class="cont1">
       <table class="table-responsive">
           <tr>
 
             <td class="graph-card">
-              <canvas id="conges" class="chart chart-doughnut" chart-data="dataRetard" chart-labels="labelRetard" chart-colours="coloursRetard" width="120" height="110" chart-options="options"></canvas>
-              <div id="indicateur_taches"><p class="indicateur" id="conge_restant"> > prevu</p></div>
+              <canvas class="chart chart-doughnut" chart-data="dataRetard" chart-labels="labelRetard" chart-colours="coloursRetard" width="130" height="130" chart-options="options"></canvas>
+              <div id="indicateur_taches"><p class="indicateur" id="conge_restant"> {{ retard }}</p></div>
               <div id="titre_blanc"><p> Hors délais </p></div>
               <br>
             </td>
             
             <td class="graph-card">
-                <canvas id="rtt_q1" class="chart chart-doughnut"chart-data="dataDelais" chart-labels="labelDelais" chart-colours="coloursDelais" width="120" height="110" chart-options="options"></canvas>
-                <div id="indicateur_taches"><p class="indicateur" id="rttQ1_restant"> = prevu</p></div>
+                <canvas class="chart chart-doughnut"chart-data="dataDelais" chart-labels="labelDelais" chart-colours="coloursDelais" width="130" height="130" chart-options="options"></canvas>
+                <div id="indicateur_taches"><p class="indicateur" id="rttQ1_restant"> {{ delais }}</p></div>
                 <div id="titre_blanc"><p>Dans les délais</p></div>
                 <br>
             </td>
-            
+          </tr>
+          <tr>
             <td class="graph-card">
-                <canvas id="rtt_q2" class="chart chart-doughnut"chart-data="dataAvance" chart-labels="labelAvance" chart-colours="coloursAvance" width="120" height="110" chart-options="options"></canvas>
-                <div id="indicateur_taches"><p class="indicateur" id="rttQ2_restant"> < prevu</p></div>
+                <canvas class="chart chart-doughnut"chart-data="dataAvance" chart-labels="labelAvance" chart-colours="coloursAvance" width="130" height="130" chart-options="options"></canvas>
+                <div id="indicateur_taches"><p class="indicateur" id="rttQ2_restant"> {{ avance }}</p></div>
                 <div id="titre_blanc"><p>En avance</p></div>
+                <br>
+            </td> 
+            
+             <td class="graph-card">
+                <canvas class="chart chart-doughnut"chart-data="dataTermine" chart-labels="labelTermine" chart-colours="coloursTermine" width="130" height="130" chart-options="options"></canvas>
+                <div id="indicateur_taches"><p class="indicateur" id="rttQ3_restant"> {{ termine }}</p></div>
+                <div id="titre_blanc"><p>Terminé</p></div>
                 <br>
             </td> 
 
@@ -31,60 +39,6 @@
   </div>
     
     
-    <div class="tableau">
-        <h5 class="enRetard"> Hors délais : </h5>
-        <table class="infos_tache">
-            <tr ng-repeat="tacheRetard in tacheRetards | limitTo:quantity">
-                <td>{{ tacheRetard.dm }}</td>
-                <td>{{ tacheRetard.ot }}</td>
-                <td style="text-align: center">{{ tacheRetard.type }}</td>
-                <td style="text-align: center">{{ tacheRetard.date }}</td>
-                <td style="text-align: center">{{ tacheRetard.charge }}</td>
-                <td class="icon-screen"><a href="" ng-click="showAdvancedEnd($event)"><i class="fa fa-flag-checkered fa colorfa" aria-hidden="true"></i></a>
-                </td>
-                <td class="icon-screen"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa fa" aria-hidden="true"></i></a>
-                </td>
-                <td class="icon-screen"><a href="" ng-click="showAdvancedComs($event)"><i class="fa fa-comments-o colorfa fa" aria-hidden="true"></i></a>
-                </td>
-            </tr>
-          
-        </table>
-        <h5 class="enDelais"> Dans les délais : </h5>
-        <table class="infos_tache">
-            <tr ng-repeat="tache in taches |  limitTo:quantity">
-                <td>{{ tache.dm }}</td>
-                <td>{{ tache.ot }}</td>
-                <td style="text-align: center">{{ tache.type }}</td>
-                <td style="text-align: center">{{ tache.date }}</td>
-                <td style="text-align: center">{{ tache.charge }}</td>
-                <td class="icon-screen"><a href="" ng-click="showAdvancedEnd($event)"><i class="fa fa-flag-checkered fa colorfa" aria-hidden="true"></i></a>
-                </td>
-                <td class="icon-screen"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa fa" aria-hidden="true"></i></a>
-                </td>
-                <td class="icon-screen"><a href="" ng-click="showAdvancedComs($event)"><i class="fa fa-comments-o colorfa fa" aria-hidden="true"></i></a>
-            </td>
-            
-          </tr>
-            
-        </table>
-        <h5 class="enAvance"> En Avance : </h5>
-        <table class="infos_tache">
-           <tr ng-repeat="tacheAvance in tacheAvances | limitTo:quantity">
-                <td>{{ tacheAvance.dm }}</td>
-                <td>{{ tacheAvance.ot }}</td>
-                <td style="text-align: center">{{ tacheAvance.type }}</td>
-                <td style="text-align: center">{{ tacheAvance.date }}</td>
-                <td style="text-align: center">{{ tacheAvance.charge }}</td>
-                <td class="icon-screen"><a href="" ng-click="showAdvancedEnd($event)"><i class="fa fa-flag-checkered  colorfa" aria-hidden="true"></i></a>
-                </td>
-                <td class="icon-screen"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa " aria-hidden="true"></i></a>
-                </td>
-                <td class="icon-screen"><a href="" ng-click="showAdvancedComs($event)"><i class="fa fa-comments-o colorfa " aria-hidden="true"></i></a>
-                </td>
-            
-          </tr>
-            
-        </table>
-    </div>
+   
   
 </div>

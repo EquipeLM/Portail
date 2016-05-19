@@ -72,7 +72,7 @@ public class AbsenceController {
 		return new ResponseEntity<AbsenceBean>(infosSend, HttpStatus.OK);
 	};
         
-        @RequestMapping(value = "/JourFerie", method = RequestMethod.GET)
+        @RequestMapping(value = "/absence/jourFerie", method = RequestMethod.GET)
 	public ResponseEntity<AbsenceBean> infosUseAbsenceJourFerie(HttpServletRequest request) {
 		AbsenceBean infosSend = absenceService.recupererJourFerie();
 		return new ResponseEntity<AbsenceBean>(infosSend, HttpStatus.OK);
@@ -92,13 +92,13 @@ public class AbsenceController {
 		return new ResponseEntity<AbsenceCardBean>(bean, HttpStatus.OK);
 	}
         
-        @RequestMapping(value = "/absence/solde", method = RequestMethod.POST)
+        @RequestMapping(value = "/absence/Updatesolde", method = RequestMethod.POST)
 	public ResponseEntity<AbsenceCardBean> ajouterSolde(@RequestBody AbsenceCardBean bean,
 			HttpServletRequest request) {
 		UtilisateurBean user = addUtilisateurSession(request.getSession());
 		if (user != null && UtilisateurBean.USER_TRI.equals(user.getTrigramme())) {
                         
-			//absenceService.enregistrerSoldeParTypes(user.getTrigramme(), bean);
+		absenceService.enregistrerSoldeParTypes(user.getTrigramme(), bean);
 		} else {
 			// TODO: Equipe implémentation des erreurs
 		}

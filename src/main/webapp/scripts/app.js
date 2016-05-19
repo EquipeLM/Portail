@@ -38,6 +38,10 @@ angular
                 templateUrl: './views/taches.html',
                 controller: 'TachesCtrl'
             }).
+                    when('/tachesEquipe', {
+                templateUrl: './views/tachesEquipe.html',
+                controller: 'TeamCtrl'
+            }).
             otherwise({
                 redirectTo: '/home'
             });

@@ -49,7 +49,7 @@ $scope.uiConfig = {
            $scope.eventsF = [];
       
         
-           Absence.get(function(data){
+           Absence.getJourFerie(function(data){
                     $scope.eventsF.splice(0, $scope.eventsF.length); 
               data.listEvent.forEach(function(evt){
                       
@@ -226,13 +226,9 @@ $scope.uiConfig = {
         $mdDialog.cancel();
       };
       $scope.valider = function() {
-                
-                
-		var response = $http.post('api/absences/absence', $scope.formData);
-                
+	var response = $http.post('api/absences/absence', $scope.formData); 
                 Absence.save($scope.formData, function() {
-                       //va appeler ta fonction ajouterAbsence avec les valeurs bindées dans formData
-                       
+                       //va appeler ta fonction ajouterAbsence avec les valeurs bindées dans formData      
                 });
 		response.success(function(data, status, headers, config) {
                     
@@ -241,16 +237,12 @@ $scope.uiConfig = {
 		    console.log( "Exception details: " + JSON.stringify({data: data}));
 		});
          console.log($scope.formData); 
-                
-          
-        
-         
+  
       };
       
-      $scope.validerSolde = function() {
-                
-                
-		var response = $http.post('api/absences/absence/solde', $scope.formSolde);
+      
+            $scope.validerSolde = function() {
+		//var response = $http.post('api/absences/absence/solde', $scope.formSolde);
                 
                 Absence.save($scope.formSolde, function() {
                        //va appeler ta fonction ajouterAbsence avec les valeurs bindées dans formData
@@ -263,9 +255,6 @@ $scope.uiConfig = {
 		    console.log( "Exception details: " + JSON.stringify({data: data}));
 		});
          console.log($scope.formSolde); 
-                
-          
-        
          
       };
    
