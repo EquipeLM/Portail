@@ -14,12 +14,17 @@
         <form role="form">
             <div class="form-group row inputSolde">
             <div class="col-sm-2"></div>
-                <md-input-container class="md-block col-sm-8" flex-gt-sm>
-                    <input name="Conso3" ng-model="formTacheConsoEnd.consoEnd" placeholder="Charge consommée" required ng-pattern="/^[0-9]{5}$/">
-                </md-input-container>   
+                <md-input-container class="md-icon-float md-icon-right md-block">
+                    <label>Consommation totale</label>
+                    
+                    <input ng-model="formTacheConsoEnd.consoEnd" type="number" step="0.1">
+                    
+                </md-input-container>
+            
             </div>
         </form>
       </div>
+        
     </md-dialog-content>
     <md-dialog-actions layout="row"> 
       

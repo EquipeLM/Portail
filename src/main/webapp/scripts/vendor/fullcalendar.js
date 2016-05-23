@@ -602,7 +602,7 @@ fc.divideDurationByDuration = divideDurationByDuration;
 fc.multiplyDuration = multiplyDuration;
 fc.durationHasTime = durationHasTime;
 
-var dayIDs = [ 'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat' ];
+var dayIDs = [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ];
 var intervalUnits = [ 'year', 'month', 'week', 'day', 'hour', 'minute', 'second', 'millisecond' ];
 
 

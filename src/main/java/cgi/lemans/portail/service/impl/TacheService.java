@@ -17,9 +17,11 @@ import cgi.lemans.portail.controller.beans.TacheBean;
 import cgi.lemans.portail.controller.beans.TacheCardBean;
 import cgi.lemans.portail.domaine.entites.gamaweb.DemandeOuProjet;
 import cgi.lemans.portail.domaine.entites.gamaweb.OrdreDeTravail;
+import cgi.lemans.portail.domaine.entites.gamaweb.RessourceTma;
 import cgi.lemans.portail.domaine.entites.gamaweb.TypeActivite;
 import cgi.lemans.portail.domaine.gamaweb.IDemandeOuProjetDao;
 import cgi.lemans.portail.domaine.gamaweb.IOrdreDeTravailDao;
+import cgi.lemans.portail.domaine.gamaweb.IRessourceTmaDao;
 import cgi.lemans.portail.domaine.gamaweb.ITypeActiviteDao;
 import cgi.lemans.portail.service.ITacheService;
 import cgi.lemans.portail.utils.ConvertUtils;
@@ -42,6 +44,9 @@ public class TacheService implements ITacheService {
 
 	@Autowired
 	private ITypeActiviteDao typeActiviteDao;
+        
+        @Autowired
+	private IRessourceTmaDao ressourceTmaDao;
 
 	private ListTacheBean tacheDm(DemandeOuProjet demandeOuProjet) {
 		ListTacheBean task = new ListTacheBean();
@@ -159,6 +164,13 @@ public class TacheService implements ITacheService {
                 
                 
 	}
+        
+        private ListTacheBean quiModal(RessourceTma ressourceTma) {
+		ListTacheBean task = new ListTacheBean();
+                task.setNom(ressourceTma.getNom());
+                task.setPrenom(ressourceTma.getPrenom());
+                return task;
+        }
 
 	@Override
 	public TacheBean recupererDemandeModal(String tag) {
@@ -219,9 +231,23 @@ public class TacheService implements ITacheService {
     @Override
     public TacheCardBean enregistrerConsoEnd(String idRessource, TacheCardBean bean) {
         OrdreDeTravail consoEndTache = new OrdreDeTravail();
-        consoEndTache.setChargeConsommeeTotale(Double.parseDouble(bean.getChargeConsomme()));
+        consoEndTache.setChargeConsommeeTotale(ConvertUtils.parseDouble(bean.getChargeConsomme()));
         ordreDeTravailDao.create(consoEndTache);
         return bean;
+    }
+
+    @Override
+    public TacheBean recupererListQui(String tag) {
+        List<RessourceTma> quiTAcheModal = ressourceTmaDao.findQuiEquipe(tag);
+		TacheBean taskRetour = new TacheBean();
+		List<ListTacheBean> absResources = new ArrayList<ListTacheBean>();
+		for (RessourceTma ressourceTma : quiTAcheModal) {
+			absResources.add(quiModal(ressourceTma));
+
+		}
+		taskRetour.setListTache(absResources);
+
+		return taskRetour;
     }
 
 }

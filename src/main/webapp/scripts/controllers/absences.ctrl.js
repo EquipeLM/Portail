@@ -20,13 +20,16 @@ $scope.uiConfig = {
         },
         refetchEvents : true,
         weekNumbers: true,
-        eventClick: $scope.showAdvanced
+        
+        monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+        dayNamesShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+        
       }
     }
     
     
     
-    
+        
         $scope.events = [];
       
         
@@ -46,6 +49,8 @@ $scope.uiConfig = {
                        
            });
            
+           
+            
            $scope.eventsF = [];
       
         
@@ -237,6 +242,7 @@ $scope.uiConfig = {
 		    console.log( "Exception details: " + JSON.stringify({data: data}));
 		});
          console.log($scope.formData); 
+         	
   
       };
       

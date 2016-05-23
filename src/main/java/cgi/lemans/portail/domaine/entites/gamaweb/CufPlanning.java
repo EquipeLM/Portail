@@ -5,9 +5,12 @@ import cgi.lemans.portail.domaine.entites.gamaweb.EntiteGamaweb;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -25,12 +28,14 @@ import javax.persistence.Table;
 public class CufPlanning extends EntiteGamaweb{
    
     @Id 
-    @GeneratedValue 
+    
     @Column(name="idPlanning")
     private Integer idPlanning;
     
-    @Column(name="idOT")
-    private Integer idOT;
+    @NotFound(action=NotFoundAction.IGNORE)
+    @ManyToOne
+    @JoinColumn(name="idOT")
+    private OrdreDeTravail idOT;
     
     @Column(name="idRessource")
     private String idResource;
@@ -62,11 +67,11 @@ public class CufPlanning extends EntiteGamaweb{
         this.idPlanning = idPlanning;
     }
 
-    public Integer getIdOT() {
+    public OrdreDeTravail getIdOT() {
         return idOT;
     }
 
-    public void setIdOT(Integer idOT) {
+    public void setIdOT(OrdreDeTravail idOT) {
         this.idOT = idOT;
     }
 

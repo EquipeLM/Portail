@@ -201,25 +201,30 @@ angular
         
         };
 
-        $scope.loadUsers = function() {
-        // Use timeout to simulate a 650ms request.
+       $scope.loadUsers = function() {
+          
         $scope.users = [];
-        return $timeout(function() {
-          $scope.users = [
-            { id: 1, name: 'Prenom Nom' },
-            { id: 2, name: 'Prenom Nom' },
-            { id: 3, name: 'Prenom Nom' },
-            { id: 4, name: 'Prenom Nom' },
-            { id: 5, name: 'Prenom Nom' },
-          ];
-        }, 650);
+       
+          var test = Tache.getRessourceTri({tag :"CNP"},function(data) {
+                    data.listTache.forEach(function(evt){
+                        $scope.users.push(
+                            {name: evt.nom +' '+ evt.prenom}
+                        )
+                    });
+                    
+                });
+        
         };
         
-         $scope.quantity = 2;
+        
+        
+        
          
-        $scope.formTacheConsoEnd = { 
-            "codeEnd": ""
-        };
+        $scope.formTacheConsoEnd = {};
+        $scope.formTacheConsoEnd.consoEnd;
+        
+            
+        
        // $scope.formTacheConsoEnd.consoEnd ;
          
         $scope.hide = function() {

@@ -26,6 +26,7 @@ public class OrdreDeTravailDao extends AbstractGenericDaoGamaweb<OrdreDeTravail>
                             
                             + "where a.typeActivite!='HTM' "
                             
+                            
                             + "and a.ressource.idRessource = :idRessource" ;
 		Query query = getSession().createQuery(hql);
 		query.setParameter("idRessource", idRessource);
@@ -43,7 +44,8 @@ public class OrdreDeTravailDao extends AbstractGenericDaoGamaweb<OrdreDeTravail>
                             //+ "left join a.ressource ref " 
                             + "where a.ressource.tags " 
                             + "like :equipeChoisie "
-                            + "and a.typeActivite != 'HTM'"
+                            + "and a.typeActivite != 'HTM' "
+                            + "and a.chargeRestante != 0"
                            ;
 		Query query = getSession().createQuery(hql);
 		query.setParameter("equipeChoisie", '%'+ tag + '%');

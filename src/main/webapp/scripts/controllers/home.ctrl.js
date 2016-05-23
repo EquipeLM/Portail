@@ -20,7 +20,7 @@ angular
             })  
         };
      
-    $scope.loadDemandes = function() {
+     $scope.loadDemandes = function() {
         // Use timeout to simulate a 650ms request.
         $scope.demandes = [];
          
@@ -32,11 +32,12 @@ angular
                     }); 
                 });
         
-        
          };
-    
-    $scope.loadTypes = function() {
-        // Use timeout to simulate a 650ms request.
+         
+            
+                
+        $scope.loadTypes = function() {
+     
         $scope.types = [];
        
           var test = Tache.getTypeActiviteLibelle(function(data) {
@@ -44,31 +45,37 @@ angular
                         $scope.types.push(
                             {name: evt.libelleTypeOT}
                         )
-                    }); 
+                    });
+                    
                 });
+                
         
+        };
+
+       $scope.loadUsers = function() {
+          
+        $scope.users = [];
+       
+          var test = Tache.getRessourceTri({tag :"CNP"},function(data) {
+                    data.listTache.forEach(function(evt){
+                        $scope.users.push(
+                            {name: evt.nom +' '+ evt.prenom}
+                        )
+                    });
+                    
+                });
         
         };
         
+       
+    
     
     
      $scope.formDataTache = {};
 	//$scope.formDataTache.designation = 
+     
+      
     
-    $scope.loadUsers = function() {
-    $scope.users = [];
-         
-                var test = Absence.getByEquipe({id: "CNP", month:new DayPilot.Date().getMonth()}, function(data) {
-                    data.listEvent.forEach(function(evt){
-                        $scope.users.push(
-                            {name : evt.nom}
-                        )
-                    }); 
-                });
-        
-        
-         };
-                    
                     
     $scope.status = '  ';
     $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');

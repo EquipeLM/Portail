@@ -17,4 +17,6 @@ import java.util.List;
 public interface IDemandeOuProjetDao extends IGenericDao<Serializable, DemandeOuProjet> {
     
     public List<DemandeOuProjet> findListDemande(String tag);
+    
+    
 }

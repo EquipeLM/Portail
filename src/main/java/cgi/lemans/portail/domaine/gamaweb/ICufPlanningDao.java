@@ -6,7 +6,7 @@
 package cgi.lemans.portail.domaine.gamaweb;
 
 import cgi.lemans.portail.domaine.IGenericDao;
-import cgi.lemans.portail.domaine.entites.gamaweb.RessourceTma;
+import cgi.lemans.portail.domaine.entites.gamaweb.CufPlanning;
 import java.io.Serializable;
 import java.util.List;
 
@@ -14,8 +14,8 @@ import java.util.List;
  *
  * @author souchul
  */
-public interface IRessourceTmaDao extends IGenericDao<Serializable, RessourceTma>{
+public interface ICufPlanningDao extends IGenericDao<Serializable, CufPlanning>{
     
-  public List<RessourceTma> findQuiEquipe(String tag);
+   public List<CufPlanning> findListDemandePlanning (String tag) ;
     
 }

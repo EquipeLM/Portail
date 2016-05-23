@@ -76,6 +76,12 @@ public class TacheController {
 		return new ResponseEntity<TacheBean>(infosSend, HttpStatus.OK);
 	}
         
+        @RequestMapping(value = "/tache/ressource/tri/{tag}", method = RequestMethod.GET)
+	public ResponseEntity<TacheBean> getInfosQuiOT(@PathVariable String tag, HttpServletRequest request) {
+		TacheBean infosSend = tacheService.recupererListQui(tag);
+		return new ResponseEntity<TacheBean>(infosSend, HttpStatus.OK);
+	}
+        
         @RequestMapping(value = "/tache/ajout/consoEnd", method = RequestMethod.POST)
 	public ResponseEntity<TacheCardBean> ajouterConsoEnd(@RequestBody TacheCardBean bean,
 			HttpServletRequest request) {

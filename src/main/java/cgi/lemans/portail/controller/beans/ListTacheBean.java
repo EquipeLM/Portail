@@ -27,6 +27,8 @@ public class ListTacheBean {
     private int compteurDelais;
     private int compteurAvance;
     private String trigramme;
+    private String nom;
+    private String prenom;
 
 
     public int getId() {
@@ -160,6 +162,23 @@ public class ListTacheBean {
     public void setTrigramme(String trigramme) {
         this.trigramme = trigramme;
     }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+    
     
     
 

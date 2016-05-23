@@ -859,3 +859,6 @@ color-black{
     padding-left: 15%;
 }
 
+md-input-container.md-icon-right {
+    padding-left: 0px;
+}

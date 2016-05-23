@@ -29,6 +29,15 @@ angular
 						url:'api/taches/tache/typeActivite/libelle',
 						isArray: false
 					},
+                                        getRessourceTri : {
+						method: 'GET',
+                                                param : {
+                                                        tag: '@tag',
+                                                },
+						
+						url:'api/taches/tache/ressource/tri/:tag',
+						isArray: false
+					},
                                         addConsoEnd : {
 						method: 'POST',
                                                 param : {},
