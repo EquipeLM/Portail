@@ -192,6 +192,7 @@ public class TacheService implements ITacheService {
 		TacheBean taskRetour = new TacheBean();
 		List<ListTacheBean> absResources = new ArrayList<ListTacheBean>();
 		for (TypeActivite typeActivite : listot) {
+                   
 			absResources.add(tacheOT(typeActivite));
 
 		}

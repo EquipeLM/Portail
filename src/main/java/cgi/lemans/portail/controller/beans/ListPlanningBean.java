@@ -12,9 +12,11 @@ package cgi.lemans.portail.controller.beans;
 public class ListPlanningBean {
  
     private int id;
-    private int semaine;
+    private String semaine;
     private int idOt;
     private String trigramme;
+    private double planifie;
+    private String sem;
 
     public int getId() {
         return id;
@@ -24,11 +26,11 @@ public class ListPlanningBean {
         this.id = id;
     }
 
-    public int getSemaine() {
+    public String getSemaine() {
         return semaine;
     }
 
-    public void setSemaine(int semaine) {
+    public void setSemaine(String semaine) {
         this.semaine = semaine;
     }
 
@@ -47,6 +49,25 @@ public class ListPlanningBean {
     public void setTrigramme(String trigramme) {
         this.trigramme = trigramme;
     }
+
+    public double getPlanifie() {
+        return planifie;
+    }
+
+    public void setPlanifie(double planifie) {
+        this.planifie = planifie;
+    }
+
+    public String getSem() {
+        return sem;
+    }
+
+    public void setSem(String sem) {
+        this.sem = sem;
+    }
+    
+    
+    
     
     
     

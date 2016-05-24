@@ -13,26 +13,14 @@ import java.util.List;
  */
 public class PlanningBean {
     
-    private String trigramme;
-    private String libelleDM;
-    private String libelleOT;
-    private String type;
-    private String consommé;
-    private String raf;
-    private String prevue;
-    private String planifie;
-    private int idOt;
     
+    private String libelleDM;
+    
+    private String idDm;
+    private List<ListOTPlanningBean> listOTPlanning;
+    
+
    
-    private List<ListPlanningBean> listPlanning;
-
-    public String getTrigramme() {
-        return trigramme;
-    }
-
-    public void setTrigramme(String trigramme) {
-        this.trigramme = trigramme;
-    }
 
     public String getLibelleDM() {
         return libelleDM;
@@ -42,73 +30,24 @@ public class PlanningBean {
         this.libelleDM = libelleDM;
     }
 
-    public String getLibelleOT() {
-        return libelleOT;
+
+    public String getIdDm() {
+        return idDm;
     }
 
-    public void setLibelleOT(String libelleOT) {
-        this.libelleOT = libelleOT;
+    public void setIdDm(String idDm) {
+        this.idDm = idDm;
     }
 
-    public String getType() {
-        return type;
+    public List<ListOTPlanningBean> getListOTPlanning() {
+        return listOTPlanning;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getConsommé() {
-        return consommé;
-    }
-
-    public void setConsommé(String consommé) {
-        this.consommé = consommé;
-    }
-
-    public String getRaf() {
-        return raf;
-    }
-
-    public void setRaf(String raf) {
-        this.raf = raf;
-    }
-
-    public String getPrevue() {
-        return prevue;
-    }
-
-    public void setPrevue(String prevue) {
-        this.prevue = prevue;
-    }
-
-    public String getPlanifie() {
-        return planifie;
-    }
-
-    public void setPlanifie(String planifie) {
-        this.planifie = planifie;
-    }
-
-    public int getIdOt() {
-        return idOt;
-    }
-
-    public void setIdOt(int idOt) {
-        this.idOt = idOt;
+    public void setListOTPlanning(List<ListOTPlanningBean> listOTPlanning) {
+        this.listOTPlanning = listOTPlanning;
     }
     
     
-    
-
-
-    public List<ListPlanningBean> getListPlanning() {
-        return listPlanning;
-    }
-
-    public void setListPlanning(List<ListPlanningBean> listPlanning) {
-        this.listPlanning = listPlanning;
-    }
     
     
     

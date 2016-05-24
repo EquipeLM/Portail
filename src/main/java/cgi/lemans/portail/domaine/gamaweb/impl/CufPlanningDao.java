@@ -22,12 +22,10 @@ public class CufPlanningDao extends AbstractGenericDaoGamaweb<CufPlanning> imple
     @Override
     public List<CufPlanning> findListDemandePlanning(String tag) {
         
-        String hql = "from CufPlanning a "
-                   //+ "left join a.idOT b "
-                   //+ "left join b.idDemande c "
+        String hql = "from CufPlanning a " 
                    + "where a.equipePlanning " 
                    + "like :equipeChoisie "
-                   //+ "and right(a.noSem,2) >= weekofyear(now())"
+                   
                    ;
               
         Query query = getSession().createQuery(hql);

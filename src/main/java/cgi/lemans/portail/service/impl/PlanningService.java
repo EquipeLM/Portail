@@ -5,12 +5,15 @@
  */
 package cgi.lemans.portail.service.impl;
 
+import cgi.lemans.portail.controller.beans.ListOTPlanningBean;
 import cgi.lemans.portail.controller.beans.ListPlanningBean;
 import cgi.lemans.portail.controller.beans.PlanningBean;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufPlanning;
 import cgi.lemans.portail.domaine.gamaweb.ICufPlanningDao;
 import cgi.lemans.portail.service.IPlanningService;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,60 +35,84 @@ public class PlanningService implements IPlanningService{
 	
 
     @Override
-    
     public List<PlanningBean> afficherPlanningEquipe(String tag) {
-       
-       Map<Integer, PlanningBean> planByidOT = new HashMap<Integer, PlanningBean>();
-               List<CufPlanning> listEquipePlanning = cufPlanningDao.findListDemandePlanning(tag);
+        Map<String, PlanningBean> planByidDM = new HashMap<String, PlanningBean>();
+        List<CufPlanning> listEquipePlanning = cufPlanningDao.findListDemandePlanning(tag);
       
-                              for (CufPlanning cufPlanning : listEquipePlanning) {
-                                             
-                                              
-                                              Integer idOT = cufPlanning.getIdOT();
-                                                
-                                             
-                              }
-                              return new ArrayList<>(planByidOT.values());
+            for (CufPlanning cufPlanning : listEquipePlanning) {
+                ListOTPlanningBean plan = planningOTEquipe(tag);
+                final String idDM = cufPlanning.getIdOT().getIdDemande().getIdDemande();
+                if (!planByidDM.keySet().contains(idDM)) {
+                    PlanningBean planRetour = new PlanningBean();
+                   
+                    planRetour.setIdDm(cufPlanning.getIdOT().getIdDemande().getIdDemande());
+                    planRetour.setLibelleDM(cufPlanning.getIdOT().getIdDemande().getLibelle());
+                    planRetour.setListOTPlanning(new ArrayList<ListOTPlanningBean>());
+                    planByidDM.put(idDM, planRetour);
+                    }
+                planByidDM.get(idDM).getListOTPlanning().add(plan);
+            }
+                              
+            return new ArrayList<>(planByidDM.values());
                               
                
    }
-    /*public List<PlanningBean> afficherPlanningEquipe(String tag) {
+    
+    private ListOTPlanningBean planningOTEquipe (String tag){
         
-        Map<Integer, PlanningBean> planByidOT = new HashMap<Integer, PlanningBean>();
-	List<Object[]> listEquipePlanning = cufPlanningDao.findListDemandePlanning(tag);
-       //String[] str = planByidOT.keySet().toArray(new String[planByidOT.size()]);
-		for (Object[] cufPlanning : listEquipePlanning) {
-			ListPlanningBean plan = planningEquipe(cufPlanning);
-			
-			final Integer idOT = cufPlanning.getIdOT().getIdOt();
-
-			if (!planByidOT.keySet().contains(idOT)) {
-				PlanningBean planRetour = new PlanningBean();
-				planRetour.setLibelleOT(cufPlanning.getIdOT().getLibelOT());
-                                planRetour.setIdOt(idOT);
-                                planRetour.setTrigramme(cufPlanning.getIdResource());
-                                planRetour.setConsommé(cufPlanning.getIdOT().getChargeConsommeeTotale().toString());
-                                planRetour.setPrevue(cufPlanning.getIdOT().getChargePrevue().toString());
-                                planRetour.setRaf(cufPlanning.getIdOT().getChargeRestante().toString());
-
-			}
-			planByidOT.get(idOT).getListPlanning().add(plan);
-		}
-		return new ArrayList<>(planByidOT.values());
+        //Map<Integer, ListOTPlanningBean> planByidOT = new HashMap<Integer, ListOTPlanningBean>();
+        List<CufPlanning> listEquipePlanning = cufPlanningDao.findListDemandePlanning(tag);
+      
+        ListOTPlanningBean planOTRetour = new ListOTPlanningBean();
+        List<ListPlanningBean> planRessources = new ArrayList<ListPlanningBean>();
+        for (CufPlanning cufPlanning : listEquipePlanning) {
+            
+            ListPlanningBean plan = planningEquipe(cufPlanning);
+            final Integer idOT = cufPlanning.getIdOT().getIdOt();
+           
+            planRessources.add(planningEquipe(cufPlanning));
+            planOTRetour.setIdDM(cufPlanning.getIdOT().getIdDemande().getIdDemande());
+            planOTRetour.setIdOt(idOT);
+            planOTRetour.setLibelleOT(cufPlanning.getIdOT().getLibelOT());
+            planOTRetour.setTypeOT(cufPlanning.getIdOT().getTypeActivite());
+            planOTRetour.setConsomme(cufPlanning.getIdOT().getChargeConsommeeTotale().toString());
+            planOTRetour.setRaf(cufPlanning.getIdOT().getChargeRestante().toString());
+            planOTRetour.setPrevue(cufPlanning.getIdOT().getChargePrevue().toString());
+            planOTRetour.setTrigrammeOT(cufPlanning.getIdResource());
+          
+            
+            
+            // planifié
+  
+        }
+        planOTRetour.setListPlanning(planRessources);
 		
-                
-    }*/
+	return planOTRetour;
+        
+    }
+ 	
     
     private ListPlanningBean planningEquipe (CufPlanning cufPlanning){
         
-        ListPlanningBean event = new ListPlanningBean();
+        ListPlanningBean plan = new ListPlanningBean();
 		
-            event.setId(cufPlanning.getIdPlanning());
-            event.setSemaine(cufPlanning.getNoSem());
-            event.setIdOt(cufPlanning.getIdOT().getIdOt());
-            event.setTrigramme(cufPlanning.getIdResource());
+            plan.setId(cufPlanning.getIdPlanning());
+            String sem = (cufPlanning.getNoSem().toString());
+            String nSem = sem.substring(4, 6);
+            
+            SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd ");
+            Calendar cal = Calendar.getInstance();
+            cal.set(Calendar.WEEK_OF_YEAR, Integer.parseInt(nSem));        
+            cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+            
+            
+            plan.setSem(nSem);
+            plan.setSemaine(date.format(cal.getTime()));
+            plan.setIdOt(cufPlanning.getIdOT().getIdOt());
+            plan.setPlanifie(cufPlanning.getChargePlanning());
+            //event.setTrigramme(cufPlanning.getIdResource());
                 
-		return event;
+		return plan;
     }
    
     
