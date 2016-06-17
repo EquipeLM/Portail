@@ -44,6 +44,20 @@ angular
 						
 						url:'api/taches/tache/ajout/consoEnd',
 						isArray: false
+					},
+                                        addConsoJour : {
+						method: 'POST',
+                                                param : {},
+						
+						url:'api/taches/tache/ajout/consoJour',
+						isArray: false
+					},
+                                        addTache : {
+						method: 'POST',
+                                                param : {},
+						
+						url:'api/taches/tache/ajout/tache',
+						isArray: false
 					}
                                         
                                         

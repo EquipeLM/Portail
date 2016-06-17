@@ -54,17 +54,7 @@ angular
         
         
         
-        $scope.hide = function() {
-            $mdDialog.hide();
-        };
-        $scope.cancel = function() {
-          $mdDialog.cancel();
-        };
-        $scope.valider = function() {
-                
-        };  
-        
-        
+        $scope.someBoolean = true;
          
         var comptDelais = 0;
         var comptAvance = 0;
@@ -78,9 +68,13 @@ angular
                 var test = Tache.get(function(data) {
                     data.listTache.forEach(function(evt){
                         if(evt.libelleDmDelais !== null){
+                            if(evt.chargeConso > parseFloat("0")){
+                                $scope.someBoolean = false;
+                            }
                             comptDelais++;
                         $scope.taches.push(
-                            {id: evt.id, 
+                            {id: evt.idOt, 
+                             idDemande : evt.idDemande,
                              dm: evt.libelleDmDelais,
                              ot: evt.libelleOT,
                              type: evt.libelleTypeOT,
@@ -89,9 +83,13 @@ angular
                              restant : evt.chargeRestante}
                         );
                         }else if(evt.libelleDmRetard !== null){
+                            if(evt.chargeConso > parseFloat("0")){
+                                $scope.someBoolean = false;
+                            }
                             comptRetard++;
                         $scope.tacheRetards.push(
-                            {id: evt.id, 
+                            {id: evt.idOt, 
+                             idDemande : evt.idDemande,
                              dm: evt.libelleDmRetard,
                              ot: evt.libelleOT,
                              type: evt.libelleTypeOT,
@@ -101,9 +99,13 @@ angular
                         )
                         }
                         else if(evt.libelleDmAvance !== null){
+                            if(evt.chargeConso > parseFloat("0")){
+                                $scope.someBoolean = false;
+                            }
                             comptAvance++;
                         $scope.tacheAvances.push(
-                            {id: evt.id, 
+                            {id: evt.idOt, 
+                             idDemande : evt.idDemande,
                              dm: evt.libelleDmAvance,
                              ot: evt.libelleOT,
                              type: evt.libelleTypeOT,
@@ -116,7 +118,8 @@ angular
                         else if(evt.libelleDmTermine !== null){
                             comptTermine++;
                         $scope.tacheTermines.push(
-                            {id: evt.id, 
+                            {id: evt.idOt, 
+                             idDemande : evt.idDemande,
                              dm: evt.libelleDmTermine,
                              ot: evt.libelleOT,
                              type: evt.libelleTypeOT,
@@ -124,6 +127,55 @@ angular
                              charge: evt.chargePrevue}
                         )
                         }
+                        
+                        $scope.formTacheConsoEnd = {};
+                        $scope.formTacheConsoEnd.consoEnd;
+                        $scope.formTacheConsoEnd.idDemande = evt.idDemande;
+                        $scope.formTacheConsoEnd.type = evt.libelleTypeOT;
+                        $scope.formTacheConsoEnd.idOt = evt.idOt;
+                        
+                            
+                        $scope.hide = function() {
+                            $mdDialog.hide();
+                        };
+        
+                        $scope.cancel = function() {
+                            $mdDialog.cancel();
+                        };
+        
+                        $scope.validerConsoEnd = function() {
+                            $mdDialog.hide();
+                            Tache.addConsoEnd($scope.formTacheConsoEnd, function() {});
+                            console.log($scope.formTacheConsoEnd); 
+                            
+                        };
+                        
+                        $scope.formTacheConsoJour = {};
+                        $scope.formTacheConsoJour.consoFaite;
+                        $scope.formTacheConsoJour.raf;
+                        
+                        
+                            
+                        $scope.hide = function() {
+                            $mdDialog.hide();
+                        };
+        
+                        $scope.cancel = function() {
+                            $mdDialog.cancel();
+                        };
+        
+                        $scope.validerConsoJour = function() {
+                            //$mdDialog.hide();
+                            $scope.formTacheConsoJour.idDemande = evt.idDemande;
+                            $scope.formTacheConsoJour.type = evt.libelleTypeOT;
+                            $scope.formTacheConsoJour.idOt = evt.idOt;
+                            Tache.addConsoJour($scope.formTacheConsoJour, function() {});
+                            console.log($scope.formTacheConsoJour); 
+                            
+                        };
+                        
+                                                
+                        
                         
                     });
                     
@@ -178,7 +230,7 @@ angular
                 var test = Tache.getDemandeLibelle({tag: "CNP"}, function(data) {
                     data.listTache.forEach(function(evt){
                         $scope.demandes.push(
-                            {id: evt.id, name: evt.libelleDm}
+                            {id: evt.idDm, name: evt.libelleDm, estimation : evt.estimationRevisee}
                         )
                     }); 
                 });
@@ -194,7 +246,7 @@ angular
           var test = Tache.getTypeActiviteLibelle(function(data) {
                     data.listTache.forEach(function(evt){
                         $scope.types.push(
-                            {name: evt.libelleTypeOT}
+                            {name: evt.libelleTypeOT, id: evt.idType}
                         )
                     }); 
                 });
@@ -208,7 +260,7 @@ angular
           var test = Tache.getRessourceTri({tag :"CNP"},function(data) {
                     data.listTache.forEach(function(evt){
                         $scope.users.push(
-                            {name: evt.nom +' '+ evt.prenom}
+                            {name: evt.nom +' '+ evt.prenom, id: evt.trigramme}
                         )
                     });
                     
@@ -216,44 +268,40 @@ angular
         
         };
         
+        $scope.formTache = {};
+        $scope.formTache.chargePrevue;
         
         
         
-         
-        $scope.formTacheConsoEnd = {};
-        $scope.formTacheConsoEnd.consoEnd;
         
-            
-        
-       // $scope.formTacheConsoEnd.consoEnd ;
-         
+       
         $scope.hide = function() {
-            $mdDialog.hide();
-        };
-        
-        $scope.cancel = function() {
-            $mdDialog.cancel();
-        };
-        
-        $scope.valider = function() {
+        $mdDialog.hide();
+      };
+      $scope.cancel = function() {
+        $mdDialog.cancel();
+      };
+      $scope.valider = function() {
                 
+                $scope.formTache.demande = $scope.demande.name;
+                $scope.formTache.idDemande = $scope.demande.id;
+                $scope.formTache.type = $scope.type.id;
+                $scope.formTache.user= $scope.user.id;
+                $scope.formTache.designation = $scope.demande.name +' - '+ $scope.type.name;
+                $scope.formTache.estimationRevisee = $scope.demande.estimation;
                 
-		//var response = $http.post('api/taches/conso', $scope.formTacheConsoEnd);
-                
-                Tache.addConsoEnd($scope.formTacheConsoEnd, function() {});
-		/*response.success(function(data, status, headers, config) {
-                    
+                Tache.addTache($scope.formTache, function() {
+                       //va appeler ta fonction ajouterAbsence avec les valeurs bindées dans formData      
                 });
-		response.error(function(data, status, headers, config) {
-		    console.log( "Exception details: " + JSON.stringify({data: data}));
-		});*/
-                
-         console.log($scope.formTacheConsoEnd); 
-                
-          
+		
+         console.log($scope.formTache); 
+         	
+  
+      };  
+        
         
          
-      };
+        
          
          
     

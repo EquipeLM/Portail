@@ -26,7 +26,8 @@ angular
 						
 						url:'api/absences/absence/Updatesolde',
 						isArray: false
-					}
+					},
+                                       
                                         
 				}
 		); 

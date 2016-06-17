@@ -6,6 +6,8 @@
 package cgi.lemans.portail.service;
 
 import cgi.lemans.portail.controller.beans.PlanningBean;
+import cgi.lemans.portail.controller.beans.PlanningCardBean;
+import cgi.lemans.portail.controller.beans.PlanningModalBean;
 import java.util.List;
 
 /**
@@ -16,4 +18,9 @@ public interface IPlanningService {
     
     public List<PlanningBean> afficherPlanningEquipe(String tag);
     
+    public PlanningModalBean recupererInfosForfaitModal();
+    
+    public PlanningModalBean recupererInfosTypeModal();
+    
+    public PlanningCardBean enregistrerDemande(String idResource, PlanningCardBean bean);
 }

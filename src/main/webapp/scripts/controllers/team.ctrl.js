@@ -58,7 +58,7 @@ angular
                         if(evt.libelleDmDelais !== null){
                             comptDelais++;
                         $scope.taches.push(
-                            {id: evt.id, 
+                            {id: evt.idOt, 
                              dm: evt.libelleDmDelais,
                              ot: evt.libelleOT,
                              type: evt.libelleTypeOT,
@@ -70,7 +70,7 @@ angular
                         }else if(evt.libelleDmRetard !== null){
                             comptRetard++;
                         $scope.tacheRetards.push(
-                            {id: evt.id, 
+                            {id: evt.idOt, 
                              dm: evt.libelleDmRetard,
                              ot: evt.libelleOT,
                              type: evt.libelleTypeOT,
@@ -84,7 +84,7 @@ angular
                         else if(evt.libelleDmAvance !== null){
                             comptAvance++;
                         $scope.tacheAvances.push(
-                            {id: evt.id, 
+                            {id: evt.idOt, 
                              dm: evt.libelleDmAvance,
                              ot: evt.libelleOT,
                              type: evt.libelleTypeOT,

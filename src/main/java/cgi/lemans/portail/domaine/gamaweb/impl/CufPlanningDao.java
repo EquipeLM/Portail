@@ -36,4 +36,40 @@ public class CufPlanningDao extends AbstractGenericDaoGamaweb<CufPlanning> imple
         
     }
     
+    @Override
+    public List<CufPlanning> findTotalPlan(String tag) {
+        
+        String hql = "select a.idRessource, a.noSem, count(a.chargePlanifie)"
+                   + "from CufPlanning a " 
+                   + "where a.equipePlanning " 
+                   + "like :equipeChoisie "
+                   
+                   ;
+              
+        Query query = getSession().createQuery(hql);
+        query.setParameter("equipeChoisie", '%'+ tag + '%');
+        
+        List<CufPlanning> results = (List<CufPlanning>) query.list();
+        CufPlanning number = (CufPlanning) results.get(0);
+    	return results;
+        
+    }
+    
+    public List<CufPlanning> findListIDDemandePlanning(String tag) {
+        
+        String hql = "from CufPlanning a " 
+                   + "where a.equipePlanning " 
+                   + "like :equipeChoisie "
+                   + " and a.idDemande =: id" 
+                   
+                   ;
+              
+        Query query = getSession().createQuery(hql);
+        query.setParameter("equipeChoisie", '%'+ tag + '%');
+        
+        List<CufPlanning> results = query.list();
+    	return results;
+        
+    }
+    
 }

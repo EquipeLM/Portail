@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('portail.services', ['ngResource']);
-angular.module('portail.controllers', ['ui.calendar', 'ui.bootstrap', 'ngMaterial', 'daypilot']);
+angular.module('portail.controllers', ['ui.calendar', 'ui.bootstrap', 'ngMaterial', 'daypilot', 'ngVis']);
 angular
     .module('portail',  ['ngRoute', 'mobile-angular-ui', 'ui.checkbox', 'ui.calendar', 'chart.js', 'daypilot', 'ui.bootstrap', 'portail.controllers', 'portail.services'])
     .config(function ($routeProvider) {
@@ -41,6 +41,10 @@ angular
                     when('/tachesEquipe', {
                 templateUrl: './views/tachesEquipe.html',
                 controller: 'TeamCtrl'
+            }).
+                    when('/planning', {
+                templateUrl: './views/planning.html',
+                controller: 'PlanningCtrl'
             }).
             otherwise({
                 redirectTo: '/home'

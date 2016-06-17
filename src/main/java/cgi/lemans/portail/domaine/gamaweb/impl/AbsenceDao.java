@@ -44,12 +44,14 @@ public class AbsenceDao extends AbstractGenericDaoGamaweb<Absence> implements IA
                    + "where ref.tags " 
                    + "like :equipeChoisie "
 //                   + "and (month(a.premierJourAbsence) = :moisAafficher or month(a.dateFinAbsence) = :moisAafficher) "
-                   + "and (year(a.premierJourAbsence) = :anneeEnCours or year(a.dateFinAbsence) = :anneeEnCours)"
+                   + "and (year(a.premierJourAbsence) = :anneeEnCours or year(a.dateFinAbsence) = :anneeEnCours) "
+                   + "and ref.dateDepart > :date "
                    + "order by ref.nom desc"
                    ;
         Query query = getSession().createQuery(hql);
         query.setParameter("equipeChoisie", '%'+ equipeLibelle + '%');
         query.setParameter("anneeEnCours", Calendar.getInstance().get(Calendar.YEAR));
+        query.setDate("date", new java.util.Date());
 //        query.setParameter("moisAafficher", ConvertUtils.parseInteger(moisAafficher) + 1 );
         List<Absence> results = (List<Absence>)query.list();
     	return results;

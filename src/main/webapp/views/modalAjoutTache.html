@@ -48,7 +48,7 @@ and open the template in the editor.
                <md-input-container class="md-icon-float md-icon-right md-block">
                     <label>Charge prévue</label>
                     
-                    <input ng-model="formDataTache.prevue" type="number" step="0.1">
+                    <input ng-model="formTache.chargePrevue" type="number" step="0.1">
                     
                 </md-input-container>
                 
@@ -56,13 +56,14 @@ and open the template in the editor.
             <div class="form-group row">
                 
                       <div layout="column" layout-align="center center">
-                        <md-select placeholder="Qui : " ng-model="user" md-on-open="loadUsers()" style="min-width: 250px;" >
-                          <md-option value={{user}} ng-repeat="user in users">{{user.name}}</md-option>
+                        <md-select placeholder="Qui : " ng-model="user" md-on-open="loadUsers()" style="min-width: 250px;">
+                          <md-option ng-value="user" ng-repeat="user in users">{{user.name}}</md-option>
                         </md-select>
-                          
                       </div>	
                 <div class="col-sm-1"></div>
             </div>
+            
+           
         </form>
       </div>
     </md-dialog-content>
@@ -72,7 +73,7 @@ and open the template in the editor.
       <md-button ng-click="hide()">
        Annuler
       </md-button>
-      <md-button ng-click="valider()" style="margin-right:20px;">
+      <md-button ng-click="validerTache()" style="margin-right:20px;">
        Valider
       </md-button>
     </md-dialog-actions>

@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="./styles/vendor/layout.css" />
         <link rel="stylesheet" href="//cdn.jsdelivr.net/angular.gantt/latest/angular-gantt.min.css"/>
         <link rel="stylesheet" href="//cdn.jsdelivr.net/angular.gantt/latest/angular-gantt-plugins.min.css"/>
-         <!--<link rel="stylesheet" href="./styles/vendor/team.css" />-->
+        <link rel="stylesheet" href="./styles/vendor/vis.min.css" />-->
         <link rel="stylesheet" href="./styles/vendor/angular-material.min.css">
         <link rel="stylesheet" href="./styles/common.css" />
         <link rel="stylesheet" href="./styles/card.css" />
@@ -22,15 +22,7 @@
     <body ng-app="portail">
         <div class="sidebar sidebar-left"></div>
         <div class="sidebar sidebar-right"></div>
-        <div class="navbar navbar-app navbar-absolute-top headerCGI">
-            <h2>CGI Tools</h2>
-            <a href="#" class="homeLink"><i class="fa fa-home fa-2x"></i></a>
-            <h3 class="tri"> BJA </h3>
-            <a href="/portail/#/config" class="settings"><i class="fa fa-gears fa-2x"></i></a>
-            <a class="settings" href="https://mypm.imfr.cgi.com/portail/#/CDSMainframe/incoherences"><i class="fa fa-bell fa-2x"></i></a>
-            
-            
-        </div>
+        
         
         <!-- App body -->
         <div class='app-body contentCGI scrollable'>
@@ -47,7 +39,9 @@
     <script src="./scripts/vendor/angular-route.js"></script>
     <script src="./scripts/vendor/mobile-angular-ui.js"></script>
     <script src="./scripts/vendor/mobileangularui-checkbox.js"></script>
-    
+    <script src="./scripts/vendor/angular-vis.js"></script>
+    <script src="./scripts/vendor/app-graph2d.js"></script>
+    <script src="./scripts/vendor/vis.min.js"></script>
     <script src="./scripts/vendor/moment.js"></script>
     <script src="./scripts/vendor/jquery-2.2.0.min.js"></script>
     <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.js"></script>
@@ -58,9 +52,10 @@
     <script src="./scripts/vendor/gcal.js"></script>
     <script src="./scripts/vendor/calendar.js"></script>
     <script src="./scripts/vendor/Chart.js"></script>
+    <script src="./scripts/vendor/stackedBar.js"></script>
     <script src="./scripts/vendor/angular-chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/angular.gantt/latest/angular-gantt.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/angular.gantt/latest/angular-gantt-plugins.min.js"></script>
+     <script  src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
+    
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
@@ -72,8 +67,12 @@
     <script src="./scripts/services/absences.services.js"></script>
     <script src="./scripts/services/taches.services.js"></script>
     <script src="./scripts/services/planning.services.js"></script>
+    <script src="./scripts/services/incoherence.services.js"></script>
+    <script src="./scripts/services/statistique.service.js"></script>
     <script src="./scripts/controllers/team.ctrl.js"></script>
+    <script src="./scripts/controllers/planningCard.ctrl.js"></script>
     <script src="./scripts/controllers/planning.ctrl.js"></script>
+    <script src="./scripts/controllers/statistiques.ctrl.js"></script>
     <script src="./scripts/controllers/absences.ctrl.js"></script>
     <script src="./scripts/controllers/outils.ctrl.js"></script>
     <script src="./scripts/controllers/taches.ctrl.js"></script>

@@ -20,5 +20,7 @@ public interface IOrdreDeTravailDao extends IGenericDao<Serializable, OrdreDeTra
 	public List<OrdreDeTravail> findAllDemande(String idRessource);
         
         public List<OrdreDeTravail> findAllDemandeEquipe(String tag);
+        
+        public List<OrdreDeTravail> findIdDemandePlanning(String id);
 
 }

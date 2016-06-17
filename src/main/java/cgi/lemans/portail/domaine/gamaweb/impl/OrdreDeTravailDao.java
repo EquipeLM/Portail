@@ -54,4 +54,21 @@ public class OrdreDeTravailDao extends AbstractGenericDaoGamaweb<OrdreDeTravail>
 		return results; 
     }
 
+    @Override
+    public List<OrdreDeTravail> findIdDemandePlanning(String id) {
+        String hql = "from OrdreDeTravail a "   
+                            //+ "left join a.ressource ref " 
+                            
+                            
+                            + "where a.chargeRestante != 0"
+                            + "and a.idDemande.idDemande = :id"
+                           ;
+		Query query = getSession().createQuery(hql);
+		
+                query.setParameter("id", id);
+		
+		List<OrdreDeTravail> results = query.list();
+		return results; 
+    }
+
 }

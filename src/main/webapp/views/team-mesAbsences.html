@@ -1,22 +1,15 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>Absences de l'équipe</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
+<div class="navbar navbar-app navbar-absolute-top headerCGI">
+            <h2>CGI Tools</h2>
+            <a href="#" class="homeLink"><i class="fa fa-home fa-2x"></i></a>
+            <h3 class="tri"> BJA </h3>
+            <a class="settings" href="/portail/#/config"><i class="fa fa-gears fa-2x"></i></a>
+            <a class="settings" href="https://mypm.imfr.cgi.com/portail/#/CDSMainframe/incoherences"><i class="fa fa-bell fa-2x"></i><span class="badge">{{notif}}</span></a>
+            
+            
+</div>
    
-                <div class="calendarTeam">
-                    <div style="margin-left: 15%; width: 85%; margin-top: 2%;">
-                        <daypilot-scheduler id="scheduler" daypilot-config="schedulerConfig" daypilot-events="events" ></daypilot-scheduler>
-                    </div>
-                </div>
-
-    </body>
-</html>
+<div class="calendarTeam" style="margin-top: 80px;">
+    <div style="margin-left: 15%; width: 85%; margin-top: 2%;">
+        <daypilot-scheduler id="scheduler" daypilot-config="schedulerConfig" daypilot-events="events" ></daypilot-scheduler>
+    </div>
+</div>

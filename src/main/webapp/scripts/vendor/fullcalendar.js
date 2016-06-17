@@ -3901,7 +3901,7 @@ Grid.mixin({
 			function(name, func) {
 				// attach the handler to the container element and only listen for real event elements via bubbling
 				_this.el.on(name, '.fc-event-container > *', function(ev) {
-					//var seg = $(this).data('fc-seg'); // grab segment data. put there by View::renderEvents
+					var seg = $(this).data('fc-seg'); // grab segment data. put there by View::renderEvents
 
 					// only call the handlers if there is not a drag/resize in progress
 					if (seg && !_this.isDraggingSeg && !_this.isResizingSeg) {

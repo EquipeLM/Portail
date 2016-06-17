@@ -17,5 +17,5 @@ import java.util.List;
 public interface ICufPlanningDao extends IGenericDao<Serializable, CufPlanning>{
     
    public List<CufPlanning> findListDemandePlanning (String tag) ;
-    
+   public List<CufPlanning> findTotalPlan(String tag);
 }

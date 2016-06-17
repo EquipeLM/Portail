@@ -35,6 +35,17 @@ public class DemandeOuProjetDao extends AbstractGenericDaoGamaweb<DemandeOuProje
     	return results;
     
     }
+    
+    public DemandeOuProjet findIdMax (){
+        String hql = "select max(a.idDemande) from DemandeOuprojet";
+        Query query = getSession().createQuery(hql);
+        DemandeOuProjet results = (DemandeOuProjet)query.uniqueResult();
+    	return results;
+    }
+    
+    
+    
+    
 
    
 

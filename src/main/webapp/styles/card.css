@@ -3,7 +3,7 @@
     border:1px solid #AAA;
     border-bottom:3px solid #BBB;
     padding:0px;
-    margin:3px;
+    margin:8px;
     overflow:hidden;
     
 }
@@ -79,8 +79,9 @@
 
 
 .card-header {
-    height: 49px;
+    height: 55px;
     overflow: hidden;
+    
 }
 
 .card-body{
@@ -91,7 +92,7 @@
 }
 
 .card-header>.card-button{
-    padding: 4px;
+    padding: 12px;
     position: absolute;
     top: 3px;
     right: 4px;
@@ -124,44 +125,184 @@
 }
 
 .card-header-yellow {
-    background: #F0B506;
+    background: #fbb813;
 }
 .card-home-yellow{
-    background: #F1A006;
-}
-
-.card-header-blue1 {
-    background: #1A4672;
-}
-.card-home-blue1{
-    background: #2F5F8E;
-}
-
-.card-header-blue2 {
-    background: #5F99BE;
-}
-.card-home-blue2{
-    background: #8AC1DB;
-}
-
-.card-header-gris-teal {
-    background: #616161;
-}
-.card-home-gris-teal{
-    background: #009688;
-}
-
-.card-header-green {
-    background: #388E3C;
-}
-.card-home-green {
-    background: #8BC34A;
+    background: #fbb813;
 }
 
 .card-header-orange {
-    background: #FFA000;
+    background: #f06f36;
 }
-.card-home-orange {
-    background: #FFC107;
+.card-home-orange{
+    background: #f06f36 ;
 }
 
+.card-header-blue2 {
+    background: #1eabd6;
+}
+.card-home-blue2{
+    background: #1eabd6;
+}
+
+.card-header-pink {
+    background: #db597d ;
+}
+.card-home-pink{
+    background: #db597d ;
+}
+
+.card-header-green {
+    background: #84c53c;
+}
+.card-home-green {
+    background: #84c53c;
+}
+
+.card-header-grey {
+    background: #787f89;
+}
+.card-home-grey {
+    background: #787f89;
+}
+
+.badge{
+    background-color: #77b72f;
+    margin-left: 70%;
+    margin-top: -15px;
+    width: 25px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+.carrousel{
+  background: #ffffff;
+  text-align: center;
+  height: 100%;
+  max-width: 100%;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+}
+.carrousel h2{
+  margin: 0;
+  margin-top: -1.7em;
+  padding: 0;
+  font-size: 1em;
+  text-align: center;
+  color: #bbbbbb;
+}
+.carrousel .slides{
+  width: 400%;
+  padding-left: 0;
+  
+  overflow: hidden;
+  list-style: none;
+  position: relative;
+
+  -webkit-transition: left .75s ease-out;
+  -moz-transition: left .75s ease-out;
+  -o-transition: left .75s ease-out;
+  transition: left .75s ease-out;
+}
+.carrousel .slides li{
+  width: 25%;
+  position: relative;
+  float: left;
+}
+.carrousel li p{
+  margin-top: 0;  
+}
+.carrousel li q{
+  max-width: 90%;
+  margin: auto;
+  color: #666666;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+.carrousel li img{
+  width:3em;
+  border-radius: 50%;
+  margin-left: -1.5em;
+  margin-right: 0.5em;
+  vertical-align: middle;
+}
+.carrousel li span.author{
+  margin-top:0.5em;
+  font-size: 1.2em;
+  color: #777777;
+  display: block;
+}
+.carrousel .slidesNavigation{
+  display: block;
+  list-style: none;
+  text-align: center;
+  bottom: 1em;
+  /*--- Centering trick---*/
+    /* Absolute positioning*/
+    position: absolute; 
+    /* Abosulte positioning*/
+    width: 104px; /*This width  is the addition of the width of all the navigations dots - So in this case is   104 because the navigation dots are 26px (width:10px and 6px marginleft + 6 px marginright) and there are 4 dots so 4x26=104 */
+    left: 50%; /*Centering de element*/
+    margin-left: -52px; /*adjusting the centering by applying a negative margin of half of the width*/
+}
+.carrousel input{
+  display: none;
+}
+.carrousel .slidesNavigation label{
+  float: left;
+  margin: 6px;
+  display: block;
+  height: 10px;
+  width: 10px;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  border: solid 2px #2980b9;
+  font-size: 0;
+}
+/* You have to repeat this with each slide */
+#radio-1:checked ~ .slides{
+  left: 0;
+}
+#radio-2:checked ~ .slides{
+  left: -100%;
+}
+#radio-3:checked ~ .slides{
+  left: -200%;
+}
+#radio-4:checked ~ .slides{
+  left: -300%;
+}
+
+
+.carrousel .slidesNavigation label:hover{
+   cursor: pointer;
+}
+/* You have to repeat this with each slide/dot */
+.carrousel #radio-1:checked ~ .slidesNavigation label#dotForRadio-1,
+.carrousel #radio-2:checked ~ .slidesNavigation label#dotForRadio-2,
+.carrousel #radio-3:checked ~ .slidesNavigation label#dotForRadio-3,
+.carrousel #radio-4:checked ~ .slidesNavigation label#dotForRadio-4{
+  background: #2980b9;
+}
+
+@media  (max-width: 796px) {
+  .carrousel{
+    height: 8.5em;
+  }
+}
+@media  (max-width: 480px) {
+  .carrousel li p{
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+  .carrousel li q{
+      font-size: 1em;
+  }
+  .carrousel li img{
+     width:2em;
+     margin-left: -1em;
+     margin-right: 0.25em;
+  }
+}

@@ -82,12 +82,36 @@ public class TacheController {
 		return new ResponseEntity<TacheBean>(infosSend, HttpStatus.OK);
 	}
         
+        @RequestMapping(value = "/tache/ajout/tache", method = RequestMethod.POST)
+	public ResponseEntity<TacheCardBean> ajouterTache(@RequestBody TacheCardBean bean,
+			HttpServletRequest request) {
+		UtilisateurBean user = addUtilisateurSession(request.getSession());
+		
+			tacheService.enregistrerNewTache(bean);
+		
+		return new ResponseEntity<TacheCardBean>(bean, HttpStatus.OK);
+	}
+        
         @RequestMapping(value = "/tache/ajout/consoEnd", method = RequestMethod.POST)
 	public ResponseEntity<TacheCardBean> ajouterConsoEnd(@RequestBody TacheCardBean bean,
 			HttpServletRequest request) {
 		UtilisateurBean user = addUtilisateurSession(request.getSession());
 		if (user != null && UtilisateurBean.USER_TRI.equals(user.getTrigramme())) {
 			tacheService.enregistrerConsoEnd(user.getTrigramme(), bean);
+		} else {
+			// TODO: Equipe implémentation des erreurs
+		}
+		// FIXME: Le code retourné est toujours OK mais ça ne veut pas dire que
+		// c'est vrai tq les exceptions ne sont pas gérées.
+		return new ResponseEntity<TacheCardBean>(bean, HttpStatus.OK);
+	}
+        
+        @RequestMapping(value = "/tache/ajout/consoJour", method = RequestMethod.POST)
+	public ResponseEntity<TacheCardBean> ajouterConsoJour(@RequestBody TacheCardBean bean,
+			HttpServletRequest request) {
+		UtilisateurBean user = addUtilisateurSession(request.getSession());
+		if (user != null && UtilisateurBean.USER_TRI.equals(user.getTrigramme())) {
+			tacheService.enregistrerConsoJour(user.getTrigramme(), bean);
 		} else {
 			// TODO: Equipe implémentation des erreurs
 		}

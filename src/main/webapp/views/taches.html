@@ -1,4 +1,13 @@
-<div class="container">
+<div class="navbar navbar-app navbar-absolute-top headerCGI">
+            <h2>CGI Tools</h2>
+            <a href="#" class="homeLink"><i class="fa fa-home fa-2x"></i></a>
+            <h3 class="tri"> BJA </h3>
+            <a class="settings" href="/portail/#/config"><i class="fa fa-gears fa-2x"></i></a>
+            <a class="settings" href="https://mypm.imfr.cgi.com/portail/#/CDSMainframe/incoherences"><i class="fa fa-bell fa-2x"></i><span class="badge">{{notif}}</span></a>
+            
+            
+</div>
+<div class="container" style="margin-top: 80px;">
     <div class="row marge1">
         <div class="col-sm-3"></div>
     <table class="table-responsive indicateur-screen">
@@ -85,12 +94,15 @@
     
         <tbody>
           <tr ng-repeat="tacheRetard in tacheRetards | orderBy:sortType:sortReverse | filter:searchTache" ng-hide="showRetards">
-            <td ng-app="">{{ tacheRetard.dm }}</td>
+            <td ng-app="">{{ tacheRetard.dm }} {{ tacheRetard.idDemande }}</td>
             <td>{{ tacheRetard.ot }}</td>
             <td style="text-align: center">{{ tacheRetard.type }}</td>
             <td style="text-align: center">{{ tacheRetard.date }}</td>
             <td style="text-align: center">{{ tacheRetard.charge }}</td>
             <td style="text-align: center">{{ tacheRetard.restant }}</td>
+            
+            <td ng-show="someBoolean" class="icon-screen"><a href="" ng-click="showAdvancedEndBis($event)"><i class="fa fa-share fa-2x colorfa" aria-hidden="true"></i></a>
+            </td>
             <td class="icon-screen"><a href="" ng-click="showAdvancedEndBis($event)"><i class="fa fa-flag-checkered fa-2x colorfa" aria-hidden="true"></i></a>
             </td>
             <td class="icon-screen"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa fa-2x" aria-hidden="true"></i></a>
@@ -134,7 +146,7 @@
     
         <tbody>
           <tr ng-repeat="tache in taches |  filter:searchTache" ng-hide="showDetails">
-            <td>{{ tache.dm }}</td>
+            <td>{{ tache.dm }} {{tache.idDemande}}</td>
             <td>{{ tache.ot }}</td>
             <td style="text-align: center">{{ tache.type }}</td>
             <td style="text-align: center">{{ tache.date }}</td>
@@ -182,7 +194,7 @@
     
         <tbody>
           <tr ng-repeat="tacheAvance in tacheAvances | orderBy:sortType:sortReverse | filter:searchTache" ng-hide="showAvance">
-            <td>{{ tacheAvance.dm }}</td>
+            <td>{{ tacheAvance.dm }} {{tacheAvance.idDemande}}</td>
             <td>{{ tacheAvance.ot }}</td>
             <td style="text-align: center">{{ tacheAvance.type }}</td>
             <td style="text-align: center">{{ tacheAvance.date }}</td>

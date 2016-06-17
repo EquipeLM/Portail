@@ -51,15 +51,17 @@ public class TacheService implements ITacheService {
 	private ListTacheBean tacheDm(DemandeOuProjet demandeOuProjet) {
 		ListTacheBean task = new ListTacheBean();
 
-		task.setId(ConvertUtils.parseInteger(demandeOuProjet.getIdDemande()));
+		task.setIdDm(ConvertUtils.parseInteger(demandeOuProjet.getIdDemande()));
 		task.setLibelleDm(demandeOuProjet.getLibelle());
+                task.setEstimationRevisee(demandeOuProjet.getEstimationRevisee().toString());
 
 		return task;
 	}
 
 	private ListTacheBean tacheOT(TypeActivite typeActivite) {
 		ListTacheBean task = new ListTacheBean();
-
+                
+                task.setIdType(typeActivite.getTypeAct());
 		task.setLibelleTypeOT(typeActivite.getLibelle());
 
 		return task;
@@ -68,6 +70,8 @@ public class TacheService implements ITacheService {
 	private ListTacheBean allTaches(OrdreDeTravail ordreDeTravail) {
 		ListTacheBean task = new ListTacheBean();
                 
+                if (ordreDeTravail.getChargeRestante() != null && ordreDeTravail.getChargeConsommeeTotale() != null && ordreDeTravail.getIdDemande() != null){
+                    
                 
                 double calcul =  ordreDeTravail.getChargeRestante() + ordreDeTravail.getChargeConsommeeTotale();
                 
@@ -85,8 +89,9 @@ public class TacheService implements ITacheService {
                    task.setDate(ConvertUtils.formatterDate(ordreDeTravail.getDateFinPrevue()));
 		   task.setChargePrevue(ordreDeTravail.getChargePrevue().toString());
                    task.setChargeRestante(ordreDeTravail.getChargeRestante().toString());
-                   task.setId(ordreDeTravail.getIdOt());
-                   task.setChargeConso(calcul);
+                   task.setIdOt(ordreDeTravail.getIdOt());
+                   task.setChargeConso(ordreDeTravail.getChargeConsommeeTotale());
+                   task.setIdDemande(ordreDeTravail.getIdDemande().getIdDemande());
                    
                if (ordreDeTravail.getChargeRestante() == 0.0){
                     task.setLibelleDmTermine(ordreDeTravail.getIdDemande().getLibelle());
@@ -106,8 +111,9 @@ public class TacheService implements ITacheService {
                 }
                     
                 
-
+                }
 		return task;
+                
                 
 	}
 	
@@ -131,7 +137,7 @@ public class TacheService implements ITacheService {
                    task.setDate(ConvertUtils.formatterDate(ordreDeTravail.getDateFinPrevue()));
 		   task.setChargePrevue(ordreDeTravail.getChargePrevue().toString());
                    task.setChargeRestante(ordreDeTravail.getChargeRestante().toString());
-                   task.setId(ordreDeTravail.getIdOt());
+                   task.setIdOt(ordreDeTravail.getIdOt());
                    task.setChargeConso(calcul);
                    task.setTrigramme(ordreDeTravail.getRessource().getIdRessource());
                    
@@ -169,6 +175,7 @@ public class TacheService implements ITacheService {
 		ListTacheBean task = new ListTacheBean();
                 task.setNom(ressourceTma.getNom());
                 task.setPrenom(ressourceTma.getPrenom());
+                task.setTrigramme(ressourceTma.getIdRessource());
                 return task;
         }
 
@@ -232,11 +239,57 @@ public class TacheService implements ITacheService {
     @Override
     public TacheCardBean enregistrerConsoEnd(String idRessource, TacheCardBean bean) {
         OrdreDeTravail consoEndTache = new OrdreDeTravail();
+        //consoEndTache.setRessource(bean.getUser());
+        
+        
         consoEndTache.setChargeConsommeeTotale(ConvertUtils.parseDouble(bean.getChargeConsomme()));
+        consoEndTache.setIdOt(bean.getIdOt());
+        
+        DemandeOuProjet dm = new DemandeOuProjet();
+        dm.setIdDemande(bean.getIdDemande());
+        consoEndTache.setIdDemande(dm);
+        
+        RessourceTma ress = new RessourceTma();
+        ress.setIdRessource(idRessource);
+        consoEndTache.setRessource(ress);
+        consoEndTache.setTypeActivite(bean.getType());
+        
+        consoEndTache.setIdForfaitBudget(0);
+        consoEndTache.setChargeRestante(0.0);
+        consoEndTache.setCoutConsomme(0.0);
+        consoEndTache.setCout_restant(0.0);
         ordreDeTravailDao.create(consoEndTache);
+        
         return bean;
     }
 
+    @Override
+    public TacheCardBean enregistrerConsoJour(String idRessource, TacheCardBean bean) {
+        OrdreDeTravail consoEndTache = new OrdreDeTravail();
+        //consoEndTache.setRessource(bean.getUser());
+        
+        
+        consoEndTache.setChargeConsommeeTotale(ConvertUtils.parseDouble(bean.getChargeConsomme()));
+        consoEndTache.setIdOt(bean.getIdOt());
+        
+        DemandeOuProjet dm = new DemandeOuProjet();
+        dm.setIdDemande(bean.getIdDemande());
+        consoEndTache.setIdDemande(dm);
+        
+        RessourceTma ress = new RessourceTma();
+        ress.setIdRessource(idRessource);
+        consoEndTache.setRessource(ress);
+        consoEndTache.setTypeActivite(bean.getType());
+        
+        consoEndTache.setIdForfaitBudget(0);
+        consoEndTache.setChargeRestante(ConvertUtils.parseDouble(bean.getChargeRestante()));
+        consoEndTache.setCoutConsomme(0.0);
+        consoEndTache.setCout_restant(0.0);
+        ordreDeTravailDao.create(consoEndTache);
+        
+        return bean;
+    }
+    
     @Override
     public TacheBean recupererListQui(String tag) {
         List<RessourceTma> quiTAcheModal = ressourceTmaDao.findQuiEquipe(tag);
@@ -249,6 +302,39 @@ public class TacheService implements ITacheService {
 		taskRetour.setListTache(absResources);
 
 		return taskRetour;
+    }
+
+    @Override
+    public TacheCardBean enregistrerNewTache(TacheCardBean bean) {
+       OrdreDeTravail newTache = new OrdreDeTravail();
+       DemandeOuProjet dm = new DemandeOuProjet();
+       RessourceTma ress = new RessourceTma();
+       
+       newTache.setTypeActivite(bean.getType());
+       //dm.setLibelle(bean.getDemande());  
+       //newTache.setIdDemande(dm);
+       dm.setIdDemande(bean.getIdDemande());
+       newTache.setIdDemande(dm);
+       ress.setIdRessource(bean.getUser());
+       newTache.setRessource(ress);
+       newTache.setLibelOT(bean.getDesignation());
+       newTache.setChargePrevue(ConvertUtils.parseDouble(bean.getChargePrevue()));
+       newTache.setChargeRestante(ConvertUtils.parseDouble(bean.getChargePrevue()));
+       newTache.setChargeConsommeeTotale(0.0);
+       newTache.setCoutConsomme(0.0);
+       newTache.setCout_restant(0.0);
+       newTache.setIdForfaitBudget(0);
+      ordreDeTravailDao.create(newTache);
+      
+      // modfication 
+      
+      DemandeOuProjet newTacheUpdate = new DemandeOuProjet();
+      
+      newTacheUpdate.setIdDemande(bean.getIdDemande());
+      newTacheUpdate.setEstimationRevisee(ConvertUtils.parseDouble(bean.getChargePrevue())+ConvertUtils.parseDouble(bean.getEstimationRevisee()));
+      demandeOuProjetDao.update(newTacheUpdate);
+      
+       return bean;
     }
 
 }

@@ -5,9 +5,25 @@
 angular
     .module('portail.controllers')
     
-    .controller('HomeCtrl', ['$scope', '$http', 'Tache', 'Absence', '$mdDialog', '$mdMedia', '$resource', '$timeout', function ($scope, $http, Tache, Absence, $mdDialog, $mdMedia, $resource, $timeout) {
+    .controller('HomeCtrl', ['$scope', '$http','Incoherence', 'Tache', 'Absence', '$mdDialog', '$mdMedia', '$resource', '$timeout', function ($scope, $http, Incoherence, Tache, Absence, $mdDialog, $mdMedia, $resource, $timeout) {
     
+      
+    
+    var compt = 0;
+    
+    var test = Incoherence.get(function(data) {
+        data.listInco.forEach(function(evt){
+            if(evt.idResponsable !== null){
+                compt++; 
+                ({id: evt.id, 
+                tri: evt.idResponsable});
+            }
+        });
         
+        $scope.notif = compt;
+    });
+    
+    
      $scope.showAdvancedAddTache = function(ev) {
             var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
             $mdDialog.show({
@@ -19,6 +35,20 @@ angular
                 fullscreen: useFullScreen
             })  
         };
+        
+        $scope.showAdvancedAddDM = function(ev) {
+            var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+            $mdDialog.show({
+      
+                templateUrl: './views/modalAjoutDM.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true,
+                fullscreen: useFullScreen
+            })  
+        };
+        
+     
      
      $scope.loadDemandes = function() {
         // Use timeout to simulate a 650ms request.
@@ -27,7 +57,7 @@ angular
                 var test = Tache.getDemandeLibelle({tag: "CNP"}, function(data) {
                     data.listTache.forEach(function(evt){
                         $scope.demandes.push(
-                            {id: evt.id, name: evt.libelleDm}
+                            {id: evt.idDm, name: evt.libelleDm}
                         )
                     }); 
                 });
@@ -43,12 +73,10 @@ angular
           var test = Tache.getTypeActiviteLibelle(function(data) {
                     data.listTache.forEach(function(evt){
                         $scope.types.push(
-                            {name: evt.libelleTypeOT}
+                            {name: evt.libelleTypeOT, id: evt.idType}
                         )
-                    });
-                    
+                    }); 
                 });
-                
         
         };
 
@@ -59,7 +87,7 @@ angular
           var test = Tache.getRessourceTri({tag :"CNP"},function(data) {
                     data.listTache.forEach(function(evt){
                         $scope.users.push(
-                            {name: evt.nom +' '+ evt.prenom}
+                            {name: evt.nom +' '+ evt.prenom, id: evt.trigramme}
                         )
                     });
                     
@@ -67,12 +95,35 @@ angular
         
         };
         
+        $scope.formTache = {};
+        $scope.formTache.chargePrevue;
+        
+        
+        
+        
        
-    
-    
-    
-     $scope.formDataTache = {};
-	//$scope.formDataTache.designation = 
+        $scope.hide = function() {
+        $mdDialog.hide();
+      };
+      $scope.cancel = function() {
+        $mdDialog.cancel();
+      };
+      $scope.validerTache = function() {
+                
+                $scope.formTache.demande = $scope.demande.name;
+                $scope.formTache.idDemande = $scope.demande.id;
+                $scope.formTache.type = $scope.type.id;
+                $scope.formTache.user= $scope.user.id;
+                $scope.formTache.designation = $scope.demande.name +' - '+ $scope.type.name;
+                
+                Tache.addTache($scope.formTache, function() {
+                       //va appeler ta fonction ajouterAbsence avec les valeurs bindées dans formData      
+                });
+		
+         console.log($scope.formTache); 
+         	
+  
+      };  
      
       
     
@@ -88,9 +139,7 @@ angular
  
     $scope.formData = {};
 	$scope.formData.dateProchainConges = new Date();
-        
-        //$scope.formData.dateProchainConges.setHours(5);
-        //$scope.formData.dateFinProchainConges = $scope.formData.dateProchainConges;
+
 	$scope.formData.dateFinProchainConges = new Date();
 	$scope.formData.typeJourneeDebut = "amPm";
 	$scope.formData.typeJourneeFin = null;
@@ -181,6 +230,13 @@ angular
 		});
          console.log($scope.formData);       
       };
+      $scope.supprimer = function (){
+          
+          alert("element supprimé");
+      }
+      
+     
+           
    
     }])
 

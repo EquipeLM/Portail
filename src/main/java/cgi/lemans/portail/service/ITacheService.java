@@ -25,6 +25,10 @@ public interface ITacheService {
     
     public TacheCardBean enregistrerConsoEnd(String idRessource, TacheCardBean bean);
     
+    public TacheCardBean enregistrerConsoJour(String idRessource, TacheCardBean bean);
+    
     public TacheBean recupererListQui (String equipeChoisie);
+    
+    public TacheCardBean enregistrerNewTache(TacheCardBean bean); 
     
 }

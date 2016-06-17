@@ -3,13 +3,23 @@
 
 angular
     .module('portail.controllers')
-    .controller('AbsencesCtrl',['$scope', '$http', 'Absence', '$mdDialog', '$mdMedia', '$resource', function ($scope, $http, Absence, $mdDialog, $mdMedia, $resource) {
+    .controller('AbsencesCtrl',['$scope', '$http', 'Absence', '$mdDialog', '$mdMedia', '$resource', function ($scope, $http, Absence, $mdDialog, $mdMedia, $resource, $modal, uiCalendarConfig, $dialog) {
 
-
+ $scope.alertOnEventClick =function(ev) {
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+        $mdDialog.show({
+      
+            templateUrl: './views/modalTuileUpdate.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: useFullScreen
+        });
+    };
 
 $scope.uiConfig = {
         calendar:{
-        height: 550,
+        height: 610,
         editable: true,
         
         weekends: true,
@@ -23,17 +33,17 @@ $scope.uiConfig = {
         
         monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
         dayNamesShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
-        
-      }
-    }
-    
-    
+        eventClick: $scope.alertOnEventClick
+       
+  }
+
+};
     
         
         $scope.events = [];
       
         
-           Absence.get({id: "LSO"},function(data){
+           Absence.get({id: "BJA"},function(data){
                     $scope.events.splice(0, $scope.events.length); 
               data.listEvent.forEach(function(evt){
                       
@@ -118,10 +128,8 @@ $scope.uiConfig = {
                     $scope.dataRttQ2 = ["0", $scope.restantQdeux];
                 }
 		
-		$scope.colours = ['#80a1b7','#d8d8d8'];
-                $scope.colours1 = ['#87c1de','#d8d8d8'];
-                $scope.colours2 = ['#9ae6f1','#d8d8d8'];
-                
+		$scope.colours = ['#616161','#d8d8d8'];
+               
                 
                 
                 
@@ -242,6 +250,7 @@ $scope.uiConfig = {
 		    console.log( "Exception details: " + JSON.stringify({data: data}));
 		});
          console.log($scope.formData); 
+         $mdDialog.hide();
          	
   
       };

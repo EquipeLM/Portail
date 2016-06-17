@@ -6,6 +6,7 @@
 package cgi.lemans.portail.controller;
 
 import cgi.lemans.portail.controller.beans.PlanningBean;
+import cgi.lemans.portail.controller.beans.PlanningModalBean;
 import cgi.lemans.portail.controller.beans.UtilisateurBean;
 import cgi.lemans.portail.service.IPlanningService;
 import java.util.List;
@@ -50,4 +51,30 @@ public class PlanningController {
 		List<PlanningBean> infosSend = planningService.afficherPlanningEquipe(tag);
 		return new ResponseEntity<List<PlanningBean>>(infosSend, HttpStatus.OK);
 	};
+        
+        @RequestMapping(value = "/planning/forfaitModal", method = RequestMethod.GET)
+	public ResponseEntity<PlanningModalBean> infosModalForfait(HttpServletRequest request) {
+		PlanningModalBean infosSend = planningService.recupererInfosForfaitModal();
+		return new ResponseEntity<PlanningModalBean>(infosSend, HttpStatus.OK);
+	};
+        
+        @RequestMapping(value = "/planning/typeDm", method = RequestMethod.GET)
+	public ResponseEntity<PlanningModalBean> infosModalTypeDM(HttpServletRequest request) {
+		PlanningModalBean infosSend = planningService.recupererInfosTypeModal();
+		return new ResponseEntity<PlanningModalBean>(infosSend, HttpStatus.OK);
+	};
+        
+        /*@RequestMapping(value = "/planning/ajoutDm", method = RequestMethod.POST)
+	public ResponseEntity<PlanningCardBean> ajouterAbsence(@RequestBody PlanningCardBean bean,
+			HttpServletRequest request) {
+		UtilisateurBean user = addUtilisateurSession(request.getSession());
+		if (user != null && UtilisateurBean.USER_TRI.equals(user.getTrigramme())) {
+			absenceService.enregistrerInfosParTypes(user.getTrigramme(), bean);
+		} else {
+			// TODO: Equipe implémentation des erreurs
+		}
+		// FIXME: Le code retourné est toujours OK mais ça ne veut pas dire que
+		// c'est vrai tq les exceptions ne sont pas gérées.
+		return new ResponseEntity<AbsenceCardBean>(bean, HttpStatus.OK);
+	}*/
 }

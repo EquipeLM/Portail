@@ -15,13 +15,21 @@
             <div class="form-group row inputSolde">
             <div class="col-sm-2"></div>
                 <md-input-container class="md-block col-sm-8" flex-gt-sm>
-                    <input name="Faite" ng-model="formData.consoFaite" placeholder="Charge consommée" required ng-pattern="/^[0-9]{5}$/">
+                    <label>Consommation du jour</label>  
+                    <input name="Faite" ng-model="formTacheConsoJour.consoFaite" type="number" step="0.1">
                 </md-input-container>   
             </div>
             <div class="form-group row inputSolde">
             <div class="col-sm-2"></div>
                 <md-input-container class="md-block col-sm-8" flex-gt-sm>
-                    <input name="raf" ng-model="formData.raf" placeholder="Restant à faire" required ng-pattern="/^[0-9]{5}$/">
+                    <label>Reste à faire</label>
+                    <input name="raf" ng-model="formTacheConsoJour.raf" type="number" step="0.1">
+                </md-input-container>   
+            </div>
+            <div class="col-sm-2"></div>
+                <md-input-container class="md-block col-sm-8" flex-gt-sm>
+                    <label>Commentaire</label>
+                    <input name="commentaire" ng-model="formTacheConsoJour.raf" type="text" md-maxlength="100">
                 </md-input-container>   
             </div>
         </form>
@@ -33,7 +41,7 @@
       <md-button ng-click="hide()">
        Annuler
       </md-button>
-      <md-button ng-click="valider()" style="margin-right:20px;">
+      <md-button ng-click="validerConsoJour()" style="margin-right:20px;">
        Valider
       </md-button>
     </md-dialog-actions>

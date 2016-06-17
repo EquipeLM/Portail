@@ -4,8 +4,31 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<div ng-controller="PlanningCtrl">
-   
-    <daypilot-scheduler id="scheduler" daypilot-config="schedulerConfig" daypilot-events="events" ></daypilot-scheduler>
+<div ng-controller="PlanningCardCtrl">
+    
+    <div class="carrousel">
+								
+	<input type="radio" name="slides" id="radio-1" checked>
+	<input type="radio" name="slides" id="radio-2">
+			
+	<ul class="slides">
+            <li class="slide">
+               <daypilot-scheduler id="scheduler" daypilot-config="schedulerConfig" daypilot-events="events" ></daypilot-scheduler> 
+           </li>        
+            <li class="slide">
+               <daypilot-scheduler id="scheduler1" daypilot-config="schedulerConfig1" daypilot-events="events" ></daypilot-scheduler>
+           </li>
+         
+          
+        </ul>
+        <div class="slidesNavigation">
+            <label for="radio-1" id="dotForRadio-1"></label>
+            <label for="radio-2" id="dotForRadio-2"></label>
+	</div>
+    </div>	
+    
+    
+    
+    
 </div>
    

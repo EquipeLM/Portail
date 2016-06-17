@@ -27,7 +27,7 @@ public class DemandeOuProjet extends EntiteGamaweb{
     @Column(name="IdDemande")
     private String idDemande;
     
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name="REF_Ressource")
     private RessourceTma refRessource;
     

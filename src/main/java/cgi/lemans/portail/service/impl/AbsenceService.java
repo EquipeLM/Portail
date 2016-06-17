@@ -270,7 +270,7 @@ public class AbsenceService implements IAbsenceService {
                 
                 cufRessourceAbsenceDao.create(newSolde);
                 
-                
+                // il faut supprimer les ancines soldes et et ajouter les nouveaux
                 
                 
                 return bean;

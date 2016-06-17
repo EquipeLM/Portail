@@ -8,9 +8,12 @@ package cgi.lemans.portail.domaine.entites.gamaweb;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 /**
  *
@@ -22,9 +25,10 @@ import javax.persistence.Table;
 public class CufEstTraitePendant extends EntiteGamaweb {
     
     @Id 
-    @GeneratedValue 
-    @Column(name="IdOT")
-    private Integer idOT;
+    @NotFound(action=NotFoundAction.IGNORE)
+    @ManyToOne
+    @JoinColumn(name="IdOT")
+    private OrdreDeTravail idOT;
     
     @Column(name="Date_imputation")
     private Date dateImputation;
@@ -38,7 +42,7 @@ public class CufEstTraitePendant extends EntiteGamaweb {
     @Column(name="IdImputation")
     private Integer idImputation;
     
-    @Column(name="comentaire_RAF")
+    @Column(name="commentaire_RAF")
     private String commentaireRAF;
     
     @Column(name="cout")
@@ -51,11 +55,11 @@ public class CufEstTraitePendant extends EntiteGamaweb {
         super();
     }
 
-    public Integer getIdOT() {
+    public OrdreDeTravail getIdOT() {
         return idOT;
     }
 
-    public void setIdOT(Integer idOT) {
+    public void setIdOT(OrdreDeTravail idOT) {
         this.idOT = idOT;
     }
 

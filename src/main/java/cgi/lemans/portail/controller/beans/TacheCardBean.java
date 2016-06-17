@@ -22,6 +22,12 @@ public class TacheCardBean {
     private String chargeConsomme;
     private String RessourceNom;
     private String RessourcePrenom;
+    private String designation;
+    private String user;
+    private Integer idOt;
+    private String idDemande;
+    private String estimationRevisee;
+            
     
 
     public String getDemandeRetard() {
@@ -112,6 +118,52 @@ public class TacheCardBean {
     public void setChargeConsomme(String chargeConsomme) {
         this.chargeConsomme = chargeConsomme;
     }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public Integer getIdOt() {
+        return idOt;
+    }
+
+    public void setIdOt(Integer idOt) {
+        this.idOt = idOt;
+    }
+
+    public String getIdDemande() {
+        return idDemande;
+    }
+
+    public void setIdDemande(String idDemande) {
+        this.idDemande = idDemande;
+    }
+
+    public String getEstimationRevisee() {
+        return estimationRevisee;
+    }
+
+    public void setEstimationRevisee(String estimationRevisee) {
+        this.estimationRevisee = estimationRevisee;
+    }
+    
+    
+    
+    
+    
+    
     
     
 

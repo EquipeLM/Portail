@@ -11,7 +11,9 @@ package cgi.lemans.portail.controller.beans;
  */
 public class ListTacheBean {
     
-    private int id;
+    private int idOt;
+    private int idDm;
+    private String idDemande;
     private String libelleTypeOT;
     private String libelleDm;
     private String libelleDmRetard;
@@ -29,16 +31,37 @@ public class ListTacheBean {
     private String trigramme;
     private String nom;
     private String prenom;
+    private String idType;
+    private String estimationRevisee;
 
 
-    public int getId() {
-        return id;
+    public int getIdOt() {
+        return idOt;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdOt(int idOt) {
+        this.idOt = idOt;
     }
 
+    public int getIdDm() {
+        return idDm;
+    }
+
+    public void setIdDm(int idDm) {
+        this.idDm = idDm;
+    }
+    
+    
+
+    public String getIdDemande() {
+        return idDemande;
+    }
+
+    public void setIdDemande(String idDemande) {
+        this.idDemande = idDemande;
+    }
+
+    
     public String getLibelleTypeOT() {
         return libelleTypeOT;
     }
@@ -178,8 +201,24 @@ public class ListTacheBean {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
+
+    public String getIdType() {
+        return idType;
+    }
+
+    public void setIdType(String idType) {
+        this.idType = idType;
+    }
+
+    public String getEstimationRevisee() {
+        return estimationRevisee;
+    }
+
+    public void setEstimationRevisee(String estimationRevisee) {
+        this.estimationRevisee = estimationRevisee;
+    }
     
-    
+     
     
 
     
