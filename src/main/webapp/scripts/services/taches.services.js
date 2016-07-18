@@ -22,6 +22,16 @@ angular
 						url:'api/taches/tache/demande/libelle/:tag',
 						isArray: false
 					},
+                                        getComs : {
+						method: 'GET',
+						param : {
+							idOT: '@idOT',
+							
+						},
+						url:'api/taches/tache/afficher/coms/:idOT',
+						isArray: false
+					},
+                                        
                                         getTypeActiviteLibelle : {
 						method: 'GET',
                                                 param : {},
@@ -58,7 +68,14 @@ angular
 						
 						url:'api/taches/tache/ajout/tache',
 						isArray: false
-					}
+					},
+                                        addComs : {
+						method: 'POST',
+                                                param : {},
+						
+						url:'api/taches/tache/ajout/coms',
+						isArray: false
+					},
                                         
                                         
 				}

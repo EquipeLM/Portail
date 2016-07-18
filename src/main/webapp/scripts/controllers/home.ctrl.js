@@ -5,9 +5,9 @@
 angular
     .module('portail.controllers')
     
-    .controller('HomeCtrl', ['$scope', '$http','Incoherence', 'Tache', 'Absence', '$mdDialog', '$mdMedia', '$resource', '$timeout', function ($scope, $http, Incoherence, Tache, Absence, $mdDialog, $mdMedia, $resource, $timeout) {
+    .controller('HomeCtrl', ['$scope', '$http','Incoherence', 'Tache', 'Absence', '$mdDialog', '$mdMedia', '$resource', '$timeout', function ($scope, $http, Incoherence, Tache, Absence, $mdDialog, $mdMedia, $resource, $timeout, tacheAvance) {
     
-      
+    $scope.tacheAvance = tacheAvance; 
     
     var compt = 0;
     

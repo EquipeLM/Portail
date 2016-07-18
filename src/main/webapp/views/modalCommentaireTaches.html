@@ -11,14 +11,27 @@
     </md-toolbar>
     <md-dialog-content>
       <div class="md-dialog-content">
+          
+          
         <form role="form">
-        	
+            
+           
+            
             <div class="form-group row">
-                <div class="col-sm-1"></div>
-                <md-input-container class="md-block" flex-gt-sm>
+               
+                    <div ng-repeat="com in coms">
+                        <p>{{ com.commentaire }}</td>
+                        <td>{{ com.qui }}</td>
+                        <td>{{ com.date }}</td>
+                    </div>
+                
+                      
+                <md-input-container class="md-block" flex-gt-sm>  
                     <input name="commentaire" ng-model="formDataComs.commentaire" placeholder="Répondre : ">
                 </md-input-container>   
             </div>
+            
+            
             
           
         </form>
@@ -30,9 +43,13 @@
       <md-button ng-click="hide()">
        Annuler
       </md-button>
-      <md-button ng-click="valider()" style="margin-right:20px;">
+      <md-button ng-click="validerComs()" style="margin-right:20px;">
        Valider
       </md-button>
     </md-dialog-actions>
   </form>
+    <div ng-repeat="com in coms">
+        <p>{{com.commentaire}}</p>
+    </div>
 </md-dialog>
+

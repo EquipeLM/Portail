@@ -27,6 +27,8 @@ public class TacheCardBean {
     private Integer idOt;
     private String idDemande;
     private String estimationRevisee;
+    private String commentaire;
+    private String DateComs;
             
     
 
@@ -158,6 +160,23 @@ public class TacheCardBean {
     public void setEstimationRevisee(String estimationRevisee) {
         this.estimationRevisee = estimationRevisee;
     }
+
+    public String getCommentaire() {
+        return commentaire;
+    }
+
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
+
+    public String getDateComs() {
+        return DateComs;
+    }
+
+    public void setDateComs(String DateComs) {
+        this.DateComs = DateComs;
+    }
+    
     
     
     

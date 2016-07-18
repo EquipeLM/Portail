@@ -33,6 +33,10 @@ public class ListTacheBean {
     private String prenom;
     private String idType;
     private String estimationRevisee;
+    private String commentaire;
+    private String ressource;
+    private String dateComs;
+    
 
 
     public int getIdOt() {
@@ -217,6 +221,32 @@ public class ListTacheBean {
     public void setEstimationRevisee(String estimationRevisee) {
         this.estimationRevisee = estimationRevisee;
     }
+
+    public String getCommentaire() {
+        return commentaire;
+    }
+
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
+
+    public String getRessource() {
+        return ressource;
+    }
+
+    public void setRessource(String ressource) {
+        this.ressource = ressource;
+    }
+
+    public String getDateComs() {
+        return dateComs;
+    }
+
+    public void setDateComs(String dateComs) {
+        this.dateComs = dateComs;
+    }
+    
+    
     
      
     

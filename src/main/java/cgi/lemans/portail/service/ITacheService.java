@@ -31,4 +31,8 @@ public interface ITacheService {
     
     public TacheCardBean enregistrerNewTache(TacheCardBean bean); 
     
+    public TacheCardBean enregistrerComs(TacheCardBean bean, String idRessource); 
+    
+    public TacheBean afficherComs(Integer idOT);
+    
 }

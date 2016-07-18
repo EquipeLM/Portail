@@ -7,6 +7,8 @@
             
             
 </div>
+
+
 <div class="container" style="margin-top: 80px;">
     <div class="row marge1">
         <div class="col-sm-3"></div>
@@ -156,13 +158,14 @@
             </td>
             <td class="icon-screen"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa fa-2x" aria-hidden="true"></i></a>
             </td>
-            <td class="icon-screen"><a href="" ng-click="showAdvancedComs($event)"><i class="fa fa-comments-o colorfa fa-2x" aria-hidden="true"></i></a>
+            <td class="icon-screen"><a href="" ng-click="showAdvancedComs(tache.id)"><i class="fa fa-comments-o colorfa fa-2x" aria-hidden="true"></i></a>
             </td>
             
           </tr>
         </tbody>
     
     </table>
+    
     <table style="width:94%;margin-left:3%;" class="table table-bordered table-striped table-tache">
     
         <thead>
@@ -204,15 +207,19 @@
             </td>
             <td class="icon-screen"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa fa-2x" aria-hidden="true"></i></a>
             </td>
-            <td class="icon-screen"><a href="" ng-click="showAdvancedComs($event)"><i class="fa fa-comments-o colorfa fa-2x" aria-hidden="true"></i></a>
+            <td class="icon-screen"><a href="" ng-click="showAdvancedComs(tacheAvance)"><i class="fa fa-comments-o colorfa fa-2x" aria-hidden="true"></i></a>
             </td>
+       
             
           </tr>
         </tbody>
+        
+        
+        
+                    
+        
     
-    </table>
-    
-    <table style="width:94%;margin-left:3%;" class="table table-bordered table-striped table-tache">
+    </table><table style="width:94%;margin-left:3%;" class="table table-bordered table-striped table-tache">
     
         <thead>
           <tr class="bandeau-termine">
@@ -238,7 +245,7 @@
             <td>{{ tacheTermine.dm }}</td>
             <td>{{ tacheTermine.ot }}</td>
             <td style="text-align: center">{{ tacheTermine.type }}</td>
-            <td class="icon-screen"><a href="" ng-click="showAdvancedComs($event)"><i class="fa fa-comments-o colorfa fa-2x" aria-hidden="true"></i></a>
+            <td class="icon-screen"><a href="" ng-click="showAdvancedComs(tacheTermine.id)"><i class="fa fa-comments-o colorfa fa-2x" aria-hidden="true"></i></a>
             </td>
             
           </tr>

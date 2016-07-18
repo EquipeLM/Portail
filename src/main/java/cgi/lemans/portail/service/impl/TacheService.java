@@ -15,17 +15,22 @@ import org.springframework.transaction.annotation.Transactional;
 import cgi.lemans.portail.controller.beans.ListTacheBean;
 import cgi.lemans.portail.controller.beans.TacheBean;
 import cgi.lemans.portail.controller.beans.TacheCardBean;
+import cgi.lemans.portail.domaine.entites.gamaweb.CufCommentaire;
 import cgi.lemans.portail.domaine.entites.gamaweb.DemandeOuProjet;
 import cgi.lemans.portail.domaine.entites.gamaweb.OrdreDeTravail;
 import cgi.lemans.portail.domaine.entites.gamaweb.RessourceTma;
 import cgi.lemans.portail.domaine.entites.gamaweb.TypeActivite;
+import cgi.lemans.portail.domaine.gamaweb.ICufCommentaireDao;
 import cgi.lemans.portail.domaine.gamaweb.IDemandeOuProjetDao;
 import cgi.lemans.portail.domaine.gamaweb.IOrdreDeTravailDao;
 import cgi.lemans.portail.domaine.gamaweb.IRessourceTmaDao;
 import cgi.lemans.portail.domaine.gamaweb.ITypeActiviteDao;
 import cgi.lemans.portail.service.ITacheService;
 import cgi.lemans.portail.utils.ConvertUtils;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -47,6 +52,9 @@ public class TacheService implements ITacheService {
         
         @Autowired
 	private IRessourceTmaDao ressourceTmaDao;
+        
+        @Autowired
+        private ICufCommentaireDao cufCommentaireDao;
 
 	private ListTacheBean tacheDm(DemandeOuProjet demandeOuProjet) {
 		ListTacheBean task = new ListTacheBean();
@@ -70,7 +78,7 @@ public class TacheService implements ITacheService {
 	private ListTacheBean allTaches(OrdreDeTravail ordreDeTravail) {
 		ListTacheBean task = new ListTacheBean();
                 
-                if (ordreDeTravail.getChargeRestante() != null && ordreDeTravail.getChargeConsommeeTotale() != null && ordreDeTravail.getIdDemande() != null){
+                if (ordreDeTravail.getChargePrevue() != null && ordreDeTravail.getChargeRestante() != null && ordreDeTravail.getChargeConsommeeTotale() != null && ordreDeTravail.getIdDemande() != null){
                     
                 
                 double calcul =  ordreDeTravail.getChargeRestante() + ordreDeTravail.getChargeConsommeeTotale();
@@ -335,6 +343,50 @@ public class TacheService implements ITacheService {
       demandeOuProjetDao.update(newTacheUpdate);
       
        return bean;
+    }
+
+    @Override
+    public TacheCardBean enregistrerComs(TacheCardBean bean, String idRessource) {
+        
+        CufCommentaire newComs = new CufCommentaire();
+        
+        newComs.setCommentaire(bean.getCommentaire());
+        
+        
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = new Date();
+        newComs.setModifieLe(date);
+        newComs.setModifierPar(idRessource);
+        newComs.setIdOT(bean.getIdOt());
+        
+        
+        cufCommentaireDao.create(newComs);
+        return bean;
+    }
+    
+    private ListTacheBean coms (CufCommentaire cufCommentaire) {
+		ListTacheBean task = new ListTacheBean();
+                
+                task.setCommentaire(cufCommentaire.getCommentaire());
+		task.setRessource(cufCommentaire.getModifierPar());
+                task.setDateComs(cufCommentaire.getModifieLe().toString());
+
+		return task;
+	}
+
+    @Override
+    public TacheBean afficherComs(Integer idOT) {
+        List<CufCommentaire> listComs = cufCommentaireDao.findCommentaire(idOT);
+		TacheBean taskRetour = new TacheBean();
+		List<ListTacheBean> absResources = new ArrayList<ListTacheBean>();
+		for (CufCommentaire cufCommentaire : listComs) {
+                   
+			absResources.add(coms(cufCommentaire));
+
+		}
+		taskRetour.setListTache(absResources);
+
+		return taskRetour;
     }
 
 }

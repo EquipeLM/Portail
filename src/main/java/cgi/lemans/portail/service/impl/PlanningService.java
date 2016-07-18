@@ -78,7 +78,10 @@ public class PlanningService implements IPlanningService{
     
     private ListPlanningBean planningEquipe (CufPlanning cufPlanning){
         
+        
         ListPlanningBean plan = new ListPlanningBean();
+        
+        if (cufPlanning.getIdOT().getIdOt() != null) {
 		
             plan.setId(cufPlanning.getIdPlanning());
             String sem = (cufPlanning.getNoSem().toString());
@@ -96,8 +99,10 @@ public class PlanningService implements IPlanningService{
             
             plan.setPlanifie(cufPlanning.getChargePlanning());
             plan.setTrigramme(cufPlanning.getIdResource());
+        }
                 
 	    return plan;
+            
     }
     
     

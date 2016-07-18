@@ -8,6 +8,7 @@ package cgi.lemans.portail.domaine.gamaweb;
 import cgi.lemans.portail.domaine.IGenericDao;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufCommentaire;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -15,7 +16,7 @@ import java.io.Serializable;
  */
 public interface ICufCommentaireDao extends IGenericDao<Serializable, CufCommentaire>{
     
-    public CufCommentaire findCommentaire(String idRessource);
+    public List<CufCommentaire> findCommentaire(Integer idOT);
     
     
 }
