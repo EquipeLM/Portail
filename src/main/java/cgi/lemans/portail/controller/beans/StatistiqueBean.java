@@ -5,40 +5,42 @@
  */
 package cgi.lemans.portail.controller.beans;
 
-import java.util.List;
-
 /**
  *
  * @author souchul
  */
 public class StatistiqueBean {
-    private String trigramme;
-    private String date;
-    private List<ListStatistiqueBean> listStats;
+    private Double typeASS;
+    private Double typeRE7;
+    private Double typePRO;
 
-    public String getTrigramme() {
-        return trigramme;
+    public Double getTypeASS() {
+        return typeASS;
     }
 
-    public void setTrigramme(String trigramme) {
-        this.trigramme = trigramme;
+    public void setTypeASS(Double typeASS) {
+        this.typeASS = typeASS;
     }
 
-    public String getDate() {
-        return date;
+    public Double getTypeRE7() {
+        return typeRE7;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setTypeRE7(Double typeRE7) {
+        this.typeRE7 = typeRE7;
     }
 
-    public List<ListStatistiqueBean> getListStats() {
-        return listStats;
+    public Double getTypePRO() {
+        return typePRO;
     }
 
-    public void setListStats(List<ListStatistiqueBean> listStats) {
-        this.listStats = listStats;
+    public void setTypePRO(Double typePRO) {
+        this.typePRO = typePRO;
     }
+    
+    
+
+    
     
     
 }

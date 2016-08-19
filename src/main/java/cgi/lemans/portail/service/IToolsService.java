@@ -14,4 +14,6 @@ public interface IToolsService {
 	public void enregistrerClicIcone(String idIcone, String idUser);
         
         
+        
+        
 }

@@ -6,7 +6,7 @@
 package cgi.lemans.portail.controller;
 
 import cgi.lemans.portail.controller.beans.IncoherenceBean;
-import cgi.lemans.portail.controller.beans.LoginBean;
+import cgi.lemans.portail.controller.beans.LoginWebBean;
 import cgi.lemans.portail.controller.beans.UtilisateurBean;
 import cgi.lemans.portail.service.IIncoherenceService;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,10 +47,11 @@ public class IncoherenceController {
 		return new ResponseEntity<IncoherenceBean>(infosSend, HttpStatus.OK);
 	};
         
-        @RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ResponseEntity<LoginBean> infosLogin(HttpServletRequest request) {
-		LoginBean infosSend = incoherenceService.infoConnexion();
-		return new ResponseEntity<LoginBean>(infosSend, HttpStatus.OK);
-	};
+       @RequestMapping(value = "/incoherence/connect", method = RequestMethod.POST)
+	public ResponseEntity<LoginWebBean> ajouterAbsence(@RequestBody LoginWebBean bean,
+			HttpServletRequest request, HttpSession session) {
+                            incoherenceService.connect(bean, session);
+		return new ResponseEntity<LoginWebBean>(bean, HttpStatus.OK);
+	}
     
 }

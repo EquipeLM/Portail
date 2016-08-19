@@ -5,17 +5,11 @@
  */
 package cgi.lemans.portail.controller;
 
-import cgi.lemans.portail.controller.beans.StatistiqueBean;
 import cgi.lemans.portail.controller.beans.UtilisateurBean;
 import cgi.lemans.portail.service.IStatistiqueService;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -39,11 +33,13 @@ public class StatistiqueController {
 		return user;
 	}
     
-    @RequestMapping(value = "/statistique/demandeStats", method = RequestMethod.GET)
-	public ResponseEntity<List<StatistiqueBean>> getStatsDemande(HttpServletRequest request) {
-            //UtilisateurBean user = addUtilisateurSession(request.getSession());       
-		List<StatistiqueBean> infosSend = statistiqueService.afficherDMTraiteStats("cho");
-		return new ResponseEntity<List<StatistiqueBean>>(infosSend, HttpStatus.OK);
-	}
+    /*@RequestMapping(value = "/statistique/demandeStats", method = RequestMethod.GET)
+	
+	public ResponseEntity<List<StatistiqueBean>> getInfosDmStat(HttpServletRequest request) {
+		List<StatistiqueBean> listRetour = new ArrayList<StatistiqueBean>();
+		StatistiqueBean infosSend = statistiqueService.afficherDMTraiteStats();
+                listRetour.add(infosSend);
+		return new ResponseEntity<List<StatistiqueBean>>(listRetour, HttpStatus.OK);
+	}*/
     
 }

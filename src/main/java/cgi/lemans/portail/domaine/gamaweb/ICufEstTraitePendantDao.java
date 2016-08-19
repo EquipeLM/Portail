@@ -8,12 +8,11 @@ package cgi.lemans.portail.domaine.gamaweb;
 import cgi.lemans.portail.domaine.IGenericDao;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufEstTraitePendant;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  *
  * @author souchul
  */
 public interface ICufEstTraitePendantDao extends IGenericDao<Serializable, CufEstTraitePendant>{
-    public List<CufEstTraitePendant> findAllDemandeTraiteStats(String idRessource);
+   
 }

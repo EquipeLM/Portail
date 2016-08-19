@@ -1,11 +1,11 @@
+<div class="login">
+  <div class="login-triangle"></div>
+  
+  <h2 class="login-header">Connexion</h2>
 
-
-<form name="form" ng-submit="login()" role="form">
-    <div class="form-group">
-        <label for="username">tri</label>
-        <i class="fa fa-key"></i>
-        <input type="text" name="tri" id="tri" class="form-control" ng-model="tri" required />
-        
-    </div>
-    
-</form>
+  <form class="login-container">
+    <p><input type="text" placeholder="Trigramme" ng-model="formLogin.trigramme"></p>
+    <p><input type="text" placeholder="Groupinfra" ng-model="formLogin.groupinfra"></p>
+    <p><input ng-click="connexion()" type="submit" value="Accès au portail"></p>
+  </form>
+</div>

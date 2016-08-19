@@ -9,13 +9,15 @@ import cgi.lemans.portail.controller.beans.IncoherenceBean;
 import cgi.lemans.portail.controller.beans.ListIncoherenceBean;
 import cgi.lemans.portail.controller.beans.LoginBean;
 import cgi.lemans.portail.controller.beans.LoginCardBean;
+import cgi.lemans.portail.controller.beans.LoginWebBean;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufControleIncoherence;
-import cgi.lemans.portail.domaine.entites.gamaweb.Login;
+import cgi.lemans.portail.domaine.entites.gamaweb.RessourceTma;
 import cgi.lemans.portail.domaine.gamaweb.ICufControleIncoherenceDao;
-import cgi.lemans.portail.domaine.gamaweb.ILoginDao;
+import cgi.lemans.portail.domaine.gamaweb.IRessourceTmaDao;
 import cgi.lemans.portail.service.IIncoherenceService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +35,7 @@ public class IncoherenceService implements IIncoherenceService{
     private ICufControleIncoherenceDao cufControleIncoherenceDao;
     
     @Autowired
-    ILoginDao loginDao;
+    private IRessourceTmaDao ressourceTmaDao;
 
     private ListIncoherenceBean incoherence(CufControleIncoherence cufControleIncoherence) {
 		ListIncoherenceBean inco = new ListIncoherenceBean();
@@ -58,29 +60,36 @@ public class IncoherenceService implements IIncoherenceService{
         return incoherence;
     }
     
-    
-    public LoginCardBean loginConnect(Login login) {
-        LoginCardBean loginRetour = new LoginCardBean();
-        
-        loginRetour.setLogin(login.getLogin());
-        loginRetour.setMotPasse(login.getMotDePasse());
-        
-        return loginRetour;
-        
-    }
+    private LoginCardBean login(RessourceTma ressourceTma) {
+		LoginCardBean log = new LoginCardBean();
+
+		log.setTrigramme(ressourceTma.getIdRessource());
+		log.setGroupinfra(ressourceTma.getGroupinfra());
+               
+
+		return log;
+	}
 
     @Override
-    public LoginBean infoConnexion() {
-        List<Login> listLog = loginDao.findLoginPerson();
-        LoginBean logRetour = new LoginBean();
-        List<LoginCardBean> logRessources = new ArrayList<LoginCardBean>();
-        for (Login login : listLog){
-            logRessources.add(loginConnect(login));
-        }
-        logRetour.setListLogin(logRessources);
-        return logRetour;
+    public LoginBean connect(LoginWebBean bean, HttpSession session){
         
+        List<RessourceTma> listress = ressourceTmaDao.findLogin();
+		LoginBean ressRetour = new LoginBean();
+		List<LoginCardBean> ress = new ArrayList<LoginCardBean>();
+		for (RessourceTma ressourceTma : listress) {
+			ress.add(login(ressourceTma));
+                        if((bean.getTrigramme()).equals(ressourceTma.getIdRessource())){
+                            session.setAttribute("user", bean.getTrigramme());
+                            System.out.print("ok");
+                        }else{
+                            System.out.println("erreur");
+                        }
+		
+		ressRetour.setListLogin(ress);
+		
+                }
+        return ressRetour;
     }
- 
-        
+    
+    
 }

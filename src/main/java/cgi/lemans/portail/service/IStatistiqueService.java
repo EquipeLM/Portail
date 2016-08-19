@@ -6,12 +6,11 @@
 package cgi.lemans.portail.service;
 
 import cgi.lemans.portail.controller.beans.StatistiqueBean;
-import java.util.List;
 
 /**
  *
  * @author souchul
  */
 public interface IStatistiqueService {
-    public List<StatistiqueBean> afficherDMTraiteStats(String idRessource);
+    public StatistiqueBean afficherDMTraiteStats();
 }

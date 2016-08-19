@@ -86,7 +86,7 @@ public class DemandeOuProjet extends EntiteGamaweb{
     @Column(name="cout_restant")
     private Double coutRestant;
     
-    
+  
     public DemandeOuProjet(){
         super();
     }
@@ -242,6 +242,9 @@ public class DemandeOuProjet extends EntiteGamaweb{
     public void setCoutRestant(Double coutRestant) {
         this.coutRestant = coutRestant;
     }
+
+    
+    
     
 
    

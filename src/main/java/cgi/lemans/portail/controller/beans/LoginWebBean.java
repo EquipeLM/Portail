@@ -9,10 +9,10 @@ package cgi.lemans.portail.controller.beans;
  *
  * @author souchul
  */
-public class LoginCardBean {
+public class LoginWebBean {
     
-   private String trigramme;
-   private String groupinfra;
+    private String trigramme;
+    private String groupinfra;
 
     public String getTrigramme() {
         return trigramme;
@@ -29,9 +29,9 @@ public class LoginCardBean {
     public void setGroupinfra(String groupinfra) {
         this.groupinfra = groupinfra;
     }
-
-   
-   
-   
+    
+    
+    
+    
     
 }

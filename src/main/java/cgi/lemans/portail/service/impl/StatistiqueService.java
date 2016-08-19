@@ -5,16 +5,10 @@
  */
 package cgi.lemans.portail.service.impl;
 
-import cgi.lemans.portail.controller.beans.ListStatistiqueBean;
 import cgi.lemans.portail.controller.beans.StatistiqueBean;
-import cgi.lemans.portail.domaine.entites.gamaweb.CufEstTraitePendant;
 import cgi.lemans.portail.domaine.gamaweb.ICufEstTraitePendantDao;
+import cgi.lemans.portail.domaine.gamaweb.IDemandeOuProjetDao;
 import cgi.lemans.portail.service.IStatistiqueService;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,37 +24,27 @@ public class StatistiqueService implements IStatistiqueService{
     
     @Autowired
     private ICufEstTraitePendantDao cufEstTraitePendantDao;
+    @Autowired
+    private IDemandeOuProjetDao demandeOuProjetDao;
 
     
-    private ListStatistiqueBean statsDm(CufEstTraitePendant cufEstTraitePendant) {
-		ListStatistiqueBean stats = new ListStatistiqueBean();
-                stats.setDate(cufEstTraitePendant.getDateImputation().toString());
-                stats.setTypeActivite(cufEstTraitePendant.getIdOT().getTypeActivite());
-                
-                return stats;
-        }
+    
     
     @Override
-    public List<StatistiqueBean> afficherDMTraiteStats(String idRessource) {
-        Map<Date, StatistiqueBean> absByDate = new HashMap<Date, StatistiqueBean>();
-        List<CufEstTraitePendant> liststats = cufEstTraitePendantDao.findAllDemandeTraiteStats(idRessource);
-		//
-		//List<ListStatistiqueBean> absResources = new ArrayList<ListStatistiqueBean>();
-		for (CufEstTraitePendant cufEstTraitePendant : liststats) {
-                        ListStatistiqueBean listStats = statsDm(cufEstTraitePendant);
-                        final Date dateImputation = cufEstTraitePendant.getDateImputation();
-                        
-                        if (!absByDate.keySet().contains(dateImputation)) {
-                            StatistiqueBean statsRetour = new StatistiqueBean();
-                            statsRetour.setDate(dateImputation.toString());
-                            statsRetour.setListStats(new ArrayList<ListStatistiqueBean>());
-                            absByDate.put(dateImputation, statsRetour);   
-                        }
-                        absByDate.get(dateImputation).getListStats().add(listStats);
-                }
+    public StatistiqueBean afficherDMTraiteStats() {
+        /*StatistiqueBean statRetour = new StatistiqueBean();
+        
+        Double listTypeAss = (Double) demandeOuProjetDao.findAllDemandeASS(DemandeOuProjetDao.ASS);
+        statRetour.setTypeASS(listTypeAss);
+        
+        Double listTypeRe7 = (Double) demandeOuProjetDao.findAllDemandeASS(DemandeOuProjetDao.RE7);
+        statRetour.setTypeASS(listTypeRe7);
+        
+        Double listTypePro = (Double) demandeOuProjetDao.findAllDemandeASS(DemandeOuProjetDao.PRO);
+        statRetour.setTypeASS(listTypePro);*/
+        
+        return null;
 		
-
-		return new ArrayList<>(absByDate.values());
     }
 					
     

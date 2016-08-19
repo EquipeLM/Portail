@@ -31,7 +31,17 @@ public class RessourceTmaDao extends AbstractGenericDaoGamaweb<RessourceTma> imp
 		return results;
 
 	}
+
+    @Override
+    public List<RessourceTma> findLogin() {
+        String hql = 
+                    "from RessourceTma a"
+                            ;
+		Query query = getSession().createQuery(hql);
+		List<RessourceTma> results = (List<RessourceTma>)query.list();
+		return results;
     }
+}
 
     
     

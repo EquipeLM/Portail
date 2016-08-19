@@ -19,6 +19,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class DemandeOuProjetDao extends AbstractGenericDaoGamaweb<DemandeOuProjet> implements IDemandeOuProjetDao{
 
+        public static final String ASS = "ASS";
+	public static final String RE7 = "RE7";
+	public static final String PRO = "PRO";
+    
+    
     @Override
     public List<DemandeOuProjet> findListDemande(String tag) {
         String hql = "select a from DemandeOuProjet a "
@@ -42,6 +47,10 @@ public class DemandeOuProjetDao extends AbstractGenericDaoGamaweb<DemandeOuProje
         DemandeOuProjet results = (DemandeOuProjet)query.uniqueResult();
     	return results;
     }
+    
+  
+   
+    
     
     
     

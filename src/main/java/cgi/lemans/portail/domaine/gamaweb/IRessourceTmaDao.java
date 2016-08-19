@@ -17,5 +17,6 @@ import java.util.List;
 public interface IRessourceTmaDao extends IGenericDao<Serializable, RessourceTma>{
     
   public List<RessourceTma> findQuiEquipe(String tag);
+  public List<RessourceTma> findLogin ();
     
 }
