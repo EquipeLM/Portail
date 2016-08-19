@@ -1,3 +1,6 @@
+
+ 
+
 <div class="navbar navbar-app navbar-absolute-top headerCGI">
             <h2>CGI Tools</h2>
             <a href="#" class="homeLink"><i class="fa fa-home fa-2x"></i></a>
@@ -5,11 +8,22 @@
             <a class="settings" href="/portail/#/config"><i class="fa fa-gears fa-2x"></i></a>
             <a class="settings" href="https://mypm.imfr.cgi.com/portail/#/CDSMainframe/incoherences"><i class="fa fa-bell fa-2x"></i><span class="badge">{{notif}}</span></a>
             
+ 
+           
+            
             
 </div>
 <div class="container" style="margin-top: 80px;">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-10" style="margin-top:3%;">
-        <daypilot-scheduler id="scheduler" daypilot-config="schedulerConfig" daypilot-events="events" ></daypilot-scheduler>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10" style="margin-top:3%;">
+            <daypilot-scheduler id="scheduler" daypilot-config="schedulerConfig" daypilot-events="events"></daypilot-scheduler>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10" style="margin-top: 3%;">
+            <daypilot-scheduler id="scheduler1" daypilot-config="schedulerConfig1" daypilot-events="events" ></daypilot-scheduler>
+        </div>
     </div>
 </div>

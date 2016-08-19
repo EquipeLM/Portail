@@ -82,9 +82,9 @@ public class TacheController {
 		return new ResponseEntity<TacheBean>(infosSend, HttpStatus.OK);
 	}
         
-        @RequestMapping(value = "/tache/afficher/coms/{idOT}", method = RequestMethod.GET)
-	public ResponseEntity<TacheBean> getInfosComs(@PathVariable Integer idOT, HttpServletRequest request) {
-		TacheBean infosSend = tacheService.afficherComs(idOT);
+        @RequestMapping(value = "/tache/afficher/coms", method = RequestMethod.GET)
+	public ResponseEntity<TacheBean> getInfosComs(HttpServletRequest request) {
+		TacheBean infosSend = tacheService.afficherComs();
 		return new ResponseEntity<TacheBean>(infosSend, HttpStatus.OK);
 	}
         
@@ -92,8 +92,7 @@ public class TacheController {
         @RequestMapping(value = "/tache/ajout/tache", method = RequestMethod.POST)
 	public ResponseEntity<TacheCardBean> ajouterTache(@RequestBody TacheCardBean bean,
 			HttpServletRequest request) {
-		UtilisateurBean user = addUtilisateurSession(request.getSession());
-		
+				
 			tacheService.enregistrerNewTache(bean);
 		
 		return new ResponseEntity<TacheCardBean>(bean, HttpStatus.OK);

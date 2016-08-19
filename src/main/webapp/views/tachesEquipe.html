@@ -58,6 +58,7 @@
             <a href="https://mypm.imfr.cgi.com/portail/#/CDSMainframe/outils/imputations" target="_blank"><i class="fa fa-clock-o fa-4x search-black"></i></a>
             <a href="/portail/#/taches"><i class="fa fa-user fa-4x search-black"></i></a>
             <a href="" ng-click="showAdvancedAddTache($event)"><i class="fa fa-plus fa-4x search-black"></i></a>
+            <a href="" ng-click="showAdvancedComs($event)"><i class="fa fa-comments-o fa-4x search-black"></i></a>
          </div>
      </div>
     
@@ -98,7 +99,7 @@
         <tbody>
           <tr ng-repeat="tacheRetard in tacheRetards | orderBy:sortType:sortReverse | filter:searchTache" ng-hide="showRetards">
             <td ng-app="">{{ tacheRetard.dm }}</td>
-            <td>{{ tacheRetard.ot }}</td>
+            <td>{{ tacheRetard.ot }} - {{tacheRetard.id}}</td>
             <td style="text-align: center">{{ tacheRetard.type }}</td>
             <td style="text-align: center">{{ tacheRetard.ressource }}</td>
             <td style="text-align: center">{{ tacheRetard.date }}</td>
@@ -148,7 +149,7 @@
         <tbody>
           <tr ng-repeat="tache in taches |  filter:searchTache" ng-hide="showDetails">
             <td>{{ tache.dm }}</td>
-            <td>{{ tache.ot }}</td>
+            <td>{{ tache.ot }} - {{tache.id}}</td>
             <td style="text-align: center">{{ tache.type }}</td>
             <td style="text-align: center">{{ tache.ressource }}</td>
             <td style="text-align: center">{{ tache.date }}</td>
@@ -197,7 +198,7 @@
         <tbody>
           <tr ng-repeat="tacheAvance in tacheAvances | orderBy:sortType:sortReverse | filter:searchTache" ng-hide="showAvance">
             <td>{{ tacheAvance.dm }}</td>
-            <td>{{ tacheAvance.ot }}</td>
+            <td>{{ tacheAvance.ot }} - {{tacheAvance.id}}</td>
             <td style="text-align: center">{{ tacheAvance.type }}</td>
             <td style="text-align: center">{{ tacheAvance.ressource }}</td>
             <td style="text-align: center">{{ tacheAvance.date }}</td>

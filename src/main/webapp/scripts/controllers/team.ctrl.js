@@ -1,7 +1,9 @@
 
 angular
         .module('portail.controllers')
-        .controller('TeamCtrl', function($scope, $http, $timeout,$filter , Absence, Tache) {
+        .controller('TeamCtrl', function($scope, $http, $timeout,$filter , Absence, Tache, $mdDialog, $mdMedia, $resource) {
+    
+// Configuration des absences de l'équipe    
     
             $scope.schedulerConfig = {
                 scale: "Day",
@@ -18,6 +20,7 @@ angular
                 eventEndSpec : "Date",
             };            
            
+// Affichage de toutes les abssences des ressources de la CNP par ordre alphabétique           
             
             $scope.schedulerConfig.resources = [];
             $scope.events = [];
@@ -43,6 +46,8 @@ angular
             	$scope.order('name2');
 
             });
+            
+// Indicateurs pour les tâches des équipes           
             
             var comptDelais = 0;
             var comptAvance = 0;
@@ -94,20 +99,7 @@ angular
                              ressource : evt.trigramme}
                         )
                         }
-                        
-                        /*else if(evt.libelleDmTermine !== null){
-                            comptTermine++;
-                        $scope.tacheTermines.push(
-                            {id: evt.id, 
-                             dm: evt.libelleDmTermine,
-                             ot: evt.libelleOT,
-                             type: evt.libelleTypeOT,
-                             date : evt.date,
-                             charge: evt.chargePrevue,
-                             ressource : evt.trigramme}
-                        )
-                        }*/
-                        
+                                                
                     });
                     
                    var totalDelais =  comptAvance + comptRetard;
@@ -140,4 +132,48 @@ angular
                    $scope.coloursTermine = ['#d8d8d8','#d8d8d8']; 
                 
                 });
+    
+            
+    $scope.showAdvancedComs = function(ev) {
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+        $mdDialog.show({
+            templateUrl: './views/modalCommentaireTaches.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: useFullScreen
+        })  
+    };        
+                
+//  Récupération et envoi des datas pour laisser un commentaire sur la tâche                 
+                
+            $scope.formDataComs = {};
+            $scope.formDataComs.commentaire;
+            $scope.formDataComs.idOt;
+                        
+            $scope.validerComs = function() {
+                
+                Tache.addComs($scope.formDataComs, function() {});
+                console.log($scope.formDataComs);
+                $mdDialog.hide();
+            }; 
+               
+                
+// Afficher tous les commentaires ainsi que ajouter un champ pour dire sur quelle tâche
+             
+            $scope.coms = [];
+                        
+            Tache.getComs(function(data) {
+                data.listTache.forEach(function(evt){
+                    $scope.coms.push(
+                        {commentaire : evt.commentaire,
+                         qui : evt.ressource,
+                         date : evt.dateComs,
+                         id: evt.idOt}
+                    );
+           
+                });
+                
+            });
+        
   });

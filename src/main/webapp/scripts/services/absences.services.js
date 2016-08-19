@@ -13,6 +13,7 @@ angular
 						url:'api/absences/equipe/:id/mois/:month',
 						isArray: true
 					},
+                                        
                                         getJourFerie : {
 						method: 'GET',
                                                 param : {},

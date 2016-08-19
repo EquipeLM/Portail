@@ -17,17 +17,24 @@
             
            
             
-            <div class="form-group row">
-               
-                    <div ng-repeat="com in coms">
-                        <p>{{ com.commentaire }}</td>
-                        <td>{{ com.qui }}</td>
-                        <td>{{ com.date }}</td>
+            <div class="form-group">
+                
+                    <div class="row" ng-repeat="com in coms | limitTo : -7" >
+                        <div class="qui col-sm-2"><p>{{com.qui}}</p></div>
+                        
+                        <div class="bulle col-sm-8">
+                            <p class="com"><br><b>OT : {{com.id}}</b></br> {{ com.commentaire }}</p>
+                            <p class="date"> {{ com.date }} </p>
+                        </div>
+                        
                     </div>
                 
                       
-                <md-input-container class="md-block" flex-gt-sm>  
-                    <input name="commentaire" ng-model="formDataComs.commentaire" placeholder="Répondre : ">
+                <md-input-container class="md-block row" flex-gt-sm style="margin-top: 5%;margin-left: 10%;">  
+                    <input  name="idOt" ng-model="formDataComs.idOt" placeholder="id de l'OT : ">  
+                </md-input-container>   
+                <md-input-container class="md-block row" flex-gt-sm style="margin-left: 10%;margin-top: 3%;">  
+                <input style="width:400px;"  name="commentaire" ng-model="formDataComs.commentaire" placeholder="commentaire : ">
                 </md-input-container>   
             </div>
             
@@ -48,8 +55,6 @@
       </md-button>
     </md-dialog-actions>
   </form>
-    <div ng-repeat="com in coms">
-        <p>{{com.commentaire}}</p>
-    </div>
+  
 </md-dialog>
 

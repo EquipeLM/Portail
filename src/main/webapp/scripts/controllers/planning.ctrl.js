@@ -1,8 +1,18 @@
 angular
         .module('portail.controllers')
-        .controller('PlanningCtrl', function($scope, $http, $timeout, $filter, Planning, $mdDialog, $mdMedia, Tache, Planning) {
+        .controller('PlanningCtrl', function($scope, $http, $timeout, $filter, Planning, $mdDialog, $mdMedia, Tache, Planning, Absence) {
         
+        
+        $scope.sortType     = 'name'; // set the default sort type
+        $scope.sortReverse  = false;  // set the default sort order
+        $scope.searchTache   = '';     // set the default search/filter term
+  
+         $scope.sortType     = 'tacheRetard.dm'; // set the default sort type
+    $scope.sortReverse  = false;  // set the default sort order
+    $scope.searchTache   = '';     // set the default search/filter term
         $scope.events = [];
+
+// Configuration du planning
 
         $scope.schedulerConfig = {
             scale: "Week",
@@ -29,13 +39,13 @@ angular
             
             treeEnabled: true,
             rowHeaderColumns: [
-                {title: 'Demandes', width: 80},
+                {title: 'OT', width: 80},
+                {title: 'Type', width: 50},
                 {title: 'Tri', width: 50},
-                {title: "Type", width: 50},
-                {title: "Consommé", width: 80},
-                {title: "RAF", width: 50},
-                {title: "Prévue", width: 50},
-                {title: "Planifié", width: 60}
+                {title: 'Prevue', width : 50},
+                {title: 'Raf', width : 50},
+                {title: 'Consommée', width : 75}
+                
             ],
             
             
@@ -50,17 +60,16 @@ angular
         /*$scope.EditEvent(function (){
             $scope.events.edit(this.source);
         })*/
+            
         
-       
-        
-        
+// Ajout des toutes les plannifications de chaque ressources appartenant à la CNP
+
         $scope.schedulerConfig.resources = [];
             
-           
+            var orderBy = $filter('orderBy');
             Planning.getByEquipe({tag:'CNP'},function(data){
             	data.forEach(function(elt){
-            		$scope.schedulerConfig.resources.push({id : elt.idDm, name : elt.libelleDM/*, columns : [{html: elt.type},  {html: elt.consomme}, {html: elt.raf}, {html: elt.prevue}, {html: "0"}]*/, expanded : true,
-                         children : [{id:elt.idOt, name: elt.libelleOT, columns: [{html: elt.trigrammeOT}, {html: elt.type},  {html: elt.consomme}, {html: elt.raf}, {html: elt.prevue}, {html: "0"}]}]})
+            		$scope.schedulerConfig.resources.push({id:elt.idOt, name: elt.libelleOT, name2 : elt.trigrammeOT,columns: [{html: elt.typeOT},{html: elt.trigrammeOT}, {html: elt.prevue}, {html:elt.raf}, {html: elt.consomme}]})
                         
             		elt.listPlanning.forEach(function(evt){
             			$scope.events.push(
@@ -71,8 +80,64 @@ angular
                                 resource: evt.idOt});
             		});
                     });
+                    $scope.order = function(predicate) {
+            		$scope.predicate = predicate;
+            		$scope.reverse = false;
+            		$scope.schedulerConfig.resources = orderBy($scope.schedulerConfig.resources, predicate, $scope.reverse);
+            	};
+            	$scope.order('name2');
             	});
            
+
+            // Configuration du planning d'absences de chaque ressource               
+                
+                $scope.schedulerConfig1 = {
+                scale: "Day",
+                days: 365,
+                eventHeight: 45,
+                startDate: new DayPilot.Date().firstDayOfMonth(),
+                timeHeaders: [
+                    { groupBy: "Month" },
+                    { groupBy: "Cell", format: "dd/MM" }
+                ],
+                eventResizeHandling : "Disabled",
+                eventMoveHandling : "Disabled",
+                locale : "fr-fr",
+                cellBackColorNonBusiness : "#000000",
+                eventEndSpec : "Date",
+                height : 380,
+                heightSpec : "Max",
+            };            
+           
+// Affichage des absences de l'équipe de la CNP           
+            
+            $scope.schedulerConfig1.resources = [];
+            $scope.events = [];
+            var orderBy = $filter('orderBy');
+            Absence.getByEquipe({id:'CNP', month:new DayPilot.Date().getMonth()},function(data){
+            	data.forEach(function(elt){
+            		$scope.schedulerConfig1.resources.push({ id : elt.trigramme, name : elt.prenom + " " + elt.nom, name2 : elt.nom});
+            		elt.listEvent.forEach(function(evt){
+            			$scope.events.push(
+            			{id: evt.id,
+            		    text: evt.text,
+            		    start: evt.dateDebut,
+            		    end: evt.dateFin,
+            		    resource: elt.trigramme});
+            		});
+            		
+            	})
+            	$scope.order = function(predicate) {
+            		$scope.predicate = predicate;
+            		$scope.reverse = false;
+            		$scope.schedulerConfig.resources = orderBy($scope.schedulerConfig.resources, predicate, $scope.reverse);
+            	};
+            	$scope.order('name2');
+
+            });
+            
+// Affichage dans un select de la modal les forfaits 
+
         $scope.loadForfaits = function() {
         // Use timeout to simulate a 650ms request.
         $scope.forfaits = [];
@@ -83,11 +148,10 @@ angular
                         )
                     }); 
                 });
-               
-        
+
          };
          
-            
+// Affichage dans un select de la modal les types            
                 
         $scope.loadTypes = function() {
         // Use timeout to simulate a 650ms request.
@@ -99,13 +163,11 @@ angular
                         )
                     }); 
                 });
-               
-        
          };
          
-
-       $scope.loadUsers = function() {
-          
+// Affichage dans un select de la modal les nom et prenom de chaque ressource appartenant à la CNP
+       
+        $scope.loadUsers = function() {  
         $scope.users = [];
        
           var test = Tache.getRessourceTri({tag :"CNP"},function(data) {
@@ -122,11 +184,11 @@ angular
    
         
        
-        
+// Fonction qui permet d'ajouter une demande grâce à une modale
+
         $scope.formData = {};
-            $scope.formData.idClient;
-            $scope.formData.description;
-        
+        $scope.formData.idClient;
+        $scope.formData.description;
         
         
         $scope.hide = function() {
@@ -138,11 +200,11 @@ angular
         $scope.validerDemande = function() {
             
             
-            $scope.formData.motCle = "for";
-            $scope.selectedUser;
-            $scope.formData.qui = $scope.user.id;
-            $scope.formData.typeDm = $scope.type.id;
-            $scope.formData.forfait = $scope.forfait.id;
+        $scope.formData.motCle = "for";
+        $scope.selectedUser;
+        $scope.formData.qui = $scope.user.id;
+        $scope.formData.typeDm = $scope.type.id;
+        $scope.formData.forfait = $scope.forfait.id;
 	
                 /*Planning.addDemande($scope.formData, function() {
                        //va appeler ta fonction ajouterAbsence avec les valeurs bindées dans formData      
@@ -155,4 +217,4 @@ angular
         
              
                 
-})
+});

@@ -6,6 +6,7 @@
 package cgi.lemans.portail.controller;
 
 import cgi.lemans.portail.controller.beans.IncoherenceBean;
+import cgi.lemans.portail.controller.beans.LoginBean;
 import cgi.lemans.portail.controller.beans.UtilisateurBean;
 import cgi.lemans.portail.service.IIncoherenceService;
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +44,12 @@ public class IncoherenceController {
             UtilisateurBean user = addUtilisateurSession(request.getSession());
 		IncoherenceBean infosSend = incoherenceService.afficherNbIncoherence(user.getTrigramme());
 		return new ResponseEntity<IncoherenceBean>(infosSend, HttpStatus.OK);
+	};
+        
+        @RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ResponseEntity<LoginBean> infosLogin(HttpServletRequest request) {
+		LoginBean infosSend = incoherenceService.infoConnexion();
+		return new ResponseEntity<LoginBean>(infosSend, HttpStatus.OK);
 	};
     
 }

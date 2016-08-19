@@ -6,6 +6,7 @@
 package cgi.lemans.portail.controller;
 
 import cgi.lemans.portail.controller.beans.PlanningBean;
+import cgi.lemans.portail.controller.beans.PlanningCardBean;
 import cgi.lemans.portail.controller.beans.PlanningModalBean;
 import cgi.lemans.portail.controller.beans.UtilisateurBean;
 import cgi.lemans.portail.service.IPlanningService;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,6 +65,15 @@ public class PlanningController {
 		PlanningModalBean infosSend = planningService.recupererInfosTypeModal();
 		return new ResponseEntity<PlanningModalBean>(infosSend, HttpStatus.OK);
 	};
+        
+        @RequestMapping(value = "/planning/ajoutPlan", method = RequestMethod.POST)
+	public ResponseEntity<PlanningCardBean> ajouterPlan(@RequestBody PlanningCardBean bean,
+			HttpServletRequest request) {
+		
+			planningService.enregistrerPlan(bean);
+		
+		return new ResponseEntity<PlanningCardBean>(bean, HttpStatus.OK);
+	}
         
         /*@RequestMapping(value = "/planning/ajoutDm", method = RequestMethod.POST)
 	public ResponseEntity<PlanningCardBean> ajouterAbsence(@RequestBody PlanningCardBean bean,

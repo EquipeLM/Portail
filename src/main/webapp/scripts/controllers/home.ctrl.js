@@ -5,11 +5,13 @@
 angular
     .module('portail.controllers')
     
-    .controller('HomeCtrl', ['$scope', '$http','Incoherence', 'Tache', 'Absence', '$mdDialog', '$mdMedia', '$resource', '$timeout', function ($scope, $http, Incoherence, Tache, Absence, $mdDialog, $mdMedia, $resource, $timeout, tacheAvance) {
+    .controller('HomeCtrl', ['$scope', '$http','Incoherence', 'Tache', 'Planning', 'Absence', '$mdDialog', '$mdMedia', '$resource', '$timeout', function ($scope, $http, Incoherence, Tache,Planning, Absence, $mdDialog, $mdMedia, $resource, $timeout, tacheAvance) {
     
     $scope.tacheAvance = tacheAvance; 
     
     var compt = 0;
+    
+// Permet l'afficahge du nombre d'incohérence de myPm
     
     var test = Incoherence.get(function(data) {
         data.listInco.forEach(function(evt){
@@ -23,6 +25,7 @@ angular
         $scope.notif = compt;
     });
     
+// Ouverture de la modale d'ajout de tâche    
     
      $scope.showAdvancedAddTache = function(ev) {
             var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
@@ -36,6 +39,8 @@ angular
             })  
         };
         
+// Ouverture de la modale d'ajout de demande          
+        
         $scope.showAdvancedAddDM = function(ev) {
             var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
             $mdDialog.show({
@@ -48,7 +53,19 @@ angular
             })  
         };
         
-     
+        
+        $scope.showAdvancedAddPlan = function(ev) {
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+        $mdDialog.show({
+            templateUrl: './views/ModalPlannif.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: useFullScreen
+        })  
+    };
+        
+// Permet l'affichage des libellés de demandes dans le select de la modale     
      
      $scope.loadDemandes = function() {
         // Use timeout to simulate a 650ms request.
@@ -64,7 +81,7 @@ angular
         
          };
          
-            
+// Permet l'affichage des libellés de types dans le select de la modale            
                 
         $scope.loadTypes = function() {
      
@@ -79,6 +96,8 @@ angular
                 });
         
         };
+        
+// Permet l'affichage des personnes dans le select de la modale        
 
        $scope.loadUsers = function() {
           
@@ -95,20 +114,20 @@ angular
         
         };
         
+// Envoi des datas de l'ajout tâche
+
         $scope.formTache = {};
         $scope.formTache.chargePrevue;
         
-        
-        
-        
-       
         $scope.hide = function() {
-        $mdDialog.hide();
-      };
-      $scope.cancel = function() {
-        $mdDialog.cancel();
-      };
-      $scope.validerTache = function() {
+            $mdDialog.hide();
+        };
+        
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+        
+        $scope.validerTache = function() {
                 
                 $scope.formTache.demande = $scope.demande.name;
                 $scope.formTache.idDemande = $scope.demande.id;
@@ -124,8 +143,25 @@ angular
          	
   
       };  
-     
       
+      $scope.formPlanData = {};
+        $scope.formPlanData.idOtPlan;
+        $scope.formPlanData.idRessource;
+        $scope.formPlanData.noSem;
+        $scope.formPlanData.charge;
+        
+     
+      $scope.validerPlan = function() {
+                
+                
+                
+                Planning.addPlan($scope.formPlanData, function() {
+                           
+                });
+               console.log($scope.formPlanData);
+                $mdDialog.hide();
+                
+            };
     
                     
     $scope.status = '  ';
@@ -135,7 +171,7 @@ angular
         alert("CheckBox is checked.");
     }              
     
-    //il faut initialiser le scope pour pouvoir faire le binding avec le modele
+ //il faut initialiser le scope pour pouvoir faire le binding avec le modele
  
     $scope.formData = {};
 	$scope.formData.dateProchainConges = new Date();
@@ -172,6 +208,8 @@ angular
     	} 
         
     }
+    
+// Ouverture de la modale d'ajout d'absence
     
     $scope.showAdvanced = function(ev) {
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;

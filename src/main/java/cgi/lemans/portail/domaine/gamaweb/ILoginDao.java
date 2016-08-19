@@ -6,7 +6,7 @@
 package cgi.lemans.portail.domaine.gamaweb;
 
 import cgi.lemans.portail.domaine.IGenericDao;
-import cgi.lemans.portail.domaine.entites.gamaweb.CufCommentaire;
+import cgi.lemans.portail.domaine.entites.gamaweb.Login;
 import java.io.Serializable;
 import java.util.List;
 
@@ -14,9 +14,8 @@ import java.util.List;
  *
  * @author souchul
  */
-public interface ICufCommentaireDao extends IGenericDao<Serializable, CufCommentaire>{
+public interface ILoginDao extends IGenericDao<Serializable, Login> {
     
-    public List<CufCommentaire> findCommentaire();
-    
+    public List<Login> findLoginPerson ();
     
 }

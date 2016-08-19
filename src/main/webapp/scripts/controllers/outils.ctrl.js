@@ -1,6 +1,7 @@
 'use strict';
 
 /* Controllers */
+// Directive pour pouvoir utilisé l'option de zoom
 
 angular
     .module('portail.controllers')

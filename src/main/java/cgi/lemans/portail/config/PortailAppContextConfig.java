@@ -34,6 +34,7 @@ import cgi.lemans.portail.domaine.entites.gamaweb.RessourceTma;
 import cgi.lemans.portail.domaine.entites.gamaweb.TypeAbsence;
 import cgi.lemans.portail.domaine.entites.gamaweb.TypeActivite;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufControleIncoherence;
+import cgi.lemans.portail.domaine.entites.gamaweb.Login;
 import cgi.lemans.portail.domaine.entites.gamaweb.TypeDemande;
 import cgi.lemans.portail.domaine.entites.newportal.Icones;
 import cgi.lemans.portail.domaine.entites.newportal.IconesByUser;
@@ -111,6 +112,7 @@ public class PortailAppContextConfig {
                 sessionBuilder.addAnnotatedClasses(TypeActivite.class);
                 sessionBuilder.addAnnotatedClasses(CufControleIncoherence.class);
                 sessionBuilder.addAnnotatedClasses(TypeDemande.class);
+                sessionBuilder.addAnnotatedClasses(Login.class);
                 
 		sessionBuilder.addProperties(getHibernatePropertiesGamaweb());
 		return sessionBuilder.buildSessionFactory();

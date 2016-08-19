@@ -336,11 +336,7 @@ public class TacheService implements ITacheService {
       
       // modfication 
       
-      DemandeOuProjet newTacheUpdate = new DemandeOuProjet();
       
-      newTacheUpdate.setIdDemande(bean.getIdDemande());
-      newTacheUpdate.setEstimationRevisee(ConvertUtils.parseDouble(bean.getChargePrevue())+ConvertUtils.parseDouble(bean.getEstimationRevisee()));
-      demandeOuProjetDao.update(newTacheUpdate);
       
        return bean;
     }
@@ -366,17 +362,18 @@ public class TacheService implements ITacheService {
     
     private ListTacheBean coms (CufCommentaire cufCommentaire) {
 		ListTacheBean task = new ListTacheBean();
-                
+                if(cufCommentaire.getIdOT() != null){
+                task.setIdOt(cufCommentaire.getIdOT());
                 task.setCommentaire(cufCommentaire.getCommentaire());
 		task.setRessource(cufCommentaire.getModifierPar());
                 task.setDateComs(cufCommentaire.getModifieLe().toString());
-
+                }
 		return task;
 	}
 
     @Override
-    public TacheBean afficherComs(Integer idOT) {
-        List<CufCommentaire> listComs = cufCommentaireDao.findCommentaire(idOT);
+    public TacheBean afficherComs() {
+        List<CufCommentaire> listComs = cufCommentaireDao.findCommentaire();
 		TacheBean taskRetour = new TacheBean();
 		List<ListTacheBean> absResources = new ArrayList<ListTacheBean>();
 		for (CufCommentaire cufCommentaire : listComs) {

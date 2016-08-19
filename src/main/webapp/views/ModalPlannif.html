@@ -1,0 +1,59 @@
+<md-dialog ng-cloak ng-controller="HomeCtrl">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Ajouter une plannification </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="./styles/images/cancel.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <form role="form" name="planForm">
+            <div class="form-group row">
+                <div class="col-sm-1"></div>
+                    <md-input-container class="md-block" >
+                        <input style="width: 295px;" name="idOtPlan" ng-model="formPlanData.idOtPlan" placeholder="Id de l'OT : ">
+                    </md-input-container> 	
+                <div class="col-sm-1"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-1"></div>
+                    <md-input-container class="md-block" >
+                        <input style="width: 295px;" name="idRessource" ng-model="formPlanData.idRessource" placeholder="Ressource : ">
+                    </md-input-container> 	
+                <div class="col-sm-1"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-1"></div>
+                    <md-input-container class="md-block" >
+                        <input style="width: 295px;" name="noSem" ng-model="formPlanData.noSem" placeholder="Numero de semaine : ">
+                    </md-input-container> 	
+                <div class="col-sm-1"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-1"></div>
+                    <md-input-container class="md-block" >
+                        <input style="width: 295px;" name="charge" ng-model="formPlanData.charge" placeholder="Charge : ">
+                    </md-input-container> 	
+                <div class="col-sm-1"></div>
+            </div>
+          
+            
+        </form>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row"> 
+      
+      <span flex></span>
+      <md-button ng-click="hide()">
+       Annuler
+      </md-button>
+      <md-button ng-click="validerPlan()" style="margin-right:20px;">
+       Valider
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

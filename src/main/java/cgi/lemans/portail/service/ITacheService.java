@@ -33,6 +33,6 @@ public interface ITacheService {
     
     public TacheCardBean enregistrerComs(TacheCardBean bean, String idRessource); 
     
-    public TacheBean afficherComs(Integer idOT);
+    public TacheBean afficherComs();
     
 }

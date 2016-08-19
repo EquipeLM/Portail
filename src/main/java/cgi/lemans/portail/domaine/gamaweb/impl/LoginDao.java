@@ -5,8 +5,8 @@
  */
 package cgi.lemans.portail.domaine.gamaweb.impl;
 
-import cgi.lemans.portail.domaine.entites.gamaweb.CufCommentaire;
-import cgi.lemans.portail.domaine.gamaweb.ICufCommentaireDao;
+import cgi.lemans.portail.domaine.entites.gamaweb.Login;
+import cgi.lemans.portail.domaine.gamaweb.ILoginDao;
 import java.util.List;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
@@ -16,17 +16,17 @@ import org.springframework.stereotype.Repository;
  * @author souchul
  */
 @Repository
-public class CufCommentaireDao extends AbstractGenericDaoGamaweb<CufCommentaire> implements ICufCommentaireDao{
+public class LoginDao extends AbstractGenericDaoGamaweb<Login> implements ILoginDao{
 
-    
     @Override
-    public List<CufCommentaire> findCommentaire() {
-        String hql = "from CufCommentaire a " 
-                                
-                ;
+    public List<Login> findLoginPerson() {
+        
+        String hql =  "from Login a ";
         Query query = getSession().createQuery(hql);
-        List<CufCommentaire> results = (List<CufCommentaire>) query.list();
+        List<Login> results = (List<Login>) query.list();
         return results;
+    
     }
+    
     
 }

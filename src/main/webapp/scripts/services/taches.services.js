@@ -25,10 +25,10 @@ angular
                                         getComs : {
 						method: 'GET',
 						param : {
-							idOT: '@idOT',
+							
 							
 						},
-						url:'api/taches/tache/afficher/coms/:idOT',
+						url:'api/taches/tache/afficher/coms',
 						isArray: false
 					},
                                         

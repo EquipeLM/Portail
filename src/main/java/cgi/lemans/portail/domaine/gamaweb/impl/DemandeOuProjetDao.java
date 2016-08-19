@@ -26,7 +26,7 @@ public class DemandeOuProjetDao extends AbstractGenericDaoGamaweb<DemandeOuProje
                    + "where ref.tags " 
                    + "like :equipeChoisie "
                    + "and a.dernierEtat != 'TER'"
-                   + "and a.chargeRestanteTotale !=0"
+                  
                    + "and a.typeDemande not in('PRV')"
                    ;
         Query query = getSession().createQuery(hql);

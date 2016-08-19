@@ -871,3 +871,44 @@ md-input-container.md-icon-right {
 .addDm{
     margin-left: 10%;
 }
+
+.bulle{
+    background-color: #bfbdbd;
+    height: 10%;
+    width : 70%;
+    color : white;
+    margin-bottom: 2%;
+    margin-right: 15%;
+    border-radius: 5px;
+}
+
+.qui{
+    border-radius: 40px;
+    height: 50px;
+    width: 50px;
+    border : 2px solid #bfbdbd;
+    margin-right: 3%;
+       
+}
+
+.qui p{
+    margin-top: 13px;
+    margin-left: -4px;
+    font-weight: bold;
+}
+
+.date{
+    font-size: 10px;
+    float: right;
+    margin-right: 5%;
+}
+
+.panel{
+    width: 70%;
+    margin-left: 15%;
+}
+
+.statsBar{
+    width : 90%;
+    height : 80%;
+}

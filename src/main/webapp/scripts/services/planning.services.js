@@ -36,6 +36,12 @@ angular
 						url:'api/plannings/planning/ajoutDm',
 						isArray: false
 					},
+                                        addPlan : {
+                                                method : 'POST',
+                                                param : {},
+                                                url:'api/plannings/planning/ajoutPlan',
+                                                isArray: false
+                                        }
                                         
                                         
                                 });

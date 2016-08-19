@@ -12,6 +12,7 @@ import cgi.lemans.portail.controller.beans.PlanningCardBean;
 import cgi.lemans.portail.controller.beans.PlanningModalBean;
 import cgi.lemans.portail.domaine.entites.gamaweb.CufPlanning;
 import cgi.lemans.portail.domaine.entites.gamaweb.ForfaitBudget;
+import cgi.lemans.portail.domaine.entites.gamaweb.OrdreDeTravail;
 import cgi.lemans.portail.domaine.entites.gamaweb.TypeDemande;
 import cgi.lemans.portail.domaine.gamaweb.ICufPlanningDao;
 import cgi.lemans.portail.domaine.gamaweb.IForfaitBudgetDao;
@@ -21,6 +22,7 @@ import cgi.lemans.portail.service.IPlanningService;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,41 +49,12 @@ public class PlanningService implements IPlanningService{
         
 
 	
-
-    @Override
-    public List<PlanningBean> afficherPlanningEquipe(String tag) {
-        
-         Map<String, PlanningBean> absByDm = new HashMap<String, PlanningBean>();
-        List<CufPlanning> listplan = cufPlanningDao.findListDemandePlanning(tag);
-		
-		for (CufPlanning cufPlanning : listplan) {
-                        ListPlanningBean plan = planningEquipe(cufPlanning);
-                        final String idDemande = cufPlanning.getIdOT().getIdDemande().getIdDemande();
-                        
-                        if (!absByDm.keySet().contains(idDemande)) {
-                            PlanningBean planRetour = new PlanningBean();
-                            planRetour.setIdDm(idDemande);
-                            planRetour.setLibelleDM(cufPlanning.getIdOT().getIdDemande().getLibelle());
-                            planRetour.setListPlanning(new ArrayList<ListPlanningBean>());
-                            absByDm.put(idDemande, planRetour);   
-                        }
-                        absByDm.get(idDemande).getListPlanning().add(plan);
-                }
-		
-
-		return new ArrayList<>(absByDm.values());
-                
-                              
-               
-   }
-    
-    
-    private ListPlanningBean planningEquipe (CufPlanning cufPlanning){
+private ListPlanningBean planningEquipe (CufPlanning cufPlanning){
         
         
-        ListPlanningBean plan = new ListPlanningBean();
+        ListPlanningBean plan = new ListPlanningBean();          
         
-        if (cufPlanning.getIdOT().getIdOt() != null) {
+        if((cufPlanning.getIdResource() != null) && (cufPlanning.getChargePlanning() != null) && (cufPlanning.getIdOT() != null) ){
 		
             plan.setId(cufPlanning.getIdPlanning());
             String sem = (cufPlanning.getNoSem().toString());
@@ -98,12 +71,46 @@ public class PlanningService implements IPlanningService{
             plan.setIdOt(cufPlanning.getIdOT().getIdOt());
             
             plan.setPlanifie(cufPlanning.getChargePlanning());
-            plan.setTrigramme(cufPlanning.getIdResource());
+            
         }
-                
+        
+            
 	    return plan;
             
     }
+        
+        
+    @Override
+    public List<PlanningBean> afficherPlanningEquipe(String tag) {
+        
+         Map<Integer, PlanningBean> absByDm = new HashMap<Integer, PlanningBean>();
+        List<CufPlanning> listplan = cufPlanningDao.findListDemandePlanning(tag);
+		
+		for (CufPlanning cufPlanning : listplan) {
+                        ListPlanningBean plan = planningEquipe(cufPlanning);
+                        if(cufPlanning.getIdOT() != null){
+                        final Integer idOt = cufPlanning.getIdOT().getIdOt();
+                        
+                        if (!absByDm.keySet().contains(idOt)) {
+                            PlanningBean planRetour = new PlanningBean();
+                            planRetour.setIdOt(idOt);
+                            planRetour.setLibelleOT(cufPlanning.getIdOT().getLibelOT());
+                            planRetour.setPrevue(cufPlanning.getIdOT().getChargePrevue().toString());
+                            planRetour.setRaf(cufPlanning.getIdOT().getChargeRestante().toString());
+                            planRetour.setConsomme(cufPlanning.getIdOT().getChargeConsommeeTotale().toString());
+                            planRetour.setTypeOT(cufPlanning.getIdOT().getTypeActivite());
+                           
+                           planRetour.setTrigrammeOT(cufPlanning.getIdResource());
+                            planRetour.setListPlanning(new ArrayList<ListPlanningBean>());
+                            absByDm.put(idOt, planRetour);   
+                        }
+                        absByDm.get(idOt).getListPlanning().add(plan);
+                }}
+		
+
+		return new ArrayList<>(absByDm.values());
+             
+   }
     
     
     private ListPlanningModalBean forfaitDm(ForfaitBudget forfaitBudget) {
@@ -158,6 +165,26 @@ public class PlanningService implements IPlanningService{
     @Override
     public PlanningCardBean enregistrerDemande(String idResource, PlanningCardBean bean) {
        return null;
+    }
+
+    @Override
+    public PlanningCardBean enregistrerPlan(PlanningCardBean bean) {
+        CufPlanning plan = new CufPlanning();
+        
+    
+        
+        OrdreDeTravail ot = new OrdreDeTravail();
+        ot.setIdOt(bean.getIdOtPlan());
+        plan.setIdOT(ot);
+        
+        plan.setIdResource(bean.getIdRessource());
+        plan.setNoSem(bean.getNoSem());
+        plan.setChargePlanning(bean.getCharge());
+        plan.setDateModif(new Date());
+        plan.setUserModif("annie");
+        plan.setEquipePlanning("CNP");
+        cufPlanningDao.create(plan);
+        return bean;
     }
     
     

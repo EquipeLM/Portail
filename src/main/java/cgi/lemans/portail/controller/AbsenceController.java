@@ -44,6 +44,7 @@ public class AbsenceController {
 		return user;
 	}
 
+        
 	@RequestMapping(value = "")
 	public ResponseEntity<List<AbsenceCardBean>> getInfosAbsencesCard(HttpServletRequest request) {
 		UtilisateurBean user = addUtilisateurSession(request.getSession());
@@ -68,6 +69,7 @@ public class AbsenceController {
 
 	@RequestMapping(value = "/{idRessource}", method = RequestMethod.GET)
 	public ResponseEntity<AbsenceBean> infosUserAbsence(@PathVariable String idRessource, HttpServletRequest request) {
+            
 		AbsenceBean infosSend = absenceService.recupererAllAbsRessource(idRessource);
 		return new ResponseEntity<AbsenceBean>(infosSend, HttpStatus.OK);
 	};
@@ -84,11 +86,7 @@ public class AbsenceController {
 		UtilisateurBean user = addUtilisateurSession(request.getSession());
 		if (user != null && UtilisateurBean.USER_TRI.equals(user.getTrigramme())) {
 			absenceService.enregistrerInfosParTypes(user.getTrigramme(), bean);
-		} else {
-			// TODO: Equipe implémentation des erreurs
-		}
-		// FIXME: Le code retourné est toujours OK mais ça ne veut pas dire que
-		// c'est vrai tq les exceptions ne sont pas gérées.
+		} 
 		return new ResponseEntity<AbsenceCardBean>(bean, HttpStatus.OK);
 	}
         

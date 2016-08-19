@@ -11,6 +11,7 @@ import cgi.lemans.portail.controller.beans.IconesCardBean;
 import cgi.lemans.portail.controller.beans.ToolsCardBean;
 import cgi.lemans.portail.domaine.entites.newportal.Icones;
 import cgi.lemans.portail.domaine.entites.newportal.IconesByUser;
+import cgi.lemans.portail.domaine.gamaweb.ILoginDao;
 import cgi.lemans.portail.domaine.newportal.IIconesByUserDao;
 import cgi.lemans.portail.service.IToolsService;
 
@@ -24,6 +25,9 @@ public class ToolsService implements IToolsService {
 	
 	@Autowired
 	IIconesByUserDao iconeByUserDao;
+        
+        @Autowired
+        ILoginDao loginDao;
 
 	@Override
 	public ToolsCardBean afficherLesIconesCardByUser(String user) {
@@ -60,6 +64,10 @@ public class ToolsService implements IToolsService {
 		icbu.setCpt(icbu.getCpt() + 1);
 		iconeByUserDao.update(icbu);
 	}
+
+    
+        
+        
 
 	
 }

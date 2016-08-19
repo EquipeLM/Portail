@@ -6,6 +6,7 @@
 package cgi.lemans.portail.service;
 
 import cgi.lemans.portail.controller.beans.IncoherenceBean;
+import cgi.lemans.portail.controller.beans.LoginBean;
 
 /**
  *
@@ -14,5 +15,5 @@ import cgi.lemans.portail.controller.beans.IncoherenceBean;
 public interface IIncoherenceService {
  
     public IncoherenceBean afficherNbIncoherence(String idRessource);
-    
+    public LoginBean infoConnexion();
 }

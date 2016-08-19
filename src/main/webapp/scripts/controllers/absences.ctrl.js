@@ -5,7 +5,9 @@ angular
     .module('portail.controllers')
     .controller('AbsencesCtrl',['$scope', '$http', 'Absence', '$mdDialog', '$mdMedia', '$resource', function ($scope, $http, Absence, $mdDialog, $mdMedia, $resource, $modal, uiCalendarConfig, $dialog) {
 
- $scope.alertOnEventClick =function(ev) {
+// Fonction qui permet l'ouverture de la modal de modification
+        
+    $scope.alertOnEventClick =function(ev) {
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
         $mdDialog.show({
       
@@ -16,8 +18,11 @@ angular
             fullscreen: useFullScreen
         });
     };
+    
+   
+// Configuration du calendrier
 
-$scope.uiConfig = {
+    $scope.uiConfig = {
         calendar:{
         height: 610,
         editable: true,
@@ -35,55 +40,50 @@ $scope.uiConfig = {
         dayNamesShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
         eventClick: $scope.alertOnEventClick
        
-  }
-
-};
+        }
+    };
     
-        
-        $scope.events = [];
-      
-        
-           Absence.get({id: "BJA"},function(data){
-                    $scope.events.splice(0, $scope.events.length); 
-              data.listEvent.forEach(function(evt){
-                      
-                      $scope.events.push(
-                      {id: evt.id,
-                      title: evt.text,
-                      start: new Date(evt.dateDebut),
-                      end: new Date(evt.dateFin),
-                      color: evt.couleur,
-                      stick : true,
-                      });
-                  });
+    
+// Affichage des absences de la personne connecté
+
+    $scope.events = [];
+    Absence.get({id: "MBE"},function(data){
+        $scope.events.splice(0, $scope.events.length); 
+            data.listEvent.forEach(function(evt){
+                $scope.events.push(
+                    {id: evt.id,
+                    title: evt.text,
+                    start: new Date(evt.dateDebut),
+                    end: new Date(evt.dateFin),
+                    color: evt.couleur,
+                    stick : true,
+                    });
+            });
+    });
+    
+           
+// Affichage des jours fériés
+
+    $scope.eventsF = [];
+    Absence.getJourFerie(function(data){
+        $scope.eventsF.splice(0, $scope.eventsF.length); 
+            data.listEvent.forEach(function(evt){
+                $scope.eventsF.push(
+                    {id: evt.id,
+                    title: evt.text,
+                    start: new Date(evt.dateDebut),
+                    end: new Date(evt.dateFin),
+                    color: evt.couleur,
+                    stick : true,
+                    });
+            });
                        
-           });
-           
-           
+    });            
             
-           $scope.eventsF = [];
-      
-        
-           Absence.getJourFerie(function(data){
-                    $scope.eventsF.splice(0, $scope.eventsF.length); 
-              data.listEvent.forEach(function(evt){
-                      
-                      $scope.eventsF.push(
-                      {id: evt.id,
-                      title: evt.text,
-                      start: new Date(evt.dateDebut),
-                      end: new Date(evt.dateFin),
-                      color: evt.couleur,
-                      stick : true,
-                      });
-                  });
-                       
-           }); //pb d'affichage des jours fériés
-           
-                   
     $scope.eventSources = [$scope.events, $scope.eventsF];
     
     
+// Indicateurs d'absences avec la récupération de datas
 
     var conges = Absence.query(function(data) {
         
@@ -105,7 +105,8 @@ $scope.uiConfig = {
                 $scope.totalPris = parseFloat($scope.conges)+parseFloat($scope.rttUn)+parseFloat($scope.rttDeux);
                 $scope.totalRestant = parseFloat($scope.restantConges)+parseFloat($scope.restantQun)+parseFloat($scope.restantQdeux);
 		
-		console.log(data[0]);
+	
+        
 		$scope.labelConge = ["Pris", "Restants"];
 		$scope.dataConge = [$scope.conges, $scope.restantConges];
 		$scope.options = {responsive: true, percentageInnerCutout: 70};
@@ -130,10 +131,7 @@ $scope.uiConfig = {
 		
 		$scope.colours = ['#616161','#d8d8d8'];
                
-                
-                
-                
-	});
+    });
         
     $scope.status = '  ';
     $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
@@ -187,6 +185,8 @@ $scope.uiConfig = {
     	}
     }
     
+// Fonction qui permet l'ouverture de la modale d'ajout d'absence
+
     $scope.showAdvanced = function(ev) {
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
         $mdDialog.show({
@@ -199,8 +199,11 @@ $scope.uiConfig = {
            
         })
         
-        };
-        $scope.showAdvanced2 = function(ev) {
+    };
+
+// Fonction qui permet l'ouverture de la modale de solde
+        
+    $scope.showAdvanced2 = function(ev) {
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
         $mdDialog.show({
       
@@ -211,8 +214,8 @@ $scope.uiConfig = {
             fullscreen: useFullScreen
         })
     
-      };  
-    
+    }; 
+        
         $scope.$watch(function() {
             return $mdMedia('xs') || $mdMedia('sm');
         }, function(wantsFullScreen) {
@@ -231,6 +234,8 @@ $scope.uiConfig = {
     $scope.myDate.getMonth() + 2,
     $scope.myDate.getDate());
     
+    
+// Fonction de l'annulation ou de fermeture de la modale    
    
       $scope.hide = function() {
         $mdDialog.hide();
@@ -238,42 +243,32 @@ $scope.uiConfig = {
       $scope.cancel = function() {
         $mdDialog.cancel();
       };
-      $scope.valider = function() {
-	var response = $http.post('api/absences/absence', $scope.formData); 
-                Absence.save($scope.formData, function() {
-                       //va appeler ta fonction ajouterAbsence avec les valeurs bindées dans formData      
-                });
-		response.success(function(data, status, headers, config) {
-                    
-                });
-		response.error(function(data, status, headers, config) {
-		    console.log( "Exception details: " + JSON.stringify({data: data}));
-		});
-         console.log($scope.formData); 
-         $mdDialog.hide();
-         	
-  
-      };
       
+// Fonction de validation et l'envoi des données d'une absence
+
+    $scope.valider = function() {
+	
+            Absence.save($scope.formData, function() {
+                //va appeler la fonction ajouterAbsence avec les valeurs bindées dans formData      
+            });
+           
+        console.log($scope.formData); 
+        $mdDialog.hide();
+    };
+    
+// Fonction de validation et l'envoi des données d'un solde    
       
-            $scope.validerSolde = function() {
-		//var response = $http.post('api/absences/absence/solde', $scope.formSolde);
-                
-                Absence.save($scope.formSolde, function() {
-                       //va appeler ta fonction ajouterAbsence avec les valeurs bindées dans formData
-                       
-                });
-		response.success(function(data, status, headers, config) {
-                    
-                });
-		response.error(function(data, status, headers, config) {
-		    console.log( "Exception details: " + JSON.stringify({data: data}));
-		});
+    $scope.validerSolde = function() {
+		
+        Absence.save($scope.formSolde, function() {
+            //va appeler ta fonction ajouterAbsence avec les valeurs bindées dans formData
+        });
+		
          console.log($scope.formSolde); 
          
       };
    
-    }])
+}])
 
     
 

@@ -57,9 +57,7 @@ public class OrdreDeTravailDao extends AbstractGenericDaoGamaweb<OrdreDeTravail>
     @Override
     public List<OrdreDeTravail> findIdDemandePlanning(String id) {
         String hql = "from OrdreDeTravail a "   
-                            //+ "left join a.ressource ref " 
-                            
-                            
+
                             + "where a.chargeRestante != 0"
                             + "and a.idDemande.idDemande = :id"
                            ;

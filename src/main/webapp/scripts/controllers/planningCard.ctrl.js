@@ -2,13 +2,13 @@ angular
         .module('portail.controllers')
         .controller('PlanningCardCtrl', function($scope, $http, $timeout, $filter, Planning, Absence) {
             
-        var vm = this;
-	vm.grettings = "hola";
+    var vm = this;
+    vm.myInterval = 5000;
+    vm.slides = [];
 
-	vm.myInterval = 5000;
-	vm.slides = [];
-
-$scope.events = [];
+    $scope.events = [];
+    
+// Configuration du planning de la tuile
 
         $scope.schedulerConfig = {
             scale: "Week",
@@ -40,35 +40,19 @@ $scope.events = [];
             rowHeaderColumns: [
                 {title: 'OT', width: 80},
                 {title: 'Tri', width: 30},
-                {title: "Type", width: 50},
-                {title: "Consommé", width: 80},
-                {title: "RAF", width: 50},
-                {title: "Prévue", width: 50},
+               
                 
             ],
-            
-            
-            /*resources : [
-                { name: "Libelle DM", id: "101", columns: [{html: "DEV"},  {html: "0.5"}, {html: "0.5"}, {html: "1"}, {html: "1"}], 
-                    children : [{"id":"11","name":"nom OT", columns: [{html: "DEV"},  {html: "0.5"}, {html: "0.5"}, {html: "1"}, {html: "1"}]}] },
-                { name: "Libelle DM", id: "102", columns: [{html: "DEV"},  {html: "0.5"}, {html: "0.5"}, {html: "1"}, {html: "1"}] },
-               
-            ]*/
         };
-        
-        /*$scope.EditEvent(function (){
-            $scope.events.edit(this.source);
-        })*/
-        
        
-        
-        
+// Affichage du planifié de chaque ressource       
+       
         $scope.schedulerConfig.resources = [];
             
             var orderBy = $filter('orderBy');
             Planning.getByEquipe({tag:'CNP'},function(data){
             	data.forEach(function(elt){
-            		$scope.schedulerConfig.resources.push({id:elt.idOt, name: elt.libelleOT, name2 : elt.trigrammeOT, columns: [{html: elt.trigrammeOT}, {html: elt.type},  {html: elt.consomme}, {html: elt.raf}, {html: elt.prevue}]})
+            		$scope.schedulerConfig.resources.push({id:elt.idOt, name: elt.libelleOT, name2 : elt.trigrammeOT, columns: [{html: elt.trigrammeOT}]})
                         
             		elt.listPlanning.forEach(function(evt){
                             
@@ -89,9 +73,12 @@ $scope.events = [];
             	});
                 
                 
+// Configuration du planning d'absences de chaque ressource               
+                
                 $scope.schedulerConfig1 = {
                 scale: "Day",
                 days: 365,
+                eventHeight: 35,
                 startDate: new DayPilot.Date().firstDayOfMonth(),
                 timeHeaders: [
                     { groupBy: "Month" },
@@ -106,6 +93,7 @@ $scope.events = [];
                 heightSpec : "Max",
             };            
            
+// Affichage des absences de l'équipe de la CNP           
             
             $scope.schedulerConfig1.resources = [];
             $scope.events = [];
@@ -131,4 +119,9 @@ $scope.events = [];
             	$scope.order('name2');
 
             });
+            
+// Fonction qui permet l'ouverture de la modale quand une tâche est terminée        
+        
+    
+    
 });

@@ -23,4 +23,6 @@ public interface IPlanningService {
     public PlanningModalBean recupererInfosTypeModal();
     
     public PlanningCardBean enregistrerDemande(String idResource, PlanningCardBean bean);
+    
+    public PlanningCardBean enregistrerPlan (PlanningCardBean bean);
 }
