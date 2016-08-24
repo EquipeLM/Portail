@@ -48,7 +48,7 @@ public class PlanningController {
 	}
         
         @RequestMapping(value = "/planning/equipe/{tag}", method = RequestMethod.GET)
-	public ResponseEntity<List<PlanningBean>> infosEquipeAbsence(@PathVariable String tag,
+	public ResponseEntity<List<PlanningBean>> infosEquipePlanning(@PathVariable String tag,
 		HttpServletRequest request) {
 		List<PlanningBean> infosSend = planningService.afficherPlanningEquipe(tag);
 		return new ResponseEntity<List<PlanningBean>>(infosSend, HttpStatus.OK);

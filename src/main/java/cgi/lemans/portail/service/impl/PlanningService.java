@@ -65,8 +65,6 @@ private ListPlanningBean planningEquipe (CufPlanning cufPlanning){
             cal.set(Calendar.WEEK_OF_YEAR, Integer.parseInt(nSem));        
             cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
             
-            
-            
             plan.setSemaine(date.format(cal.getTime()));
             plan.setIdOt(cufPlanning.getIdOT().getIdOt());
             

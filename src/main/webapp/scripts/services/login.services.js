@@ -7,9 +7,18 @@ angular
 					connect : {
 						method: 'POST',
 						param : {},
-						url:'api/incoherences/incoherence/connect',
+						url:'api/absences/login',
+						isArray: false
+					},
+                                        login : {
+						method: 'GET',
+						param : {},
+						url:'api/incoherences/loginValue',
 						isArray: false
 					}
                                     }
+                                            
+                                            
+                                            
                                     )
                         });

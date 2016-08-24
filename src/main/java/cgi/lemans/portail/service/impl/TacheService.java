@@ -127,27 +127,20 @@ public class TacheService implements ITacheService {
 	
 	private ListTacheBean allTachesEquipe(OrdreDeTravail ordreDeTravail) {
 		ListTacheBean task = new ListTacheBean();
-                
-                
+
                 double calcul =  ordreDeTravail.getChargeRestante() + ordreDeTravail.getChargeConsommeeTotale();
-                
-                
                 DecimalFormat df = new DecimalFormat("########.00"); 
                 String str = df.format(calcul); 
                 calcul = Double.parseDouble(str.replace(',', '.'));
-
-                /*BigDecimal bd = new BigDecimal(calcul);
-                bd= bd.setScale(3,BigDecimal.ROUND_DOWN);
-                calcul = bd.doubleValue();*/
-                
-                    task.setLibelleOT(ordreDeTravail.getLibelOT());
-                   task.setLibelleTypeOT(ordreDeTravail.getTypeActivite());
-                   task.setDate(ConvertUtils.formatterDate(ordreDeTravail.getDateFinPrevue()));
-		   task.setChargePrevue(ordreDeTravail.getChargePrevue().toString());
-                   task.setChargeRestante(ordreDeTravail.getChargeRestante().toString());
-                   task.setIdOt(ordreDeTravail.getIdOt());
-                   task.setChargeConso(calcul);
-                   task.setTrigramme(ordreDeTravail.getRessource().getIdRessource());
+               
+                task.setLibelleOT(ordreDeTravail.getLibelOT());
+                task.setLibelleTypeOT(ordreDeTravail.getTypeActivite());
+                task.setDate(ConvertUtils.formatterDate(ordreDeTravail.getDateFinPrevue()));
+		task.setChargePrevue(ordreDeTravail.getChargePrevue().toString());
+                task.setChargeRestante(ordreDeTravail.getChargeRestante().toString());
+                task.setIdOt(ordreDeTravail.getIdOt());
+                task.setChargeConso(calcul);
+                task.setTrigramme(ordreDeTravail.getRessource().getIdRessource());
                    
                
                 if(ordreDeTravail.getIdDemande() != null){   

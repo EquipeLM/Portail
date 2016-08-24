@@ -50,7 +50,12 @@ angular
                 templateUrl: './views/login.html',
                 controller: 'LoginCtrl'
             }).
+                    when('/loginError', {
+                templateUrl: './views/LoginError.html',
+                controller: 'LoginCtrl'
+            }).
+                    
             otherwise({
-                redirectTo: '/home'
+                redirectTo: '/login'
             });
     });

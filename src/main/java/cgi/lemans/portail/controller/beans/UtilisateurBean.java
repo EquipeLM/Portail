@@ -13,9 +13,9 @@ public class UtilisateurBean {
 	public String getTrigramme() {
 		return USER_TRI;
 	}
-//	public String getTrigramme() {
-//		return trigramme;
-//	}
+	//public String getTrigramme() {
+	//	return trigramme;
+	//}
 	public void setTrigramme(String trigramme) {
 		this.trigramme = trigramme;
 	}

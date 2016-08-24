@@ -7,8 +7,6 @@ package cgi.lemans.portail.service;
 
 import cgi.lemans.portail.controller.beans.IncoherenceBean;
 import cgi.lemans.portail.controller.beans.LoginBean;
-import cgi.lemans.portail.controller.beans.LoginWebBean;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -17,5 +15,5 @@ import javax.servlet.http.HttpSession;
 public interface IIncoherenceService {
  
     public IncoherenceBean afficherNbIncoherence(String idRessource);
-    public LoginBean connect(LoginWebBean bean, HttpSession session);
+    public LoginBean connect();
 }

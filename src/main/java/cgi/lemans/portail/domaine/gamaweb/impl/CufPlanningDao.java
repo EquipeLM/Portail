@@ -25,9 +25,7 @@ public class CufPlanningDao extends AbstractGenericDaoGamaweb<CufPlanning> imple
         String hql = "from CufPlanning a " 
                    + "where a.equipePlanning " 
                    + "like :equipeChoisie "
-                   
-                   ;
-              
+                   ; 
         Query query = getSession().createQuery(hql);
         query.setParameter("equipeChoisie", '%'+ tag + '%');
         
