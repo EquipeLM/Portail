@@ -7,19 +7,19 @@ angular
 					getByEquipe : {
 						method: 'GET',
 						param : {
-							tag: '@tag',
+							
 							
 						},
-						url:'api/taches/tache/equipe/:tag',
+						url:'api/taches/tache/equipe',
 						isArray: false
 					},
                                         getDemandeLibelle : {
 						method: 'GET',
 						param : {
-							tag: '@tag',
+							
 							
 						},
-						url:'api/taches/tache/demande/libelle/:tag',
+						url:'api/taches/tache/demande/libelle',
 						isArray: false
 					},
                                         getComs : {
@@ -42,10 +42,10 @@ angular
                                         getRessourceTri : {
 						method: 'GET',
                                                 param : {
-                                                        tag: '@tag',
+                                                       
                                                 },
 						
-						url:'api/taches/tache/ressource/tri/:tag',
+						url:'api/taches/tache/ressource/tri',
 						isArray: false
 					},
                                         addConsoEnd : {

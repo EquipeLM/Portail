@@ -7,10 +7,10 @@ angular
 					getByEquipe : {
 						method: 'GET',
 						param : {
-							id: '@id',
+							
 							month: '@month'
 						},
-						url:'api/absences/equipe/:id/mois/:month',
+						url:'api/absences/equipe/mois/:month',
 						isArray: true
 					},
                                         
@@ -21,11 +21,11 @@ angular
 						url:'api/absences/absence/jourFerie',
 						isArray: false
 					},
-                                        updateSolde : {
+                                        AddSolde : {
 						method: 'POST',
                                                 param : {},
 						
-						url:'api/absences/absence/Updatesolde',
+						url:'api/absences/absence/AddSolde',
 						isArray: false
 					},
                                        

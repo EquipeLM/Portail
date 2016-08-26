@@ -5,9 +5,23 @@
 angular
     .module('portail.controllers')
     
-    .controller('HomeCtrl', ['$scope', '$http','Incoherence', 'Tache', 'Planning', 'Absence', '$mdDialog', '$mdMedia', '$resource', '$timeout', function ($scope, $http, Incoherence, Tache,Planning, Absence, $mdDialog, $mdMedia, $resource, $timeout, tacheAvance) {
+    .controller('HomeCtrl', ['$scope', '$http','Incoherence', 'Tache', 'Planning', 'Absence', '$mdDialog', '$mdMedia', '$resource', '$timeout', 'Login', function ($scope, $http, Incoherence, Tache,Planning, Absence, $mdDialog, $mdMedia, $resource, $timeout, tacheAvance, Login, $window) {
     
-    $scope.tacheAvance = tacheAvance; 
+   
+                /*var log = Login.loginTest(function(data){
+                    console.log(data[0].trigramme);
+                    $scope.trigrammeConnect = data[0].trigramme;
+                    if(data.trigramme[0] == ''){
+                        $window.location = '/portail/#/loginError';            
+                    }
+                });*/
+                 
+             
+    
+    
+                    
+                    
+   $scope.tacheAvance = tacheAvance; 
     
     var compt = 0;
     
@@ -256,16 +270,12 @@ angular
       $scope.valider = function() {
              
                 
-		var response = $http.post('api/absences/absence', $scope.formData);
+		
                 
                 Absence.save($scope.formData, function() {
                        //va appeler ta fonction ajouterAbsence avec les valeurs bindées dans formData
                 });
-		response.success(function(data, status, headers, config) {                     
-                });
-		response.error(function(data, status, headers, config) {
-		    console.log( "Exception details: " + JSON.stringify({data: data}));
-		});
+		
          console.log($scope.formData);       
       };
       $scope.supprimer = function (){

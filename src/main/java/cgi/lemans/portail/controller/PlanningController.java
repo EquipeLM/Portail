@@ -8,15 +8,12 @@ package cgi.lemans.portail.controller;
 import cgi.lemans.portail.controller.beans.PlanningBean;
 import cgi.lemans.portail.controller.beans.PlanningCardBean;
 import cgi.lemans.portail.controller.beans.PlanningModalBean;
-import cgi.lemans.portail.controller.beans.UtilisateurBean;
 import cgi.lemans.portail.service.IPlanningService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,28 +26,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/plannings")
-public class PlanningController {
+public class PlanningController extends ControllerPrincipal{
     
     @Autowired
     IPlanningService planningService;
     
-    /**
-     * @param session
-     * @return
-     */
-	public UtilisateurBean addUtilisateurSession(HttpSession session) {
-		UtilisateurBean user = (UtilisateurBean) session.getAttribute("user");
-		if (user == null) {
-			user = new UtilisateurBean();
-			session.setAttribute("user", user);
-		}
-		return user;
-	}
+   
         
-        @RequestMapping(value = "/planning/equipe/{tag}", method = RequestMethod.GET)
-	public ResponseEntity<List<PlanningBean>> infosEquipePlanning(@PathVariable String tag,
+        @RequestMapping(value = "/planning/equipe", method = RequestMethod.GET)
+	public ResponseEntity<List<PlanningBean>> infosEquipePlanning(
 		HttpServletRequest request) {
-		List<PlanningBean> infosSend = planningService.afficherPlanningEquipe(tag);
+		List<PlanningBean> infosSend = planningService.afficherPlanningEquipe("CNP");
 		return new ResponseEntity<List<PlanningBean>>(infosSend, HttpStatus.OK);
 	};
         

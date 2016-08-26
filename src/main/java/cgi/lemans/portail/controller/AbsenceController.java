@@ -1,5 +1,6 @@
 package cgi.lemans.portail.controller;
 
+import cgi.lemans.portail.controller.beans.AbsenceBean;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,17 +10,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import cgi.lemans.portail.controller.beans.AbsenceBean;
 import cgi.lemans.portail.controller.beans.AbsenceCardBean;
-import cgi.lemans.portail.controller.beans.LoginWebBean;
-import cgi.lemans.portail.controller.beans.UtilisateurBean;
 import cgi.lemans.portail.service.IAbsenceService;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * @author gautierfa
@@ -27,41 +25,19 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 @RestController
 @RequestMapping(value = "/absences")
-public class AbsenceController {
+public class AbsenceController extends ControllerPrincipal{
 
 	@Autowired
 	IAbsenceService absenceService;
-
-	/**
-	 * @param session
-	 * @return
-	 */
+      
         
-         public UtilisateurBean addUtilisateurSession(HttpSession session) {
-		UtilisateurBean user = (UtilisateurBean) session.getAttribute("user");
-		if (user == null) {
-			user = new UtilisateurBean();
-			session.setAttribute("user",user);
-		}
-		return user;
-	}
-        
-        @RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ResponseEntity<LoginWebBean> infosConnect(@RequestBody LoginWebBean bean,
-			HttpServletRequest request, HttpSession session) {
-		session.setAttribute("user", bean.getTrigramme());
-		
-		return new ResponseEntity<LoginWebBean>(bean, HttpStatus.OK);
-	}
-    
-
         
 	@RequestMapping(value = "")
-	public ResponseEntity<List<AbsenceCardBean>> getInfosAbsencesCard(HttpServletRequest request) {
-		UtilisateurBean user = addUtilisateurSession(request.getSession());
+	public ResponseEntity<List<AbsenceCardBean>> getInfosAbsencesCard(HttpServletRequest request, HttpSession session) {
+		
 		List<AbsenceCardBean> listRetour = new ArrayList<AbsenceCardBean>();
 		
-			AbsenceCardBean infosSend = absenceService.recupererInfosAbsRessource(user.getTrigramme());
+			AbsenceCardBean infosSend = absenceService.recupererInfosAbsRessource((String)session.getAttribute("user"));
 
 			listRetour.add(infosSend);
 
@@ -69,17 +45,17 @@ public class AbsenceController {
 		return new ResponseEntity<List<AbsenceCardBean>>(listRetour, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/equipe/{nomEquipe}/mois/{mois}", method = RequestMethod.GET)
-	public ResponseEntity<List<AbsenceBean>> infosEquipeAbsence(@PathVariable String nomEquipe,
+	@RequestMapping(value = "/equipe/mois/{mois}", method = RequestMethod.GET)
+	public ResponseEntity<List<AbsenceBean>> infosEquipeAbsence(
 			@PathVariable String mois, HttpServletRequest request) {
-		List<AbsenceBean> infosSend = absenceService.afficherInfosEquipe(nomEquipe, mois);
+		List<AbsenceBean> infosSend = absenceService.afficherInfosEquipe("CNP", mois);
 		return new ResponseEntity<List<AbsenceBean>>(infosSend, HttpStatus.OK);
 	};
 
 	@RequestMapping(value = "/{idRessource}", method = RequestMethod.GET)
-	public ResponseEntity<AbsenceBean> infosUserAbsence(@PathVariable String idRessource, HttpServletRequest request) {
+	public ResponseEntity<AbsenceBean> infosUserAbsence(HttpServletRequest request, HttpSession session) {
             
-		AbsenceBean infosSend = absenceService.recupererAllAbsRessource(idRessource);
+		AbsenceBean infosSend = absenceService.recupererAllAbsRessource((String) session.getAttribute("user"));
 		return new ResponseEntity<AbsenceBean>(infosSend, HttpStatus.OK);
 	};
         
@@ -90,21 +66,19 @@ public class AbsenceController {
 	};
 
 	@RequestMapping(value = "/absence", method = RequestMethod.POST)
-	public ResponseEntity<AbsenceCardBean> ajouterAbsence(@RequestBody AbsenceCardBean bean,
+	public ResponseEntity<AbsenceCardBean> ajouterAbsence(HttpSession session, @RequestBody AbsenceCardBean bean,
 			HttpServletRequest request) {
-		UtilisateurBean user = addUtilisateurSession(request.getSession());
-		
-			absenceService.enregistrerInfosParTypes(user.getTrigramme(), bean);
+		absenceService.enregistrerInfosParTypes((String) session.getAttribute("user"), bean);
 		
 		return new ResponseEntity<AbsenceCardBean>(bean, HttpStatus.OK);
 	}
         
-        @RequestMapping(value = "/absence/Updatesolde", method = RequestMethod.POST)
-	public ResponseEntity<AbsenceCardBean> ajouterSolde(@RequestBody AbsenceCardBean bean,
+        @RequestMapping(value = "/absence/AddSolde", method = RequestMethod.POST)
+	public ResponseEntity<AbsenceCardBean> ajouterSolde(HttpSession session, @RequestBody AbsenceCardBean bean,
 			HttpServletRequest request) {
-		UtilisateurBean user = addUtilisateurSession(request.getSession());
 		
-		absenceService.enregistrerSoldeParTypes(user.getTrigramme(), bean);
+		
+		absenceService.enregistrerSoldeParTypes((String) session.getAttribute("user"), bean);
 		
 		// FIXME: Le code retourné est toujours OK mais ça ne veut pas dire que
 		// c'est vrai tq les exceptions ne sont pas gérées.

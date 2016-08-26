@@ -3,9 +3,18 @@
 
 angular
     .module('portail.controllers')
-    .controller('AbsencesCtrl',['$scope', '$http', 'Absence', '$mdDialog', '$mdMedia', '$resource', function ($scope, $http, Absence, $mdDialog, $mdMedia, $resource, $modal, uiCalendarConfig, $dialog) {
+    .controller('AbsencesCtrl',['$scope', '$http', 'Absence', '$mdDialog', '$mdMedia', '$resource', 'Login', '$window', function ($scope, $http, Absence, $mdDialog, $mdMedia, $resource, $modal, uiCalendarConfig, $dialog, Login, $window, $route) {
 
-// Fonction qui permet l'ouverture de la modal de modification
+
+            $scope.testlog = function(){
+                Login.loginTest(function(data){
+                    if(data.trigramme == ''){
+                        $window.location = '/portail/#/loginError';            
+                    }
+                });
+            }
+
+            // Fonction qui permet l'ouverture de la modal de modification
         
     $scope.alertOnEventClick =function(ev) {
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
@@ -167,10 +176,7 @@ angular
 	$scope.formData.options = null;
         
        
-       $scope.formSolde = {};
-        $scope.formSolde.soldeConges = null;
-	$scope.formSolde.soldesQun = null;
-	$scope.formSolde.soldesQdeux =  null;
+       
 	
     $scope.affichePeriodeFin = function(value){
     	$scope.isCachee = "cachee";
@@ -254,17 +260,25 @@ angular
            
         console.log($scope.formData); 
         $mdDialog.hide();
+        $route.reload();
     };
+    
+    $scope.formSolde = {};
+        $scope.formSolde.soldeConges;
+	$scope.formSolde.soldesQun;
+	$scope.formSolde.soldesQdeux;
+        
     
 // Fonction de validation et l'envoi des données d'un solde    
       
     $scope.validerSolde = function() {
 		
-        Absence.save($scope.formSolde, function() {
+        Absence.AddSolde($scope.formSolde, function() {
             //va appeler ta fonction ajouterAbsence avec les valeurs bindées dans formData
         });
 		
          console.log($scope.formSolde); 
+         $mdDialog.hide();
          
       };
    

@@ -3,8 +3,17 @@
 
 angular
     .module('portail.controllers')
-    .controller('TachesCtrl',['$scope', '$http','$mdDialog', '$mdMedia', '$resource', "Tache", '$timeout', function ($scope, $http, $mdDialog, $mdMedia, $resource, Tache, $timeout, $filter, $modal, $log) {
+    .controller('TachesCtrl',['$scope', '$http','$mdDialog', '$mdMedia', '$resource', "Tache", '$timeout', function ($scope, $http, $mdDialog, $mdMedia, $resource, Tache, $timeout, $filter, $modal, $log, Login, $window) {
             
+
+    $scope.testlog = function(){
+                Login.loginTest(function(data){
+                    if(data.trigramme == ''){
+                        $window.location = '/portail/#/loginError';            
+                    }
+                });
+            }                
+                    
 // Fonction de recherche dans le tableau
                     
     $scope.sortType     = 'name'; // set the default sort type
@@ -320,6 +329,7 @@ angular
         });
 		
         console.log($scope.formTache); 
+        $window.location = '/portail/#/home';
     };  
         
         

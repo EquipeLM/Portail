@@ -10,26 +10,19 @@ angular
     $scope.formLogin.groupinfra;
     
     $scope.connexion = function() {
-                            
+    console.log($scope.formLogin);                        
+     $scope.logins = [];
                 
-                //console.log($scope.formLogin); 
-                
-                $scope.logins = [];
-                
-                Login.login(function(data){
-                    data.listLogin.forEach(function(evt){
-                        $scope.logins.push(
-                        {tri: evt.trigramme,
-                        groupinfra: evt.groupinfra,
-                        
-                        })
-                        if(angular.equals($scope.formLogin.trigramme, evt.trigramme)){
-                            $window.location = '/portail/#/home';
-                            Login.connect($scope.formLogin, function() {});
-                        
-                        }else{
-                            $window.location = '/portail/#/loginError';
-                        }
+    Login.login(function(data){
+        data.listLogin.forEach(function(evt){
+            $scope.logins.push(
+                {tri: evt.trigramme,
+                groupinfra: evt.groupinfra,
+                })
+            if(angular.equals($scope.formLogin.trigramme, evt.trigramme)&&angular.equals($scope.formLogin.groupinfra, evt.groupinfra)){
+                $window.location = '/portail/#/home';
+                Login.connect($scope.formLogin, function() {});
+            }
             });
         });  
     }

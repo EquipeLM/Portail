@@ -1,9 +1,25 @@
-<div ng-controller="StatistiquesCtrl">
+<div ng-controller="TeamCtrl">
    
-    <div id="graphique">
-        <canvas id="bar" width="200" height="400" class="chart chart-bar"
-            chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" chart-colours="colours">
-        </canvas>
+    
+    <div class="row">
+        
+        <div class="col-sm-2" style="margin-left: 1%;">
+            <div style="width:60%;background-color: #46bfbd;"><p style="color: white; font-weight: bold; padding: 4px;"> tâches totales </p></div>
+            <div style="width:60%;background-color: #97bbcd;"><p style="color: white; font-weight: bold; padding: 4px;"> tâches en retards </p></div>
+            <div style="width:60%;background-color: #dcdcdc;"><p style="color: white; font-weight: bold; padding: 4px;"> tâches dans les délais </p></div>
+            <div style="width:60%;background-color: #f7464a;"><p style="color: white; font-weight: bold; padding: 4px;"> tâches en avances </p></div>
+        </div>
+    
+        <div class="col-sm-3" style="width:400px; height:350px">
+            <canvas  width="200" height="200" id="base" class="chart-base" chart-type="typeTaches"
+                 chart-data="allTaches" chart-labels="labelTaches" chart-option="optionTaches" style="width:200px; height:200px;">
+            </canvas> 
+        </div>
+        <div class="col-sm-4" style="width:600px; height:550px;margin-top: 2%;margin-left: -50px;">
+            <canvas id="pie" class="chart chart-pie"
+                chart-data="allTaches" chart-labels="labelTaches" chart-options="optionsTaches">
+            </canvas> 
+        </div>
     </div>
     
 </div>

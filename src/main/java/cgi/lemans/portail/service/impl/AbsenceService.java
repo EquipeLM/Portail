@@ -110,7 +110,7 @@ public class AbsenceService implements IAbsenceService {
 		Date dateDebut = cal.getTime();
 
 		cal.setTime(ConvertUtils.parseToDate(bean.getDateFinProchainConges(), "US"));
-		cal.add(Calendar.DAY_OF_YEAR, 1);
+		cal.add(Calendar.DAY_OF_YEAR, 2);
 		Date dateFin = cal.getTime();
 
 		nvelleAbsConge.setRefRessource(ress);
@@ -210,7 +210,13 @@ public class AbsenceService implements IAbsenceService {
 			event.setAnnee(ConvertUtils.toString(cal.get(Calendar.YEAR)));
 		}
 		event.setDateDebut(ConvertUtils.formatterDateUS(absence.getPremierJourAbsence()));
-		event.setDateFin(ConvertUtils.formatterDateUS(absence.getDateFinAbsence()));
+               
+                Calendar caln = new GregorianCalendar();
+                caln.setTime(ConvertUtils.parseToDate(absence.getDateFinAbsence().toString(), "US"));
+		caln.add(Calendar.DAY_OF_YEAR, 2);
+		Date fin = cal.getTime();
+
+		event.setDateFin(ConvertUtils.formatterDateUS(fin));
 		event.setId(absence.getIdAbsence());
 		event.setText(absence.getCommentaireAbsence());
                 
@@ -249,29 +255,41 @@ public class AbsenceService implements IAbsenceService {
     @Override
     public AbsenceCardBean enregistrerSoldeParTypes(String idRessource, AbsenceCardBean bean) {
         
-                /*AbsenceCardBean absRetour = new AbsenceCardBean();
-		CufRessourceAbsence idAbsenceSupp = (CufRessourceAbsence) cufRessourceAbsenceDao.findCufRessourceAbsenceByTypeByRessource(idRessource, CufRessourceAbsenceDao.CONGES);
-		absRetour.setIdRessourceAbsence(idAbsenceSupp);*/
-
-        
-        CufRessourceAbsence newSolde = new CufRessourceAbsence();
-		// CufRessourceAbsence nvSolde = new CufRessourceAbsence();
+                        
+                CufRessourceAbsence newSolde = new CufRessourceAbsence();
+                CufRessourceAbsence newSolde2 = new CufRessourceAbsence();
+                CufRessourceAbsence newSolde3 = new CufRessourceAbsence();
 		RessourceTma ress = new RessourceTma();
 		TypeAbsence type = new TypeAbsence();
+                TypeAbsence type2 = new TypeAbsence();
+                TypeAbsence type3 = new TypeAbsence();
                 Calendar cal = Calendar.getInstance();
                 ress.setIdRessource(idRessource);
+                newSolde.setTypeAbsence(type);
+                newSolde2.setTypeAbsence(type2);
+                newSolde3.setTypeAbsence(type3);
+                
 
                 
                 newSolde.setSolde(ConvertUtils.parseDouble(bean.getSoldeConges()));
                 type.setIdTypeAbsence(1);
-                newSolde.setTypeAbsence(type);
                 newSolde.setAnnee(2016);
                 newSolde.setRessourceTma(ress); 
                 
+                newSolde2.setSolde(ConvertUtils.parseDouble(bean.getSoldesQun()));
+                type2.setIdTypeAbsence(2);
+                newSolde2.setAnnee(2016);
+                newSolde2.setRessourceTma(ress); 
+                
+                newSolde3.setSolde(ConvertUtils.parseDouble(bean.getSoldesQdeux()));
+                type3.setIdTypeAbsence(3);
+                newSolde3.setAnnee(2016);
+                newSolde3.setRessourceTma(ress); 
+                
                 cufRessourceAbsenceDao.create(newSolde);
-                
-                // il faut supprimer les ancines soldes et et ajouter les nouveaux
-                
+                cufRessourceAbsenceDao.create(newSolde2);
+                cufRessourceAbsenceDao.create(newSolde3);
+                              
                 
                 return bean;
     }

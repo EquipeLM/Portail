@@ -5,9 +5,7 @@
  */
 package cgi.lemans.portail.controller;
 
-import cgi.lemans.portail.controller.beans.UtilisateurBean;
 import cgi.lemans.portail.service.IStatistiqueService;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,19 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/statistiques")
-public class StatistiqueController {
+public class StatistiqueController extends ControllerPrincipal{
     
     @Autowired
     IStatistiqueService statistiqueService;
     
-    public UtilisateurBean addUtilisateurSession(HttpSession session) {
-		UtilisateurBean user = (UtilisateurBean) session.getAttribute("user");
-		if (user == null) {
-			user = new UtilisateurBean();
-			session.setAttribute("user", user);
-		}
-		return user;
-	}
+   
     
     /*@RequestMapping(value = "/statistique/demandeStats", method = RequestMethod.GET)
 	

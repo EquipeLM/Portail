@@ -7,10 +7,10 @@ angular
 					getByEquipe : {
 						method: 'GET',
 						param : {
-							tag: '@tag'
+							
 							
 						},
-						url:'api/plannings/planning/equipe/:tag',
+						url:'api/plannings/planning/equipe',
 						isArray: true
 					},
                                         getForfaitModal : {

@@ -1,9 +1,15 @@
 
 angular
         .module('portail.controllers')
-        .controller('TeamCtrl', function($scope, $http, $timeout,$filter , Absence, Tache, $mdDialog, $mdMedia, $resource) {
+        .controller('TeamCtrl', function($scope, $http, $timeout,$filter , Absence, Tache, $mdDialog, $mdMedia, $resource, Login, $window) {
     
-// Configuration des absences de l'équipe    
+        $scope.testlog = function(){
+                Login.loginTest(function(data){
+                    if(data.trigramme == ''){
+                        $window.location = '/portail/#/loginError';            
+                    }
+                });
+            }
     
             $scope.schedulerConfig = {
                 scale: "Day",
@@ -25,7 +31,7 @@ angular
             $scope.schedulerConfig.resources = [];
             $scope.events = [];
             var orderBy = $filter('orderBy');
-            Absence.getByEquipe({id:'CNP', month:new DayPilot.Date().getMonth()},function(data){
+            Absence.getByEquipe({month:new DayPilot.Date().getMonth()},function(data){
             	data.forEach(function(elt){
             		$scope.schedulerConfig.resources.push({ id : elt.trigramme, name : elt.prenom + " " + elt.nom, name2 : elt.nom});
             		elt.listEvent.forEach(function(evt){
@@ -99,6 +105,7 @@ angular
                              ressource : evt.trigramme}
                         )
                         }
+                       
                                                 
                     });
                     
@@ -129,7 +136,19 @@ angular
                    $scope.labelTermine = ["Termine", ""];
                    $scope.dataTermine = [comptTermine, "0"];
                    $scope.options = {responsive: true, percentageInnerCutout: 70};
-                   $scope.coloursTermine = ['#d8d8d8','#d8d8d8']; 
+                   $scope.coloursTermine = ['#d8d8d8','#d8d8d8'];
+                   
+                   $scope.allTachesCours = comptDelais + comptRetard + comptAvance;
+                   
+                    $scope.labelTaches = ["OT en retard", "OT dans les délais", "OT en avance", "OT Totales"];
+                    $scope.allTaches = [comptRetard, comptDelais, comptAvance, $scope.allTachesCours];
+                    $scope.typeTaches = 'PolarArea';
+                    $scope.optionTaches = {responsive: true, borderWidth: 2};
+
+                    
+                   
+                   
+                  
                 
                 });
     

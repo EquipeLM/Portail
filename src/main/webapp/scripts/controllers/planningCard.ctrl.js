@@ -1,6 +1,15 @@
 angular
         .module('portail.controllers')
-        .controller('PlanningCardCtrl', function($scope, $http, $timeout, $filter, Planning, Absence) {
+        .controller('PlanningCardCtrl', function($scope, $http, $timeout, $filter, Planning, Absence, Login, $window) {
+            
+            $scope.testlog = function(){
+                Login.loginTest(function(data){
+                    if(data.trigramme == ''){
+                        $window.location = '/portail/#/loginError';            
+                    }
+                });
+            }
+            
             
     var vm = this;
     vm.myInterval = 5000;
@@ -38,8 +47,10 @@ angular
             
             //treeEnabled: true,
             rowHeaderColumns: [
-                {title: 'OT', width: 80},
+                {title: 'OT', width: 90},
+                {title: 'Id', width: 30},
                 {title: 'Tri', width: 30},
+                
                
                 
             ],
@@ -52,7 +63,7 @@ angular
             var orderBy = $filter('orderBy');
             Planning.getByEquipe({tag:'CNP'},function(data){
             	data.forEach(function(elt){
-            		$scope.schedulerConfig.resources.push({id:elt.idOt, name: elt.libelleOT, name2 : elt.trigrammeOT, columns: [{html: elt.trigrammeOT}]})
+            		$scope.schedulerConfig.resources.push({id:elt.idOt, name: elt.libelleOT, name2 : elt.trigrammeOT, columns: [{html: elt.idOt}, {html: elt.trigrammeOT}]})
                         
             		elt.listPlanning.forEach(function(evt){
                             
