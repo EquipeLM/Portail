@@ -34,7 +34,7 @@ angular
     $scope.uiConfig = {
         calendar:{
         height: 610,
-        editable: true,
+        editable: false,
         
         weekends: true,
         header:{
@@ -47,7 +47,7 @@ angular
         
         monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
         dayNamesShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
-        eventClick: $scope.alertOnEventClick
+        
        
         }
     };
@@ -56,7 +56,7 @@ angular
 // Affichage des absences de la personne connecté
 
     $scope.events = [];
-    Absence.get({id: "MBE"},function(data){
+    Absence.show(function(data){
         $scope.events.splice(0, $scope.events.length); 
             data.listEvent.forEach(function(evt){
                 $scope.events.push(
@@ -94,7 +94,7 @@ angular
     
 // Indicateurs d'absences avec la récupération de datas
 
-    var conges = Absence.query(function(data) {
+    var conges = Absence.getCard(function(data) {
         
 		$scope.conges = data[0].congesConsomme;
 		$scope.rttUn = data[0].rttQunConsomme;
@@ -130,14 +130,20 @@ angular
                         $scope.isAjuste = "ajuste";
 		}else {
 			$scope.labelRttQ2 = ["Pris", "Restants"];
-			$scope.dataRttQ2 = ["0", $scope.restantQdeux];
+			$scope.dataRttQ2 = [$scope.rttDeux, "0.0"];
 			$scope.options = {responsive: true, percentageInnerCutout: 70};
 		}
                 
-                if($scope.rttDeux < "0.0"){
-                    $scope.dataRttQ2 = ["0", $scope.restantQdeux];
+                /*if($scope.rttDeux == "0.0"){
+                    $scope.dataRttQ2 = [$scope.conges, "0"];
+                } /*else if ($scope.rttUn < "0.0"){
+                    $scope.dataRttQ1 = ["0", $scope.restantQun];
+                } else if ($scope.conges < "0.0"){
+                    $scope.dataConge = ["0", $scope.restantConges];
                 }
-		
+                */
+                
+                
 		$scope.colours = ['#616161','#d8d8d8'];
                
     });
@@ -149,13 +155,10 @@ angular
         alert("CheckBox is checked.");
     }              
     
-    //il faut initialiser le scope pour pouvoir faire le binding avec le modele
+//il faut initialiser le scope pour pouvoir faire le binding avec le modele
  
     $scope.formData = {};
 	$scope.formData.dateProchainConges = new Date();
-        
-        //$scope.formData.dateProchainConges.setHours(5);
-        //$scope.formData.dateFinProchainConges = $scope.formData.dateProchainConges;
 	$scope.formData.dateFinProchainConges = new Date();
 	$scope.formData.typeJourneeDebut = "amPm";
 	$scope.formData.typeJourneeFin = null;
@@ -254,13 +257,13 @@ angular
 
     $scope.valider = function() {
 	
-            Absence.save($scope.formData, function() {
+            Absence.addAbsence($scope.formData, function() {
                 //va appeler la fonction ajouterAbsence avec les valeurs bindées dans formData      
             });
            
         console.log($scope.formData); 
         $mdDialog.hide();
-        $route.reload();
+        window.location.reload();
     };
     
     $scope.formSolde = {};

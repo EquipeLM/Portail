@@ -1,74 +1,65 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <md-dialog ng-cloak ng-controller="TachesCtrl">
-  <form>
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2>Ajouter une tâche </h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ng-click="cancel()">
-          <md-icon md-svg-src="./styles/images/cancel.svg" aria-label="Close dialog"></md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
-    <md-dialog-content>
-      <div class="md-dialog-content">
-        <form role="form">
-        	<div class="form-group row">
-                <div class="col-sm-1"></div>
-                      <div layout="column" layout-align="center center" >
-                        <md-select placeholder="Demande : " ng-model="demande" md-on-open="loadDemandes()" style="min-width: 300px; max-width:300px;">
-                          <md-option ng-value="demande" ng-repeat="demande in demandes | orderBy:'name'">{{demande.name}}</md-option>
-                        </md-select>
-                      </div>	
-                <div class="col-sm-1"></div>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Ajouter une tâche </h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="./styles/images/cancel.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
             </div>
-            <div class="form-group row">
-                
-                      <div layout="column" layout-align="center center">
-                        <md-select placeholder="Type d'OT : " ng-model="type" md-on-open="loadTypes()" style="min-width: 250px;">
-                          <md-option ng-value="type" ng-repeat="type in types">{{type.name}}</md-option>
-                        </md-select>
-                      </div>	
-                <div class="col-sm-1"></div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <form role="form">
+                    <div class="form-group row">
+                        <div class="col-sm-1"></div>
+                              <div layout="column" layout-align="center center" >
+                                <md-select placeholder="Demande : " ng-model="demande" md-on-open="loadDemandes()" style="min-width: 300px; max-width:300px;">
+                                    <md-option ng-value="demande" ng-repeat="demande in demandes | orderBy:'name'">{{demande.name}}</md-option>
+                                </md-select>
+                              </div>	
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <div class="form-group row">
+                        <div layout="column" layout-align="center center">
+                            <md-select placeholder="Type d'OT : " ng-model="type" md-on-open="loadTypes()" style="min-width: 250px;">
+                                <md-option ng-value="type" ng-repeat="type in types">{{type.name}}</md-option>
+                            </md-select>
+                        </div>	
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-1"></div>
+                        <md-input-container class="md-block" >
+                            <input style="width: 295px;" name="designation" ng-model="demande.name +' - '+ type.name" placeholder="Désignation : ">
+                        </md-input-container>   
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-1"></div>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <input ng-model="formTache.chargePrevue" type="number" step="0.1">
+                        </md-input-container>   
+                    </div>
+                    <div class="form-group row">
+                        <div layout="column" layout-align="center center">
+                            <md-select placeholder="Qui : " ng-model="user" md-on-open="loadUsers()" style="min-width: 250px;">
+                                <md-option ng-value="user" ng-repeat="user in users">{{user.name}}</md-option>
+                            </md-select>
+                        </div>	
+                    <div class="col-sm-1"></div>
+                    </div>
+                </form>
             </div>
-            <div class="form-group row">
-                <div class="col-sm-1"></div>
-                <md-input-container class="md-block" >
-                    <input style="width: 295px;" name="designation" ng-model="demande.name +' - '+ type.name" placeholder="Désignation : ">
-                </md-input-container>   
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-1"></div>
-                <md-input-container class="md-block" flex-gt-sm>
-                    <input ng-model="formTache.chargePrevue" type="number" step="0.1">
-                </md-input-container>   
-            </div>
-            <div class="form-group row">
-                
-                      <div layout="column" layout-align="center center">
-                        <md-select placeholder="Qui : " ng-model="user" md-on-open="loadUsers()" style="min-width: 250px;">
-                          <md-option ng-value="user" ng-repeat="user in users">{{user.name}}</md-option>
-                        </md-select>
-                      </div>	
-                <div class="col-sm-1"></div>
-            </div>
-        </form>
-      </div>
-    </md-dialog-content>
-    <md-dialog-actions layout="row"> 
-      
-      <span flex></span>
-      <md-button ng-click="hide()">
-       Annuler
-      </md-button>
-      <md-button ng-click="valider()" style="margin-right:20px;">
-       Valider
-      </md-button>
-    </md-dialog-actions>
-  </form>
+        </md-dialog-content>
+        <md-dialog-actions layout="row"> 
+            <span flex></span>
+            <md-button ng-click="hide()">
+            Annuler
+            </md-button>
+            <md-button ng-click="valider()" style="margin-right:20px;">
+            Valider
+            </md-button>
+        </md-dialog-actions>
+    </form>
 </md-dialog>

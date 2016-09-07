@@ -24,9 +24,6 @@ import javax.persistence.Table;
 @Table(name="absence")
 public class Absence extends EntiteGamaweb{
     
-    /**
-	 * 
-	 */
     private static final long serialVersionUID = -7675469008489694732L;
     
     @Id 

@@ -1,82 +1,74 @@
 <md-dialog ng-cloak ng-controller="PlanningCtrl">
-  <form>
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2>Ajouter une demande </h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ng-click="cancel()">
-          <md-icon md-svg-src="./styles/images/cancel.svg" aria-label="Close dialog"></md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
-    <md-dialog-content>
-      <div class="md-dialog-content">
-        <form role="form" name="tacheForm">
-            <div class="form-group row">
-                <div class="col-sm-1"></div>
-                      <div layout="column" layout-align="center center" >
-                        <md-select placeholder="forfait budget : " ng-model="forfait" md-on-open="loadForfaits()" style="min-width: 300px; max-width:300px;">
-                          <md-option ng-value="forfait" ng-repeat="forfait in forfaits">{{forfait.name}}</md-option>
-                        </md-select>
-                      </div>	
-                <div class="col-sm-1"></div>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Ajouter une demande </h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="./styles/images/cancel.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
             </div>
-             <div class="form-group row">
-                
-                      <div layout="column" layout-align="center center">
-                        <md-select placeholder="Type d'OT : " ng-model="type" md-on-open="loadTypes()" style="min-width: 250px;">
-                            <md-option ng-value="type" ng-repeat="type in types">{{type.name}}</md-option>
-                        </md-select>
-                      </div>	
-                <div class="col-sm-1"></div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+              <form role="form" name="tacheForm">
+                    <div class="form-group row">
+                        <div class="col-sm-1"></div>
+                        <div layout="column" layout-align="center center" >
+                          <md-select placeholder="forfait budget : " ng-model="forfait" md-on-open="loadForfaits()" style="min-width: 300px; max-width:300px;">
+                              <md-option ng-value="forfait" ng-repeat="forfait in forfaits">{{forfait.name}}</md-option>
+                          </md-select>
+                        </div>	
+                    <div class="col-sm-1"></div>
+                    </div>
+                    <div class="form-group row">
+                        <div layout="column" layout-align="center center">
+                            <md-select placeholder="Type d'OT : " ng-model="type" md-on-open="loadTypes()" style="min-width: 250px;">
+                                <md-option ng-value="type" ng-repeat="type in types">{{type.name}}</md-option>
+                            </md-select>
+                        </div>	
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <div class="form-group row" style="margin-top: 20px;">
+                        <div class="col-sm-3"></div>
+                            <md-radio-group layout="row" ng-model="formData.motCle">
+				<md-radio-button value="DVS"> Sur devis </md-radio-button>
+				<md-radio-button value="TPS"> Au temps passé </md-radio-button>
+                                <md-radio-button value="FOR"> Au forfait </md-radio-button>
+                            </md-radio-group>
+                        <div class="col-sm-2"></div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-1"></div>
+                        <md-input-container class="md-block" >
+                            <input style="width: 295px;" name="idClient" ng-model="formData.idClient" placeholder="Id client : ">
+                        </md-input-container>   
+                    </div>
+                    <div class="form-group row">
+                        <div layout="column" layout-align="center center">
+                            <md-select placeholder="Responsable : " ng-model="user" md-on-open="loadUsers()" style="min-width: 250px;" >
+                                <md-option ng-value="user" ng-repeat="user in users">{{user.name}}</md-option>
+                            </md-select>     
+                        </div>	
+                    <div class="col-sm-1"></div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-1"></div>
+                        <md-input-container class="md-block" >
+                            <input style="width: 295px;" name="description" ng-model="formData.description" placeholder="Description : ">
+                        </md-input-container>   
+                    </div>
+                </form>
             </div>
-            
-            <div class="form-group row" style="margin-top: 20px;">
-            <div class="col-sm-3"></div>
-				<md-radio-group layout="row" ng-model="formData.motCle">
-					<md-radio-button value="DVS"> Sur devis </md-radio-button>
-					<md-radio-button value="TPS"> Au temps passé </md-radio-button>
-                                        <md-radio-button value="FOR"> Au forfait </md-radio-button>
-				</md-radio-group>
-                <div class="col-sm-2"></div>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-1"></div>
-                <md-input-container class="md-block" >
-                    <input style="width: 295px;" name="idClient" ng-model="formData.idClient" placeholder="Id client : ">
-                    
-                </md-input-container>   
-            </div>
-            <div class="form-group row">
-                
-                      <div layout="column" layout-align="center center">
-                        <md-select placeholder="Responsable : " ng-model="user" md-on-open="loadUsers()" style="min-width: 250px;" >
-                          <md-option ng-value="user" ng-repeat="user in users">{{user.name}}</md-option>
-                        </md-select>
-                          
-                      </div>	
-                <div class="col-sm-1"></div>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-1"></div>
-                <md-input-container class="md-block" >
-                    <input style="width: 295px;" name="description" ng-model="formData.description" placeholder="Description : ">
-                    
-                </md-input-container>   
-            </div>
-            
-        </form>
-      </div>
-    </md-dialog-content>
-    <md-dialog-actions layout="row"> 
-      
-      <span flex></span>
-      <md-button ng-click="hide()">
-       Annuler
-      </md-button>
-      <md-button ng-click="validerDemande()" style="margin-right:20px;">
-       Valider
-      </md-button>
-    </md-dialog-actions>
-  </form>
+        </md-dialog-content>
+        <md-dialog-actions layout="row"> 
+            <span flex></span>
+            <md-button ng-click="hide()">
+             Annuler
+            </md-button>
+            <md-button ng-click="validerDemande()" style="margin-right:20px;">
+             Valider
+            </md-button>
+        </md-dialog-actions>
+    </form>
 </md-dialog>

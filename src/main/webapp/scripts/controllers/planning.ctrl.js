@@ -48,12 +48,13 @@ angular
             
             treeEnabled: true,
             rowHeaderColumns: [
-                {title: 'OT', width: 90},
+                {title: 'OT', width: 100},
                 {title: 'Type', width: 50},
-                {title: 'Tri', width: 50},
+                
                 {title: 'Prevue', width : 50},
                 {title: 'Raf', width : 50},
-                {title: 'Consommée', width : 75}
+                {title: 'Consommée', width : 85},
+                {title: 'Tri', width: 50}
                 
             ],
             
@@ -78,7 +79,7 @@ angular
             var orderBy = $filter('orderBy');
             Planning.getByEquipe({tag:'CNP'},function(data){
             	data.forEach(function(elt){
-            		$scope.schedulerConfig.resources.push({id:elt.idOt, name: elt.libelleOT+ ' - '+ elt.idOt, name2 : elt.trigrammeOT,columns: [{html: elt.typeOT},{html: elt.trigrammeOT}, {html: elt.prevue}, {html:elt.raf}, {html: elt.consomme}]})
+            		$scope.schedulerConfig.resources.push({id:elt.idOt, name: elt.libelleOT+ ' - '+ elt.idOt, name2 : elt.trigrammeOT, columns: [{html: elt.typeOT}, {html: elt.prevue}, {html:elt.raf}, {html: elt.consomme}, {html: elt.trigrammeOT}]})
                         
             		elt.listPlanning.forEach(function(evt){
             			$scope.events.push(

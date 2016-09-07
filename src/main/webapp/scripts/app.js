@@ -54,6 +54,10 @@ angular
                 templateUrl: './views/LoginError.html',
                 controller: 'LoginCtrl'
             }).
+                    when('/statistique', {
+                templateUrl: './views/statistique.html',
+                controller: 'TeamCtrl'
+            }).
                     
             otherwise({
                 redirectTo: '/login'

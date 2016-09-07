@@ -1,7 +1,7 @@
 <div class="navbar navbar-app navbar-absolute-top headerCGI">
             <h2>CGI Tools</h2>
             <a href="#/home" class="homeLink"><i class="fa fa-home fa-2x"></i></a>
-            <h3 class="tri"> BJA </h3>
+            
             <a class="settings" href="/portail/#/config"><i class="fa fa-gears fa-2x"></i></a>
             <a class="settings" href="https://mypm.imfr.cgi.com/portail/#/CDSMainframe/incoherences"><i class="fa fa-bell fa-2x"></i><span class="badge">{{notif}}</span></a>
             
@@ -105,12 +105,9 @@
             <td style="text-align: center">{{ tacheRetard.charge }}</td>
             <td style="text-align: center">{{ tacheRetard.restant }}</td>
             
-            <td ng-show="someBoolean" class="icon-screen"><a href="" ng-click="showAdvancedEndBis($event)"><i class="fa fa-share fa-2x colorfa" aria-hidden="true"></i></a>
-            </td>
-            <td class="icon-screen"><a href="" ng-click="showAdvancedEndBis($event)"><i class="fa fa-flag-checkered fa-2x colorfa" aria-hidden="true"></i></a>
-            </td>
+          
             <td class="icon-screen"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa fa-2x" aria-hidden="true"></i></a>
-            </td
+            </td>
             
             
           </tr>
@@ -155,8 +152,7 @@
             <td style="text-align: center">{{ tache.date }}</td>
             <td style="text-align: center">{{ tache.charge }}</td>
             <td style="text-align: center">{{ tache.restant }}</td>
-            <td class="icon-screen"><a href="" ng-click="showAdvancedEndBis($event)"><i class="fa fa-flag-checkered fa-2x colorfa" aria-hidden="true"></i></a>
-            </td>
+            
             <td class="icon-screen"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa fa-2x" aria-hidden="true"></i></a>
             </td>
            
@@ -203,8 +199,7 @@
             <td style="text-align: center">{{ tacheAvance.date }}</td>
             <td style="text-align: center">{{ tacheAvance.charge }}</td>
             <td style="text-align: center">{{ tacheAvance.restant }}</td>
-            <td class="icon-screen"><a href="" ng-click="showAdvancedEndBis($event)"><i class="fa fa-flag-checkered fa-2x colorfa" aria-hidden="true"></i></a>
-            </td>
+            
             <td class="icon-screen"><a href="" ng-click="showAdvancedImputation($event)"><i class="fa fa-clock-o colorfa fa-2x" aria-hidden="true"></i></a>
             </td>
             

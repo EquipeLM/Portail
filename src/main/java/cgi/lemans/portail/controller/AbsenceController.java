@@ -32,7 +32,7 @@ public class AbsenceController extends ControllerPrincipal{
       
         
         
-	@RequestMapping(value = "")
+	@RequestMapping(value = "/absence/valueCard")
 	public ResponseEntity<List<AbsenceCardBean>> getInfosAbsencesCard(HttpServletRequest request, HttpSession session) {
 		
 		List<AbsenceCardBean> listRetour = new ArrayList<AbsenceCardBean>();
@@ -52,7 +52,7 @@ public class AbsenceController extends ControllerPrincipal{
 		return new ResponseEntity<List<AbsenceBean>>(infosSend, HttpStatus.OK);
 	};
 
-	@RequestMapping(value = "/{idRessource}", method = RequestMethod.GET)
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public ResponseEntity<AbsenceBean> infosUserAbsence(HttpServletRequest request, HttpSession session) {
             
 		AbsenceBean infosSend = absenceService.recupererAllAbsRessource((String) session.getAttribute("user"));
@@ -65,7 +65,7 @@ public class AbsenceController extends ControllerPrincipal{
 		return new ResponseEntity<AbsenceBean>(infosSend, HttpStatus.OK);
 	};
 
-	@RequestMapping(value = "/absence", method = RequestMethod.POST)
+	@RequestMapping(value = "/absence/addAbsence", method = RequestMethod.POST)
 	public ResponseEntity<AbsenceCardBean> ajouterAbsence(HttpSession session, @RequestBody AbsenceCardBean bean,
 			HttpServletRequest request) {
 		absenceService.enregistrerInfosParTypes((String) session.getAttribute("user"), bean);

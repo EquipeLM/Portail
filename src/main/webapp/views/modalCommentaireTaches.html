@@ -1,60 +1,44 @@
 <md-dialog ng-cloak ng-controller="TachesCtrl">
-  <form>
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2>Ajouter un commentaire </h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ng-click="cancel()">
-          <md-icon md-svg-src="./styles/images/cancel.svg" aria-label="Close dialog"></md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
-    <md-dialog-content>
-      <div class="md-dialog-content">
-          
-          
-        <form role="form">
-            
-           
-            
-            <div class="form-group">
-                
-                    <div class="row" ng-repeat="com in coms | limitTo : -7" >
-                        <div class="qui col-sm-2"><p>{{com.qui}}</p></div>
-                        
-                        <div class="bulle col-sm-8">
-                            <p class="com"><br><b>OT : {{com.id}}</b></br> {{ com.commentaire }}</p>
-                            <p class="date"> {{ com.date }} </p>
-                        </div>
-                        
-                    </div>
-                
-                      
-                <md-input-container class="md-block row" flex-gt-sm style="margin-top: 5%;margin-left: 10%;">  
-                    <input  name="idOt" ng-model="formDataComs.idOt" placeholder="id de l'OT : ">  
-                </md-input-container>   
-                <md-input-container class="md-block row" flex-gt-sm style="margin-left: 10%;margin-top: 3%;">  
-                <input style="width:400px;"  name="commentaire" ng-model="formDataComs.commentaire" placeholder="commentaire : ">
-                </md-input-container>   
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Ajouter un commentaire </h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="./styles/images/cancel.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
             </div>
-            
-            
-            
-          
-        </form>
-      </div>
-    </md-dialog-content>
-    <md-dialog-actions layout="row"> 
-      
-      <span flex></span>
-      <md-button ng-click="hide()">
-       Annuler
-      </md-button>
-      <md-button ng-click="validerComs()" style="margin-right:20px;">
-       Valider
-      </md-button>
-    </md-dialog-actions>
-  </form>
-  
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <form role="form">
+                    <div class="form-group">
+                        <div class="row" ng-repeat="com in coms | limitTo : -7" >
+                            <div class="qui col-sm-2"><p>{{com.qui}}</p></div>
+                            <div class="bulle col-sm-8">
+                                <p class="com"><br><b>OT : {{com.id}}</b></br> {{ com.commentaire }}</p>
+                                <p class="date"> {{ com.date }} </p>
+                            </div>
+                        </div>     
+                        <md-input-container class="md-block row" flex-gt-sm style="margin-top: 5%;margin-left: 10%;">  
+                            <input  name="idOt" ng-model="formDataComs.idOt" placeholder="id de l'OT : ">  
+                        </md-input-container>   
+                        <md-input-container class="md-block row" flex-gt-sm style="margin-left: 10%;margin-top: 3%;">  
+                            <input style="width:400px;"  name="commentaire" ng-model="formDataComs.commentaire" placeholder="commentaire : ">
+                        </md-input-container>   
+                    </div>
+                </form>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row"> 
+            <span flex></span>
+            <md-button ng-click="hide()">
+             Annuler
+            </md-button>
+            <md-button ng-click="validerComs()" style="margin-right:20px;">
+             Valider
+            </md-button>
+        </md-dialog-actions>
+    </form>
 </md-dialog>
 

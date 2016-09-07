@@ -23,6 +23,11 @@ import cgi.lemans.portail.domaine.gamaweb.IAbsenceDao;
 @Repository
 public class AbsenceDao extends AbstractGenericDaoGamaweb<Absence> implements IAbsenceDao{
 
+    
+	public static final String CONGES = "1";
+	public static final String RTT_Q1 = "2";
+	public static final String RTT_Q2 = "3";
+    
     @Override
     public Absence findAbsenceByPremierJourAbsence(String idRessource) {
         String hql = "from Absence a "
@@ -64,6 +69,21 @@ public class AbsenceDao extends AbstractGenericDaoGamaweb<Absence> implements IA
         query.setParameter("idRessource", idRessource);
         List<Absence> results = (List<Absence>)query.list();
     	return results;
+    }
+    
+    @Override
+    public Double findAbsenceByTypeByRessource(String idRessource, String type) {
+        String hql = "SELECT sum(a.nombreJourAbsence) as pris " 
+                + "from Absence a "
+                + "where YEAR(a.premierJourAbsence)= :annee "
+                + "and a.refTypeAbsence.idTypeAbsence = :type "
+                + "and a.refRessource.id = :idRessource ";
+        Query query = getSession().createQuery(hql);
+        query.setParameter("idRessource", idRessource);
+        query.setParameter("annee", Calendar.getInstance().get(Calendar.YEAR));
+        query.setParameter("type", Integer.parseInt(type));
+        Double results = (Double) query.uniqueResult();
+        return results;
     }
 
 }

@@ -38,5 +38,7 @@ public interface IAbsenceDao extends IGenericDao<Serializable, Absence>{
     
     public List<Absence> findAbsenceByUser (String idRessource);
     
+    public Double findAbsenceByTypeByRessource(String idRessource, String type);
+    
 }
 

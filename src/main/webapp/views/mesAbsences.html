@@ -1,15 +1,12 @@
 <div class="navbar navbar-app navbar-absolute-top headerCGI">
-            <h2>CGI Tools</h2>
-            <a href="#/home" class="homeLink"><i class="fa fa-home fa-2x"></i></a>
-            <h3 class="tri"> BJA </h3>
-            <a class="settings" href="/portail/#/config"><i class="fa fa-gears fa-2x"></i></a>
-            <a class="settings" href="https://mypm.imfr.cgi.com/portail/#/CDSMainframe/incoherences"><i class="fa fa-bell fa-2x"></i><span class="badge">{{notif}}</span></a>
-            
-            
+    <h2>CGI Tools</h2>
+    <a href="#/home" class="homeLink"><i class="fa fa-home fa-2x"></i></a>
+    <a class="settings" href="/portail/#/config"><i class="fa fa-gears fa-2x"></i></a>
+    <a class="settings" href="https://mypm.imfr.cgi.com/portail/#/CDSMainframe/incoherences"><i class="fa fa-bell fa-2x"></i><span class="badge">{{notif}}</span></a>            
 </div>
 <div class="container" style="margin-top: 70px;">
     <div class="row marge">
-      <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
         <div class="col-sm-3">
             <div class="table-responsive">
                 <table id="recapitulatif" class="table">
@@ -44,9 +41,7 @@
                       <td id="total_restant">{{totalRestant}}</td>
                     </tr>
                 </table>
-            </div>
-
-            
+            </div> 
             <div id="graphique">
               <div class="cont2 {{isAjuste}}">
                 <table class="graphique">
@@ -79,7 +74,9 @@
                 <a class="buttonAjouter" href="/portail/#/teamAbsences" style="text-decoration:none"><img src="./styles/images/team.png" /><p>Absences de l'équipe</p></a>
             </div>
             
-         </div>
+        </div>
         <div class="col-sm-5">
-            
-            <div class="calendar" ng-model="eventSources" calendar="myCalendar1" ui-calendar="uiConfig.calendar"></div>
+        <div class="calendar" ng-model="eventSources" calendar="myCalendar1" ui-calendar="uiConfig.calendar"></div>
+        </div>
+    </div>
+</div>

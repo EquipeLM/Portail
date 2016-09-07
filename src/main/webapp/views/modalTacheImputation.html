@@ -1,49 +1,47 @@
 <md-dialog ng-cloak ng-controller="TachesCtrl">
-  <form>
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2>Consommation du jour</h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ng-click="cancel()">
-          <md-icon md-svg-src="./styles/images/cancel.svg" aria-label="Close dialog"></md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
-    <md-dialog-content>
-      <div class="md-dialog-content">
-        <form role="form">
-            <div class="form-group row inputSolde">
-            <div class="col-sm-2"></div>
-                <md-input-container class="md-block col-sm-8" flex-gt-sm>
-                    <label>Consommation du jour</label>  
-                    <input name="Faite" ng-model="formTacheConsoJour.consoFaite" type="number" step="0.1">
-                </md-input-container>   
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Consommation du jour</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="./styles/images/cancel.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
             </div>
-            <div class="form-group row inputSolde">
-            <div class="col-sm-2"></div>
-                <md-input-container class="md-block col-sm-8" flex-gt-sm>
-                    <label>Reste à faire</label>
-                    <input name="raf" ng-model="formTacheConsoJour.raf" type="number" step="0.1">
-                </md-input-container>   
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <form role="form">
+                    <div class="form-group row inputSolde">
+                        <div class="col-sm-2"></div>
+                        <md-input-container class="md-block col-sm-8" flex-gt-sm>
+                            <label>Consommation du jour</label>  
+                            <input name="Faite" ng-model="formTacheConsoJour.consoFaite" type="number" step="0.1">
+                        </md-input-container>   
+                    </div>
+                    <div class="form-group row inputSolde">
+                        <div class="col-sm-2"></div>
+                        <md-input-container class="md-block col-sm-8" flex-gt-sm>
+                            <label>Reste à faire</label>
+                            <input name="raf" ng-model="formTacheConsoJour.raf" type="number" step="0.1">
+                        </md-input-container>   
+                    </div>
+                    <div class="col-sm-2"></div>
+                        <md-input-container class="md-block col-sm-8" flex-gt-sm>
+                            <label>Commentaire</label>
+                            <input name="commentaire" ng-model="formTacheConsoJour.raf" type="text" md-maxlength="100">
+                        </md-input-container>   
+                </form>
             </div>
-            <div class="col-sm-2"></div>
-                <md-input-container class="md-block col-sm-8" flex-gt-sm>
-                    <label>Commentaire</label>
-                    <input name="commentaire" ng-model="formTacheConsoJour.raf" type="text" md-maxlength="100">
-                </md-input-container>   
-            </div>
-        </form>
-      </div>
-    </md-dialog-content>
-    <md-dialog-actions layout="row"> 
-      
-      <span flex></span>
-      <md-button ng-click="hide()">
-       Annuler
-      </md-button>
-      <md-button ng-click="validerConsoJour()" style="margin-right:20px;">
-       Valider
-      </md-button>
-    </md-dialog-actions>
-  </form>
+        </md-dialog-content>
+        <md-dialog-actions layout="row"> 
+            <span flex></span>
+            <md-button ng-click="hide()">
+            Annuler
+            </md-button>
+            <md-button ng-click="validerConsoJour()" style="margin-right:20px;">
+            Valider
+            </md-button>
+        </md-dialog-actions>
+    </form>
 </md-dialog>

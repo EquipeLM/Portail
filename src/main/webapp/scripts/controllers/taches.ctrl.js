@@ -139,50 +139,7 @@ angular
                     )
                 }
                 
-// Récupération et envoi des datas pour les consommations terminées                
-                
-            $scope.formTacheConsoEnd = {};
-            $scope.formTacheConsoEnd.consoEnd;
-            $scope.formTacheConsoEnd.idDemande = evt.idDemande;
-            $scope.formTacheConsoEnd.type = evt.libelleTypeOT;
-            $scope.formTacheConsoEnd.idOt = evt.idOt;
-            
-            $scope.hide = function() {
-                $mdDialog.hide();
-            };
-        
-            $scope.cancel = function() {
-                $mdDialog.cancel();
-            };
-        
-            $scope.validerConsoEnd = function() {
-                $mdDialog.hide();
-                Tache.addConsoEnd($scope.formTacheConsoEnd, function() {});
-                console.log($scope.formTacheConsoEnd); 
-            };
-                 
-// Récupération et envoi des datas pour les consommations en cours                    
-                
-            $scope.formTacheConsoJour = {};
-            $scope.formTacheConsoJour.consoFaite;
-            $scope.formTacheConsoJour.raf;
-         
-            $scope.hide = function() {
-                $mdDialog.hide();
-            };
-        
-            $scope.cancel = function() {
-                $mdDialog.cancel();
-            };
-        
-            $scope.validerConsoJour = function() {
-                            //$mdDialog.hide();
-                $scope.formTacheConsoJour.idDemande = evt.idDemande;
-                $scope.formTacheConsoJour.type = evt.libelleTypeOT;
-                $scope.formTacheConsoJour.idOt = evt.idOt;
-                Tache.addConsoJour($scope.formTacheConsoJour, function() {});
-                console.log($scope.formTacheConsoJour); 
-            };
+
                         
 //  Récupération et envoi des datas pour laisser un commentaire sur la tâche                 
                 
@@ -195,6 +152,7 @@ angular
                 Tache.addComs($scope.formDataComs, function() {});
                 console.log($scope.formDataComs);
                 $mdDialog.hide();
+                window.location.reload();
             }; 
                
                 
@@ -325,11 +283,13 @@ angular
         $scope.formTache.user= $scope.user.id;
         $scope.formTache.designation = $scope.demande.name +' - '+ $scope.type.name;
         $scope.formTache.estimationRevisee = $scope.demande.estimation;
+        $scope.formTache.date;
         Tache.addTache($scope.formTache, function() {
         });
 		
         console.log($scope.formTache); 
-        $window.location = '/portail/#/home';
+        $mdDialog.hide();
+        window.location.reload();
     };  
         
         

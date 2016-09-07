@@ -1,20 +1,27 @@
-<div ng-controller="TeamCtrl">
-    <div class="row">
-        <div class="col-sm-2" style="margin-left: 1%;">
+<div class="navbar navbar-app navbar-absolute-top headerCGI">
+            <h2>CGI Tools</h2>
+            <a href="#/home" class="homeLink"><i class="fa fa-home fa-2x"></i></a>
+            
+            <a class="settings" href="/portail/#/config"><i class="fa fa-gears fa-2x"></i></a>
+            <a class="settings" href="https://mypm.imfr.cgi.com/portail/#/CDSMainframe/incoherences"><i class="fa fa-bell fa-2x"></i><span class="badge">{{notif}}</span></a>
+            
+            
+</div>
+
+
+<div class="row" style="margin-top: 7%;">
+    
+        <div class="col-sm-2" style="margin-left: 3%;">
             <div style="width:60%;background-color: #46bfbd;"><p style="color: white; font-weight: bold; padding: 4px;"> tâches totales </p></div>
             <div style="width:60%;background-color: #97bbcd;"><p style="color: white; font-weight: bold; padding: 4px;"> tâches en retards </p></div>
             <div style="width:60%;background-color: #dcdcdc;"><p style="color: white; font-weight: bold; padding: 4px;"> tâches dans les délais </p></div>
             <div style="width:60%;background-color: #f7464a;"><p style="color: white; font-weight: bold; padding: 4px;"> tâches en avances </p></div>
         </div>
-        <div class="col-sm-3" style="width:400px; height:350px">
+    
+        <div class="col-sm-5" style="width:400px; height:350px; margin-top: 5%">
             <canvas  width="200" height="200" id="base" class="chart-base" chart-type="typeTaches"
                  chart-data="allTaches" chart-labels="labelTaches" chart-option="optionTaches" style="width:200px; height:200px;">
             </canvas> 
         </div>
-        <div class="col-sm-4" style="width:600px; height:550px;margin-top: 2%;margin-left: -50px;">
-            <canvas id="pie" class="chart chart-pie"
-                chart-data="allTaches" chart-labels="labelTaches" chart-options="optionsTaches">
-            </canvas> 
-        </div>
-    </div>   
-</div>
+       
+    </div>

@@ -30,6 +30,7 @@ import cgi.lemans.portail.domaine.gamaweb.IAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.ICufAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.ICufRessourceAbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.IJourFerieMobileDao;
+import cgi.lemans.portail.domaine.gamaweb.impl.AbsenceDao;
 import cgi.lemans.portail.domaine.gamaweb.impl.CufAbsenceDao;
 import cgi.lemans.portail.service.IAbsenceService;
 import cgi.lemans.portail.utils.ConvertUtils;
@@ -54,14 +55,14 @@ public class AbsenceService implements IAbsenceService {
 	@Override
 	public AbsenceCardBean recupererInfosAbsRessource(String idRessource) {
 		AbsenceCardBean absRetour = new AbsenceCardBean();
-		Double listCongesPris = (Double) cufAbsenceDao.findCufAbsenceByTypeByRessource(idRessource,
-				CufAbsenceDao.CONGES);
+		Double listCongesPris = (Double) absenceDao.findAbsenceByTypeByRessource(idRessource,
+				AbsenceDao.CONGES);
 		absRetour.setCongesConsomme(listCongesPris == null ? "0.0" : listCongesPris.toString());
 
-		Double listQ1Pris = (Double) cufAbsenceDao.findCufAbsenceByTypeByRessource(idRessource, CufAbsenceDao.RTT_Q1);
+		Double listQ1Pris = (Double) absenceDao.findAbsenceByTypeByRessource(idRessource, AbsenceDao.RTT_Q1);
 		absRetour.setRttQunConsomme(listQ1Pris == null ? "0.0" : listQ1Pris.toString());
 
-		Double listQ2Pris = (Double) cufAbsenceDao.findCufAbsenceByTypeByRessource(idRessource, CufAbsenceDao.RTT_Q2);
+		Double listQ2Pris = (Double) absenceDao.findAbsenceByTypeByRessource(idRessource, AbsenceDao.RTT_Q2);
 		absRetour.setRttQdeuxConsomme(listQ2Pris == null ? "0.0" : listQ2Pris.toString());
 
 		CufRessourceAbsence listCongesSolde = (CufRessourceAbsence) cufRessourceAbsenceDao
@@ -148,7 +149,7 @@ public class AbsenceService implements IAbsenceService {
 			long diff = ((d2.getTime() - d1.getTime()) / 86400000) + 1;
 
 			nvelleAbsConge.setNombreJourAbsence(diff);
-			nvelleAbsConge.setPremierJourAbsence(dateDebut);
+			nvelleAbsConge.setPremierJourAbsence(ConvertUtils.parseToDate(bean.getDateProchainConges(), "US"));
 			nvelleAbsConge.setDateFinAbsence(dateFin);
 			nvelleAbsConge.setCommentaireAbsence("");
 			if (("choixConge").equals(bean.getIdTypeAbsence())) {

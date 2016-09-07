@@ -3,7 +3,7 @@
 
 angular
     .module('portail.controllers')
-    .controller('LoginCtrl', ['$scope', '$http', '$mdDialog', '$mdMedia', '$resource', '$timeout', 'Login', '$location', '$window', function ($scope, $http, $mdDialog, $mdMedia, $resource, $timeoutk, Login, $location, $window) {
+    .controller('LoginCtrl', ['$scope', '$http', '$mdDialog', '$mdMedia', '$resource', '$timeout', 'Login', '$location', '$window','Incoherence', 'Tache', 'Planning', 'Absence', function ($scope, $http, $mdDialog, $mdMedia, $resource, $timeout, Login, $location, $window,Incoherence, Tache, Planning) {
             
     $scope.formLogin = {};
     $scope.formLogin.trigramme;
@@ -12,6 +12,8 @@ angular
     $scope.connexion = function() {
     console.log($scope.formLogin);                        
      $scope.logins = [];
+     $scope.tri = $scope.formLogin.trigramme;
+     console.log($scope.tri);
                 
     Login.login(function(data){
         data.listLogin.forEach(function(evt){
@@ -27,6 +29,12 @@ angular
         });  
     }
         
-        
-        
-        }]);
+    
+    
+     
+           
+   
+    }])
+
+    
+

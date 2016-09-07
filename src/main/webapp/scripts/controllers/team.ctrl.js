@@ -175,6 +175,7 @@ angular
                 Tache.addComs($scope.formDataComs, function() {});
                 console.log($scope.formDataComs);
                 $mdDialog.hide();
+                window.location.reload();
             }; 
                
                 

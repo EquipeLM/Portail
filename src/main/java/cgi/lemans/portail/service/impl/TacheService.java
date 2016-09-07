@@ -94,7 +94,7 @@ public class TacheService implements ITacheService {
                 
                 task.setLibelleOT(ordreDeTravail.getLibelOT());
                    task.setLibelleTypeOT(ordreDeTravail.getTypeActivite());
-                   task.setDate(ConvertUtils.formatterDate(ordreDeTravail.getDateFinPrevue()));
+                   task.setDate(ConvertUtils.formatterDate(ordreDeTravail.getDateDebut()));
 		   task.setChargePrevue(ordreDeTravail.getChargePrevue().toString());
                    task.setChargeRestante(ordreDeTravail.getChargeRestante().toString());
                    task.setIdOt(ordreDeTravail.getIdOt());
@@ -312,8 +312,7 @@ public class TacheService implements ITacheService {
        RessourceTma ress = new RessourceTma();
        
        newTache.setTypeActivite(bean.getType());
-       //dm.setLibelle(bean.getDemande());  
-       //newTache.setIdDemande(dm);
+       
        dm.setIdDemande(bean.getIdDemande());
        newTache.setIdDemande(dm);
        ress.setIdRessource(bean.getUser());
@@ -322,14 +321,13 @@ public class TacheService implements ITacheService {
        newTache.setChargePrevue(ConvertUtils.parseDouble(bean.getChargePrevue()));
        newTache.setChargeRestante(ConvertUtils.parseDouble(bean.getChargePrevue()));
        newTache.setChargeConsommeeTotale(0.0);
+       newTache.setDateFinPrevue(ConvertUtils.parseToDate(bean.getDate(), "US"));
        newTache.setCoutConsomme(0.0);
        newTache.setCout_restant(0.0);
        newTache.setIdForfaitBudget(0);
       ordreDeTravailDao.create(newTache);
       
-      // modfication 
-      
-      
+            
       
        return bean;
     }

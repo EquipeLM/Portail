@@ -1,130 +1,111 @@
 <div class="navbar navbar-app navbar-absolute-top headerCGI">
-            <h2>CGI Tools</h2>
-            <a href="#/home" class="homeLink"><i class="fa fa-home fa-2x"></i></a>
-            <h3 class="tri" ng-model="trigrammeConnect"></h3>
-            <a class="settings" href="/portail/#/login"><i class="fa fa-sign-out fa-2x"></i></a>
-            <a class="settings" href="https://mypm.imfr.cgi.com/portail/#/CDSMainframe/incoherences"><i class="fa fa-bell fa-2x"></i><span class="badge">{{notif}}</span></a>
-            
-            
+    <h2>CGI Tools</h2>
+    <a href="#/home" class="homeLink"><i class="fa fa-home fa-2x"></i></a>
+    <a class="settings" href="/portail/#/login"><i class="fa fa-sign-out fa-2x"></i></a>
+    <a class="settings" href="https://mypm.imfr.cgi.com/portail/#/CDSMainframe/incoherences"><i class="fa fa-bell fa-2x"></i><span class="badge">{{notif}}</span></a>
 </div>
-
 <div class="tuiles">
-         <div class="row"> 
-             <div class="col-sm-4 no-padding {{isCache}}"> 
-                 <div class="card card-home card-home-big card-home-orange"> 
-                     <div class="card-header card-header-orange"> 
-                        <h2>Tâches</h2> 
-                        <div class="card-button"> 
-                            <a href="https://mypm.imfr.cgi.com/portail/#/CDSMainframe/outils/imputations" target="_blank"><i class="fa fa-clock-o fa-3x"></i></a>
-                            
-                            <a href="" ng-click="showAdvancedAddTache($event)"><i class="fa fa-plus fa-3x"></i></a>
-                            <a href="/portail/#/tachesEquipe"><i class="fa fa-users fa-3x"></i></a>
-                            <a href="/portail/#/taches"><i class="fa fa-external-link-square fa-3x"></i></a> 
-                         </div> 
-                     </div> 
-                     <div class="card_body2"> 
-                         <div ng-include="'./views/card-taches.html'"></div>
-                     </div> 
-                 </div> 
-             </div> 
-            
-            
-             <div class="col-sm-8 no-padding {{isCache}}"> 
-                 <div class="card card-home card-home-big card-home-yellow"> 
-                     <div class="card-header card-header-yellow"> 
-                         <h2>Planning</h2> 
-                         <div class="card-button">
-                             
-                              <a href="" ng-click="showAdvancedAddPlan($event)"><i class="fa fa-calendar-plus-o fa-3x"></i></a>
-                              <a href="" ng-click="showAdvancedAddDM($event)"><i class="fa fa-plus fa-3x"></i></a>
-                              <a href="/portail/#/planning"><i class="fa fa-external-link-square fa-3x"></i></a> 
-                         </div> 
-                     </div> 
-                     <div class="card-body">
+    <div class="row"> 
+        <div class="col-sm-4 no-padding {{isCache}}"> 
+            <div class="card card-home card-home-big card-home-orange"> 
+                <div class="card-header card-header-orange"> 
+                    <h2>Tâches</h2> 
+                    <div class="card-button"> 
+                        <a href="https://mypm.imfr.cgi.com/portail/#/CDSMainframe/outils/imputations" target="_blank"><i class="fa fa-clock-o fa-3x"></i></a>
+                        <a href="" ng-click="showAdvancedAddTache($event)"><i class="fa fa-plus fa-3x"></i></a>
+                        <a href="/portail/#/tachesEquipe"><i class="fa fa-users fa-3x"></i></a>
+                        <a href="/portail/#/taches"><i class="fa fa-external-link-square fa-3x"></i></a> 
+                    </div> 
+                </div> 
+                <div class="card_body2"> 
+                    <div ng-include="'./views/card-taches.html'"></div>
+                </div> 
+            </div> 
+        </div> 
+        <div class="col-sm-8 no-padding {{isCache}}"> 
+            <div class="card card-home card-home-big card-home-yellow"> 
+                <div class="card-header card-header-yellow"> 
+                    <h2>Planning</h2> 
+                    <div class="card-button">
+                        <a href="" ng-click="showAdvancedAddPlan($event)"><i class="fa fa-calendar-plus-o fa-3x"></i></a>
                         
-                        <div ng-include="'./views/card-planning.html'"></div>  
-                     </div> 
-
-              </div> 
-             </div> 
-        </div>
-        <div class="row">
-            <div class="col-sm-4 no-padding">
-                <div class="card card-home card-home-blue2">
-                    <div class="card-header card-header-blue2">
-                        <h2>Outils</h2>
-                        <div class="card-button">
-                            <a href="/portail/#/outilsHome"><i class="fa fa-external-link-square fa-3x"></i></a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                      <div class="icons-outils row">
-                        <div class="col-sm-2"></div>
-                        <!--<a href="/portail/#/genRequete"><i class="fa fa-database fa-5x col-sm-3"><h3>Requête SQL</h3></i></a>-->
-                        <a href="/portail/#/viewPdf"><i class="fa fa-gears fa-5x col-sm-4"><h3>Modèle de données</h3></i></a>
-                        <a href="http://portal.ent.cginet:7540/psp/paprd/?cmd=login"><i class="fa fa-clock-o fa-5x col-sm-4"><h3>PSA Time</h3></i></a>
-                        <div class="col-sm-1"></div>
-                      </div>
-                      <div class="icons-outils row">
-                        <div class="col-sm-2"></div>
-                        <a href="https://ebs-sso.global.logica.com/sso/pages/login.jsp"><i class="fa fa-calendar fa-5x col-sm-4"><h3>My Logica People</h3></i></a>
-                        <a href="http://mysite.ent.cgi.com/news.aspx"><i class="fa fa-user fa-5x col-sm-4"><h3>My Site</h3></i></a>
-                        <div class="col-sm-1"></div>
-                      </div>
-
-
-
-                    </div>
-                </div>
-            </div>
-             <div class="col-sm-4 no-padding"> 
-                 <div class="card card-home card-home-grey"> 
-                     <div class="card-header card-header-grey"> 
-                         <h2>Test</h2> 
-                         <div class="card-button"> 
-                             <a><i class="fa fa-external-link-square fa-3x"></i></a> 
-                         </div> 
-                     </div> 
-                     <div class="card-body"> 
-                         <i class="fa fa-area-chart fa-6x"></i> 
-                     </div> 
-                 </div> 
-             </div> 
-            <div class="col-sm-4 no-padding">
-                <div class="card card-home card-home-green">
-                    <div class="card-header card-header-green">
-                        <h2>Absences</h2>
-                        <div class="card-button">
-                            <a href="/portail/#/teamAbsences"><i class="fa fa-users fa-3x"></i></a>
-                            <a href="" ng-click="showAdvanced($event)"><i class="fa fa-plus fa-3x"></i></a>
-                            <a href="/portail/#/mesAbsences"><i class="fa fa-external-link-square fa-3x"></i></a>
-                                                       
-                        </div>
-                        
-                    </div>
-                    <div class="card-body">
-                        <div ng-include="'./views/card-mesAbsences.html'"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-       
-        <div class="row"> 
-            <div class="col-sm-8 no-padding"> 
-                <div class="card card-home card-home-big card-home-pink"> 
-                     <div class="card-header card-header-pink"> 
-                         <h2>Statistiques</h2> 
-                         <div class="card-button"> 
-                            <a><i class="fa fa-external-link-square fa-3x"></i></a> 
-                         </div> 
-                     </div> 
-                     <div class="card-body"> 
-                         <div ng-include="'./views/card-statistiques.html'"></div>
-                     </div> 
-
-                 </div> 
-             </div> 
-
-
+                        <a href="/portail/#/planning"><i class="fa fa-external-link-square fa-3x"></i></a> 
+                    </div> 
+                </div> 
+                <div class="card-body">
+                    <div ng-include="'./views/card-planning.html'"></div>  
+                </div> 
+            </div> 
+        </div> 
     </div>
+    <div class="row">
+        <div class="col-sm-4 no-padding">
+            <div class="card card-home card-home-blue2">
+                <div class="card-header card-header-blue2">
+                    <h2>Outils</h2>
+                    <div class="card-button">
+                        <a href="/portail/#/outilsHome"><i class="fa fa-external-link-square fa-3x"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="icons-outils row">
+                        <div class="col-sm-2"></div>
+                            <a href="/portail/#/viewPdf"><i class="fa fa-gears fa-5x col-sm-4"><h3>Modèle de données</h3></i></a>
+                            <a href="http://portal.ent.cginet:7540/psp/paprd/?cmd=login"><i class="fa fa-clock-o fa-5x col-sm-4"><h3>PSA Time</h3></i></a>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <div class="icons-outils row">
+                        <div class="col-sm-2"></div>
+                            <a href="https://ebs-sso.global.logica.com/sso/pages/login.jsp"><i class="fa fa-calendar fa-5x col-sm-4"><h3>My Logica People</h3></i></a>
+                            <a href="http://mysite.ent.cgi.com/news.aspx"><i class="fa fa-user fa-5x col-sm-4"><h3>My Site</h3></i></a>
+                        <div class="col-sm-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 no-padding"> 
+            <div class="card card-home card-home-grey"> 
+                <div class="card-header card-header-grey"> 
+                    <h2>Test</h2> 
+                    <div class="card-button"> 
+                        <a><i class="fa fa-external-link-square fa-3x"></i></a> 
+                    </div> 
+                </div> 
+                <div class="card-body"> 
+                    <i class="fa fa-area-chart fa-6x"></i> 
+                </div> 
+            </div> 
+        </div> 
+        <div class="col-sm-4 no-padding">
+            <div class="card card-home card-home-green">
+                <div class="card-header card-header-green">
+                    <h2>Absences</h2>
+                    <div class="card-button">
+                        <a href="/portail/#/teamAbsences"><i class="fa fa-users fa-3x"></i></a>
+                        <a href="" ng-click="showAdvanced($event)"><i class="fa fa-plus fa-3x"></i></a>
+                        <a href="/portail/#/mesAbsences"><i class="fa fa-external-link-square fa-3x"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div ng-include="'./views/card-mesAbsences.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row"> 
+        <div class="col-sm-8 no-padding"> 
+            <div class="card card-home card-home-big card-home-pink"> 
+                <div class="card-header card-header-pink"> 
+                    <h2>Statistiques</h2> 
+                    <div class="card-button"> 
+                        <a href="/portail/#/statistique"><i class="fa fa-external-link-square fa-3x"></i></a> 
+                    </div> 
+                </div> 
+                <div class="card-body"> 
+                    <div ng-include="'./views/card-statistiques.html'"></div>
+                </div> 
+            </div> 
+        </div> 
+    </div>
+</div>
         

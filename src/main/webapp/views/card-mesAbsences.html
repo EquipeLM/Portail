@@ -1,38 +1,31 @@
 <div ng-controller="AbsencesCtrl">
-  <div id="graphique">
-    <div class="cont">
-      <table class="table-responsive">
-          <tr>
-
-            <td class="graph-card {{isCentre}}">
-              <canvas id="conges" class="chart chart-doughnut" chart-data="dataConge" chart-labels="labelConge" chart-colours="colours" width="120" height="120" chart-options="options"></canvas>
-              <div id="indicateur"><p class="indicateur" id="conge_restant">{{restantConges}}</p></div>
-              <div id="titre"><p> Congés</p></div>
-              <br>
-            </td>
-            
-            <td class="graph-card {{isCentre}}">
-                <canvas id="rtt_q1" class="chart chart-doughnut"chart-data="dataRttQ1" chart-labels="labelRttQ1" chart-colours="colours" width="120" height="120" chart-options="options"></canvas>
-                <div id="indicateur"><p class="indicateur" id="rttQ1_restant">{{restantQun}}</p></div>
-                <div id="titre"><p>RTT Q1</p></div>
-                <br>
-            </td>
-            
-            <td class="graph-card {{isCachee}}">
-                <canvas id="rtt_q2" class="chart chart-doughnut"chart-data="dataRttQ2" chart-labels="labelRttQ2" chart-colours="colours" width="120" height="120" chart-options="options"></canvas>
-                <div id="indicateur"><p class="indicateur" id="rttQ2_restant">{{restantQdeux}}</p></div>
-                <div id="titre"><p>RTT Q2</p></div>
-                <br>
-            </td> 
-
-            </tr>
-        </table>
+    <div id="graphique">
+        <div class="cont row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3">
+                        <canvas id="conges" class="chart chart-doughnut" chart-data="dataConge" chart-labels="labelConge" chart-colours="colours" width="120" height="120" chart-options="options"></canvas>
+                        <div id="indicateur"><p class="indicateur" id="conge_restant">{{restantConges}}</p></div>
+                        <div id="titre"><p> Congés</p></div>
+                        <br>
+            </div>
+            <div class="col-sm-3">
+                        <canvas id="rtt_q1" class="chart chart-doughnut"chart-data="dataRttQ1" chart-labels="labelRttQ1" chart-colours="colours" width="120" height="120" chart-options="options"></canvas>
+                        <div id="indicateur"><p class="indicateur" id="rttQ1_restant">{{restantQun}}</p></div>
+                        <div id="titre"><p>RTT Q1</p></div>
+                        <br>
+            </div>
+            <div class="col-sm-3">
+                        <canvas id="rtt_q2" class="chart chart-doughnut"chart-data="dataRttQ2" chart-labels="labelRttQ2" chart-colours="colours" width="120" height="120" chart-options="options"></canvas>
+                        <div id="indicateur"><p class="indicateur" id="rttQ2_restant">{{restantQdeux}}</p></div>
+                        <div id="titre"><p>RTT Q2</p></div>
+                        <br>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="quand row">
+    <div class="quand row">
       <h3> Prochain congé :  {{dateProchainConges}}</h3>
-  </div>
-  <div class="duree row">
+    </div>
+    <div class="duree row">
       <h3> Durée : {{dureeProchainConges}}</h3>
-  </div>
+    </div>
 </div>

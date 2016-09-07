@@ -1,44 +1,39 @@
 <div ng-controller="TachesCtrl">
-  <div id="graphique">
-    <div class="cont1">
-      <table class="table-responsive">
-          <tr>
-
-            <td class="graph-card">
-              <canvas class="chart chart-doughnut" chart-data="dataRetard" chart-labels="labelRetard" chart-colours="coloursRetard" width="130" height="130" chart-options="options"></canvas>
-              <div id="indicateur_taches"><p class="indicateur" id="conge_restant"> {{ retard }}</p></div>
-              <div id="titre_blanc"><p> Hors délais </p></div>
-              <br>
-            </td>
-            
-            <td class="graph-card">
-                <canvas class="chart chart-doughnut"chart-data="dataDelais" chart-labels="labelDelais" chart-colours="coloursDelais" width="130" height="130" chart-options="options"></canvas>
-                <div id="indicateur_taches"><p class="indicateur" id="rttQ1_restant"> {{ delais }}</p></div>
-                <div id="titre_blanc"><p>Dans les délais</p></div>
-                <br>
-            </td>
-          </tr>
-          <tr>
-            <td class="graph-card">
-                <canvas class="chart chart-doughnut"chart-data="dataAvance" chart-labels="labelAvance" chart-colours="coloursAvance" width="130" height="130" chart-options="options"></canvas>
-                <div id="indicateur_taches"><p class="indicateur" id="rttQ2_restant"> {{ avance }}</p></div>
-                <div id="titre_blanc"><p>En avance</p></div>
-                <br>
-            </td> 
-            
-             <td class="graph-card">
-                <canvas class="chart chart-doughnut"chart-data="dataTermine" chart-labels="labelTermine" chart-colours="coloursTermine" width="130" height="130" chart-options="options"></canvas>
-                <div id="indicateur_taches"><p class="indicateur" id="rttQ3_restant"> {{ termine }}</p></div>
-                <div id="titre_blanc"><p>Terminé</p></div>
-                <br>
-            </td> 
-
-            </tr>
-        </table>
-    </div>
-  </div>
-    
-    
-   
-  
+    <div id="graphique">
+        <div class="cont1 row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3">
+                 <canvas class="chart chart-doughnut" chart-data="dataRetard" chart-labels="labelRetard" chart-colours="coloursRetard" width="80" height="80" chart-options="options"></canvas>
+                      <div id="indicateur_taches"><p class="indicateur" id="conge_restant"> {{ retard }}</p></div>
+                      <div id="titre_blanc"><p> Hors délais </p></div>
+                      <br>
+            </div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3">       
+                        <canvas class="chart chart-doughnut"chart-data="dataDelais" chart-labels="labelDelais" chart-colours="coloursDelais" width="80" height="80" chart-options="options"></canvas>
+                        <div id="indicateur_taches"><p class="indicateur" id="rttQ1_restant"> {{ delais }}</p></div>
+                        <div id="titre_blanc"><p>Dans les délais</p></div>
+                        <br>
+            </div> 
+        </div>
+        <div class="cont1 row">
+            <div class="col-sm-1"></div>
+                <div class="col-sm-3">
+                        <canvas class="chart chart-doughnut"chart-data="dataAvance" chart-labels="labelAvance" chart-colours="coloursAvance" width="130" height="130" chart-options="options"></canvas>
+                        <div id="indicateur_taches"><p class="indicateur" id="rttQ2_restant"> {{ avance }}</p></div>
+                        <div id="titre_blanc"><p>En avance</p></div>
+                        <br>
+                </div>
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3">
+                    <td class="graph-card">
+                       <canvas class="chart chart-doughnut"chart-data="dataTermine" chart-labels="labelTermine" chart-colours="coloursTermine" width="130" height="130" chart-options="options"></canvas>
+                       <div id="indicateur_taches"><p class="indicateur" id="rttQ3_restant"> {{ termine }}</p></div>
+                       <div id="titre_blanc"><p>Terminé</p></div>
+                       <br>
+                </div>
+        </div>
+                   
+        </div>
+    </div> 
 </div>

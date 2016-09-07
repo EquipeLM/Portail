@@ -5,7 +5,7 @@
 angular
     .module('portail.controllers')
     
-    .controller('HomeCtrl', ['$scope', '$http','Incoherence', 'Tache', 'Planning', 'Absence', '$mdDialog', '$mdMedia', '$resource', '$timeout', 'Login', function ($scope, $http, Incoherence, Tache,Planning, Absence, $mdDialog, $mdMedia, $resource, $timeout, tacheAvance, Login, $window) {
+    .controller('HomeCtrl', ['$scope', '$http','Incoherence', 'Tache', 'Planning', 'Absence', '$mdDialog', '$mdMedia', '$resource', '$timeout', 'Login', '$route', function ($scope, $http, Incoherence, Tache,Planning, Absence, $mdDialog, $mdMedia, $resource, $timeout, tacheAvance, Login, $window, $route) {
     
    
                 /*var log = Login.loginTest(function(data){
@@ -17,11 +17,7 @@ angular
                 });*/
                  
              
-    
-    
-                    
-                    
-   $scope.tacheAvance = tacheAvance; 
+  
     
     var compt = 0;
     
@@ -154,6 +150,8 @@ angular
                 });
 		
          console.log($scope.formTache); 
+         $mdDialog.hide();
+         window.location.reload(); 
          	
   
       };  
@@ -174,6 +172,7 @@ angular
                 });
                console.log($scope.formPlanData);
                 $mdDialog.hide();
+                window.location.reload(); 
                 
             };
     
@@ -272,11 +271,13 @@ angular
                 
 		
                 
-                Absence.save($scope.formData, function() {
+                Absence.addAbsence($scope.formData, function() {
                        //va appeler ta fonction ajouterAbsence avec les valeurs bindées dans formData
                 });
 		
-         console.log($scope.formData);       
+         console.log($scope.formData); 
+          $mdDialog.hide();
+          window.location.reload(); 
       };
       $scope.supprimer = function (){
           
